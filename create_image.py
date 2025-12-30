@@ -97,6 +97,13 @@ def extract_thematic_snippet(json_data: Dict[str, Any]) -> str:
     return json_data.get("thematic_rules", {}).get("prompt_snippet", "")
 
 
+def extract_thematic_forms(json_data: Dict[str, Any]) -> Dict[str, str]:
+    """Extract form definitions from thematic_rules.forms.
+    Returns a dict mapping form names to their prompt_snippet."""
+    forms = json_data.get("thematic_rules", {}).get("forms", {})
+    return {name: form.get("prompt_snippet", "") for name, form in forms.items()}
+
+
 def remove_base_language(miniature_snippet: str) -> str:
     """Remove 'mounted on a ... base' phrase from the 40mm snippet.
 
@@ -221,6 +228,9 @@ def resolve_prompt_from_json(
     Returns:
         Tuple of (prompt string, list of thematic snippets from refinement path)
     """
+    # Extract form definitions once
+    thematic_forms = extract_thematic_forms(json_data)
+    
     # Parse refinement_path if provided
     if refinement_path:
         parts = parse_refinement_path(refinement_path)
@@ -248,7 +258,18 @@ def resolve_prompt_from_json(
         first_ref = refinements[0]
         thematic = []
         if "thematic_snippet" in first_ref:
-            thematic.append(first_ref["thematic_snippet"])
+            snippet_val = first_ref["thematic_snippet"]
+            if isinstance(snippet_val, list):
+                # List of references - resolve each one
+                for ref in snippet_val:
+                    if ref in thematic_forms and thematic_forms[ref]:
+                        thematic.append(thematic_forms[ref])
+                    else:
+                        # Not a form reference, use as-is
+                        thematic.append(ref)
+            else:
+                # Legacy: single string value
+                thematic.append(snippet_val)
         return first_ref.get("prompt", ""), thematic
     
     # Find the refinement (form)
@@ -265,7 +286,18 @@ def resolve_prompt_from_json(
     # Collect thematic snippet from this refinement
     thematic = []
     if "thematic_snippet" in refinement:
-        thematic.append(refinement["thematic_snippet"])
+        snippet_val = refinement["thematic_snippet"]
+        if isinstance(snippet_val, list):
+            # List of references - resolve each one
+            for ref in snippet_val:
+                if ref in thematic_forms and thematic_forms[ref]:
+                    thematic.append(thematic_forms[ref])
+                else:
+                    # Not a form reference, use as-is
+                    thematic.append(ref)
+        else:
+            # Legacy: single string value
+            thematic.append(snippet_val)
     
     return refinement.get("prompt", ""), thematic
 
@@ -518,6 +550,7 @@ def main(argv: list[str] | None = None) -> int:
     generic_snippet = extract_generic_snippet(json_data)
     miniature_snippet = extract_miniature_snippet(json_data)
     thematic_general = extract_thematic_snippet(json_data)
+    thematic_forms = extract_thematic_forms(json_data)
     
     include_miniature = not args.no_miniature
     include_generic = not args.no_generic
@@ -563,7 +596,8 @@ def main(argv: list[str] | None = None) -> int:
             "OPENAI_API_KEY is not set. In PowerShell: $env:OPENAI_API_KEY=\"...\""
         )
 
-    if args.all:
+    # If no form specified, generate all refinements (--all is now default behavior)
+    if not form_id or args.all:
         # Generate (or print) all refinements for this character
         char_data = find_character_by_id_or_name(json_data, character_id)
         if not char_data:
@@ -582,7 +616,18 @@ def main(argv: list[str] | None = None) -> int:
                 p0 = ref.get("prompt", "")
                 thematic_snip = []
                 if "thematic_snippet" in ref:
-                    thematic_snip.append(ref["thematic_snippet"])
+                    snippet_val = ref["thematic_snippet"]
+                    if isinstance(snippet_val, list):
+                        # List of references - resolve each one
+                        for ref_item in snippet_val:
+                            if ref_item in thematic_forms and thematic_forms[ref_item]:
+                                thematic_snip.append(thematic_forms[ref_item])
+                            else:
+                                # Not a form reference, use as-is
+                                thematic_snip.append(ref_item)
+                    else:
+                        # Legacy: single string value
+                        thematic_snip.append(snippet_val)
                 p = build_final_prompt(
                     p0,
                     thematic_snippets=thematic_snip,
@@ -607,7 +652,18 @@ def main(argv: list[str] | None = None) -> int:
             p0 = ref.get("prompt", "")
             thematic_snip = []
             if "thematic_snippet" in ref:
-                thematic_snip.append(ref["thematic_snippet"])
+                snippet_val = ref["thematic_snippet"]
+                if isinstance(snippet_val, list):
+                    # List of references - resolve each one
+                    for ref_item in snippet_val:
+                        if ref_item in thematic_forms and thematic_forms[ref_item]:
+                            thematic_snip.append(thematic_forms[ref_item])
+                        else:
+                            # Not a form reference, use as-is
+                            thematic_snip.append(ref_item)
+                else:
+                    # Legacy: single string value
+                    thematic_snip.append(snippet_val)
             p = build_final_prompt(
                 p0,
                 thematic_snippets=thematic_snip,
@@ -626,12 +682,7 @@ def main(argv: list[str] | None = None) -> int:
             print(str(out_path))
         return 0
 
-    # Single (character, form)
-    if not form_id:
-        parser.error(
-            "Form/refinement must be specified either with --form or in path syntax (e.g., --character 1:1)"
-        )
-    
+    # Single (character, form) - form_id must be specified to reach here
     prompt0, thematic_snip = resolve_prompt_from_json(
         json_data, character=character_id, form=form_id
     )

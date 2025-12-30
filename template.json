@@ -1,11 +1,11 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "Template for character prompt database with nested refinements. See readme.md for detailed instructions.",
+  "$comment": "Template for character prompt database with nested refinements and reusable thematic forms. Refinements use thematic_snippet arrays to reference form definitions. See readme.md for detailed instructions.",
   
   "metadata": {
     "title": "Character Prompt Template",
-    "version": "1.0.0",
-    "description": "Generic template for organizing AI image generation prompts with nested refinements",
+    "version": "2.0.0",
+    "description": "Generic template for organizing AI image generation prompts with nested refinements and reference-based thematic rules",
     "created": "2025-12-29"
   },
 
@@ -30,15 +30,28 @@
       "rendering style: stylized, sculpt-ready miniature render (not photoreal)",
       "emphasize readable forms and primary/secondary shapes",
       "output format: high resolution (4k/2048+)",
+      "base contact: at least one point of the figure must be in contact with the base (foot, paw, hand, tail, knee, weapon, etc.); no floating or airborne poses without visible support",
       "printability: watertight, manifold geometry, no extremely thin elements (<1.5mm), balanced pose"
     ],
     "prompt_snippet": "single character, centered composition, full figure (head-to-toe / nose-to-tail), 3/4 view, 50-85mm lens, overhead studio lighting (top-down key) with subtle rim light, high contrast, sharp focus, unpainted grey resin miniature (uniform matte grey), sculpt-ready, high detail, stylized tabletop-miniature aesthetic (clean readable planes, graphic shapes, simplified forms; not photoreal), print-readable stylized fur/hair (bold clumps/tufts, deep grooves), avoid ultra-fine hair and noisy microtexture, heroic-scale tabletop miniature proportions (slightly exaggerated features; not strict realism), NO background at all, transparent background / alpha cutout only"
   },
 
   "thematic_rules": {
-    "description": "Theme-specific rules applied to all prompts. Use prompt_snippet for global theme, and refinement-level thematic_snippet for variant-specific theming.",
+    "description": "Theme-specific rules applied to all prompts. Use prompt_snippet for global theme, and refinement-level thematic_snippet arrays to reference specific forms. Forms defined here can be reused across all characters.",
     "theme": "Example Theme: Fantasy Medieval",
-    "prompt_snippet": "fantasy medieval setting, heroic high-fantasy aesthetic, dramatic lighting"
+    "prompt_snippet": "fantasy medieval setting, heroic high-fantasy aesthetic, dramatic lighting",
+    "forms": {
+      "armored": {
+        "description": "Example form: heavily armored variant",
+        "anatomy": "full plate armor, heavy protection, limited mobility",
+        "prompt_snippet": "heavily armored, full plate mail with heraldic details, defensive posture"
+      },
+      "unarmored": {
+        "description": "Example form: lightly equipped variant",
+        "anatomy": "light clothing, unencumbered, full mobility",
+        "prompt_snippet": "lightly equipped, casual adventuring gear, mobile and unencumbered"
+      }
+    }
   },
 
   "miniature_scale_rules": {
@@ -70,21 +83,21 @@
           "id": 1,
           "name": "armored",
           "description": "Full plate armor variant",
-          "thematic_snippet": "heavily armored, full plate mail with heraldic details, defensive posture",
+          "thematic_snippet": ["armored"],
           "prompt": "Heroic warrior in full plate armor, tall and imposing, sword and shield at ready, battle-worn but dignified",
           "refinements": [
             {
               "id": 1,
               "name": "standing",
               "description": "Standing guard pose",
-              "thematic_snippet": "static guard stance, vigilant and alert",
+              "thematic_snippet": ["static guard stance, vigilant and alert"],
               "prompt": "standing at attention in guard pose, shield planted, sword vertical"
             },
             {
               "id": 2,
               "name": "charging",
               "description": "Dynamic charging pose",
-              "thematic_snippet": "dynamic charging action, forward momentum, aggressive stance",
+              "thematic_snippet": ["dynamic charging action, forward momentum, aggressive stance"],
               "prompt": "charging forward with shield raised and sword drawn back for strike"
             }
           ]
@@ -93,21 +106,21 @@
           "id": 2,
           "name": "unarmored",
           "description": "Casual clothing variant",
-          "thematic_snippet": "lightly equipped, casual adventuring gear, mobile and unencumbered",
+          "thematic_snippet": ["unarmored"],
           "prompt": "Heroic warrior in simple tunic and belt, tall and strong, sword sheathed at hip, relaxed but alert",
           "refinements": [
             {
               "id": 1,
               "name": "sitting",
               "description": "Resting pose",
-              "thematic_snippet": "relaxed resting pose, off-duty moment",
+              "thematic_snippet": ["relaxed resting pose, off-duty moment"],
               "prompt": "sitting on a log, hand on sword hilt, watchful expression"
             },
             {
               "id": 2,
               "name": "walking",
               "description": "Traveling pose",
-              "thematic_snippet": "steady traveling pace, road-worn adventurer",
+              "thematic_snippet": ["steady traveling pace, road-worn adventurer"],
               "prompt": "walking forward with confident stride, hand near sword"
             }
           ]

@@ -56,21 +56,78 @@ Each refinement can have:
 - `description` (string) - Description of this refinement
 - `pose` (string) - Optional pose description
 - `prompt` (string) - The actual prompt text
-- `thematic_snippet` (string) - Optional refinement-specific thematic rules (e.g., form anatomy, style)
+- `thematic_snippet` (array of strings, optional) - List of thematic rule references or custom snippets
+  - Each item can be:
+    - A reference to a form name from `thematic_rules.forms` (e.g., `["glabro"]`)
+    - A custom snippet string (e.g., `["aggressive stance, weapon ready"]`)
+    - Multiple references or combinations (e.g., `["glabro", "combat-ready"]`)
+  - The script resolves references and applies all snippets in order
+  - If omitted, only global thematic rules are applied
 - `refinements` (array) - Optional nested sub-refinements
 
 ### Thematic Rules
 
 The `thematic_rules` section supports project-wide theming:
-- `prompt_snippet` (string) - General thematic snippet applied to ALL prompts
-- Each refinement can optionally include a `thematic_snippet` that adds refinement-specific theming
-- Thematic snippets are accumulated as you descend through nested refinements
+- `prompt_snippet` (string) - General thematic snippet applied to ALL prompts globally
+- `forms` (object) - Optional reusable form definitions that can be referenced by refinements
+  - Each form has: `description`, `anatomy`, and `prompt_snippet`
+  - Useful for standardizing common variants (e.g., werewolf forms, armor types, etc.)
+- Refinements reference forms using `thematic_snippet: ["form_name"]`
+- Multiple forms or custom snippets can be combined: `thematic_snippet: ["form1", "custom text", "form2"]`
 
 **Example workflow:**
-1. Character prompt defines unique features
-2. Refinement's `thematic_snippet` adds form/variant-specific details (e.g., "fully human form" vs "massive werewolf war form")
-3. Global `thematic_rules.prompt_snippet` adds overall theme (e.g., "Old West horror")
-4. Generic and miniature rules add technical requirements
+1. Define reusable forms in `thematic_rules.forms` (optional)
+2. Character prompt defines unique features
+3. Refinement's `thematic_snippet` array references forms or adds custom snippets
+4. Global `thematic_rules.prompt_snippet` adds overall theme (applied to ALL prompts)
+5. Generic and miniature rules add technical requirements
+
+**Form Definitions Example:**
+```json
+"thematic_rules": {
+  "prompt_snippet": "Old West frontier horror",
+  "forms": {
+    "human": {
+      "description": "Fully human form",
+      "anatomy": "human anatomy, human proportions",
+      "prompt_snippet": "fully human form, predatory stillness"
+    },
+    "glabro": {
+      "description": "Near-human hybrid",
+      "anatomy": "enlarged hands and claws, elongated jaw",
+      "prompt_snippet": "near-human hybrid, enlarged hands and claws"
+    }
+  }
+}
+```
+
+**Using Form References in Refinements:**
+```json
+{
+  "id": 1,
+  "name": "human",
+  "thematic_snippet": ["human"],
+  "prompt": "Character-specific details..."
+},
+{
+  "id": 2,
+  "name": "glabro",
+  "thematic_snippet": ["glabro"],
+  "prompt": "Character-specific details..."
+},
+{
+  "id": 3,
+  "name": "custom",
+  "thematic_snippet": ["glabro", "heavily scarred", "aggressive posture"],
+  "prompt": "Can combine form refs and custom text..."
+}
+```
+
+**Snippet Resolution:**
+- `thematic_snippet: ["glabro"]` → Looks up "glabro" in `thematic_rules.forms` and uses its `prompt_snippet`
+- `thematic_snippet: ["custom text"]` → Uses "custom text" as-is (not a form reference)
+- `thematic_snippet: ["form1", "form2"]` → Resolves multiple forms and combines them
+- No `thematic_snippet` → Only global thematic rules are applied
 
 ## Usage
 
@@ -83,18 +140,18 @@ conda activate sc
 # List all available characters and refinements
 python create_image.py garou.json --list
 
-# Generate prompt only (no API call)
+# Generate prompts for all forms of a character (default behavior)
+python create_image.py garou.json 1 --dry-run
+python create_image.py garou.json alpha --prompt-only
+
+# Generate prompt for a specific form
 python create_image.py garou.json 1:3 --dry-run
 python create_image.py garou.json alpha:crinos --dry-run
 
-# Generate actual image (requires OpenAI API key)
+# Generate actual images (requires OpenAI API key)
 $env:OPENAI_API_KEY = "your-key-here"
-python create_image.py garou.json 1:3
-python create_image.py garou.json alpha:human
-
-# Generate all forms for a character
-python create_image.py garou.json 1 --all
-python create_image.py garou.json alpha --all --dry-run
+python create_image.py garou.json 1              # All forms for character 1
+python create_image.py garou.json alpha:human    # Just human form
 
 # Copy prompt to clipboard (Windows)
 python create_image.py garou.json 1:1 --dry-run --copy
@@ -107,17 +164,19 @@ python create_image.py garou.json 1:1 --no-generic
 python create_image.py garou.json 1:1 --no-miniature
 
 # Use a different JSON file
-python create_image.py myproject.json 1:1 --dry-run
+python create_image.py myproject.json 1 --dry-run
 python create_image.py template.json --list
 ```
 
 ### Command-Line Options
 
 - **`filename`** - JSON file to use (required, first argument)
-- `--character, -c` - Character ID or path (e.g., `1`, `alpha`, `1:3`)
-- `--form, -f` - Refinement/form (e.g., `human`, `crinos`)
+- **`character`** - Character ID or path (positional or `--character/-c`)
+  - Format: `1`, `alpha`, `1:2`, or `alpha:human`
+  - If only character specified (e.g., `1` or `alpha`), generates all refinements
+  - If full path specified (e.g., `1:2`), generates only that specific refinement
+- `--form, -f` - Refinement/form (e.g., `human`, `crinos`) - alternative to path syntax
 - `--json, -j` - Alternative way to specify JSON file (overrides positional argument)
-- `--out` - Output directory (default: `./out`)
 - `--out` - Output directory (default: `./out`)
 - `--model` - OpenAI model (default: `gpt-image-1`)
 - `--size` - Image size (default: `1024x1024`)
@@ -125,7 +184,7 @@ python create_image.py template.json --list
 - `--prompt-only` - Alias for `--dry-run`
 - `--copy` - Copy prompt to clipboard (Windows)
 - `--list` - List all available characters/refinements
-- `--all` - Generate all refinements for a character
+- `--all` - (Optional) Explicitly request all refinements - same as omitting form
 - `--no-miniature` - Don't append miniature scale rules
 - `--no-base` - Remove base/stand from miniature rules
 - `--no-generic` - Don't append generic render rules
@@ -144,6 +203,9 @@ python create_image.py template.json --list
 3. **Add thematic_rules** (optional)
    - Add project-specific style guidance
    - Theme, mood, or genre-specific rules
+   - Optionally define reusable forms in `thematic_rules.forms`
+     - Useful for standardizing variants (e.g., werewolf forms, armor types)
+     - Each form includes `description`, `anatomy`, and `prompt_snippet`
 
 4. **Define characters**
    - Each character gets an `id` (number) and `name` (string)
@@ -167,8 +229,15 @@ python create_image.py template.json --list
 
 - **Generic rules**: Keep concise and universal (lighting, camera, materials)
 - **Thematic rules**: Project-specific style guidance (genre, mood, theme)
-- **Character prompts**: Focus on unique identifying features
+  - **Global snippet**: Applied to ALL prompts automatically via `thematic_rules.prompt_snippet`
+  - **Form definitions**: Define reusable forms in `thematic_rules.forms` for consistency across characters
+  - Example: All werewolf characters share the same 5 forms (human, glabro, crinos, hispo, wolf)
+- **Character prompts**: Focus on unique identifying features specific to that character
 - **Refinement prompts**: Add specific pose, action, or variation details
+- **Refinement thematic_snippet**: Array of form references or custom snippets
+  - Use `["form_name"]` to reference a form from `thematic_rules.forms`
+  - Use `["custom text"]` for one-off snippets not defined as forms
+  - Combine multiple: `["form1", "custom text", "form2"]`
 - **Test combination**: Ensure prompts combine well at each nesting level
 
 ### Naming Conventions
@@ -181,12 +250,19 @@ python create_image.py template.json --list
 ### Prompt Construction
 
 The final prompt is constructed in this order:
-1. Character/refinement specific prompt
-2. Refinement `thematic_snippet` (if present)
-3. Global thematic rules `prompt_snippet`
+1. Character/refinement specific prompt (from refinement `prompt` field)
+2. Refinement thematic snippets (resolved from `thematic_snippet` array references)
+3. Global thematic rules `prompt_snippet` (applied to ALL prompts automatically)
 4. Generic render rules (if not excluded with `--no-generic`)
 5. Miniature scale rules (if not excluded with `--no-miniature`)
 6. Additional flags (e.g., `--no-base` adds "no base, no stand...")
+
+**Example for Alpha's Glabro form:**
+- Refinement prompt: "Glabro female -- enlarged hands, elongated jaw..."
+- Thematic snippet: `["glabro"]` → resolved to "near-human hybrid with distinctly human features..."
+- Global thematic: "Old West frontier horror, evil werewolf pack, territorial and predatory"
+- Generic rules: "single character, centered composition, full figure..."
+- Miniature rules: "40mm scale tabletop miniature, hard plastic/resin model..."
 
 This layering ensures consistent theming across all variants while allowing refinement-specific details.
 
@@ -204,11 +280,30 @@ This layering ensures consistent theming across all variants while allowing refi
 9. **Lost Cub** (Newblood) - Recently turned
 
 ### Each Character Has 5 Forms
-- **Human** - Fully human appearance
-- **Glabro** - Near-human but wrong
-- **Crinos** - The war form (towering bipedal wolf-man)
-- **Hispo** - Massive dire-wolf form
-- **Wolf** - Near-natural wolf
+
+The Garou pack uses standardized werewolf forms defined in `thematic_rules.forms`:
+
+- **Human** - Fully human form with subtle predatory tells
+  - Anatomy: human anatomy, human proportions
+  - Snippet: "fully human form, predatory stillness and unnatural gaze"
+  
+- **Glabro** - Near-human hybrid form (the "almost human but wrong" state)
+  - Anatomy: enlarged hands and claws, elongated jaw with visible fangs, hunched posture, human-like feet (larger with clawed toes)
+  - Snippet: "near-human hybrid, enlarged hands and claws, elongated jaw with fangs, hunched posture, human-like feet (larger with clawed toes)"
+  
+- **Crinos** - The war form (massive bipedal werewolf)
+  - Anatomy: towering bipedal werewolf, wolf-like head with elongated muzzle and massive fangs, powerful shoulders and chest, digitigrade legs
+  - Snippet: "massive bipedal werewolf war form, towering scale, full spiritual transformation"
+  
+- **Hispo** - Dire-wolf form (massive prehistoric wolf)
+  - Anatomy: massive quadruped dire wolf, exaggerated shoulders and spine, oversized paws and jaws
+  - Snippet: "dire wolf form, massive quadruped, exaggerated shoulders and spine"
+  
+- **Wolf** - Wolf form (near-natural but larger and unsettling)
+  - Anatomy: large wolf anatomy, slightly oversized compared to natural wolves, intelligent eyes
+  - Snippet: "large intelligent wolf, near-natural but larger and uncanny"
+
+Each character's refinements reference these form definitions in their `thematic_snippet` to ensure consistency across all 9 characters.
 
 ### Example Commands
 
@@ -219,8 +314,9 @@ python create_image.py garou.json 1:3 --dry-run
 # Alpha in human form (by name)
 python create_image.py garou.json alpha:human --dry-run
 
-# All forms for the Lost Cub
-python create_image.py garou.json 9 --all --dry-run
+# All forms for the Lost Cub (default behavior when no form specified)
+python create_image.py garou.json 9 --dry-run
+python create_image.py garou.json lost_cub --dry-run
 
 # Breaker in wolf form with no base
 python create_image.py garou.json breaker:wolf --no-base --dry-run
