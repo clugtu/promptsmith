@@ -1,0 +1,160 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Template for character prompt database with nested refinements. See readme.md for detailed instructions.",
+  
+  "metadata": {
+    "title": "Character Prompt Template",
+    "version": "1.0.0",
+    "description": "Generic template for organizing AI image generation prompts with nested refinements",
+    "created": "2025-12-29"
+  },
+
+  "generic_render_rules": {
+    "description": "Universal rendering rules applied to all prompts",
+    "rules": [
+      "single character, centered composition",
+      "full figure visible (head-to-toe / nose-to-tail), do not crop limbs or extremities",
+      "3/4 view for optimal silhouette readability",
+      "camera: 50-85mm equivalent focal length",
+      "lighting: 3-point lighting with strong rim light and soft key fill",
+      "overhead studio lighting (top-down key) with subtle rim light for edge definition",
+      "lighting style emphasizes readable silhouette and plane separation",
+      "materials/finish: unpainted grey resin miniature (uniform matte grey), like test print / unprimed model",
+      "stylization: tabletop-miniature aesthetic (clean graphic shapes, simplified primary forms, bold secondary forms, crisp plane breaks)",
+      "avoid photoreal skin/fur microtexture that reads as noise at scale",
+      "proportions: heroic scale (slightly exaggerated hands/heads/features and crisp planes)",
+      "texture guidance: prefer stylized, print-readable detail; fur/hair as bold clumps/tufts with deep grooves",
+      "avoid ultra-fine individual hairs, micro-fuzz, flyaways, and noisy microtexture",
+      "minimum detail size: ~0.3-0.5mm; prioritize crisp edges and strong plane breaks",
+      "background: NO background - transparent background / alpha cutout only, isolated subject silhouette",
+      "rendering style: stylized, sculpt-ready miniature render (not photoreal)",
+      "emphasize readable forms and primary/secondary shapes",
+      "output format: high resolution (4k/2048+)",
+      "printability: watertight, manifold geometry, no extremely thin elements (<1.5mm), balanced pose"
+    ],
+    "prompt_snippet": "single character, centered composition, full figure (head-to-toe / nose-to-tail), 3/4 view, 50-85mm lens, overhead studio lighting (top-down key) with subtle rim light, high contrast, sharp focus, unpainted grey resin miniature (uniform matte grey), sculpt-ready, high detail, stylized tabletop-miniature aesthetic (clean readable planes, graphic shapes, simplified forms; not photoreal), print-readable stylized fur/hair (bold clumps/tufts, deep grooves), avoid ultra-fine hair and noisy microtexture, heroic-scale tabletop miniature proportions (slightly exaggerated features; not strict realism), NO background at all, transparent background / alpha cutout only"
+  },
+
+  "thematic_rules": {
+    "description": "Theme-specific rules applied to all prompts. Use prompt_snippet for global theme, and refinement-level thematic_snippet for variant-specific theming.",
+    "theme": "Example Theme: Fantasy Medieval",
+    "prompt_snippet": "fantasy medieval setting, heroic high-fantasy aesthetic, dramatic lighting"
+  },
+
+  "miniature_scale_rules": {
+    "description": "Specific rules for miniature-scale rendering (typically 28mm-40mm tabletop scale)",
+    "rules": [
+      "40mm scale tabletop miniature",
+      "hard plastic/resin model appearance",
+      "crisp sculpted details",
+      "slightly exaggerated heroic proportions",
+      "studio product photo lighting",
+      "neutral seamless background (or transparent alpha)",
+      "softbox lighting with rim light",
+      "sharp focus with high depth detail",
+      "fine layer lines avoided",
+      "clean sculpted planes",
+      "readable edges and silhouette"
+    ],
+    "prompt_snippet": "40mm scale tabletop miniature, hard plastic/resin model, crisp sculpted details, slightly exaggerated heroic proportions, studio product photo, neutral seamless background, softbox lighting with rim light, sharp focus, high depth detail, clean sculpted planes, readable edges"
+  },
+
+  "characters": [
+    {
+      "id": 1,
+      "name": "example_hero",
+      "description": "A heroic warrior character - example template",
+      "visual_notes": "Tall, armored, carrying a sword and shield",
+      "refinements": [
+        {
+          "id": 1,
+          "name": "armored",
+          "description": "Full plate armor variant",
+          "thematic_snippet": "heavily armored, full plate mail with heraldic details, defensive posture",
+          "prompt": "Heroic warrior in full plate armor, tall and imposing, sword and shield at ready, battle-worn but dignified",
+          "refinements": [
+            {
+              "id": 1,
+              "name": "standing",
+              "description": "Standing guard pose",
+              "thematic_snippet": "static guard stance, vigilant and alert",
+              "prompt": "standing at attention in guard pose, shield planted, sword vertical"
+            },
+            {
+              "id": 2,
+              "name": "charging",
+              "description": "Dynamic charging pose",
+              "thematic_snippet": "dynamic charging action, forward momentum, aggressive stance",
+              "prompt": "charging forward with shield raised and sword drawn back for strike"
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "unarmored",
+          "description": "Casual clothing variant",
+          "thematic_snippet": "lightly equipped, casual adventuring gear, mobile and unencumbered",
+          "prompt": "Heroic warrior in simple tunic and belt, tall and strong, sword sheathed at hip, relaxed but alert",
+          "refinements": [
+            {
+              "id": 1,
+              "name": "sitting",
+              "description": "Resting pose",
+              "thematic_snippet": "relaxed resting pose, off-duty moment",
+              "prompt": "sitting on a log, hand on sword hilt, watchful expression"
+            },
+            {
+              "id": 2,
+              "name": "walking",
+              "description": "Traveling pose",
+              "thematic_snippet": "steady traveling pace, road-worn adventurer",
+              "prompt": "walking forward with confident stride, hand near sword"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "example_mage",
+      "description": "A mystical mage character - example template",
+      "visual_notes": "Robed figure with staff, arcane symbols",
+      "refinements": [
+        {
+          "id": 1,
+          "name": "battle_robes",
+          "description": "Combat-ready mystical robes",
+          "prompt": "Mystical mage in flowing battle robes, staff glowing with arcane energy, eyes alight with power",
+          "refinements": [
+            {
+              "id": 1,
+              "name": "casting",
+              "description": "Mid-spell casting pose",
+              "prompt": "arms raised, staff held high, arcane energy swirling around hands"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+
+  "usage_examples": {
+    "by_number": {
+      "1": "Returns all refinements for character 1 (example_hero)",
+      "1:1": "Returns character 1, refinement 1 (armored)",
+      "1:1:1": "Returns character 1, refinement 1, sub-refinement 1 (armored, standing)",
+      "1:2:2": "Returns character 1, refinement 2, sub-refinement 2 (unarmored, walking)"
+    },
+    "by_name": {
+      "example_hero": "Returns all refinements for example_hero",
+      "example_hero:armored": "Returns armored variant",
+      "example_hero:armored:charging": "Returns armored charging pose",
+      "example_mage:battle_robes:casting": "Returns mage casting spell"
+    },
+    "mixed": {
+      "1:armored": "Character 1, refinement named 'armored'",
+      "example_hero:1": "Character named 'example_hero', refinement number 1",
+      "2:1:casting": "Character 2, refinement 1, sub-refinement named 'casting'"
+    }
+  }
+}
