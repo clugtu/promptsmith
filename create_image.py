@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 """create_image.py
 
 Generate an image from prompts stored in a JSON file (garou.json).
@@ -247,6 +248,9 @@ def resolve_prompt_from_json(
     if not char_data:
         raise PromptNotFoundError(f"Character not found: {character}")
     
+    # Get character_base if present
+    character_base = char_data.get("character_base", "").strip()
+    
     # If no form specified, return character description or first refinement
     if form is None:
         refinements = char_data.get("refinements", [])
@@ -270,7 +274,15 @@ def resolve_prompt_from_json(
             else:
                 # Legacy: single string value
                 thematic.append(snippet_val)
-        return first_ref.get("prompt", ""), thematic
+        
+        # Prepend character_base to refinement prompt if present
+        refinement_prompt = first_ref.get("prompt", "")
+        if character_base:
+            final_prompt = f"{character_base}, {refinement_prompt}"
+        else:
+            final_prompt = refinement_prompt
+        
+        return final_prompt, thematic
     
     # Find the refinement (form)
     refinements = char_data.get("refinements", [])
@@ -299,7 +311,14 @@ def resolve_prompt_from_json(
             # Legacy: single string value
             thematic.append(snippet_val)
     
-    return refinement.get("prompt", ""), thematic
+    # Prepend character_base to refinement prompt if present
+    refinement_prompt = refinement.get("prompt", "")
+    if character_base:
+        final_prompt = f"{character_base}, {refinement_prompt}"
+    else:
+        final_prompt = refinement_prompt
+    
+    return final_prompt, thematic
 
 
 def build_final_prompt(
