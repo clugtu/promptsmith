@@ -33,9 +33,6 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 
 
-FORMS = {"human", "glabro", "crinos", "hispo", "wolf"}
-
-
 def sanitize_for_ascii(text: str) -> str:
     """Replace common Unicode characters with ASCII equivalents for safe terminal output."""
     replacements = {
@@ -269,6 +266,9 @@ def resolve_prompt_from_json(
     # Get character_base if present
     character_base = char_data.get("character_base", "").strip()
     
+    # Get gender from character data
+    gender = char_data.get("gender", None)
+    
     # If no form specified, return character description or first refinement
     if form is None:
         refinements = char_data.get("refinements", [])
@@ -300,7 +300,7 @@ def resolve_prompt_from_json(
         else:
             final_prompt = refinement_prompt
         
-        return final_prompt, thematic
+        return final_prompt, thematic, gender
     
     # Find the refinement (form)
     refinements = char_data.get("refinements", [])
@@ -336,7 +336,7 @@ def resolve_prompt_from_json(
     else:
         final_prompt = refinement_prompt
     
-    return final_prompt, thematic
+    return final_prompt, thematic, gender
 
 
 def build_final_prompt(
@@ -360,9 +360,8 @@ def build_final_prompt(
         # Only add if the gender word doesn't already appear in the base prompt
         gender_lower = gender.lower()
         if gender_lower not in base_prompt.lower():
-            # Add gender descriptor based on form/species keywords
-            if any(word in base_prompt.lower() for word in ['crinos', 'werewolf', 'dire wolf', 'wolf']):
-                parts.append(f"{gender_lower} with {gender_lower}-typical build and proportions")
+            # Add gender descriptor for all forms
+            parts.append(f"{gender_lower} with {gender_lower}-typical build and proportions")
     
     # Add thematic snippets from refinements
     if thematic_snippets:
@@ -475,7 +474,7 @@ def build_output_path(
     ts = datetime.now().strftime("%Y%m%d-%H%M%S")
     safe_form = str(form).lower()
     safe_char = str(character).replace(":", "_")
-    filename = f"garou_{safe_char}_{safe_form}_{ts}.png"
+    filename = f"generated_{safe_char}_{safe_form}_{ts}.png"
     return out_dir / filename
 
 
@@ -508,7 +507,7 @@ def main(argv: list[str] | None = None) -> int:
         "--form",
         "-f",
         type=str,
-        help="Form/refinement: human, glabro, crinos, hispo, wolf (or ID/name). Not needed if using path syntax in --character.",
+        help="Form/refinement name or ID. Not needed if using path syntax in --character.",
     )
     parser.add_argument(
         "--json",
