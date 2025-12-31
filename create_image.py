@@ -36,6 +36,24 @@ from typing import Any, Dict, List, Optional, Tuple, Union
 FORMS = {"human", "glabro", "crinos", "hispo", "wolf"}
 
 
+def sanitize_for_ascii(text: str) -> str:
+    """Replace common Unicode characters with ASCII equivalents for safe terminal output."""
+    replacements = {
+        '\u00b0': ' degrees',  # ° (degree symbol)
+        '\u2013': '-',         # – (en dash)
+        '\u2014': '--',        # — (em dash)
+        '\u2018': "'",         # ' (left single quote)
+        '\u2019': "'",         # ' (right single quote)
+        '\u201c': '"',         # " (left double quote)
+        '\u201d': '"',         # " (right double quote)
+        '\u2026': '...',       # … (ellipsis)
+        '\u00a0': ' ',         # non-breaking space
+    }
+    for unicode_char, ascii_equiv in replacements.items():
+        text = text.replace(unicode_char, ascii_equiv)
+    return text
+
+
 def format_for_chat(prompt: str) -> str:
     """Format a prompt for copy/paste into ChatGPT."""
     return prompt.strip()
@@ -217,7 +235,7 @@ def resolve_prompt_from_json(
     character: Optional[Union[int, str]] = None,
     form: Optional[str] = None,
     refinement_path: Optional[str] = None
-) -> Tuple[str, List[str]]:
+) -> Tuple[str, List[str], Optional[str]]:
     """Resolve a prompt from JSON using various addressing methods.
     
     Args:
@@ -227,7 +245,7 @@ def resolve_prompt_from_json(
         refinement_path: Full path like '1:1' or 'alpha:human'
     
     Returns:
-        Tuple of (prompt string, list of thematic snippets from refinement path)
+        Tuple of (prompt string, list of thematic snippets from refinement path, gender or None)
     """
     # Extract form definitions once
     thematic_forms = extract_thematic_forms(json_data)
@@ -324,6 +342,7 @@ def resolve_prompt_from_json(
 def build_final_prompt(
     base_prompt: str,
     *,
+    gender: Optional[str] = None,
     thematic_snippets: List[str] = None,
     thematic_general: str = "",
     generic_snippet: str,
@@ -335,6 +354,15 @@ def build_final_prompt(
     base_prompt = base_prompt.strip().rstrip(",")
 
     parts = [base_prompt]
+    
+    # Add gender hint if provided and not already in prompt
+    if gender:
+        # Only add if the gender word doesn't already appear in the base prompt
+        gender_lower = gender.lower()
+        if gender_lower not in base_prompt.lower():
+            # Add gender descriptor based on form/species keywords
+            if any(word in base_prompt.lower() for word in ['crinos', 'werewolf', 'dire wolf', 'wolf']):
+                parts.append(f"{gender_lower} with {gender_lower}-typical build and proportions")
     
     # Add thematic snippets from refinements
     if thematic_snippets:
@@ -622,6 +650,9 @@ def main(argv: list[str] | None = None) -> int:
         if not char_data:
             raise PromptNotFoundError(f"Character not found: {character_id}")
         
+        # Extract gender from character data
+        gender = char_data.get("gender", None)
+        
         refinements = char_data.get("refinements", [])
         if not refinements:
             raise PromptNotFoundError(
@@ -649,6 +680,7 @@ def main(argv: list[str] | None = None) -> int:
                         thematic_snip.append(snippet_val)
                 p = build_final_prompt(
                     p0,
+                    gender=gender,
                     thematic_snippets=thematic_snip,
                     thematic_general=thematic_general,
                     generic_snippet=generic_snippet,
@@ -685,6 +717,7 @@ def main(argv: list[str] | None = None) -> int:
                     thematic_snip.append(snippet_val)
             p = build_final_prompt(
                 p0,
+                gender=gender,
                 thematic_snippets=thematic_snip,
                 thematic_general=thematic_general,
                 generic_snippet=generic_snippet,
@@ -702,11 +735,12 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     # Single (character, form) - form_id must be specified to reach here
-    prompt0, thematic_snip = resolve_prompt_from_json(
+    prompt0, thematic_snip, gender = resolve_prompt_from_json(
         json_data, character=character_id, form=form_id
     )
     prompt = build_final_prompt(
         prompt0,
+        gender=gender,
         thematic_snippets=thematic_snip,
         thematic_general=thematic_general,
         generic_snippet=generic_snippet,
@@ -717,7 +751,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     
     if args.dry_run:
-        out_text = "create image: " + format_for_chat(prompt) + "\n"
+        out_text = "create image: " + sanitize_for_ascii(format_for_chat(prompt)) + "\n"
         if args.copy:
             copy_to_clipboard_windows(out_text)
         print(out_text, end="")
