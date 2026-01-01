@@ -349,8 +349,8 @@ def resolve_prompt_from_json(
     # Get character_base if present
     character_base = char_data.get("character_base", "").strip()
     
-    # Get gender from character data
-    gender = char_data.get("gender", None)
+    # Get gender from character data (refinements may override)
+    char_gender = char_data.get("gender", None)
     
     # If no form specified, return character description or first refinement
     if form is None:
@@ -382,7 +382,10 @@ def resolve_prompt_from_json(
             final_prompt = f"{character_base}, {refinement_prompt}"
         else:
             final_prompt = refinement_prompt
-        
+
+        # Use refinement-level gender if present, else character-level
+        gender = first_ref.get("gender", char_gender)
+
         return final_prompt, thematic, gender
     
     # Find the refinement (form)
@@ -418,7 +421,10 @@ def resolve_prompt_from_json(
         final_prompt = f"{character_base}, {refinement_prompt}"
     else:
         final_prompt = refinement_prompt
-    
+
+    # Use refinement-level gender if present, else character-level
+    gender = refinement.get("gender", char_gender)
+
     return final_prompt, thematic, gender
 
 
@@ -450,13 +456,9 @@ def build_final_prompt(
             'feminine', 'masculine'
         ])
         
-        # Only add gender hint to transformed forms (not human)
-        is_transformed = any(word in base_lower for word in [
-            'crinos', 'werewolf', 'dire wolf', 'wolf ', 'glabro', 'hispo'
-        ])
-        
-        if is_transformed and not has_gender:
-            parts.append(f"{gender_lower} with {gender_lower}-typical build and proportions")
+        # Add gender to all forms unless already present
+        if not has_gender:
+            parts.append(f"{gender_lower}")
     
     # Add thematic snippets from refinements
     if thematic_snippets:
@@ -659,7 +661,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--all",
         action="store_true",
-        help="Generate (or print) all forms for the given --character.",
+        help="Generate (or print) all forms for all characters. If --character is specified, generate all forms for that character only.",
     )
 
     parser.add_argument(
@@ -711,8 +713,100 @@ def main(argv: list[str] | None = None) -> int:
     # Handle positional or flag-based character argument
     character_arg = args.character_positional or args.character
     
+    # If --all is used without a character, generate all characters and all forms
+    if args.all and character_arg is None:
+        characters = json_data.get("characters", [])
+        if not characters:
+            raise PromptNotFoundError("No characters found in JSON")
+        
+        if args.dry_run:
+            blocks: list[str] = []
+            for char_data in characters:
+                character_id = char_data.get("name", "") or char_data.get("id", "")
+                char_gender = char_data.get("gender", None)
+                refinements = char_data.get("refinements", [])
+
+                for ref in refinements:
+                    ref_name = ref.get("name", "")
+                    p0 = ref.get("prompt", "")
+                    # Prefer refinement-level gender when present
+                    gender_for_prompt = ref.get("gender", char_gender)
+                    thematic_snip = []
+                    if "thematic_snippet" in ref:
+                        snippet_val = ref["thematic_snippet"]
+                        if isinstance(snippet_val, list):
+                            for ref_item in snippet_val:
+                                if ref_item in thematic_forms and thematic_forms[ref_item]:
+                                    thematic_snip.append(thematic_forms[ref_item])
+                                else:
+                                    thematic_snip.append(ref_item)
+                        else:
+                            thematic_snip.append(snippet_val)
+                    p = build_final_prompt(
+                        p0,
+                        gender=gender_for_prompt,
+                        thematic_snippets=thematic_snip,
+                        thematic_general=thematic_general,
+                        style_snippet=style_snippet,
+                        generic_snippet=generic_snippet,
+                        miniature_snippet=miniature_snippet,
+                        include_generic=include_generic,
+                        include_miniature=include_miniature,
+                        no_base=args.no_base,
+                    )
+                    blocks.append(f"[{character_id}:{ref_name}]\n{sanitize_for_ascii(format_for_chat(p))}")
+            
+            out_text = "\n\n".join(blocks).strip() + "\n"
+            if args.copy:
+                copy_to_clipboard_windows(out_text)
+            print(out_text, end="")
+            return 0
+        
+        # Generate images for all characters and all forms
+        args.out.mkdir(parents=True, exist_ok=True)
+        for char_data in characters:
+            character_id = char_data.get("name", "") or char_data.get("id", "")
+            char_gender = char_data.get("gender", None)
+            refinements = char_data.get("refinements", [])
+
+            for ref in refinements:
+                ref_name = ref.get("name", "")
+                p0 = ref.get("prompt", "")
+                # Prefer refinement-level gender when present
+                gender_for_prompt = ref.get("gender", char_gender)
+                thematic_snip = []
+                if "thematic_snippet" in ref:
+                    snippet_val = ref["thematic_snippet"]
+                    if isinstance(snippet_val, list):
+                        for ref_item in snippet_val:
+                            if ref_item in thematic_forms and thematic_forms[ref_item]:
+                                thematic_snip.append(thematic_forms[ref_item])
+                            else:
+                                thematic_snip.append(ref_item)
+                    else:
+                        thematic_snip.append(snippet_val)
+                p = build_final_prompt(
+                    p0,
+                    gender=gender_for_prompt,
+                    thematic_snippets=thematic_snip,
+                    thematic_general=thematic_general,
+                    style_snippet=style_snippet,
+                    generic_snippet=generic_snippet,
+                    miniature_snippet=miniature_snippet,
+                    include_generic=include_generic,
+                    include_miniature=include_miniature,
+                    no_base=args.no_base,
+                )
+                png_bytes = generate_image_openai(p, model=args.model, size=args.size)
+                out_path = build_output_path(
+                    args.out, character=character_id, form=ref_name
+                )
+                out_path.write_bytes(png_bytes)
+                print(str(out_path))
+        return 0
+    
     if character_arg is None:
-        parser.error("Character argument is required unless using --list. Use positional argument or --character flag.")
+        parser.error("Character argument is required unless using --list or --all. Use positional argument or --character flag.")
 
     # Parse character - could be path like "1:1" or "alpha:human"
     character_id = None
@@ -749,8 +843,8 @@ def main(argv: list[str] | None = None) -> int:
         if not char_data:
             raise PromptNotFoundError(f"Character not found: {character_id}")
         
-        # Extract gender from character data
-        gender = char_data.get("gender", None)
+        # Extract gender from character data (refinements may override)
+        char_gender = char_data.get("gender", None)
         
         refinements = char_data.get("refinements", [])
         if not refinements:
@@ -763,6 +857,8 @@ def main(argv: list[str] | None = None) -> int:
             for ref in refinements:
                 ref_name = ref.get("name", "")
                 p0 = ref.get("prompt", "")
+                # Prefer refinement-level gender when present
+                gender_for_prompt = ref.get("gender", char_gender)
                 thematic_snip = []
                 if "thematic_snippet" in ref:
                     snippet_val = ref["thematic_snippet"]
@@ -779,7 +875,7 @@ def main(argv: list[str] | None = None) -> int:
                         thematic_snip.append(snippet_val)
                 p = build_final_prompt(
                     p0,
-                    gender=gender,
+                    gender=gender_for_prompt,
                     thematic_snippets=thematic_snip,
                     thematic_general=thematic_general,
                     style_snippet=style_snippet,
@@ -789,7 +885,7 @@ def main(argv: list[str] | None = None) -> int:
                     include_miniature=include_miniature,
                     no_base=args.no_base,
                 )
-                blocks.append(f"[{character_id}:{ref_name}]\n{format_for_chat(p)}")
+                blocks.append(f"[{character_id}:{ref_name}]\n{sanitize_for_ascii(format_for_chat(p))}")
 
             out_text = "\n\n".join(blocks).strip() + "\n"
             if args.copy:
@@ -801,6 +897,8 @@ def main(argv: list[str] | None = None) -> int:
         for ref in refinements:
             ref_name = ref.get("name", "")
             p0 = ref.get("prompt", "")
+            # Prefer refinement-level gender when present
+            gender_for_prompt = ref.get("gender", char_gender)
             thematic_snip = []
             if "thematic_snippet" in ref:
                 snippet_val = ref["thematic_snippet"]
@@ -817,7 +915,7 @@ def main(argv: list[str] | None = None) -> int:
                     thematic_snip.append(snippet_val)
             p = build_final_prompt(
                 p0,
-                gender=gender,
+                gender=gender_for_prompt,
                 thematic_snippets=thematic_snip,
                 thematic_general=thematic_general,
                 style_snippet=style_snippet,
