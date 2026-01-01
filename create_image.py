@@ -355,12 +355,23 @@ def build_final_prompt(
 
     parts = [base_prompt]
     
-    # Add gender hint if provided and not already in prompt
+    # Add gender hint if provided and not already explicitly stated
     if gender:
-        # Only add if the gender word doesn't already appear in the base prompt
         gender_lower = gender.lower()
-        if gender_lower not in base_prompt.lower():
-            # Add gender descriptor for all forms
+        base_lower = base_prompt.lower()
+        
+        # Check for explicit gender words
+        has_gender = any(word in base_lower for word in [
+            'female', 'male', 'woman', 'man ', ' man,', 'girl', 'boy',
+            'feminine', 'masculine'
+        ])
+        
+        # Only add gender hint to transformed forms (not human)
+        is_transformed = any(word in base_lower for word in [
+            'crinos', 'werewolf', 'dire wolf', 'wolf ', 'glabro', 'hispo'
+        ])
+        
+        if is_transformed and not has_gender:
             parts.append(f"{gender_lower} with {gender_lower}-typical build and proportions")
     
     # Add thematic snippets from refinements
