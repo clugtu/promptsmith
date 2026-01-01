@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "description": "40mm tabletop miniature scale-specific rendering rules",
+  "miniature_scale_rules": {
+    "description": "40mm tabletop miniature render rules (copy/paste into prompts)",
+    "rules": [
+      "Always specify 40mm scale tabletop miniature for image→3D workflows",
+      "40mm scale tabletop miniature, hard plastic/resin model, crisp sculpted details",
+      "Mounted on a round gaming base (about 32mm) - optional, can be omitted with --no-base flag",
+      "Studio lighting",
+      "Softbox lighting with rim light, sharp focus, high depth detail",
+      "For monochrome reference: black-and-white (monochrome), high-contrast studio lighting, no color cast",
+      "Miniature surface language: fine layer lines avoided, clean sculpted planes, readable edges, no smoky fog covering the silhouette",
+      "Turntable/consistency: same miniature, consistent proportions across views; front view then 3/4 view then back view",
+      "Painted reference: painted like a premium display miniature, subtle edge highlights, matte varnish look",
+      "Unpainted reference (best for geometry): unpainted grey resin miniature, uniform matte grey material"
+    ],
+    "prompt_snippet": "40mm tabletop miniature, crisp sculpted details, studio lighting with rim, sharp focus"
+  }
+}

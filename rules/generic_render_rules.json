@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "description": "Universal rendering rules for tabletop miniature-style renders - applicable to all character types",
+  "generic_render_rules": {
+    "description": "Universal rendering rules applied to all prompts",
+    "rules": [
+      "SINGLE FIGURE ONLY: exactly one character/creature in the entire image. NO other figures, NO background characters, NO companions, NO additional people or animals. Only the main subject.",
+      "Clarity-first: prioritize a clean silhouette and unobstructed forms. Keep all limbs/appendages visible; avoid occluding major body parts.",
+      "Composition: single character, centered, appropriate framing for form. Prefer 3/4 or three-quarter camera for readable silhouette.",
+      "Framing: FULL FIGURE only -- show the entire character from head to toe (or nose to tail for quadrupeds), fully in frame; do not crop limbs, hands, feet, tail, ears, or weapon tips.",
+      "Camera: 50–85mm equivalent focal length (avoid wide lenses that distort), 3/4 view or eye-level by default.",
+      "Lighting: 3-point lighting with strong rim light + soft key; add a subtle fill to reveal details. Use directional rim to define silhouette.",
+      "Materials / finish: unpainted grey resin miniature (uniform matte grey).",
+      "Lighting style: overhead studio lighting (top-down key) with a subtle rim light; emphasize readable silhouette and edge definition.",
+      "Stylization: prioritize a stylized tabletop-miniature aesthetic (clean, graphic shape language; simplified primary forms; bold secondary forms; crisp plane breaks). NOT PHOTOREAL - avoid photorealistic microtexture that reads as noise at miniature scale. This is a miniature sculpture, not a photograph.",
+      "Texture guidance (40mm scale): prefer stylized, miniature-readable surface detail as graphic shapes with crisp edges and clean separation between elements. Avoid ultra-fine detail, micro-noise, or photorealistic rendering.",
+      "Fur/hair rendering (applies to any furred/haired creatures): CRITICAL - fur/hair must be sculpted as bold clumps/tufts with deep grooves and clean separation between masses. NO ultra-fine individual hairs, NO micro-fuzz, NO flyaways, NO strand-level detail, NO photorealistic hair rendering. Think carved wood or clay, not real fur. Texture should read as graphic shapes, not noise.",
+      "Fur hierarchy: prioritize primary silhouette clumps > secondary mass breaks > minimal tertiary texture. If detail competes with silhouette readability at 40mm, remove it.",
+      "Micro-detail restraint: avoid tiny surface details; prioritize crisp edges, strong plane breaks, and a clear hierarchy (big forms first, then a few secondary shapes, then sparing texture).",
+      "Background: plain neutral LIGHT studio background only (solid light grey or white). NOT black, NOT dark, NOT vignette. Isolated subject; no scenery, no set dressing, no gradient, no environmental objects, no props that aren't directly held/worn by the subject, no other creatures or figures.",
+      "No environmental geometry: do not add rocks, terrain, debris, perches, platforms, or scenic elements unless explicitly requested. Character must exist in isolation.",
+      "Weapon visibility (CRITICAL): any weapon must be fully visible from grip to tip, not crossing or overlapping the torso, limbs, or silhouette of the body. Weapon shaft and head must be unobstructed, with clear negative space between weapon and figure. No motion blur, no depth-of-field blur, no foreshortening that hides length.",
+      "Weapon/tool constraint (CRITICAL): do not add weapons, tools, or functional implements unless explicitly specified in the prompt. Only include weapons and tools that are clearly named and described. NO extra firearms, NO additional pistols, NO revolvers, NO sidearms, NO holsters (unless specifically mentioned), NO daggers, NO hidden weapons, NO improvised weapons. Decorative embellishments, accessories, clothing details, and worn items are allowed, but do not invent combat implements.",
+      "Action pose constraint: attack poses must be readable from a single 3/4 camera angle without limb or weapon overlap. Weapon thrusts and swings must project away from the torso at 20–30° with visible negative space.",
+      "Value hierarchy (CRITICAL for miniature readability): use deliberate value contrast to define depth. Deep recesses must render significantly darker than primary planes; major forms must separate clearly in value. Avoid flat mid-grey renders. Lighting and shading should simulate zenithal priming for readability.",
+      "Rendering style: stylized, sculpt-ready miniature render (NOT photoreal, NOT photographic). Emphasize readable forms and primary/secondary shapes; use selectively placed texture for definition, not micro-noise.",
+      "Materials: neutral, slightly matte materials for preview renders; indicate if metallic or glazed parts should be present. Prefer flat diffuse materials to inspect silhouette.",
+      "Prompt engineering tips: include camera and lighting tokens, add materials and scale tokens (\"sculpt-ready\"), and use negative prompts (\"no watermarks, no text, no extra limbs, no extreme motion blur\")."
+    ],
+    "prompt_snippet": "TABLETOP GAMING MINIATURE SCULPTURE (miniature statue); SINGLE CHARACTER ONLY (no other figures, animals, or people), centered full figure (head-to-toe/nose-to-tail), 3/4 view, 50-85mm lens, overhead key + rim light, high contrast, unpainted grey resin miniature, stylized tabletop aesthetic (clean planes, graphic shapes), NOT PHOTOREAL, sculpted stylized fur as bold clumps and masses with deep grooves (NO individual hairs, NO strand detail, NO photorealistic fur), plain neutral LIGHT studio background only (solid light grey or white), NOT black background, NO environmental objects or background elements"
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "version": "1.0.0",
+  "description": "Realistic Weird West visual style guide - defines aesthetic, tone, and look/feel for rendered miniatures (separate from technical printability rules)",
+  "style_id": "realistic_weird_west",
+  "style_rules": {
+    "description": "Visual style and aesthetic guidance for Realistic Weird West miniatures",
+    "style_name": "Realistic Weird West",
+    "aesthetic_overview": "Gritty, grounded realism meets dark supernatural horror. Late 1800s American frontier + feudal Japan aesthetics with horror pulp sensibilities. Weathered, lived-in materials; intimidating character presence; dramatic shadows and high-contrast lighting to emphasize menace.",
+    "visual_references": [
+      "Classic pulp horror illustrations (1930s-1950s pulp magazine covers)",
+      "Spaghetti Western cinematography (high contrast, dramatic shadows, strong silhouettes)",
+      "Historical reference photography: 1870s-1890s American West, Meiji-era Japan",
+      "Dark fantasy tabletop miniature painting (Reaper, Games Workshop horror ranges)",
+      "Film noir lighting and composition"
+    ],
+    "rendering_approach": {
+      "overall_aesthetic": "Realistic but stylized - grounded in historical authenticity with supernatural horror overlay. NOT cartoony, NOT anime, NOT grimdark exaggeration. Think premium display miniature with dramatic presentation.",
+      "realism_level": "Semi-realistic: anatomically plausible with restrained exaggeration for miniature scale. Details simplified for print-readability but maintaining believable material qualities and proportions.",
+      "proportion_guidance": "Aim for slimmer, more realistic body types (athletic, lean silhouettes). Avoid bulky \"space-marine\" heroic scale: no oversized torsos, no overly thick limbs, no giant hands/heads. Keep strength readable via posture and silhouette, not mass.",
+      "texture_philosophy": "Weathered, worn, battle-tested materials. Leather shows creases and scuffs; metal shows tarnish and scratches; fabric shows wear and fading. Everything has history and weight.",
+      "color_palette_guidance": "Earth tones, aged materials, desaturated colors with occasional rich accents (deep crimson blood, antique silver, oxidized brass). Avoid bright saturated colors except for supernatural elements (glowing eyes, ritual markings)."
+    },
+    "lighting_and_atmosphere": {
+      "lighting_style": "Dramatic chiaroscuro - strong directional key light with deep shadows. High contrast between light and shadow to emphasize menace and form. Rim lighting to separate figure from background and enhance silhouette drama.",
+      "mood": "Ominous, threatening, predatory. Characters should feel dangerous and intimidating even in neutral poses.",
+      "shadow_treatment": "Deep, rich shadows with gradual falloff. Shadows should enhance sculptural form and create depth, not flatten or obscure important details.",
+      "highlight_treatment": "Controlled highlights on key surfaces - leather sheen, metal edges, bone and fang. Avoid overly glossy or plastic-looking specular highlights."
+    },
+    "character_presentation": {
+      "expression_guidance": "Confident, threatening, merciless. Characters are predators and warriors - expressions should convey controlled violence, cold calculation, or feral menace. Avoid friendly or neutral expressions.",
+      "body_language": "Grounded, powerful stances. Weight and presence are important - characters should feel solid and dangerous. Poses communicate threat even in static stances.",
+      "supernatural_elements": "Fangs, claws, glowing eyes, ritual scarification treated as natural extensions of the character - not cartoonish or over-the-top. Subtle corruption and wrongness rather than obvious monster features.",
+      "hero_vs_villain_presentation": "Both heroes and villains share menacing presentation - heroes are intimidating protectors, villains are merciless predators. Distinction through iconography (religious symbols, tribal markings) and weapon choice, not softness vs hardness."
+    },
+    "material_representation": {
+      "fabric_and_leather": "Thick, heavy materials with visible texture - leather shows grain and creases; fabric shows weave and drape. Weathered and worn from frontier life. Straps, buckles, and fastenings clearly visible and functional-looking.",
+      "metal_and_armor": "Aged, tarnished metal - iron, steel, brass, silver. Scratched, dented, battle-worn. Avoid shiny chrome or pristine surfaces. Rivets, joints, and construction details visible.",
+      "wood_and_bone": "Weathered wood grain, aged bone with natural texture. Weapons show use - stocks are scuffed, bone accessories are yellowed and cracked with age.",
+      "supernatural_materials": "Obsidian, ritual bone, carved stone, tarnished silver religious iconography. Materials with weight and history, not magical glow or energy effects."
+    },
+    "cultural_aesthetic_notes": {
+      "american_frontier": "1870s-1890s American West - post-Civil War through late frontier period. Practical working clothing, not Hollywood cowboy costumes. Dusty, sun-faded, repaired gear. Six-shooters are tools, not show pieces.",
+      "feudal_japan": "Late Edo / early Meiji period (1850s-1880s) - transitional era with traditional samurai aesthetics meeting modernization. Worn armor, traditional weapons, Buddhist/Shinto iconography. Weathered but maintained with discipline.",
+      "native_american": "Plains tribes - buffalo hide, beadwork, bone and feather ornaments. War regalia is functional and ceremonial, showing tribal identity and personal achievements. Respect historical accuracy in patterns and construction.",
+      "religious_iconography": "Catholic frontier missions - weathered crosses, rosaries, religious medals. Items show devotion through wear and handling, not pristine church condition. Faith as armor and weapon."
+    },
+    "tone_and_theme": {
+      "genre": "Weird West / Dark Fantasy Horror - supernatural threats in historical frontier setting",
+      "narrative_tone": "Grim, violent, atmospheric. Characters operate in moral grey areas. Horror is personal and visceral, not cosmic or abstract.",
+      "threat_level": "High stakes, life-or-death. Characters are survivors and killers operating in a brutal world. Competence and lethality are assumed.",
+      "supernatural_integration": "Supernatural elements are woven into the world as dangerous reality, not fantasy spectacle. Vampires, werewolves, and spirits are predators using historical settings as hunting grounds."
+    },
+    "composition_guidance": {
+      "camera_angles": "Eye-level or slightly low angle to emphasize presence and threat. 3/4 view for readable silhouette. Avoid high angles that diminish characters or extreme low angles that distort proportions.",
+      "framing": "Tight enough to show character detail and presence, wide enough to show full figure and weapon readability. Character fills frame confidently without crowding.",
+      "depth_and_layering": "Clear foreground/background separation. Character is sharp focus, environment (if any) provides context but never competes for attention.",
+      "negative_space": "Strategic use of negative space around weapons, between limbs, and in silhouette gaps. Space emphasizes form and readability for 3D conversion."
+    },
+    "forbidden_elements": {
+      "avoid": [
+        "Bright, saturated color palettes (no neon, no candy colors)",
+        "Clean, pristine materials (everything shows use and age)",
+        "Friendly or cheerful expressions (characters are predators and warriors)",
+        "Cartoon or anime stylization (proportions are semi-realistic)",
+        "Modern materials or anachronistic elements (no plastics, no modern firearms)",
+        "Excessive gore or explicit violence (menace through presence, not shock value)",
+        "Glowing energy effects or magical auras (supernatural is visceral, not flashy)",
+        "Overly dark grimdark or edgelord aesthetics (grim but not nihilistic)",
+        "High fantasy tropes (no dragons, no elves, no medieval European knights)",
+        "Steampunk or clockwork aesthetics (weird west, not Victorian sci-fi)"
+      ]
+    },
+    "style_keywords": {
+      "primary": [
+        "Realistic Weird West",
+        "dark frontier horror",
+        "pulp horror aesthetic",
+        "historical with supernatural overlay",
+        "weathered and battle-worn",
+        "intimidating presence",
+        "dramatic chiaroscuro lighting",
+        "gritty realism meets dark fantasy"
+      ],
+      "supporting": [
+        "1880s American frontier",
+        "feudal Japan",
+        "spaghetti western cinematography",
+        "film noir shadows",
+        "pulp illustration style",
+        "tabletop miniature display quality",
+        "premium painted miniature aesthetic",
+        "grounded supernatural horror"
+      ]
+    }
+  },
+  "prompt_snippet": "Realistic Weird West aesthetic, dark frontier horror, pulp horror sensibility, weathered historical materials (aged leather, tarnished metal, worn fabric), dramatic chiaroscuro lighting with deep shadows, dramatic character presence, slim athletic realistic proportions (avoid bulky space-marine heroic scale), gritty semi-realistic style (NOT cartoon, NOT anime), 1880s frontier + feudal Japan period accuracy, dark dramatic mood, film noir composition"
+}

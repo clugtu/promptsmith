@@ -90,12 +90,84 @@ class CharacterData:
 
 
 def load_json_data(json_path: Path) -> Dict[str, Any]:
-    """Load and parse the JSON file."""
+    """Load and parse the JSON file, resolving any imports."""
     if not json_path.exists():
         raise FileNotFoundError(f"JSON file not found: {json_path}")
     
     with open(json_path, "r", encoding="utf-8") as f:
-        return json.load(f)
+        data = json.load(f)
+    
+    # Resolve imports if present
+    if "imports" in data:
+        data = resolve_imports(data, json_path.parent)
+    
+    return data
+
+
+def resolve_imports(data: Dict[str, Any], base_path: Path) -> Dict[str, Any]:
+    """Resolve file references in the imports section and merge them into the data.
+    
+    This function loads referenced JSON files and merges their content into the main data structure.
+    Files are cached to avoid loading the same file multiple times.
+    """
+    imports = data.get("imports", {})
+    if not imports:
+        return data
+    
+    # Cache for loaded files to avoid duplicate loads
+    file_cache = {}
+    
+    # Resolve generic_render_rules
+    if "generic_render_rules" in imports:
+        rules_path = resolve_path(imports["generic_render_rules"], base_path)
+        if rules_path not in file_cache:
+            with open(rules_path, "r", encoding="utf-8") as f:
+                file_cache[rules_path] = json.load(f)
+        data["generic_render_rules"] = file_cache[rules_path].get("generic_render_rules", {})
+    
+    # Resolve miniature_scale_rules
+    if "miniature_scale_rules" in imports:
+        rules_path = resolve_path(imports["miniature_scale_rules"], base_path)
+        if rules_path not in file_cache:
+            with open(rules_path, "r", encoding="utf-8") as f:
+                file_cache[rules_path] = json.load(f)
+        data["miniature_scale_rules"] = file_cache[rules_path].get("miniature_scale_rules", {})
+    
+    # Resolve common_thematic_forms
+    if "common_thematic_forms" in imports:
+        forms_path = resolve_path(imports["common_thematic_forms"], base_path)
+        if forms_path not in file_cache:
+            with open(forms_path, "r", encoding="utf-8") as f:
+                file_cache[forms_path] = json.load(f)
+        # Merge common forms into thematic_rules.forms
+        common_forms = file_cache[forms_path].get("common_thematic_forms", {})
+        if "thematic_rules" not in data:
+            data["thematic_rules"] = {}
+        if "forms" not in data["thematic_rules"]:
+            data["thematic_rules"]["forms"] = {}
+        # Merge common forms (character file forms take precedence)
+        for form_name, form_data in common_forms.items():
+            if form_name not in data["thematic_rules"]["forms"]:
+                data["thematic_rules"]["forms"][form_name] = form_data
+    
+    # Resolve style_rules
+    if "style_rules" in imports:
+        style_path = resolve_path(imports["style_rules"], base_path)
+        if style_path not in file_cache:
+            with open(style_path, "r", encoding="utf-8") as f:
+                file_cache[style_path] = json.load(f)
+        # Import the entire style file content (it has prompt_snippet at root level)
+        data["style_rules"] = file_cache[style_path]
+    
+    return data
+
+
+def resolve_path(path_str: str, base_path: Path) -> Path:
+    """Resolve a path string relative to base_path or as absolute."""
+    path = Path(path_str)
+    if path.is_absolute():
+        return path
+    return (base_path / path).resolve()
 
 
 def extract_generic_snippet(json_data: Dict[str, Any]) -> str:
@@ -113,11 +185,22 @@ def extract_thematic_snippet(json_data: Dict[str, Any]) -> str:
     return json_data.get("thematic_rules", {}).get("prompt_snippet", "")
 
 
+def extract_style_snippet(json_data: Dict[str, Any]) -> str:
+    """Extract the style rules prompt snippet from JSON."""
+    return json_data.get("style_rules", {}).get("prompt_snippet", "")
+
+
 def extract_thematic_forms(json_data: Dict[str, Any]) -> Dict[str, str]:
     """Extract form definitions from thematic_rules.forms.
     Returns a dict mapping form names to their prompt_snippet."""
     forms = json_data.get("thematic_rules", {}).get("forms", {})
-    return {name: form.get("prompt_snippet", "") for name, form in forms.items()}
+    result = {}
+    for name, form in forms.items():
+        # Skip non-dict entries (like _comment)
+        if not isinstance(form, dict):
+            continue
+        result[name] = form.get("prompt_snippet", "")
+    return result
 
 
 def remove_base_language(miniature_snippet: str) -> str:
@@ -345,6 +428,7 @@ def build_final_prompt(
     gender: Optional[str] = None,
     thematic_snippets: List[str] = None,
     thematic_general: str = "",
+    style_snippet: str = "",
     generic_snippet: str,
     miniature_snippet: str,
     include_generic: bool,
@@ -370,6 +454,10 @@ def build_final_prompt(
     # Add general thematic snippet
     if thematic_general:
         parts.append(thematic_general)
+    
+    # Add style snippet
+    if style_snippet:
+        parts.append(style_snippet)
     
     if include_generic and generic_snippet:
         parts.append(generic_snippet)
@@ -596,6 +684,7 @@ def main(argv: list[str] | None = None) -> int:
     generic_snippet = extract_generic_snippet(json_data)
     miniature_snippet = extract_miniature_snippet(json_data)
     thematic_general = extract_thematic_snippet(json_data)
+    style_snippet = extract_style_snippet(json_data)
     thematic_forms = extract_thematic_forms(json_data)
     
     include_miniature = not args.no_miniature
@@ -682,6 +771,7 @@ def main(argv: list[str] | None = None) -> int:
                     gender=gender,
                     thematic_snippets=thematic_snip,
                     thematic_general=thematic_general,
+                    style_snippet=style_snippet,
                     generic_snippet=generic_snippet,
                     miniature_snippet=miniature_snippet,
                     include_generic=include_generic,
@@ -719,6 +809,7 @@ def main(argv: list[str] | None = None) -> int:
                 gender=gender,
                 thematic_snippets=thematic_snip,
                 thematic_general=thematic_general,
+                style_snippet=style_snippet,
                 generic_snippet=generic_snippet,
                 miniature_snippet=miniature_snippet,
                 include_generic=include_generic,
@@ -742,6 +833,7 @@ def main(argv: list[str] | None = None) -> int:
         gender=gender,
         thematic_snippets=thematic_snip,
         thematic_general=thematic_general,
+        style_snippet=style_snippet,
         generic_snippet=generic_snippet,
         miniature_snippet=miniature_snippet,
         include_generic=include_generic,

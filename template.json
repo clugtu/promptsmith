@@ -26,14 +26,13 @@
       "texture guidance: prefer stylized, print-readable detail; fur/hair as bold clumps/tufts with deep grooves",
       "avoid ultra-fine individual hairs, micro-fuzz, flyaways, and noisy microtexture",
       "minimum detail size: ~0.3-0.5mm; prioritize crisp edges and strong plane breaks",
-      "background: NO background - transparent background / alpha cutout only, isolated subject silhouette",
       "rendering style: stylized, sculpt-ready miniature render (not photoreal)",
       "emphasize readable forms and primary/secondary shapes",
       "output format: high resolution (4k/2048+)",
       "base contact: at least one point of the figure must be in contact with the base (foot, paw, hand, tail, knee, weapon, etc.); no floating or airborne poses without visible support",
       "printability: watertight, manifold geometry, no extremely thin elements (<1.5mm), balanced pose"
     ],
-    "prompt_snippet": "single character, centered composition, full figure (head-to-toe / nose-to-tail), 3/4 view, 50-85mm lens, overhead studio lighting (top-down key) with subtle rim light, high contrast, sharp focus, unpainted grey resin miniature (uniform matte grey), sculpt-ready, high detail, stylized tabletop-miniature aesthetic (clean readable planes, graphic shapes, simplified forms; not photoreal), print-readable stylized fur/hair (bold clumps/tufts, deep grooves), avoid ultra-fine hair and noisy microtexture, heroic-scale tabletop miniature proportions (slightly exaggerated features; not strict realism), NO background at all, transparent background / alpha cutout only"
+    "prompt_snippet": "single character, centered composition, full figure (head-to-toe / nose-to-tail), 3/4 view, 50-85mm lens, overhead studio lighting (top-down key) with subtle rim light, high contrast, sharp focus, unpainted grey resin miniature (uniform matte grey), sculpt-ready, high detail, stylized tabletop-miniature aesthetic (clean readable planes, graphic shapes, simplified forms; not photoreal), print-readable stylized fur/hair (bold clumps/tufts, deep grooves), avoid ultra-fine hair and noisy microtexture, heroic-scale tabletop miniature proportions (slightly exaggerated features; not strict realism)"
   },
 
   "thematic_rules": {
@@ -61,15 +60,14 @@
       "hard plastic/resin model appearance",
       "crisp sculpted details",
       "slightly exaggerated heroic proportions",
-      "studio product photo lighting",
-      "neutral seamless background (or transparent alpha)",
+      "studio lighting",
       "softbox lighting with rim light",
       "sharp focus with high depth detail",
       "fine layer lines avoided",
       "clean sculpted planes",
       "readable edges and silhouette"
     ],
-    "prompt_snippet": "40mm scale tabletop miniature, hard plastic/resin model, crisp sculpted details, slightly exaggerated heroic proportions, studio product photo, neutral seamless background, softbox lighting with rim light, sharp focus, high depth detail, clean sculpted planes, readable edges"
+    "prompt_snippet": "40mm scale tabletop miniature, hard plastic/resin model, crisp sculpted details, slightly exaggerated heroic proportions, studio lighting, softbox lighting with rim light, sharp focus, high depth detail, clean sculpted planes, readable edges"
   },
 
   "characters": [
