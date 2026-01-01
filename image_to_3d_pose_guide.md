@@ -1,5 +1,39 @@
 # Pose Guidance for Image-to-3D Conversion (Meshy.ai)
 ## Optimized for Miniatures, Action Poses, and Equipment
+### Updated: 2025-12-30 - Surgical Improvements Applied
+
+## Critical Rules (Must-Not-Break Constraints)
+
+### 1. **Anti-Occlusion Weapon Rule (CRITICAL)**
+Any weapon must be fully visible from grip to tip, not crossing or overlapping the torso, limbs, or silhouette of the body. Weapon shaft and head must be unobstructed, with clear negative space between weapon and figure. No motion blur, no depth-of-field blur, no foreshortening that hides length.
+
+**Why this matters:** Every recent failure with weapon poses has been weapon occlusion, not anatomy issues. This rule must be universal and explicitly enforced.
+
+### 2. **Action Pose Constraint**
+Attack poses must be readable from a single 3/4 camera angle without limb or weapon overlap. Weapon thrusts and swings must project away from the torso at 20–30° with visible negative space.
+
+**Why this matters:** Dynamic poses are the hardest and most failure-prone. This constraint prevents drift and ensures consistent quality.
+
+### 3. **No Environmental Geometry (Hard Ban)**
+Do not add rocks, terrain, debris, perches, platforms, or scenic elements unless explicitly requested. Character must exist in isolation.
+
+**Why this matters:** Models keep inventing rocks and terrain even when "no background" is specified. This explicit ban prevents environmental geometry from sneaking in.
+
+### 4. **Value Contrast for Depth (CRITICAL for Printing)**
+Use deliberate value contrast to define depth. Deep recesses must render significantly darker than primary planes; major forms must separate clearly in value. Avoid flat mid-grey renders. Lighting and shading should simulate zenithal priming for resin readability.
+
+**Why this matters:** "Color should signify depth" - value separation is essential for print readability but was never codified until now.
+
+### 5. **Conditional Base Contact**
+- **If a base is requested:** at least one point of contact must exist
+- **If "no base" or "no ground plane" is specified:** the figure must be posed as a free-standing sculpt with all weight-bearing limbs visible and no environmental geometry added
+
+**Why this matters:** The contradiction between "base contact required" and "no base/no ground plane" was causing models to invent rocks. This resolves the ambiguity.
+
+### 6. **Fur Hierarchy (For Any Furred Creatures)**
+Prioritize primary silhouette clumps > secondary mass breaks > minimal tertiary texture. If detail competes with silhouette readability at 40mm, remove it.
+
+**Why this matters:** Prevents regression to photorealistic fur rendering that doesn't print well at miniature scale.
 
 ## Understanding Occlusion Limitations
 
@@ -118,35 +152,52 @@ Image-to-3D software like Meshy.ai uses AI models trained on visible features to
 
 ### Common Meshy.ai Failure Points for Action Miniatures
 
-1. **Weapon Occlusion**
+**These are the primary failure modes that the Critical Rules (above) were designed to prevent:**
+
+1. **Weapon Occlusion (MOST COMMON)**
    - Weapon directly in front of chest → missing torso detail
    - Sword blade along arm → merged weapon-arm geometry
-   - Solution: Angle weapons 20-30° away from body parts
+   - **Solution:** Anti-occlusion weapon rule - weapons must project 20-30° away from body parts with clear negative space
 
-2. **Shield Over-Coverage**
+2. **Environmental Geometry Invention**
+   - Model invents rocks/terrain even when "no background" specified
+   - "Perched" language triggers physical rock geometry
+   - **Solution:** Hard ban on environmental geometry; conditional base contact rule
+
+3. **Flat Mid-Grey Renders**
+   - Lack of value contrast makes details unreadable at print scale
+   - Recesses and primary planes have same value
+   - **Solution:** Value hierarchy rule - deliberate contrast simulating zenithal priming
+
+4. **Shield Over-Coverage**
    - Shield flat against body → entire side undefined
    - Shield rim touching shoulder/head → merged geometry
-   - Solution: Tilt shield outward, show clear gap between shield and body
+   - **Solution:** Action pose constraint - shields must show clear gap and body visibility
 
-3. **Hand-Weapon Grip Issues**
+5. **Hand-Weapon Grip Issues**
    - Tight grip hiding fingers → malformed hands
    - Both hands overlapping on handle → fused hand geometry
-   - Solution: Stagger hands on weapon, slight gap between, fingers visible
+   - **Solution:** Weapon visibility rule - grip must be clearly visible; stagger hands
 
-4. **Cape/Cloth Physics**
+6. **Cape/Cloth Physics**
    - Cape draped over shoulders → lost shoulder definition
    - Cloth wrapping legs → incomplete leg geometry
-   - Solution: Cape should flow behind/to side, clear body silhouette
+   - **Solution:** No environmental geometry rule applies to cloth - must flow away from body
 
-5. **Dynamic Leg Positioning**
+7. **Dynamic Leg Positioning**
    - Crossed legs in action pose → merged/missing geometry
    - One leg completely behind other → single-leg appearance
-   - Solution: Stagger legs in depth, keep both visible from chosen angle
+   - **Solution:** Action pose constraint - both legs visible from chosen 3/4 angle
 
-6. **Equipment Strap Chaos**
+8. **Equipment Strap Chaos**
    - Multiple straps crossing chest → confused surface detail
    - Straps too tight to body → lost as separate geometry
-   - Solution: Minimize crossing straps, show as distinct from body
+   - **Solution:** Texture guidance - straps must have visible separation and crisp edges
+
+9. **Photorealistic Fur Regression**
+   - Ultra-fine individual hairs instead of sculpted clumps
+   - Micro-fuzz and strand-level detail that doesn't print
+   - **Solution:** Fur hierarchy rule - primary silhouette clumps > secondary breaks > minimal tertiary
 
 ## Multi-View Strategies
 
@@ -175,8 +226,12 @@ Even with optimal poses, expect to:
 ## Quick Checklist for Action Miniatures
 
 Before submitting to Meshy.ai, verify:
+- [ ] **Weapon anti-occlusion:** Weapons fully visible grip-to-tip with clear negative space (CRITICAL)
+- [ ] **Action pose constraint:** Weapons project 20-30° away from torso with visible negative space
+- [ ] **No environmental geometry:** NO rocks, terrain, debris, or platforms added (hard ban)
+- [ ] **Value contrast:** Deep recesses darker than primary planes; zenithal-like readability
+- [ ] **Base handling:** If "no base" specified, figure is free-standing with no ground plane invented
 - [ ] Primary limbs clearly separated from torso
-- [ ] Weapons angled away from body (20-30° minimum)
 - [ ] Face visible (not blocked by weapons, hair, or equipment)
 - [ ] Both hands visible with fingers distinguishable
 - [ ] Both legs identifiable in the pose
@@ -188,6 +243,7 @@ Before submitting to Meshy.ai, verify:
 - [ ] Equipment straps/accessories don't cross critical details
 - [ ] Negative space visible between equipment and body
 - [ ] Weapon grips show hand position clearly
+- [ ] Fur/hair rendered as sculpted clumps (if applicable), not photorealistic strands
 
 ## Advanced Tips
 

@@ -10,7 +10,7 @@
   },
 
   "generic_render_rules": {
-    "description": "Universal rendering rules applied to all prompts",
+    "description": "Universal rendering rules applied to all prompts - improve consistency across forms and make outputs ready for sculpting / 3D modelling / printing",
     "rules": [
       "single character, centered composition",
       "full figure visible (head-to-toe / nose-to-tail), do not crop limbs or extremities",
