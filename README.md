@@ -59,7 +59,7 @@ Each refinement can have:
 - `thematic_snippet` (array of strings, optional) - List of thematic rule references or custom snippets
   - Each item can be:
     - A reference to a form name from `thematic_rules.forms` (e.g., `["glabro"]`)
-    - A custom snippet string (e.g., `["aggressive stance, weapon ready"]`)
+    - A custom snippet string (e.g., `["aggressive stance, prop displayed"]`)
     - Multiple references or combinations (e.g., `["glabro", "combat-ready"]`)
   - The script resolves references and applies all snippets in order
   - If omitted, only global thematic rules are applied

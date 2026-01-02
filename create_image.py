@@ -97,9 +97,11 @@ def load_json_data(json_path: Path) -> Dict[str, Any]:
     with open(json_path, "r", encoding="utf-8") as f:
         data = json.load(f)
     
-    # Resolve imports if present
+    # Resolve imports if present.
+    # Intentionally resolve relative import paths against the current working directory
+    # (the directory create_image.py is run from) to make libraries portable across machines.
     if "imports" in data:
-        data = resolve_imports(data, json_path.parent)
+        data = resolve_imports(data, Path.cwd())
     
     return data
 
@@ -159,6 +161,14 @@ def resolve_imports(data: Dict[str, Any], base_path: Path) -> Dict[str, Any]:
         # Import the entire style file content (it has prompt_snippet at root level)
         data["style_rules"] = file_cache[style_path]
     
+    # Resolve pose_library
+    if "pose_library" in imports:
+        pose_path = resolve_path(imports["pose_library"], base_path)
+        if pose_path not in file_cache:
+            with open(pose_path, "r", encoding="utf-8") as f:
+                file_cache[pose_path] = json.load(f)
+        data["pose_library"] = file_cache[pose_path]
+    
     return data
 
 
@@ -188,6 +198,152 @@ def extract_thematic_snippet(json_data: Dict[str, Any]) -> str:
 def extract_style_snippet(json_data: Dict[str, Any]) -> str:
     """Extract the style rules prompt snippet from JSON."""
     return json_data.get("style_rules", {}).get("prompt_snippet", "")
+
+
+def extract_pose_library(json_data: Dict[str, Any]) -> Dict[str, Any]:
+    """Extract the pose library from JSON (if present)."""
+    return json_data.get("pose_library", {})
+
+
+def find_pose_in_library(pose_library: Dict[str, Any], pose_id: str) -> Optional[Dict[str, Any]]:
+    """Find a specific pose by pose_id in the library."""
+    for pose in pose_library.get("poses", []):
+        if pose.get("pose_id") == pose_id:
+            return pose
+    return None
+
+
+def compose_pose_prompt_from_library(
+    character_data: Dict[str, Any],
+    pose_def: Dict[str, Any],
+    pose_library: Dict[str, Any]
+) -> str:
+    """Compose a complete pose prompt from library reference + weapon definitions.
+    
+    Args:
+        character_data: The character definition containing weapons and character_base
+        pose_def: The pose definition with pose_library_ref and overrides
+        pose_library: The loaded pose library data
+    
+    Returns:
+        Composed prompt string with weapons injected and overrides applied
+    """
+    # Get the library pose reference
+    library_ref = pose_def.get("pose_library_ref")
+    if not library_ref:
+        # Fallback to old-style direct prompt if no library reference
+        return pose_def.get("prompt", "")
+    
+    # Find the pose in the library
+    library_pose = find_pose_in_library(pose_library, library_ref)
+    if not library_pose:
+        return f"[ERROR: Pose {library_ref} not found in library]"
+    
+    # Validate pose compatibility and print warnings
+    warnings = validate_pose_compatibility(character_data, library_pose, library_ref)
+    if warnings:
+        import sys
+        print("\n⚠️  Pose Compatibility Warnings:", file=sys.stderr)
+        for warning in warnings:
+            print(f"   {warning}", file=sys.stderr)
+        print(file=sys.stderr)
+    
+    # Get the base pose prompt from library
+    pose_prompt = library_pose.get("pose_prompt", "")
+    
+    # Get weapon definitions
+    weapons = character_data.get("weapons", {})
+    main_hand_weapon = weapons.get("main_hand")
+    off_hand_weapon = weapons.get("off_hand")
+    
+    # Check if pose has custom weapons_for_pose (for dual-wield scenarios)
+    weapons_for_pose = pose_def.get("weapons_for_pose", {})
+    if weapons_for_pose:
+        # Use custom weapon assignment for this pose
+        main_hand_name = weapons_for_pose.get("main_hand")
+        off_hand_name = weapons_for_pose.get("off_hand")
+        
+        # Find weapons in holstered list if needed
+        holstered = weapons.get("holstered", [])
+        if main_hand_name and main_hand_name != weapons.get("main_hand", {}).get("name"):
+            for h_weapon in holstered:
+                if h_weapon.get("name") == main_hand_name:
+                    main_hand_weapon = h_weapon.copy()
+                    break
+        if off_hand_name:
+            for h_weapon in holstered:
+                if h_weapon.get("name") == off_hand_name:
+                    off_hand_weapon = h_weapon.copy()
+                    break
+    
+    # Build weapon detail strings
+    main_hand_detail = ""
+    if main_hand_weapon:
+        name = main_hand_weapon.get("name", "prop")
+        desc = main_hand_weapon.get("description", "")
+        visual = main_hand_weapon.get("visual_detail", "")
+        attachment = main_hand_weapon.get("attachment", "")
+        
+        # Check for prop state override
+        prop_override = pose_def.get("prop_override", {})
+        state = prop_override.get("main_hand_prop_state", "held_firmly")
+        orientation = prop_override.get("main_hand_orientation", "")
+        
+        if "slung" in state:
+            main_hand_detail = f"{name} ({desc}) supported by {attachment}, {state.replace('_', ' ')}"
+        else:
+            main_hand_detail = f"{name} ({desc}) {state.replace('_', ' ')}"
+        
+        if orientation:
+            main_hand_detail += f", {orientation.replace('_', ' ')}"
+        if visual:
+            main_hand_detail += f"; {visual}"
+    
+    off_hand_detail = ""
+    if off_hand_weapon:
+        name = off_hand_weapon.get("name", "prop")
+        desc = off_hand_weapon.get("description", "")
+        visual = off_hand_weapon.get("visual_detail", "")
+        
+        prop_override = pose_def.get("prop_override", {})
+        state = prop_override.get("off_hand_prop_state", "held_firmly")
+        orientation = prop_override.get("off_hand_orientation", "")
+        
+        off_hand_detail = f"{name} ({desc}) {state.replace('_', ' ')}"
+        if orientation:
+            off_hand_detail += f", {orientation.replace('_', ' ')}"
+        if visual:
+            off_hand_detail += f"; {visual}"
+    
+    # Replace placeholders in pose prompt
+    if main_hand_detail:
+        pose_prompt = pose_prompt.replace("MAIN_HAND_PROP", main_hand_detail)
+    else:
+        pose_prompt = pose_prompt.replace("MAIN_HAND_PROP", "[empty hand]")
+    
+    if off_hand_detail:
+        pose_prompt = pose_prompt.replace("OFF_HAND_PROP", off_hand_detail)
+    else:
+        # Remove OFF_HAND_PROP references for unarmed off-hand
+        pose_prompt = re.sub(r"OFF_HAND_PROP[^;.]*[;.]", "", pose_prompt)
+    
+    # Add character-specific override text if present
+    character_override = pose_def.get("character_override", "")
+    if character_override:
+        pose_prompt += f" {character_override}"
+    
+    # Add holstered weapons visibility
+    holstered = weapons.get("holstered", [])
+    if holstered:
+        holstered_names = []
+        for h in holstered:
+            h_name = h.get("name", "item")
+            h_loc = h.get("location", "on belt")
+            holstered_names.append(f"{h_name} {h_loc}")
+        if holstered_names:
+            pose_prompt += f"; {', '.join(holstered_names)}"
+    
+    return pose_prompt
 
 
 def extract_thematic_forms(json_data: Dict[str, Any]) -> Dict[str, str]:
@@ -310,6 +466,114 @@ def parse_refinement_path(path_str: str) -> List[str]:
     return [p.strip() for p in path_str.split(":") if p.strip()]
 
 
+def validate_pose_compatibility(
+    character_data: Dict[str, Any],
+    pose_def: Dict[str, Any],
+    pose_id: str
+) -> List[str]:
+    """Check if character weapons match pose requirements.
+    
+    Args:
+        character_data: Character definition with weapons
+        pose_def: Pose definition from pose library
+        pose_id: Pose ID for error messages
+        
+    Returns:
+        List of warning messages (empty if no issues)
+    """
+    warnings = []
+    
+    # Get character weapon config
+    weapons = character_data.get("weapons", {})
+    main_hand_weapon = weapons.get("main_hand")
+    off_hand_weapon = weapons.get("off_hand")
+    holstered_items = weapons.get("holstered", [])
+    
+    # Get pose requirements
+    handedness_mode = pose_def.get("handedness_mode", "unarmed")
+    main_hand_slot = pose_def.get("main_hand", {})
+    off_hand_slot = pose_def.get("off_hand", {})
+    
+    main_prop_classes = main_hand_slot.get("prop_class", [])
+    off_prop_classes = off_hand_slot.get("prop_class", [])
+    
+    # Check handedness compatibility
+    if handedness_mode == "unarmed":
+        if main_hand_weapon or off_hand_weapon:
+            warnings.append(
+                f"Pose '{pose_id}' is unarmed, but character has weapons equipped. "
+                f"Weapons will be ignored in this pose."
+            )
+    
+    elif handedness_mode == "single_handed":
+        if not main_hand_weapon:
+            if "none" not in main_prop_classes:
+                warnings.append(
+                    f"Pose '{pose_id}' requires a main hand weapon, but character has none equipped."
+                )
+        else:
+            # Check if main hand weapon prop_class matches pose requirements
+            weapon_prop_class = main_hand_weapon.get("prop_class", "compact")
+            if weapon_prop_class not in main_prop_classes and "none" not in main_prop_classes:
+                warnings.append(
+                    f"Pose '{pose_id}' expects main hand prop_class {main_prop_classes}, "
+                    f"but character has '{weapon_prop_class}'. May not render optimally."
+                )
+        
+        if off_hand_weapon:
+            warnings.append(
+                f"Pose '{pose_id}' is single-handed, but character has off hand weapon. "
+                f"Off hand weapon will be ignored."
+            )
+    
+    elif handedness_mode == "two_handed":
+        if not main_hand_weapon:
+            warnings.append(
+                f"Pose '{pose_id}' requires a two-handed weapon in main hand, but character has none equipped."
+            )
+        else:
+            weapon_prop_class = main_hand_weapon.get("prop_class", "compact")
+            if weapon_prop_class not in main_prop_classes:
+                warnings.append(
+                    f"Pose '{pose_id}' expects two-handed prop_class {main_prop_classes}, "
+                    f"but character has '{weapon_prop_class}'. May not render optimally."
+                )
+        
+        if off_hand_weapon:
+            warnings.append(
+                f"Pose '{pose_id}' is two-handed, but character has separate off hand weapon. "
+                f"Off hand weapon will be ignored (both hands on main weapon)."
+            )
+    
+    elif handedness_mode == "dual_wield":
+        if not main_hand_weapon:
+            warnings.append(
+                f"Pose '{pose_id}' requires a main hand weapon, but character has none equipped."
+            )
+        if not off_hand_weapon:
+            warnings.append(
+                f"Pose '{pose_id}' requires an off hand weapon, but character has none equipped."
+            )
+        
+        if main_hand_weapon:
+            weapon_prop_class = main_hand_weapon.get("prop_class", "compact")
+            if weapon_prop_class not in main_prop_classes and "none" not in main_prop_classes:
+                warnings.append(
+                    f"Pose '{pose_id}' expects main hand prop_class {main_prop_classes}, "
+                    f"but character has '{weapon_prop_class}'. May not render optimally."
+                )
+        
+        if off_hand_weapon:
+            weapon_prop_class = off_hand_weapon.get("prop_class", "compact")
+            if weapon_prop_class not in off_prop_classes and "none" not in off_prop_classes:
+                warnings.append(
+                    f"Pose '{pose_id}' expects off hand prop_class {off_prop_classes}, "
+                    f"but character has '{weapon_prop_class}'. May not render optimally."
+                )
+    
+    return warnings
+
+
 def resolve_prompt_from_json(
     json_data: Dict[str, Any], 
     character: Optional[Union[int, str]] = None,
@@ -321,7 +585,7 @@ def resolve_prompt_from_json(
     Args:
         json_data: The loaded JSON data
         character: Character ID (int) or name (str)
-        form: Form/refinement name
+        form: Form/refinement name (or pose name in v2 structure)
         refinement_path: Full path like '1:1' or 'alpha:human'
     
     Returns:
@@ -329,6 +593,9 @@ def resolve_prompt_from_json(
     """
     # Extract form definitions once
     thematic_forms = extract_thematic_forms(json_data)
+    
+    # Extract pose library if present
+    pose_library = extract_pose_library(json_data)
     
     # Parse refinement_path if provided
     if refinement_path:
@@ -344,7 +611,16 @@ def resolve_prompt_from_json(
     # Find the character
     char_data = find_character_by_id_or_name(json_data, character)
     if not char_data:
-        raise PromptNotFoundError(f"Character not found: {character}")
+        # List available characters
+        chars = json_data.get("characters", [])
+        if chars:
+            available = [f"{c.get('id')}:{c.get('name')}" for c in chars]
+            raise PromptNotFoundError(
+                f"Character '{character}' not found.\n"
+                f"Available characters: {', '.join(available)}"
+            )
+        else:
+            raise PromptNotFoundError(f"Character '{character}' not found (no characters in database)")
     
     # Get character_base if present
     character_base = char_data.get("character_base", "").strip()
@@ -352,18 +628,24 @@ def resolve_prompt_from_json(
     # Get gender from character data (refinements may override)
     char_gender = char_data.get("gender", None)
     
-    # If no form specified, return character description or first refinement
+    # Check if this is a v2 structure with 'poses' instead of 'refinements'
+    poses = char_data.get("poses", [])
+    refinements = char_data.get("refinements", [])
+    
+    # Use whichever is present
+    items_to_search = poses if poses else refinements
+    
+    # If no form specified, return character description or first item
     if form is None:
-        refinements = char_data.get("refinements", [])
-        if not refinements:
+        if not items_to_search:
             raise PromptNotFoundError(
-                f"No refinements found for character: {character}"
+                f"No poses/refinements found for character: {character}"
             )
-        # Return the first refinement's prompt and its thematic snippet
-        first_ref = refinements[0]
+        # Return the first item's prompt and its thematic snippet
+        first_item = items_to_search[0]
         thematic = []
-        if "thematic_snippet" in first_ref:
-            snippet_val = first_ref["thematic_snippet"]
+        if "thematic_snippet" in first_item:
+            snippet_val = first_item["thematic_snippet"]
             if isinstance(snippet_val, list):
                 # List of references - resolve each one
                 for ref in snippet_val:
@@ -376,33 +658,40 @@ def resolve_prompt_from_json(
                 # Legacy: single string value
                 thematic.append(snippet_val)
         
+        # Check if this is a pose library reference
+        if "pose_library_ref" in first_item and pose_library:
+            refinement_prompt = compose_pose_prompt_from_library(
+                char_data, first_item, pose_library
+            )
+        else:
+            refinement_prompt = first_item.get("prompt", "")
+        
         # Prepend character_base to refinement prompt if present
-        refinement_prompt = first_ref.get("prompt", "")
         if character_base:
             final_prompt = f"{character_base}, {refinement_prompt}"
         else:
             final_prompt = refinement_prompt
 
-        # Use refinement-level gender if present, else character-level
-        gender = first_ref.get("gender", char_gender)
+        # Use item-level gender if present, else character-level
+        gender = first_item.get("gender", char_gender)
 
         return final_prompt, thematic, gender
     
-    # Find the refinement (form)
-    refinements = char_data.get("refinements", [])
-    refinement = find_refinement_by_id_or_name(refinements, form)
+    # Find the item (pose or refinement)
+    item = find_refinement_by_id_or_name(items_to_search, form)
     
-    if not refinement:
-        available = [f"{r.get('id')}:{r.get('name')}" for r in refinements]
+    if not item:
+        item_type = "poses" if poses else "refinements"
+        available = [f"{r.get('id')}:{r.get('name')}" for r in items_to_search]
         raise PromptNotFoundError(
-            f"Refinement '{form}' not found for character '{character}'. "
-            f"Available: {', '.join(available)}"
+            f"Pose/refinement '{form}' not found for character '{character}'.\n"
+            f"Available {item_type}: {', '.join(available)}"
         )
     
-    # Collect thematic snippet from this refinement
+    # Collect thematic snippet from this item
     thematic = []
-    if "thematic_snippet" in refinement:
-        snippet_val = refinement["thematic_snippet"]
+    if "thematic_snippet" in item:
+        snippet_val = item["thematic_snippet"]
         if isinstance(snippet_val, list):
             # List of references - resolve each one
             for ref in snippet_val:
@@ -415,15 +704,22 @@ def resolve_prompt_from_json(
             # Legacy: single string value
             thematic.append(snippet_val)
     
+    # Check if this is a pose library reference
+    if "pose_library_ref" in item and pose_library:
+        refinement_prompt = compose_pose_prompt_from_library(
+            char_data, item, pose_library
+        )
+    else:
+        refinement_prompt = item.get("prompt", "")
+    
     # Prepend character_base to refinement prompt if present
-    refinement_prompt = refinement.get("prompt", "")
     if character_base:
         final_prompt = f"{character_base}, {refinement_prompt}"
     else:
         final_prompt = refinement_prompt
 
-    # Use refinement-level gender if present, else character-level
-    gender = refinement.get("gender", char_gender)
+    # Use item-level gender if present, else character-level
+    gender = item.get("gender", char_gender)
 
     return final_prompt, thematic, gender
 

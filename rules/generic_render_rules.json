@@ -1,13 +1,21 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Universal rendering rules for tabletop miniature-style sculpt design visualizations - applicable to all character types",
+  "prop_visibility_modes": {
+    "description": "Defines how props interact with the character silhouette based on usage context",
+    "modes": {
+      "presented": "Prop held/displayed away from body; fully visible base-to-tip; clear negative space except at grip",
+      "carried_attached": "Prop worn/slung/holstered; overlap allowed at attachment zones; attachment method must be visible; item remains readable but does NOT require full base-to-tip visibility"
+    }
+  },
   "generic_render_rules": {
     "description": "Universal rendering rules applied to all prompts",
     "rules": [
       "SINGLE SUBJECT ONLY: exactly one character/creature in the entire image. NO other figures, NO background characters, NO companions, NO additional people or animals. Only the main subject.",
       "FIGURE-ONLY PRESENTATION: background blank/featureless (no scenery, terrain, set dressing, environmental objects, diorama elements, bases, pedestals, plinths, stands, or ground plane).",
       "FRAMING (HARD CONSTRAINT): full-body figure entirely visible from head to feet; no cropping at ankles, knees, hips, shoulders, elbows, wrists, or head; all limbs fully inside frame; no cinematic crop, no hero crop, no portrait crop; generous negative space around entire figure.",
+      "View: three-quarter (3/4) sculpt view (~45° turntable rotation); NOT straight-on front view.",
       "Camera: orthographic or neutral perspective (NOT cinematic); centered full-body framing (head-to-feet guaranteed); camera pulled back to include entire silhouette; no close-up, no medium shot, no waist-up framing; framing priority over facial detail.",
       "Lighting: overhead key light with clear rim separation and subtle fill for edge definition. Use rim to define depth and emphasize form separation.",
       "Design-intent anchor (CRITICAL): conceptual sculpt design visualization intended for tabletop-scale physical reproduction; illustrative art direction, not real-world documentation or evidence; do not reference existing brands or manufactured products.",
@@ -16,11 +24,11 @@
       "Texture: bold surface detail as graphic shapes with crisp edges and clean separation. Prefer smooth planar surfaces and hard-edged form transitions; prioritize form hierarchy: big shapes first, secondary forms next; texture scale stays coarse-to-medium (no ultra-fine noise).",
       "No photographic artifacts: avoid lens effects (flare, bokeh), film grain, subsurface scattering, volumetric glow, chromatic aberration, and heavy depth-of-field blur. Keep illustrative clarity and graphic readability.",
       "Fur/hair rendering (furred creatures only): bold clumps/tufts with deep grooves and clean separation between masses. NO individual hairs, NO micro-fuzz, NO flyaways, NO strand-level detail. Texture as graphic shapes, not noise.",
-      "Item visibility (CRITICAL): any prop/object must be fully visible from base to tip, not crossing or overlapping torso/limbs. Maintain clear negative space between held object and figure. No motion blur or foreshortening that hides length.",
+      "Prop visibility modes (CRITICAL): Props follow one of two visibility modes depending on usage context. PRESENTED mode: prop held/displayed away from body; fully visible base-to-tip; clear negative space between prop and torso/limbs (except at grip/contact point). CARRIED_ATTACHED mode: prop worn, slung, holstered, sheathed, or strapped; overlap with body allowed ONLY at attachment/contact zones; attachment method (strap, sling, holster, sheath, belt loop) must be clearly visible; prop remains readable in silhouette but does NOT require full base-to-tip visibility.",
       "Prop constraint (CRITICAL): do not add props unless explicitly specified. Only include items clearly named and described. Do not invent extra weapons, holsters, pouches, talismans, or implements.",
       "Poses: must be readable from a single view without limb/object overlap. Held objects presented away from torso with clear negative space; avoid self-occluding silhouettes.",
       "Value contrast (CRITICAL): depth expressed through greys. Darkest recesses as deep grey (not black); brightest planes as light grey (not pure white). Avoid flat lighting; emphasize overhead lighting for readable separation."
     ],
-    "prompt_snippet": "HIGHLY STYLIZED, NOT PHOTOREAL — conceptual sculpt design visualization for tabletop-scale reproduction.\nUnpainted miniature look: uniform matte light-to-mid grey; smooth surfaces with hard, crisp edges; depth by greys (no color); no pure black or pure white.\n\nFIGURE-ONLY PRESENTATION: single subject; background absent/blank; clear negative space; no scenery/base/stand/plinth/pedestal/ground plane; no invented props.\nFRAMING (HARD CONSTRAINT): full body visible head-to-feet; no cropping at ankles/knees/hips/shoulders/elbows/wrists/head; limbs fully inside frame; no cinematic/hero/portrait crop; generous negative space around figure.\n\nCamera: orthographic or neutral perspective (not cinematic); centered full-body framing (head-to-feet guaranteed); camera pulled back to include entire silhouette; no close-up, no medium shot, no waist-up framing; framing priority over facial detail.\nLighting: overhead key + rim separation; neutral illumination emphasizing plane breaks and silhouette readability.\nStyle: graphic silhouettes, posterized value bands, simplified planes, clean plane transitions; smooth planar surfaces; hard, sharp edges; coarse-to-medium textures; matte surfaces; no lens/film effects."
+    "prompt_snippet": "HIGHLY STYLIZED, NOT PHOTOREAL — conceptual sculpt design visualization for tabletop-scale reproduction.\nUnpainted miniature look: uniform matte light-to-mid grey; smooth surfaces with hard, crisp edges; depth by greys (no color); no pure black or pure white.\n\nFIGURE-ONLY PRESENTATION: single subject; background absent/blank; clear negative space; no scenery/base/stand/plinth/pedestal/ground plane; no invented props.\nFRAMING (HARD CONSTRAINT): full body visible head-to-feet; no cropping at ankles/knees/hips/shoulders/elbows/wrists/head; limbs fully inside frame; no cinematic/hero/portrait crop; generous negative space around figure.\nView: three-quarter (3/4) sculpt view (~45° turntable rotation); NOT straight-on front view.\n\nCamera: orthographic or neutral perspective (not cinematic); centered full-body framing (head-to-feet guaranteed); camera pulled back to include entire silhouette; no close-up, no medium shot, no waist-up framing; framing priority over facial detail.\nLighting: overhead key + rim separation; neutral illumination emphasizing plane breaks and silhouette readability.\nStyle: graphic silhouettes, posterized value bands, simplified planes, clean plane transitions; smooth planar surfaces; hard, sharp edges; coarse-to-medium textures; matte surfaces; no lens/film effects."
   }
 }
