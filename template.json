@@ -1,171 +1,252 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "Template for character prompt database with nested refinements and reusable thematic forms. Refinements use thematic_snippet arrays to reference form definitions. See readme.md for detailed instructions.",
+  "$comment": "Template for character database with pose library system. Weapons defined with handedness; poses reference reusable library templates.",
   
-  "metadata": {
-    "title": "Character Prompt Template",
-    "version": "2.0.0",
-    "description": "Generic template for organizing AI image generation prompts with nested refinements and reference-based thematic rules",
-    "created": "2025-12-29"
+  "imports": {
+    "generic_render_rules": "rules/generic_render_rules.json",
+    "style_rules": "rules/your_style_rules.json",
+    "pose_library": "rules/pose_library.json"
   },
 
-  "generic_render_rules": {
-    "description": "Universal rendering rules applied to all prompts - improve consistency across forms and make outputs ready for sculpting / 3D modelling / printing",
-    "rules": [
-      "single character, centered composition",
-      "full figure visible (head-to-toe / nose-to-tail), do not crop limbs or extremities",
-      "3/4 view for optimal silhouette readability",
-      "camera: 50-85mm equivalent focal length",
-      "lighting: 3-point lighting with strong rim light and soft key fill",
-      "overhead studio lighting (top-down key) with subtle rim light for edge definition",
-      "lighting style emphasizes readable silhouette and plane separation",
-      "materials/finish: unpainted grey resin miniature (uniform matte grey), like test print / unprimed model",
-      "stylization: tabletop-miniature aesthetic (clean graphic shapes, simplified primary forms, bold secondary forms, crisp plane breaks)",
-      "avoid photoreal skin/fur microtexture that reads as noise at scale",
-      "proportions: heroic scale (slightly exaggerated hands/heads/features and crisp planes)",
-      "texture guidance: prefer stylized, print-readable detail; fur/hair as bold clumps/tufts with deep grooves",
-      "avoid ultra-fine individual hairs, micro-fuzz, flyaways, and noisy microtexture",
-      "minimum detail size: ~0.3-0.5mm; prioritize crisp edges and strong plane breaks",
-      "rendering style: stylized, sculpt-ready miniature render (not photoreal)",
-      "emphasize readable forms and primary/secondary shapes",
-      "output format: high resolution (4k/2048+)",
-      "base contact: at least one point of the figure must be in contact with the base (foot, paw, hand, tail, knee, prop, etc.); no floating or airborne poses without visible support",
-      "printability: watertight, manifold geometry, no extremely thin elements (<1.5mm), balanced pose"
-    ],
-    "prompt_snippet": "single character, centered composition, full figure (head-to-toe / nose-to-tail), 3/4 view, 50-85mm lens, overhead studio lighting (top-down key) with subtle rim light, high contrast, sharp focus, unpainted grey resin miniature (uniform matte grey), sculpt-ready, high detail, stylized tabletop-miniature aesthetic (clean readable planes, graphic shapes, simplified forms; not photoreal), print-readable stylized fur/hair (bold clumps/tufts, deep grooves), avoid ultra-fine hair and noisy microtexture, heroic-scale tabletop miniature proportions (slightly exaggerated features; not strict realism)"
+  "metadata": {
+    "title": "Character Prompt Template",
+    "version": "3.0.0",
+    "description": "Template for pose library system - weapons defined separately, poses reference reusable templates with placeholders",
+    "created": "2026-01-02",
+    "architecture": "Pose library system with weapon injection, validation, and prop visibility modes"
   },
 
   "thematic_rules": {
-    "description": "Theme-specific rules applied to all prompts. Use prompt_snippet for global theme, and refinement-level thematic_snippet arrays to reference specific forms. Forms defined here can be reused across all characters.",
-    "theme": "Example Theme: Fantasy Medieval",
-    "prompt_snippet": "fantasy medieval setting, heroic high-fantasy aesthetic, dramatic lighting",
-    "forms": {
-      "armored": {
-        "description": "Example form: heavily armored variant",
-        "anatomy": "full plate armor, heavy protection, limited mobility",
-        "prompt_snippet": "heavily armored, full plate mail with heraldic details, defensive posture"
-      },
-      "unarmored": {
-        "description": "Example form: lightly equipped variant",
-        "anatomy": "light clothing, unencumbered, full mobility",
-        "prompt_snippet": "lightly equipped, casual adventuring gear, mobile and unencumbered"
-      }
-    }
-  },
-
-  "miniature_scale_rules": {
-    "description": "Specific rules for miniature-scale rendering (typically 28mm-40mm tabletop scale)",
-    "rules": [
-      "40mm scale tabletop miniature",
-      "hard plastic/resin model appearance",
-      "crisp sculpted details",
-      "slightly exaggerated heroic proportions",
-      "studio lighting",
-      "softbox lighting with rim light",
-      "sharp focus with high depth detail",
-      "fine layer lines avoided",
-      "clean sculpted planes",
-      "readable edges and silhouette"
-    ],
-    "prompt_snippet": "40mm scale tabletop miniature, hard plastic/resin model, crisp sculpted details, slightly exaggerated heroic proportions, studio lighting, softbox lighting with rim light, sharp focus, high depth detail, clean sculpted planes, readable edges"
+    "description": "Theme-specific rules applied to all prompts",
+    "theme": "Example Theme: Fantasy Medieval Heroes",
+    "character_archetype": "Heroic warriors and protectors",
+    "prompt_snippet": "heroic fantasy character, dramatic lighting, strong silhouette",
+    "forms": {}
   },
 
   "characters": [
     {
       "id": 1,
-      "name": "example_hero",
-      "description": "A heroic warrior character - example template",
-      "visual_notes": "Tall, armored, carrying a sword and shield",
-      "refinements": [
+      "name": "example_warrior",
+      "description": "A heroic warrior character with sword and shield",
+      "visual_notes": "Tall, armored, carrying sword and shield, battle-worn",
+      "proportions": "Heroic athletic build, broad shoulders, strong limbs",
+      "character_base": "Heroic warrior in weathered plate armor, battle-scarred but dignified. Face determined with slight scowl. Belt with pouches and rope. Strong contrast for armor plates, belt gear.",
+      "weapons": {
+        "main_hand": {
+          "name": "longsword",
+          "description": "Medieval longsword with cross-guard",
+          "prop_class": "long",
+          "visual_detail": "straight blade, wrapped leather grip, simple cross-guard"
+        },
+        "off_hand": {
+          "name": "round shield",
+          "description": "Round wooden shield with steel boss",
+          "prop_class": "shield_plane",
+          "visual_detail": "wood planks, steel rim, central boss"
+        },
+        "holstered": [
+          {
+            "name": "dagger",
+            "description": "Utility dagger",
+            "location": "sheathed at belt",
+            "visual_detail": "simple blade, leather sheath"
+          }
+        ]
+      },
+      "poses": [
         {
           "id": 1,
-          "name": "armored",
-          "description": "Full plate armor variant",
-          "thematic_snippet": ["armored"],
-          "prompt": "Heroic warrior in full plate armor, tall and imposing, sword and shield at ready, battle-worn but dignified",
-          "refinements": [
-            {
-              "id": 1,
-              "name": "standing",
-              "description": "Standing guard pose",
-              "thematic_snippet": ["static guard stance, vigilant and alert"],
-              "prompt": "standing at attention in guard pose, shield planted, sword vertical"
-            },
-            {
-              "id": 2,
-              "name": "charging",
-              "description": "Dynamic charging pose",
-              "thematic_snippet": ["dynamic charging action, forward momentum, aggressive stance"],
-              "prompt": "charging forward with shield raised and sword drawn back for strike"
-            }
-          ]
+          "name": "static_heroic",
+          "description": "Calm, imposing guard stance",
+          "pose_library_ref": "melee_001_guarded_low_ready",
+          "prop_override": {
+            "main_hand_prop_state": "held_firmly",
+            "main_hand_orientation": "low_outside"
+          },
+          "character_override": "calm determined expression; armor plates clearly visible; strong grounded presence"
         },
         {
           "id": 2,
-          "name": "unarmored",
-          "description": "Casual clothing variant",
-          "thematic_snippet": ["unarmored"],
-          "prompt": "Heroic warrior in simple tunic and belt, tall and strong, sword sheathed at hip, relaxed but alert",
-          "refinements": [
-            {
-              "id": 1,
-              "name": "sitting",
-              "description": "Resting pose",
-              "thematic_snippet": ["relaxed resting pose, off-duty moment"],
-              "prompt": "sitting on a log, hand on sword hilt, watchful expression"
-            },
-            {
-              "id": 2,
-              "name": "walking",
-              "description": "Traveling pose",
-              "thematic_snippet": ["steady traveling pace, road-worn adventurer"],
-              "prompt": "walking forward with confident stride, hand near sword"
-            }
-          ]
+          "name": "combat_ready",
+          "description": "Shield forward defensive stance",
+          "pose_library_ref": "dual_003_aim_and_cover",
+          "prop_override": {
+            "main_hand_orientation": "forward_offset",
+            "off_hand_orientation": "forward"
+          },
+          "character_override": "alert defensive posture; shield raised; sword ready; battle-ready expression"
+        },
+        {
+          "id": 3,
+          "name": "action_pose",
+          "description": "Dynamic charging attack",
+          "pose_library_ref": "melee_003_forward_lunge_action",
+          "prop_override": {
+            "main_hand_orientation": "forward_offset"
+          },
+          "character_override": "dynamic forward momentum; armor flowing; both legs clearly visible and separated"
+        },
+        {
+          "id": 4,
+          "name": "victory_stance",
+          "description": "Triumphant victory pose",
+          "pose_library_ref": "melee_004_triumph_raise",
+          "prop_override": {
+            "main_hand_prop_state": "held_firmly",
+            "main_hand_orientation": "high_overhead"
+          },
+          "character_override": "triumphant expression; weight shifted back; sword raised in victory; strong negative space"
         }
       ]
     },
     {
       "id": 2,
-      "name": "example_mage",
-      "description": "A mystical mage character - example template",
-      "visual_notes": "Robed figure with staff, arcane symbols",
-      "refinements": [
+      "name": "example_archer",
+      "description": "A ranger with longbow",
+      "visual_notes": "Light armor, longbow, quiver of arrows",
+      "proportions": "Lean athletic build, fit ranger physique",
+      "character_base": "Forest ranger in light leather armor, practical woodland gear. Face alert and focused. Belt with pouches and hunting knife. Quiver of arrows on back.",
+      "weapons": {
+        "main_hand": {
+          "name": "longbow",
+          "description": "Tall hunting longbow",
+          "prop_class": "two_hand_frame",
+          "visual_detail": "curved wood, wrapped grip, tall profile"
+        },
+        "off_hand": null,
+        "holstered": [
+          {
+            "name": "hunting knife",
+            "description": "Utility hunting knife",
+            "location": "sheathed at belt",
+            "visual_detail": "simple blade, leather wrap"
+          },
+          {
+            "name": "quiver",
+            "description": "Quiver of arrows",
+            "location": "on back",
+            "visual_detail": "leather quiver, arrow fletching visible"
+          }
+        ]
+      },
+      "poses": [
         {
           "id": 1,
-          "name": "battle_robes",
-          "description": "Combat-ready mystical robes",
-          "prompt": "Mystical mage in flowing battle robes, staff glowing with arcane energy, eyes alight with power",
-          "refinements": [
-            {
-              "id": 1,
-              "name": "casting",
-              "description": "Mid-spell casting pose",
-              "prompt": "arms raised, staff held high, arcane energy swirling around hands"
-            }
-          ]
+          "name": "static_heroic",
+          "description": "Calm ready stance with bow",
+          "pose_library_ref": "twohand_007_defensive_brace",
+          "prop_override": {
+            "main_hand_orientation": "low_outside"
+          },
+          "character_override": "calm alert expression; bow held vertically; ranger stance"
+        },
+        {
+          "id": 2,
+          "name": "combat_ready",
+          "description": "Bow drawn ready to shoot",
+          "pose_library_ref": "twohand_003_dynamic_step_aim",
+          "character_override": "focused expression; bow at ready; quiver visible on back"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "example_unarmed_monk",
+      "description": "An unarmed martial artist monk",
+      "visual_notes": "Simple robes, prayer beads, martial stance",
+      "proportions": "Balanced athletic build, lean muscular definition",
+      "character_base": "Martial monk in simple robes, belt with prayer beads. Face calm but focused. Hands wrapped in cloth strips. Bare feet.",
+      "weapons": {
+        "main_hand": null,
+        "off_hand": null,
+        "holstered": [
+          {
+            "name": "prayer beads",
+            "description": "Wooden prayer beads",
+            "location": "on belt",
+            "visual_detail": "carved wood beads on cord"
+          }
+        ]
+      },
+      "poses": [
+        {
+          "id": 1,
+          "name": "static_heroic",
+          "description": "Calm meditative stance",
+          "pose_library_ref": "unarmed_001_fighter_ready",
+          "character_override": "calm meditative expression; hands in guard position; centered balance"
+        },
+        {
+          "id": 2,
+          "name": "combat_ready",
+          "description": "Martial arts fighting stance",
+          "pose_library_ref": "unarmed_003_defensive_crouch",
+          "character_override": "focused combat expression; hands up in defensive guard; robes flowing"
+        },
+        {
+          "id": 3,
+          "name": "action_pose",
+          "description": "Dynamic striking pose",
+          "pose_library_ref": "unarmed_002_aggressive_charge",
+          "character_override": "intense expression; forward momentum; robes not covering limbs"
         }
       ]
     }
   ],
 
+  "system_documentation": {
+    "pose_library_system": {
+      "description": "Poses are defined in rules/pose_library.json as reusable templates with placeholders",
+      "weapon_separation": "Weapons defined on character.weapons object, separate from poses",
+      "composition": "At generation time, weapon descriptions replace MAIN_HAND_PROP/OFF_HAND_PROP placeholders in pose templates",
+      "validation": "System checks pose handedness_mode and prop_class match character weapons"
+    },
+    "weapon_structure": {
+      "main_hand": "Primary weapon held in main hand (or both hands for two-handed weapons)",
+      "off_hand": "Secondary weapon or item in off hand (null if empty)",
+      "holstered": "Array of items carried but not actively held (sheathed, slung, stowed)",
+      "prop_class_values": ["none", "small", "compact", "long", "flexible", "shield_plane", "two_hand_frame", "bulky"]
+    },
+    "pose_structure": {
+      "pose_library_ref": "ID of pose template in pose_library.json (e.g., 'melee_001_guarded_low_ready')",
+      "prop_override": {
+        "main_hand_prop_state": "Optional: 'held_firmly', 'slung_side_visible', 'set_aside_visible'",
+        "main_hand_orientation": "Optional: spatial orientation override",
+        "off_hand_prop_state": "Optional: state override for off hand",
+        "off_hand_orientation": "Optional: orientation override for off hand"
+      },
+      "character_override": "Character-specific additions to pose description"
+    },
+    "handedness_modes": {
+      "unarmed": "No weapons in hands (fists, claws, empty)",
+      "single_handed": "One weapon in main hand, off hand empty or gesturing",
+      "two_handed": "Both hands on same weapon (bows, two-handed swords, staves)",
+      "dual_wield": "Different weapon in each hand (sword+shield, dual pistols)"
+    },
+    "prop_visibility_modes": {
+      "presented": "Weapon fully visible with clear negative space, held away from torso (default)",
+      "carried_attached": "Weapon carried by equipment (sling/strap), overlap allowed at attachment zones"
+    }
+  },
+
   "usage_examples": {
     "by_number": {
-      "1": "Returns all refinements for character 1 (example_hero)",
-      "1:1": "Returns character 1, refinement 1 (armored)",
-      "1:1:1": "Returns character 1, refinement 1, sub-refinement 1 (armored, standing)",
-      "1:2:2": "Returns character 1, refinement 2, sub-refinement 2 (unarmored, walking)"
+      "1": "Returns all poses for character 1 (example_warrior)",
+      "1:1": "Returns character 1, pose 1 (static_heroic)",
+      "1:2": "Returns character 1, pose 2 (combat_ready)",
+      "2:1": "Returns character 2, pose 1 (example_archer static_heroic)"
     },
     "by_name": {
-      "example_hero": "Returns all refinements for example_hero",
-      "example_hero:armored": "Returns armored variant",
-      "example_hero:armored:charging": "Returns armored charging pose",
-      "example_mage:battle_robes:casting": "Returns mage casting spell"
+      "example_warrior": "Returns all poses for example_warrior",
+      "example_warrior:static_heroic": "Returns warrior static_heroic pose",
+      "example_warrior:combat_ready": "Returns warrior combat_ready pose",
+      "example_archer:combat_ready": "Returns archer combat_ready pose"
     },
     "mixed": {
-      "1:armored": "Character 1, refinement named 'armored'",
-      "example_hero:1": "Character named 'example_hero', refinement number 1",
-      "2:1:casting": "Character 2, refinement 1, sub-refinement named 'casting'"
+      "1:static_heroic": "Character 1, pose named 'static_heroic'",
+      "example_warrior:1": "Character named 'example_warrior', pose number 1",
+      "2:2": "Character 2, pose 2"
     }
   }
 }

@@ -1,6 +1,6 @@
 # Safe Image Prompt Guide
 ## Guardrail-Safe Prompting for Character Illustration
-### Updated: 2025-12-31
+### Updated: 2026-01-02
 
 ---
 
@@ -11,6 +11,28 @@ This guide defines **safe prompt language** for generating stylized character il
 **Scope:** Image generation prompts only.
 
 **Out of Scope:** Image-to-3D conversion, 3D printing, STL generation, manufacturing constraints.
+
+---
+
+## System Architecture Overview
+
+The prompt generation system uses a **pose library architecture** that separates weapon definitions from pose descriptions:
+
+1. **Weapon Definitions**: Characters define weapons separately with:
+   - `prop_class`: Type classification (none, small, compact, long, flexible, shield_plane, two_hand_frame, bulky)
+   - `handedness`: Which hand(s) use the weapon (main_hand, off_hand, holstered)
+   - Visual details and descriptions
+
+2. **Pose Library**: Reusable pose templates with:
+   - `handedness_mode`: unarmed, single_handed, two_handed, dual_wield
+   - `prop_visibility_mode`: "presented" (fully visible, held away) or "carried_attached" (overlap allowed at attachment zones)
+   - Placeholders (MAIN_HAND_PROP, OFF_HAND_PROP) for weapon injection
+
+3. **Validation System**: Automatically checks pose compatibility with character weapons and warns about mismatches
+
+4. **Prompt Composition**: Weapons are injected into pose templates at generation time, replacing placeholders with safe descriptive language
+
+**Key Benefit**: Poses are written once generically, weapons are defined separately, and the system ensures compatibility while composing safe prompts.
 
 ---
 
@@ -28,23 +50,38 @@ Modern image generation guardrails evaluate prompts in three layers:
 
 ## Core Rules - Always Apply
 
-**NO ACTIVE HANDLING / NO GRIP LANGUAGE:**
+**PASSIVE STATE LANGUAGE ONLY:**
 
-Avoid verbs implying the character is holding/operating/aiming a weapon or prop.
+The system uses **passive state descriptors** for weapon positioning, never active handling verbs.
 
-**Do NOT use:**
-- holding, aiming, pointing, firing, wielding, gripping
-- carrying, resting on shoulders, across chest, port-arms, posed
-- brandishing, drawing, raising, lifted, unsheathed
+**Forbidden Active Verbs (INSTANT FAIL):**
+- holding (as verb: "character is holding"), aiming, pointing, firing, wielding
+- gripping, grasping, clutching, brandishing
+- carrying (as action: "character carrying weapon")
+- drawing, raising (as action verbs), lifting, unsheathing
+- resting on, posed with, displayed by hands
 
-**Use passive visibility language instead:**
-- visible as a silhouette element
-- stowed, slung, sheathed, holstered
-- kept away from torso, not held in hands
-- separated with clear negative space
+**Acceptable Passive State Language:**
+- "held firmly" (state descriptor, not active verb)
+- "positioned", "kept away", "oriented"
+- "visible as silhouette element"
+- "slung", "stowed", "sheathed", "holstered"
+- "separated with clear negative space"
+- Explicit negation: "not held in hands", "not gripped", "not supported by hands"
+
+**Critical Distinction:**
+- ❌ "character is holding the sword" (active verb)
+- ✅ "sword held firmly, positioned away from torso" (passive state)
+- ❌ "gripping the weapon tightly" (active handling)
+- ✅ "weapon positioned for silhouette clarity" (passive placement)
+
+**For Slung/Stowed Weapons:**
+Always add explicit disclaimer:
+- "weapon visible but not held in hands; hands free for pose action"
+- "carried by [sling/strap/sheath]; not actively wielded"
 
 **Keep hands empty when required:**
-If pose is "unarmed/combat-ready," explicitly say:
+If pose is "unarmed", explicitly state:
 - no objects in hands
 - open negative space around fists/claws
 - hands/fingers clearly visible and separated from body
@@ -84,42 +121,82 @@ These patterns trigger immediate guardrail rejection. Learn them, avoid them com
 
 ---
 
-### 2. Weapon Interaction Must Be Symbolic, Not Handled
+### 2. Weapon Interaction Must Be Passive State, Not Active Handling
 
-**Critical Rule:** If a real-world weapon is present (firearm, blade, spear, axe, etc.), the prompt must NOT describe any hand–weapon interaction or operational handling.
+**Critical Rule:** Weapons are described using **passive state language** that positions them in space without active handling verbs.
 
-**Weapons may ONLY be described as:**
-- Symbolic / ceremonial silhouette elements
-- Visible and positioned away from the torso
-- Oriented for silhouette clarity
+**Pose Library System Approach:**
+The system uses **prop visibility modes** and **prop_state values**:
 
-**Enforcement:** `weapon_present == true` → forbid ALL handling language
+1. **Visibility Modes:**
+   - **"presented"**: Fully visible with clear negative space (default)
+   - **"carried_attached"**: Overlap allowed at attachment zones (slung weapons)
+
+2. **Prop State Values (passive descriptors):**
+   - "held firmly" - passive state descriptor
+   - "positioned [orientation]" - spatial placement
+   - "slung_side_visible" - carried by equipment, not hands
+   - "set_aside_visible" - visible but not in use
+
+3. **Explicit Disclaimers (added by system):**
+   - "not held in hands"
+   - "not gripped"
+   - "not supported by hands"
+   - "weapon visible but not held in hands; hands free for pose action"
+
+**Safe Composition Pattern:**
+```
+[weapon name] ([description]) [passive state], [orientation]; [visual details]; 
+not held in hands; not gripped; not supported by hands
+```
+
+**Example from actual system:**
+```
+double-barrel coach gun (Old West double-barrel shotgun) held firmly, angled low ready; 
+chunky double barrels, exposed hammers, weathered wood stock; 
+not held in hands; not gripped
+```
+
+**Enforcement:** Passive state language + explicit negation = safe
+
+**Validation Layer:** System checks weapon/pose compatibility and warns about mismatches.
 
 ---
 
 #### Explicitly Forbidden Phrases (Known Failure Triggers)
 
-**Handling Verbs (INSTANT FAIL):**
-- held / holding
-- gripped / gripping
+**Active Handling Verbs (INSTANT FAIL):**
+- holding (as verb: "is holding", "are holding")
+- gripping / gripped (as action)
 - supporting / one hand supporting / other hand supporting
-- carried in hand / carried in hands
+- carried in hand / carried in hands (as active carrying)
 - presented with hands / presented with both hands visible
 - hands on / both hands on / hands positioned on
-- two-handed / one-handed (in handling context)
+- two-handed grip / one-handed grip (implies grasping action)
+
+**Note:** "held firmly" as a STATE (not verb) is acceptable when followed by explicit negation ("not held in hands")
 
 **SPECIFIC HIGH-RISK PATTERNS:**
 - ❌ "one hand supporting the barrels" (firearm handling)
 - ❌ "other hand supporting the barrel"
 - ❌ "hands on grip"
 - ❌ "weapon presented with both hands visible"
+- ❌ "character is holding the weapon"
+- ❌ "gripping the handle"
+
+**Safe Alternatives:**
+- ✅ "weapon held firmly, positioned away; not held in hands; not gripped"
+- ✅ "weapon visible at the side; not actively wielded"
+- ✅ "weapon positioned for silhouette clarity"
 
 **Activation Verbs (INSTANT FAIL with weapons):**
 - drawn / drawing (e.g., "Bowie knife drawn")
 - unsheathed / unsheathing
-- raised / raising (e.g., "revolver raised high", "katana raised overhead", "katana raised vertically")
+- raising (as action: "character raising weapon")
 - lifted / lifting
 - brandished / brandishing
+
+**Note:** "raised" as POSITION is acceptable: "weapon raised overhead as symbolic element"
 
 **Combat Posture Phrases (FAIL when weapon is drawn/visible):**
 - combat ready (with visible weapon)
@@ -148,37 +225,54 @@ These patterns trigger immediate guardrail rejection. Learn them, avoid them com
 
 ---
 
-#### Required Replacement Pattern
+#### System Composition Pattern (How It Actually Works)
 
-When a weapon is present, use ONLY these generic safe patterns:
+The system composes weapon descriptions using this safe pattern:
 
-**Pattern 1 (Preferred):**
+**Composition Formula:**
 ```
-ceremonial [weapon] visible as a symbolic silhouette element, positioned away from the torso
-```
-
-**Pattern 2:**
-```
-[weapon] oriented for silhouette clarity, not actively wielded
+[weapon name] ([description]) [passive state], [orientation]; [visual details]; 
+[explicit negation]
 ```
 
-**Pattern 3:**
+**Pattern 1 (Presented Weapons):**
 ```
-[weapon] visible to the side / overhead as a symbolic element, kept clear of the torso outline
+double-barrel coach gun (Old West double-barrel shotgun) held firmly, angled low ready; 
+chunky double barrels, exposed hammers, weathered wood stock; 
+not held in hands; not gripped
 ```
+
+**Pattern 2 (Slung Weapons):**
+```
+oversized katana (Mighty oversized katana): slung side visible; 
+carried by sling; weapon visible but not held in hands; hands free for pose action; 
+chunky stylized blade profile
+```
+
+**Pattern 3 (Ceremonial Display - External Prompts):**
+```
+ceremonial [weapon] visible as symbolic silhouette element, positioned away from torso; 
+not actively wielded
+```
+
+**Key Components:**
+1. **Weapon identity**: name + brief description in parentheses
+2. **Passive state**: "held firmly", "positioned", "slung"
+3. **Orientation**: spatial placement ("angled low", "overhead", "at side")
+4. **Visual details**: appearance descriptors
+5. **Explicit negation**: "not held in hands; not gripped; not supported by hands"
 
 **Examples:**
 
-| ❌ Fails | ✅ Passes |
+| ❌ Fails | ✅ System Output |
 |---------|----------|
-| katana held in two-handed grip | ceremonial katana visible as symbolic silhouette element, positioned to the side |
-| revolver raised high in victorious salute | ceremonial revolver visible overhead as symbolic element, not actively wielded |
-| Bowie knife drawn and held away from torso | ceremonial Bowie knife visible to the side as symbolic element, positioned away from torso |
-| one hand supporting the barrels | ceremonial coach gun visible as silhouette element, oriented for clarity |
-| katana raised vertically with blade pointing skyward | ceremonial katana oriented vertically as dramatic silhouette element, positioned away from torso |
-| weapon presented with both hands visible | oversized ceremonial weapon visible to the side, not actively wielded |
+| katana held in two-handed grip | katana (oversized katana) held firmly, vertical; not held in hands; not gripped by hands |
+| character raising revolver high | revolver (six-shooter) positioned overhead; visible as symbolic element; not actively wielded |
+| Bowie knife drawn and gripped | Bowie knife (large blade) held firmly, at side; not held in hands; hands free |
+| one hand supporting the barrels | coach gun (double-barrel shotgun) positioned low; not held in hands; not supported by hands |
+| both hands on weapon | weapon held firmly, positioned away from torso; not held in hands; not gripped |
 
-**Core Principle:** Describe weapon position and symbolic purpose ONLY. Never describe how hands/arms interact with the weapon.
+**Core Principle:** Use passive state descriptors + explicit negation. The "held firmly" state + "not held in hands" negation creates a safe contradiction that signals display/positioning rather than active use.
 
 ---
 
@@ -225,15 +319,45 @@ ceremonial [weapon] visible as a symbolic silhouette element, positioned away fr
 
 **Safe substitutions (focus on display, not intent):**
 
-| ❌ Fails | ✅ Passes |
+| ❌ Fails | ✅ System Output |
 |---------|----------|
-| preparing to strike | weapon positioned for display |
-| sweeping strike motion | dynamic weapon presentation |
-| combat ready stance | battle-ready presence / heroic stance |
-| overhead attack | weapon raised dramatically overhead |
-| aggressive forward stance with blade | forward stance with blade visible |
-| coiled to explode into motion | powerful coiled stance |
-| poised to strike | weapon framed for silhouette |
+| preparing to strike | weapon positioned for display; not actively wielded |
+| sweeping strike motion | dynamic stance; weapon visible at side; not held in hands |
+| combat ready stance | battle-ready presence; weapon held firmly, positioned away; not gripped |
+| overhead attack | weapon positioned overhead; visible as symbolic element; not actively wielded |
+| aggressive forward stance with blade | forward stance; blade held firmly, visible; not held in hands; not gripped |
+| coiled to explode into motion | powerful coiled stance; weapon positioned away from torso |
+| poised to strike | weapon held firmly, positioned for silhouette; not held in hands |
+
+---
+
+## Handedness Modes & Weapon Compatibility
+
+The pose library system categorizes poses by **handedness_mode**:
+
+- **unarmed**: No weapons in hands (fists, claws, empty hands)
+- **single_handed**: One weapon in main hand, off hand empty or gesturing
+- **two_handed**: Both hands on same weapon (rifles, two-handed swords, staffs)
+- **dual_wield**: Different weapon in each hand (pistol + knife, sword + shield)
+
+**Prop Class System:**
+Weapons are classified by visual bulk and geometry:
+- `none`: Empty hand
+- `small`: Small items (coins, amulets, small religious symbols)
+- `compact`: Compact weapons (pistols, short blades, small shields)
+- `long`: Long weapons (rifles, swords, spears, staves)
+- `flexible`: Flexible items (whips, chains, ropes, lasso)
+- `shield_plane`: Shield objects (round/rectangular shields)
+- `two_hand_frame`: Two-handed weapons requiring both hands
+- `bulky`: Large bulky items
+
+**Automatic Validation:**
+The system checks:
+- Does character's weapon handedness match pose requirements?
+- Does weapon prop_class fit pose expectations?
+- Are required weapons missing or extra weapons present?
+
+Validation warnings guide users to fix compatibility issues before generation.
 
 ---
 
@@ -241,12 +365,39 @@ ceremonial [weapon] visible as a symbolic silhouette element, positioned away fr
 
 When describing dynamic poses with weapons, focus exclusively on:
 
-### Visual Framing (Always Safe - NO hand-weapon references)
-- "weapon positioned away from body"
-- "blade visible with clear negative space"
-- "ceremonial weapon displayed to the side as symbolic silhouette element"
-- "oversized weapon visible to the side, not actively wielded"
-- "weapon positioned away from body as symbolic visual element"
+### Visual Framing (System Composition Approach)
+
+**Pose Library Approach:**
+Poses use placeholders (MAIN_HAND_PROP, OFF_HAND_PROP) that get replaced at generation time.
+
+**Pose Template (in library):**
+```
+"pose_prompt": "Protective stance: feet wide; MAIN_HAND_PROP held low and angled 
+outward from body; OFF_HAND_PROP raised at chest level; clear negative space; 
+not held in hands; not gripped; not supported by hands"
+```
+
+**After Weapon Injection (actual output):**
+```
+Protective stance: feet wide; double-barrel coach gun (Old West shotgun) held firmly, 
+angled low ready; chunky barrels, exposed hammers held low and angled outward from body; 
+silver crucifix (Large silver crucifix) positioned at chest, visible chain raised at 
+chest level; clear negative space; not held in hands; not gripped; not supported by hands
+```
+
+**Pattern Breakdown:**
+1. Pose template has placeholders and explicit negation
+2. System injects weapon: `[name] ([description]) [passive state]`
+3. Pose orientation language preserved
+4. Explicit negation remains at end
+5. Result: passive state + negation = safe
+
+**Generated Safe Language Examples:**
+- "weapon positioned away from body; not actively wielded"
+- "blade held firmly, visible with clear negative space; not held in hands"
+- "ceremonial weapon visible to the side as symbolic element; not gripped"
+- "oversized weapon positioned overhead; not supported by hands; hands free"
+- "weapon held firmly, kept away from torso; not held in hands; not gripped"
 
 ### Static Display Posture (Always Safe)
 - "ceremonial weapon display"
@@ -262,22 +413,55 @@ When describing dynamic poses with weapons, focus exclusively on:
 - "powerful coiled stance" (NOT "coiled to strike")
 
 ### What You CAN Say About Weapons:
-- Where they are: "overhead", "to the side", "across body", "away from torso"
-- How they look: "dramatic", "bold", "exaggerated", "stylized", "ceremonial", "oversized"
-- Visual purpose: "symbolic element", "silhouette element", "visual element"
-- Visibility: "fully visible", "clearly visible", "strong silhouette"
-- NOT actively used: "not actively wielded", "ceremonial display", "symbolic"
+
+**Passive State Descriptors:**
+- "held firmly" (as state, with negation)
+- "positioned", "oriented", "angled"
+- "kept away from", "separated from"
+
+**Spatial Position:**
+- "overhead", "to the side", "at hip level", "away from torso"
+- "forward offset", "side out", "low outside"
+
+**Visual Description:**
+- "dramatic", "bold", "exaggerated", "stylized", "ceremonial", "oversized"
+- "chunky barrels", "weathered stock", "ornate details"
+
+**Symbolic Purpose:**
+- "symbolic element", "silhouette element", "visual element"
+- "fully visible", "clearly visible", "strong silhouette"
+
+**Explicit Negation (CRITICAL):**
+- "not held in hands"
+- "not gripped"
+- "not supported by hands"
+- "not actively wielded"
+- "weapon visible but not held in hands; hands free for pose action"
 
 ### What You CANNOT Say About Weapons:
-- Hand-weapon relationships: "hands on weapon", "both hands visible on weapon", "weapon presented with hands"
-- What they're about to do: "ready to strike", "preparing to hit"
-- How they're being used: "in grip", "attack position", "wielding"
-- Combat context: "battle technique", "striking motion"
-- Mechanical function: "angled for strike", "positioned to hit"
 
-**Core Principle:** Describe weapon position and body position SEPARATELY. Never link hands/arms to weapon interaction.
+**Active Handling Verbs:**
+- "gripping", "grasping", "clutching"
+- "holding" (as action: "character is holding")
+- "hands on weapon", "both hands visible on weapon"
+- "weapon presented with both hands"
 
-**Enforcement Rule:** `weapon_present == true` → forbid any hand–weapon relationship language
+**Combat Intent:**
+- "ready to strike", "preparing to hit", "poised to attack"
+- "attack position", "striking motion"
+- "battle technique", "combat technique"
+
+**Mechanical Function:**
+- "angled for strike", "positioned to hit"
+- "aimed at target", "targeting"
+
+**WITHOUT Explicit Negation:**
+- "held firmly" alone ❌ → "held firmly... not held in hands" ✅
+- "positioned overhead" alone ⚠️ → "positioned overhead; not actively wielded" ✅
+
+**Core Principle:** Passive state + explicit negation = safe. Active verbs = instant fail.
+
+**Enforcement Rule:** Every weapon reference must include explicit negation disclaimer.
 
 ---
 
