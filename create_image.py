@@ -388,15 +388,17 @@ def compose_pose_prompt_from_library(
         pose_prompt = character_override
     
     # Add holstered weapons as visible equipment (not slung - those are already handled above)
-    holstered = weapons.get("holstered", [])
-    if holstered:
-        holstered_items = []
-        for h in holstered:
-            h_name = h.get("name", "item")
-            h_loc = h.get("location", "on belt")
-            holstered_items.append(f"{h_name} {h_loc}")
-        if holstered_items:
-            pose_prompt += f"; {'; '.join(holstered_items)}"
+    # Skip if pose_prompt uses structured format (starts with "SUBJECT:")
+    if not pose_prompt.startswith("SUBJECT:"):
+        holstered = weapons.get("holstered", [])
+        if holstered:
+            holstered_items = []
+            for h in holstered:
+                h_name = h.get("name", "item")
+                h_loc = h.get("location", "on belt")
+                holstered_items.append(f"{h_name} {h_loc}")
+            if holstered_items:
+                pose_prompt += f"; {'; '.join(holstered_items)}"
     
     return pose_prompt
 
@@ -765,7 +767,8 @@ def resolve_prompt_from_json(
             refinement_prompt = first_item.get("prompt", "")
         
         # Prepend character_base to refinement prompt if present
-        if character_base:
+        # Skip if refinement_prompt uses structured format (starts with "SUBJECT:")
+        if character_base and not refinement_prompt.startswith("SUBJECT:"):
             final_prompt = f"{character_base}, {refinement_prompt}"
         else:
             final_prompt = refinement_prompt
@@ -811,7 +814,8 @@ def resolve_prompt_from_json(
         refinement_prompt = item.get("prompt", "")
     
     # Prepend character_base to refinement prompt if present
-    if character_base:
+    # Skip if refinement_prompt uses structured format (starts with "SUBJECT:")
+    if character_base and not refinement_prompt.startswith("SUBJECT:"):
         final_prompt = f"{character_base}, {refinement_prompt}"
     else:
         final_prompt = refinement_prompt
