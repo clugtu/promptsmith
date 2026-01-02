@@ -16,19 +16,19 @@
     ],
     "rendering_approach": {
       "overall_aesthetic": "Realistic but stylized - grounded in historical authenticity with supernatural horror overlay. Think premium character illustration with dramatic presentation.",
-      "realism_level": "Semi-realistic: anatomically plausible with restrained stylization. Details simplified for visual clarity while maintaining believable material qualities and proportions.",
-      "proportion_guidance": "Aim for slimmer, more realistic body types (athletic, lean silhouettes). Avoid bulky \"space-marine\" heroic scale: no oversized torsos, no overly thick limbs, no giant hands/heads. Keep strength readable via posture and silhouette, not mass.",
+      "realism_level": "Highly stylized for tabletop miniature scale: anatomically plausible but aggressive simplification. Expression through bold form language and silhouette, not fine detail. Manufacturability over realism.",
+      "proportion_guidance": "Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.",
       "texture_philosophy": "Weathered, worn, battle-tested materials. Leather shows creases and scuffs; metal shows tarnish and scratches; fabric shows wear and fading. Everything has history and weight."
     },
     "character_presentation": {
-      "mood": "Ominous, threatening, predatory. Characters should feel dangerous and intimidating even in neutral poses.",
-      "expression_guidance": "Confident, threatening, merciless. Characters are predators and warriors - expressions should convey controlled violence, cold calculation, or feral menace. Avoid friendly or neutral expressions.",
+      "mood": "Powerful, imposing, iconic. Characters read as dangerous through posture and silhouette, not facial micro-expression.",
+      "expression_guidance": "Expression through PRIMARY FORMS ONLY: jaw angle, brow position, eye shape as bold graphic elements. No subtle emotion, no fine wrinkles, no detailed expression work. Attitude conveyed through stance and gear, not facial nuance.",
       "body_language": "Grounded, powerful stances. Weight and presence are important - characters should feel solid and dangerous. Poses communicate threat even in static stances.",
       "supernatural_elements": "Fangs, claws, glowing eyes, ritual scarification treated as natural extensions of the character - not cartoonish or over-the-top. Subtle corruption and wrongness rather than obvious monster features.",
       "hero_vs_villain_presentation": "Both heroes and villains share menacing presentation - heroes are intimidating protectors, villains are merciless predators. Distinction through iconography (religious symbols, tribal markings) and weapon choice, not softness vs hardness."
     },
     "material_representation": {
-      "fabric_and_leather": "Thick, heavy materials with visible texture - leather shows grain and creases; fabric shows weave and drape. Weathered and worn from frontier life. Straps, buckles, and fastenings clearly visible and functional-looking.",
+      "fabric_and_leather": "Thick, heavy materials with visible texture - leather shows grain and creases; fabric shows weave and drape. Weathered and worn from frontier life. Buckles and fastenings clearly visible and functional-looking.",
       "metal_and_armor": "Aged, tarnished metal - iron, steel, brass, silver. Scratched, dented, battle-worn. Avoid shiny chrome or pristine surfaces. Rivets, joints, and construction details visible.",
       "wood_and_bone": "Weathered wood grain, aged bone with natural texture. Weapons show use - stocks are scuffed, bone accessories are yellowed and cracked with age.",
       "supernatural_materials": "Obsidian, ritual bone, carved stone, tarnished silver religious iconography. Materials with weight and history, not magical glow or energy effects."
@@ -41,7 +41,7 @@
     },
     "tone_and_theme": {
       "genre": "Weird West / Dark Fantasy Horror - supernatural threats in historical frontier setting",
-      "narrative_tone": "Grim, intense, atmospheric. Characters operate in moral grey areas. Horror is personal and visceral, not cosmic or abstract.",
+      "narrative_tone": "Dark frontier aesthetic expressed through iconic visual elements (weathered gear, ritual symbols, weapon profiles) not emotional detail. Atmosphere through composition and silhouette, not rendering subtlety.",
       "threat_level": "High stakes, life-or-death. Characters are survivors and warriors operating in a brutal world. Competence and lethality are assumed.",
       "supernatural_integration": "Supernatural elements are woven into the world as dangerous reality, not fantasy spectacle. Vampires, werewolves, and spirits are predators using historical settings as hunting grounds."
     },
@@ -78,5 +78,6 @@
       ]
     }
   },
-  "prompt_snippet": "Realistic Weird West aesthetic: dark frontier horror (1880s American + feudal Japan), weathered period materials, threatening predatory presence, semi-realistic gritty style"
+  "default_proportions": "Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.",
+  "prompt_snippet": "Weird West aesthetic: dark frontier setting (1880s American + feudal Japan fusion), weathered period materials, HIGHLY STYLIZED bold graphic forms for tabletop scale."
 }
