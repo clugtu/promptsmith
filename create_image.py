@@ -181,8 +181,12 @@ def resolve_path(path_str: str, base_path: Path) -> Path:
 
 
 def extract_generic_snippet(json_data: Dict[str, Any]) -> str:
-    """Extract the generic render rules prompt snippet from JSON."""
-    return json_data.get("generic_render_rules", {}).get("prompt_snippet", "")
+    """Extract the generic render rules sections from JSON."""
+    sections = json_data.get("generic_render_rules", {}).get("sections", {})
+    # For backwards compatibility, also check for prompt_snippet
+    if not sections:
+        return json_data.get("generic_render_rules", {}).get("prompt_snippet", "")
+    return sections
 
 
 def extract_miniature_snippet(json_data: Dict[str, Any]) -> str:
@@ -222,8 +226,9 @@ def compose_pose_prompt_from_library(
     character_data: Dict[str, Any],
     pose_def: Dict[str, Any],
     pose_library: Dict[str, Any],
-    json_data: Dict[str, Any]
-) -> str:
+    json_data: Dict[str, Any],
+    equipment: List[str]
+) -> Tuple[str, str]:
     """Compose a pose prompt by looking up a pose_library_ref.
     
     Args:
@@ -231,9 +236,10 @@ def compose_pose_prompt_from_library(
         pose_def: The pose/refinement containing pose_library_ref
         pose_library: The loaded pose library JSON
         json_data: Full JSON data for figure_type validation
+        equipment: Resolved equipment list to extract hand-held props
         
     Returns:
-        Composed prompt string with character override applied
+        Tuple of (character_override, pose_prompt) - both strings
         
     Raises:
         PromptNotFoundError: If pose_library_ref is missing or not found in library
@@ -253,8 +259,51 @@ def compose_pose_prompt_from_library(
             f"Available poses (first 15): {', '.join(available_ids)}"
         )
     
-    # Get the pose prompt template
+    # Get the pose prompt template from library
     pose_prompt = library_pose.get("pose_prompt", "")
+    
+    # Parse equipment to extract main_hand and off_hand props
+    main_hand_prop = None
+    off_hand_prop = None
+    
+    for item in equipment:
+        if " : " in item:
+            parts = item.split(" : ", 2)
+            if len(parts) >= 2:
+                prop_desc = parts[0].strip()
+                position = parts[1].strip()
+                
+                # Extract prop name from description (before any parentheses or details)
+                prop_name = prop_desc.split("(")[0].split("[")[0].strip()
+                
+                if position == "main_hand":
+                    main_hand_prop = prop_name
+                elif position == "off_hand":
+                    off_hand_prop = prop_name
+    
+    # Replace placeholders in pose_prompt
+    if main_hand_prop:
+        pose_prompt = pose_prompt.replace("MAIN_HAND_PROP", main_hand_prop)
+    
+    if off_hand_prop:
+        pose_prompt = pose_prompt.replace("OFF_HAND_PROP", off_hand_prop)
+    
+    # Enhance GRIP CLUSTER section with specific prop gripping details
+    if (main_hand_prop or off_hand_prop) and "GRIP CLUSTER (MANDATORY):" in pose_prompt:
+        grip_details = []
+        if main_hand_prop:
+            grip_details.append(f"the main hand (one of the two hands) actively grips {main_hand_prop}")
+        if off_hand_prop:
+            grip_details.append(f"the off hand (the other hand) actively grips {off_hand_prop}")
+        
+        grip_text = "; ".join(grip_details)
+        
+        # Insert grip details into GRIP CLUSTER section
+        pose_prompt = pose_prompt.replace(
+            "GRIP CLUSTER (MANDATORY): Hands are spatially locked together",
+            f"GRIP CLUSTER (MANDATORY): {grip_text}; hands are spatially locked together"
+        )
+
     
     # Validate figure types if present
     pose_figure_type = library_pose.get("figure_type")
@@ -277,12 +326,10 @@ def compose_pose_prompt_from_library(
         if not compatible:
             print(f"⚠️  Warning: Figure type mismatch - pose expects '{pose_figure_type}' but character has '{char_figure_type}'", file=sys.stderr)
     
-    # Apply character_override if present (replaces generic pose description)
+    # Get character_override (for appearance/expression modifications)
     character_override = pose_def.get("character_override", "")
-    if character_override:
-        pose_prompt = character_override
     
-    return pose_prompt
+    return character_override, pose_prompt
 
 
 def extract_thematic_forms(json_data: Dict[str, Any]) -> Dict[str, str]:
@@ -513,6 +560,115 @@ def validate_pose_compatibility(
     return warnings
 
 
+def resolve_prop_references(equipment: List[str], prop_definitions: Dict[str, str]) -> List[str]:
+    """Resolve prop references to their full descriptions with positioning.
+    
+    Args:
+        equipment: List of equipment strings, either:
+                  - New format: "prop_id : position : pose_description"
+                  - Legacy format: "full description (details) : position : pose_description"
+        prop_definitions: Dict mapping prop_id to "description (details)"
+        
+    Returns:
+        List of resolved equipment strings in format "description (details) : position : pose_description"
+    """
+    resolved = []
+    for item in equipment:
+        if " : " in item:
+            parts = item.split(" : ", 2)
+            if len(parts) >= 2:
+                first_part = parts[0].strip()
+                # Check if first part is a prop_id reference (no parentheses/brackets)
+                if first_part in prop_definitions and "(" not in first_part and "[" not in first_part:
+                    # It's a prop reference - resolve it
+                    prop_desc = prop_definitions[first_part]
+                    # Reconstruct with resolved description
+                    remaining = " : ".join(parts[1:])
+                    resolved.append(f"{prop_desc} : {remaining}")
+                else:
+                    # It's already a full description (legacy format)
+                    resolved.append(item)
+            else:
+                resolved.append(item)
+        else:
+            # No colons - legacy format
+            resolved.append(item)
+    return resolved
+
+
+def validate_hand_assignments(equipment: List[str], character_id: str, form_id: str, char_data: Dict[str, Any]) -> None:
+    """Validate that equipment hand assignments don't exceed available hands.
+    
+    Args:
+        equipment: List of equipment strings in format "item [...] [hand_position] ..."
+        character_id: Character identifier for error messages
+        form_id: Form/pose identifier for error messages
+        char_data: Character data dict (to check for multi-limbed figure type)
+        
+    Raises:
+        ValueError: If hand assignments are invalid and character is not multi-limbed
+    """
+    # Check if character is multi-limbed (has more than 2 arms)
+    figure_type = char_data.get("figure_type", "bipedal_humanoid")
+    is_multi_limbed = "multi_limbed" in figure_type
+    max_hands = 4 if is_multi_limbed else 2  # Multi-limbed gets 4 hands
+    
+    # Count hand assignments by parsing equipment strings
+    main_hand_count = 0
+    off_hand_count = 0
+    both_hands_count = 0
+    
+    for item in equipment:
+        # Parse format: "item (details) : position : description"
+        if " : " in item:
+            parts = item.split(" : ", 2)
+            if len(parts) >= 2:
+                position = parts[1].strip()
+                if position == "main_hand":
+                    main_hand_count += 1
+                elif position == "off_hand":
+                    off_hand_count += 1
+                elif position == "both_hands":
+                    both_hands_count += 1
+    
+    # Check for conflicts
+    total_hands_needed = main_hand_count + off_hand_count + (both_hands_count * 2)
+    
+    if both_hands_count > 0 and (main_hand_count > 0 or off_hand_count > 0):
+        error_msg = (
+            f"[{character_id}:{form_id}] HAND CONFLICT: Equipment requires both_hands "
+            f"({both_hands_count} item{'s' if both_hands_count > 1 else ''}) "
+            f"but also assigns main_hand ({main_hand_count}) and/or off_hand ({off_hand_count}). "
+            f"Character only has {max_hands} hands!"
+        )
+        if not is_multi_limbed:
+            raise ValueError(error_msg)
+        else:
+            print(f"WARNING: {error_msg}", file=sys.stderr)
+    elif total_hands_needed > max_hands:
+        error_msg = (
+            f"[{character_id}:{form_id}] HAND CONFLICT: Equipment requires {total_hands_needed} hands "
+            f"(main_hand: {main_hand_count}, off_hand: {off_hand_count}, both_hands: {both_hands_count}). "
+            f"Character only has {max_hands} hands!"
+        )
+        if not is_multi_limbed:
+            raise ValueError(error_msg)
+        else:
+            print(f"WARNING: {error_msg}", file=sys.stderr)
+    elif main_hand_count > 1:
+        error_msg = f"[{character_id}:{form_id}] HAND CONFLICT: Multiple items ({main_hand_count}) assigned to main_hand."
+        if not is_multi_limbed:
+            raise ValueError(error_msg)
+        else:
+            print(f"WARNING: {error_msg}", file=sys.stderr)
+    elif off_hand_count > 1:
+        error_msg = f"[{character_id}:{form_id}] HAND CONFLICT: Multiple items ({off_hand_count}) assigned to off_hand."
+        if not is_multi_limbed:
+            raise ValueError(error_msg)
+        else:
+            print(f"WARNING: {error_msg}", file=sys.stderr)
+
+
 def resolve_prompt_from_json(
     json_data: Dict[str, Any], 
     character: Optional[Union[int, str]] = None,
@@ -600,28 +756,40 @@ def resolve_prompt_from_json(
                 # Legacy: single string value
                 thematic.append(snippet_val)
         
-        # Check if this is a pose library reference
-        if "pose_library_ref" in first_item and pose_library:
-            refinement_prompt = compose_pose_prompt_from_library(
-                char_data, first_item, pose_library, json_data
-            )
-        else:
-            refinement_prompt = first_item.get("prompt", "")
-        
-        # Prepend character_base to refinement prompt if present
-        # Skip if refinement_prompt uses structured format (starts with "SUBJECT:")
-        if character_base and not refinement_prompt.startswith("SUBJECT:"):
-            final_prompt = f"{character_base}, {refinement_prompt}"
-        else:
-            final_prompt = refinement_prompt
-
         # Use item-level gender if present, else character-level
         gender = first_item.get("gender", char_gender)
         
         # Extract equipment array - check for pose-level equipment_override first
         equipment = first_item.get("equipment_override", char_data.get("equipment", []))
+        
+        # Resolve prop references if prop_definitions exist
+        prop_definitions = char_data.get("prop_definitions", {})
+        equipment = resolve_prop_references(equipment, prop_definitions)
+        
+        # Validate hand assignments (raises ValueError if invalid for non-multi-limbed)
+        validate_hand_assignments(equipment, str(character), form, char_data)
+        
+        # Check if this is a pose library reference
+        pose_prompt = ""
+        if "pose_library_ref" in first_item and pose_library:
+            character_override, pose_prompt = compose_pose_prompt_from_library(
+                char_data, first_item, pose_library, json_data, equipment
+            )
+            # Use character_override for appearance/expression additions
+            refinement_prompt = character_override if character_override else ""
+        else:
+            refinement_prompt = first_item.get("prompt", "")
+        
+        # Prepend character_base to refinement prompt if present
+        # Skip if refinement_prompt uses structured format (starts with "SUBJECT:")
+        if character_base and refinement_prompt and not refinement_prompt.startswith("SUBJECT:"):
+            final_prompt = f"{character_base}, {refinement_prompt}"
+        elif character_base:
+            final_prompt = character_base
+        else:
+            final_prompt = refinement_prompt
 
-        return final_prompt, thematic, gender, proportions, equipment
+        return final_prompt, thematic, gender, proportions, equipment, pose_prompt
     
     # Find the item (pose or refinement)
     item = find_refinement_by_id_or_name(items_to_search, form)
@@ -650,28 +818,40 @@ def resolve_prompt_from_json(
             # Legacy: single string value
             thematic.append(snippet_val)
     
-    # Check if this is a pose library reference
-    if "pose_library_ref" in item and pose_library:
-        refinement_prompt = compose_pose_prompt_from_library(
-            char_data, item, pose_library, json_data
-        )
-    else:
-        refinement_prompt = item.get("prompt", "")
-    
-    # Prepend character_base to refinement prompt if present
-    # Skip if refinement_prompt uses structured format (starts with "SUBJECT:")
-    if character_base and not refinement_prompt.startswith("SUBJECT:"):
-        final_prompt = f"{character_base}, {refinement_prompt}"
-    else:
-        final_prompt = refinement_prompt
-
     # Use item-level gender if present, else character-level
     gender = item.get("gender", char_gender)
     
     # Extract equipment array - check for pose-level equipment_override first
     equipment = item.get("equipment_override", char_data.get("equipment", []))
+    
+    # Resolve prop references if prop_definitions exist
+    prop_definitions = char_data.get("prop_definitions", {})
+    equipment = resolve_prop_references(equipment, prop_definitions)
+    
+    # Validate hand assignments (raises ValueError if invalid for non-multi-limbed)
+    validate_hand_assignments(equipment, str(character), form, char_data)
+    
+    # Check if this is a pose library reference
+    pose_prompt = ""
+    if "pose_library_ref" in item and pose_library:
+        character_override, pose_prompt = compose_pose_prompt_from_library(
+            char_data, item, pose_library, json_data, equipment
+        )
+        # Use character_override for appearance/expression additions
+        refinement_prompt = character_override if character_override else ""
+    else:
+        refinement_prompt = item.get("prompt", "")
+    
+    # Prepend character_base to refinement prompt if present
+    # Skip if refinement_prompt uses structured format (starts with "SUBJECT:")
+    if character_base and refinement_prompt and not refinement_prompt.startswith("SUBJECT:"):
+        final_prompt = f"{character_base}, {refinement_prompt}"
+    elif character_base:
+        final_prompt = character_base
+    else:
+        final_prompt = refinement_prompt
 
-    return final_prompt, thematic, gender, proportions, equipment
+    return final_prompt, thematic, gender, proportions, equipment, pose_prompt
 
 
 def build_final_prompt(
@@ -683,14 +863,15 @@ def build_final_prompt(
     proportions: str = "",
     default_proportions: str = "",
     style_snippet: str = "",
-    generic_snippet: str,
-    miniature_snippet: str,
+    generic_snippet,  # Can be str or dict of sections
+    miniature_snippet: str = "",
     include_generic: bool,
     include_miniature: bool,
     no_base: bool = False,
     equipment: List[str] = None,
     character_id: str = "",
     form_id: str = "",
+    pose_prompt: str = "",
 ) -> str:
     """Build the final prompt from components with structured sections.
     
@@ -702,7 +883,7 @@ def build_final_prompt(
         proportions: Character proportions
         default_proportions: Default proportions if character has none
         style_snippet: Style rules
-        generic_snippet: Generic render rules
+        generic_snippet: Generic render rules (str or dict of sections)
         miniature_snippet: Miniature-specific rules
         include_generic: Whether to include generic rules
         include_miniature: Whether to include miniature rules
@@ -710,6 +891,7 @@ def build_final_prompt(
         equipment: List of equipment/props with placement descriptions
         character_id: Character ID for asset naming
         form_id: Form/pose ID for asset naming
+        pose_prompt: Pose description from pose library
         
     Returns:
         Complete formatted prompt string with structured sections
@@ -763,6 +945,10 @@ def build_final_prompt(
         props_lines = "\n".join(formatted_props)
         sections.append(f"PROPS:\n{props_lines}")
     
+    # POSE section (from pose library)
+    if pose_prompt:
+        sections.append(f"POSE:\n{pose_prompt}")
+    
     # THEME section
     theme_parts = []
     if thematic_snippets:
@@ -782,9 +968,19 @@ def build_final_prompt(
     if style_snippet:
         sections.append(f"STYLE:\n{style_snippet}")
     
-    # RENDER RULES section
+    # RENDER RULES sections (from generic_render_rules.json - includes 3D-safe geometry)
     if include_generic and generic_snippet:
-        sections.append(f"RENDER RULES:\n{generic_snippet}")
+        if isinstance(generic_snippet, dict):
+            # New section-based format
+            for section_key, section_data in generic_snippet.items():
+                if isinstance(section_data, dict) and "title" in section_data:
+                    title = section_data["title"]
+                    content = section_data.get("content", "")
+                    if content:
+                        sections.append(f"{title}:\n{content}")
+        elif isinstance(generic_snippet, str) and generic_snippet:
+            # Legacy prompt_snippet format
+            sections.append(f"RENDER RULES:\n{generic_snippet}")
     
     # MINIATURE RULES section
     if include_miniature and miniature_snippet:
@@ -1038,30 +1234,25 @@ def main(argv: list[str] | None = None) -> int:
                 character_id = char_data.get("name", "") or char_data.get("id", "")
                 char_gender = char_data.get("gender", None)
                 char_proportions = char_data.get("proportions", "").strip()
+                # Check for both poses and refinements
+                poses = char_data.get("poses", [])
                 refinements = char_data.get("refinements", [])
+                items_to_generate = poses if poses else refinements
 
-                for ref in refinements:
+                for ref in items_to_generate:
                     ref_name = ref.get("name", "")
-                    p0 = ref.get("prompt", "")
-                    # Prefer refinement-level gender when present
-                    gender_for_prompt = ref.get("gender", char_gender)
-                    thematic_snip = []
-                    if "thematic_snippet" in ref:
-                        snippet_val = ref["thematic_snippet"]
-                        if isinstance(snippet_val, list):
-                            for ref_item in snippet_val:
-                                if ref_item in thematic_forms and thematic_forms[ref_item]:
-                                    thematic_snip.append(thematic_forms[ref_item])
-                                else:
-                                    thematic_snip.append(ref_item)
-                        else:
-                            thematic_snip.append(snippet_val)
+                    # Use resolve_prompt_from_json to handle pose library references
+                    p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+                        json_data, character=character_id, form=ref_name
+                    )
+                    # Use character proportions if ref doesn't have its own
+                    proportions_to_use = ref_proportions if ref_proportions else char_proportions
                     p = build_final_prompt(
                         p0,
                         gender=gender_for_prompt,
                         thematic_snippets=thematic_snip,
                         thematic_general=thematic_general,
-                        proportions=char_proportions,
+                        proportions=proportions_to_use,
                         default_proportions=default_proportions,
                         style_snippet=style_snippet,
                         generic_snippet=generic_snippet,
@@ -1069,6 +1260,10 @@ def main(argv: list[str] | None = None) -> int:
                         include_generic=include_generic,
                         include_miniature=include_miniature,
                         no_base=args.no_base,
+                        equipment=equipment,
+                        character_id=str(character_id),
+                        form_id=ref_name,
+                        pose_prompt=pose_prompt,
                     )
                     blocks.append(f"[{character_id}:{ref_name}]\n{sanitize_for_ascii(format_for_chat(p))}")
             
@@ -1084,30 +1279,25 @@ def main(argv: list[str] | None = None) -> int:
             character_id = char_data.get("name", "") or char_data.get("id", "")
             char_gender = char_data.get("gender", None)
             char_proportions = char_data.get("proportions", "").strip()
+            # Check for both poses and refinements
+            poses = char_data.get("poses", [])
             refinements = char_data.get("refinements", [])
+            items_to_generate = poses if poses else refinements
 
-            for ref in refinements:
+            for ref in items_to_generate:
                 ref_name = ref.get("name", "")
-                p0 = ref.get("prompt", "")
-                # Prefer refinement-level gender when present
-                gender_for_prompt = ref.get("gender", char_gender)
-                thematic_snip = []
-                if "thematic_snippet" in ref:
-                    snippet_val = ref["thematic_snippet"]
-                    if isinstance(snippet_val, list):
-                        for ref_item in snippet_val:
-                            if ref_item in thematic_forms and thematic_forms[ref_item]:
-                                thematic_snip.append(thematic_forms[ref_item])
-                            else:
-                                thematic_snip.append(ref_item)
-                    else:
-                        thematic_snip.append(snippet_val)
+                # Use resolve_prompt_from_json to handle pose library references
+                p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+                    json_data, character=character_id, form=ref_name
+                )
+                # Use character proportions if ref doesn't have its own
+                proportions_to_use = ref_proportions if ref_proportions else char_proportions
                 p = build_final_prompt(
                     p0,
                     gender=gender_for_prompt,
                     thematic_snippets=thematic_snip,
                     thematic_general=thematic_general,
-                    proportions=char_proportions,
+                    proportions=proportions_to_use,
                     default_proportions=default_proportions,
                     style_snippet=style_snippet,
                     generic_snippet=generic_snippet,
@@ -1115,6 +1305,10 @@ def main(argv: list[str] | None = None) -> int:
                     include_generic=include_generic,
                     include_miniature=include_miniature,
                     no_base=args.no_base,
+                    equipment=equipment,
+                    character_id=str(character_id),
+                    form_id=ref_name,
+                    pose_prompt=pose_prompt,
                 )
                 png_bytes = generate_image_openai(p, model=args.model, size=args.size)
                 out_path = build_output_path(
@@ -1165,44 +1359,43 @@ def main(argv: list[str] | None = None) -> int:
         # Extract gender from character data (refinements may override)
         char_gender = char_data.get("gender", None)
         
+        # Check for both poses and refinements
+        poses = char_data.get("poses", [])
         refinements = char_data.get("refinements", [])
-        if not refinements:
+        items_to_generate = poses if poses else refinements
+        
+        if not items_to_generate:
             raise PromptNotFoundError(
-                f"No refinements found for character: {character_id}"
+                f"No poses/refinements found for character: {character_id}"
             )
 
         if args.dry_run:
             blocks: list[str] = []
-            for ref in refinements:
+            for ref in items_to_generate:
                 ref_name = ref.get("name", "")
-                p0 = ref.get("prompt", "")
-                # Prefer refinement-level gender when present
-                gender_for_prompt = ref.get("gender", char_gender)
-                thematic_snip = []
-                if "thematic_snippet" in ref:
-                    snippet_val = ref["thematic_snippet"]
-                    if isinstance(snippet_val, list):
-                        # List of references - resolve each one
-                        for ref_item in snippet_val:
-                            if ref_item in thematic_forms and thematic_forms[ref_item]:
-                                thematic_snip.append(thematic_forms[ref_item])
-                            else:
-                                # Not a form reference, use as-is
-                                thematic_snip.append(ref_item)
-                    else:
-                        # Legacy: single string value
-                        thematic_snip.append(snippet_val)
+                # Use resolve_prompt_from_json to handle pose library references
+                p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+                    json_data, character=character_id, form=ref_name
+                )
+                # Use character proportions if ref doesn't have its own
+                proportions_to_use = ref_proportions if ref_proportions else char_proportions
                 p = build_final_prompt(
                     p0,
                     gender=gender_for_prompt,
                     thematic_snippets=thematic_snip,
                     thematic_general=thematic_general,
+                    proportions=proportions_to_use,
+                    default_proportions=default_proportions,
                     style_snippet=style_snippet,
                     generic_snippet=generic_snippet,
                     miniature_snippet=miniature_snippet,
                     include_generic=include_generic,
                     include_miniature=include_miniature,
                     no_base=args.no_base,
+                    equipment=equipment,
+                    character_id=str(character_id),
+                    form_id=ref_name,
+                    pose_prompt=pose_prompt,
                 )
                 blocks.append(f"[{character_id}:{ref_name}]\n{sanitize_for_ascii(format_for_chat(p))}")
 
@@ -1213,36 +1406,31 @@ def main(argv: list[str] | None = None) -> int:
             return 0
 
         args.out.mkdir(parents=True, exist_ok=True)
-        for ref in refinements:
+        for ref in items_to_generate:
             ref_name = ref.get("name", "")
-            p0 = ref.get("prompt", "")
-            # Prefer refinement-level gender when present
-            gender_for_prompt = ref.get("gender", char_gender)
-            thematic_snip = []
-            if "thematic_snippet" in ref:
-                snippet_val = ref["thematic_snippet"]
-                if isinstance(snippet_val, list):
-                    # List of references - resolve each one
-                    for ref_item in snippet_val:
-                        if ref_item in thematic_forms and thematic_forms[ref_item]:
-                            thematic_snip.append(thematic_forms[ref_item])
-                        else:
-                            # Not a form reference, use as-is
-                            thematic_snip.append(ref_item)
-                else:
-                    # Legacy: single string value
-                    thematic_snip.append(snippet_val)
+            # Use resolve_prompt_from_json to handle pose library references
+            p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+                json_data, character=character_id, form=ref_name
+            )
+            # Use character proportions if ref doesn't have its own
+            proportions_to_use = ref_proportions if ref_proportions else char_proportions
             p = build_final_prompt(
                 p0,
                 gender=gender_for_prompt,
                 thematic_snippets=thematic_snip,
                 thematic_general=thematic_general,
+                proportions=proportions_to_use,
+                default_proportions=default_proportions,
                 style_snippet=style_snippet,
                 generic_snippet=generic_snippet,
                 miniature_snippet=miniature_snippet,
                 include_generic=include_generic,
                 include_miniature=include_miniature,
                 no_base=args.no_base,
+                equipment=equipment,
+                character_id=str(character_id),
+                form_id=ref_name,
+                pose_prompt=pose_prompt,
             )
             png_bytes = generate_image_openai(p, model=args.model, size=args.size)
             out_path = build_output_path(
@@ -1253,7 +1441,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     # Single (character, form) - form_id must be specified to reach here
-    prompt0, thematic_snip, gender, char_proportions, equipment = resolve_prompt_from_json(
+    prompt0, thematic_snip, gender, char_proportions, equipment, pose_prompt = resolve_prompt_from_json(
         json_data, character=character_id, form=form_id
     )
     
@@ -1277,6 +1465,7 @@ def main(argv: list[str] | None = None) -> int:
         equipment=equipment,
         character_id=character_name,
         form_id=str(form_id),
+        pose_prompt=pose_prompt,
     )
     
     if args.dry_run:

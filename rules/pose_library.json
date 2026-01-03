@@ -4,9 +4,42 @@
   "global_rules": {
     "miniature_safe": [
       "At least one limb (foot/knee/hand) has clear contact with the base/terrain.",
-      "Arms and props should not merge into the torso silhouette; preserve negative space.",
-      "Avoid thin unsupported spans; prefer braced or close-to-body geometry for long props.",
       "Base elements are low-profile unless explicitly needed for stability/readability."
+    ],
+    "3d_safe_pose_and_overlap": {
+      "rule_hierarchy": {
+        "hard_rules": [
+          "No fused meshes - all parts must remain distinct volumes.",
+          "No zero-thickness parts - all elements must have printable wall thickness.",
+          "No coplanar overlaps - overlapping surfaces must have depth separation.",
+          "No unsupported floating elements - all parts must connect to the model or base.",
+          "No micro-detail below print threshold - minimum feature size must be printable (0.5mm+ equivalent)."
+        ],
+        "soft_rules": [
+          "Avoid limb and prop intersection where possible; clear air gaps preferred but not required.",
+          "Separation from body is preferred but not mandatory when expressive pose requires contact."
+        ],
+        "intentional_overlap": [
+          "Crossed arms, braced weapons, forearm-to-forearm, and forearm-to-torso overlap are allowed when pose requires it.",
+          "Overlap must be deliberate, readable, and enhance pose attitude.",
+          "Maintain minimum printable clearance (2-4mm equivalent) between overlapping parts.",
+          "Overlapping forms must remain distinct volumes with readable edges; no merging or fusing."
+        ]
+      },
+      "wielded_objects": [
+        "Separation from body preferred but not mandatory.",
+        "Controlled contact with forearm, shoulder, or chest allowed if pose intent requires it.",
+        "Hands must grip objects at clear, readable contact points.",
+        "Expressive pose takes priority over maximum separation."
+      ],
+      "priority_statement": "Expressive character pose and attitude take priority over full limb separation, provided HARD RULES remain satisfied."
+    },
+    "pose_dominance": [
+      "The body pose is primary and must not be altered to accommodate weapons.",
+      "Weapons must conform to the established arm, elbow, and shoulder positions.",
+      "Weapon orientation may adjust ONLY via wrist rotation or minor forearm adjustment.",
+      "No weapon may cause an arm to lift, extend, or change elevation beyond the defined pose.",
+      "If a conflict exists, the pose always overrides the weapon."
     ],
     "placeholders": {
       "MAIN_HAND_PROP": "Injected by character/prop system.",
@@ -118,7 +151,7 @@
         "action": "gesture",
         "orientation": "close_in"
       },
-      "pose_prompt": "Feet shoulder-width, knees slightly bent; torso angled 10\u00e2\u20ac\u201c20 degrees; MAIN_HAND_PROP visible low to the outside of the body with clear negative space (not crossing torso), not held in hands; off hand open or lightly clenched for balance; elbows away from ribs; head turned toward threat; keep chest/face unobstructed. No hands on MAIN_HAND_PROP; not gripped; not supported by hands.",
+      "pose_prompt": "Feet shoulder-width, knees slightly bent; torso angled 10\u00e2\u20ac\u201c20 degrees; MAIN_HAND_PROP held low at the side of the body with clear negative space (not crossing torso); main hand grips MAIN_HAND_PROP; off hand open or lightly clenched for balance; elbows away from ribs; head turned toward threat; keep chest/face unobstructed.",
       "base_prompt": "Round base; subtle ground texture only."
     },
     {
@@ -195,7 +228,7 @@
         "action": "gesture",
         "orientation": "high_back"
       },
-      "pose_prompt": "Front foot planted firmly, back foot planted with heel lifted; hips drive forward; MAIN_HAND_PROP visible forward and offset from torso for display only (symbolic silhouette), not actively wielded; off hand pulled back for counterbalance; maintain strong negative space under arms and between prop and body; face/chest unobstructed. No hands on MAIN_HAND_PROP; not gripped; not supported by hands.",
+      "pose_prompt": "Front foot planted firmly, back foot planted with heel lifted; hips drive forward; MAIN_HAND_PROP thrust forward in main hand, offset from torso; main hand actively grips MAIN_HAND_PROP; off hand pulled back for counterbalance; maintain strong negative space under arms and between prop and body; face/chest unobstructed.",
       "base_prompt": "Round base with a shallow broken-stone slab or rubble ridge under the lead foot."
     },
     {
@@ -271,7 +304,7 @@
         "action": "gesture",
         "orientation": "close_in"
       },
-      "pose_prompt": "Feet planted wide; chest lifted; MAIN_HAND_PROP visible overhead as a symbolic silhouette element (no hand contact), not held in hands; off hand clenched or open near waist; elbows away from body; strong upward gesture without crossing head silhouette. No hands on MAIN_HAND_PROP; not gripped; not supported by hands.",
+      "pose_prompt": "Feet planted wide; chest lifted; MAIN_HAND_PROP raised overhead in main hand; main hand actively grips MAIN_HAND_PROP; off hand clenched or open near waist; elbows away from body; strong upward gesture without crossing head silhouette.",
       "base_prompt": "Round base with a low rock under one foot for a heroic height boost."
     },
     {
@@ -512,7 +545,7 @@
         "action": "guard",
         "orientation": "down_away"
       },
-      "pose_prompt": "Dynamic advance with asymmetric dual-wield: lead foot planted on raised terrain, rear foot grounded behind; torso rotated slightly toward main-hand aim; MAIN_HAND_PROP (compact weapon/tool) aimed forward with arm extended but offset from torso centerline, not crossing chest silhouette; OFF_HAND_PROP (shield or defensive plane) held down and angled away from body, slightly to the side\u00e2\u20ac\u201dNOT vertical in front of chest, NOT used as firing platform; clear negative space between weapon arm, shield, and torso; arms must not collapse into flat frontal plane; chest and face fully readable; head turned toward aim line; shield and weapon must not overlap torso.",
+      "pose_prompt": "Dynamic advance with asymmetric dual-wield: lead foot planted on raised terrain, rear foot grounded behind; torso rotated slightly toward main-hand aim; MAIN_HAND_PROP (compact weapon/tool) aimed forward with arm extended but offset from torso centerline, not crossing chest silhouette; OFF_HAND_PROP (shield or defensive plane) held down and angled away from body, slightly to the side - NOT vertical in front of chest, NOT used as firing platform; clear negative space between weapon arm, shield, and torso; arms must not collapse into flat frontal plane; chest and face fully readable; head turned toward aim line; shield and weapon must not overlap torso.",
       "base_prompt": "Round base with a low rock shelf under the lead foot; minimal debris only."
     },
     {
@@ -591,8 +624,47 @@
         "action": "present",
         "orientation": "close_in"
       },
-      "pose_prompt": "Protective vigil stance: feet planted wide and stable; weight centered; torso upright with calm presence; MAIN_HAND_PROP visible low and angled outward from body (barrel/tip upward if long) as a symbolic element, not held in hands; OFF_HAND_PROP replaced by an empty-hand warding/blessing gesture at chest/shoulder level; elbows away from ribs; strong vertical silhouette with clear negative space between arms and torso; head level with resolute gaze; avoid crossing items over the chest. No hands on MAIN_HAND_PROP; not gripped; not supported by hands.",
+      "pose_prompt": "Protective vigil stance: feet planted wide and stable; weight centered; torso upright with calm presence; MAIN_HAND_PROP held low and angled outward from body (barrel/tip upward if long) in main hand; main hand grips MAIN_HAND_PROP; OFF_HAND_PROP replaced by an empty-hand warding/blessing gesture at chest/shoulder level; elbows away from ribs; strong vertical silhouette with clear negative space between arms and torso; head level with resolute gaze; avoid crossing items over the chest.",
       "base_prompt": "Round base; subtle ground texture only."
+    },
+    {
+      "pose_id": "dh_crossed_menace_stance",
+      "name": "Crossed Menace Stance",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "dual-wield",
+        "static",
+        "menacing",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "dual_wield",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "long",
+          "compact"
+        ],
+        "action": "guard",
+        "orientation": "high_overhead"
+      },
+      "off_hand": {
+        "prop_slot": "OFF_HAND_PROP",
+        "prop_class": [
+          "small",
+          "compact"
+        ],
+        "action": "present",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Standing straight with legs together; feet side by side. POSE CONSTRAINT (ABSOLUTE, OVERRIDES ALL): Both wrists are crossed tightly at throat level, forming a clear X-shape; this crossed-wrist pose is a hard skeletal constraint and may NOT be relaxed; main hand wrist crosses on top of off hand wrist; arms crossed against the chest, not extended. CROSS ORDER (ABSOLUTE): The main_hand arm must be the frontmost arm in screen space, visibly overlapping the off_hand arm at the wrist crossing; the off_hand arm must pass behind the main_hand forearm. HAND COUNT: exactly two arms and two hands total; no extra hands, partial hands, or duplicated limbs. GRIP CLUSTER (MANDATORY): Wrists are crossed tightly, but each hand maintains its own independent grip on its object; no two-handed firearm stance. WEAPONS: MAIN_HAND_PROP held in main hand pointing upward at steep angle (70-80 degrees from horizontal) next to one side of the head; OFF_HAND_PROP held in off hand at head level next to the other side of the head. HEAD: Head facing forward with eyes looking directly ahead between the two hands; strong menacing presence. SEPARATION: Weapons clearly separated from head and torso with visible air gaps; hands and weapons do not touch or obscure the face.",
+      "base_prompt": "Round base; flat surface."
     },
     {
       "pose_id": "oh_melee_defensive_crouch",
@@ -742,7 +814,7 @@
         "action": "guard",
         "orientation": "close_in"
       },
-      "pose_prompt": "Side guard stance: feet shoulder-width; torso turned 45 degrees; MAIN_HAND_PROP held low at side with grip/stock at hip level, barrels angled sharply upward (approximately 35\u00e2\u20ac\u201c45 degrees), with the muzzle clearly higher than the stock in screen space; strong upward foreshortening visible; entire prop from grip to tip clearly visible and separated from thigh and body; off hand raised in defensive position near chest; strong negative space between prop and torso; ready but patient posture.",
+      "pose_prompt": "Side guard stance: feet shoulder-width; torso turned 45 degrees; MAIN_HAND_PROP held low at side with grip/stock at hip level, barrels angled sharply upward (approximately 35-45 degrees), with the muzzle clearly higher than the stock in screen space; strong upward foreshortening visible; entire prop from grip to tip clearly visible and separated from thigh and body; off hand raised in defensive position near chest; strong negative space between prop and torso; ready but patient posture.",
       "base_prompt": "Round base; minimal texture."
     },
     {
@@ -974,7 +1046,7 @@
         "action": "guard",
         "orientation": "side_out"
       },
-      "pose_prompt": "Defensive crouch: feet wide with knees deeply bent, hips low; hands up in guarding positions\u00e2\u20ac\u201done forward, one to side; torso forward; weight on balls of feet; alert ready posture; strong negative space between arms and body.",
+      "pose_prompt": "Defensive crouch: feet wide with knees deeply bent, hips low; hands up in guarding positions - one forward, one to side; torso forward; weight on balls of feet; alert ready posture; strong negative space between arms and body.",
       "base_prompt": "Round base; flat surface."
     },
     {
@@ -1011,7 +1083,7 @@
         "action": "gesture",
         "orientation": "side_out"
       },
-      "pose_prompt": "Victory roar: wide powerful stance with one foot on raised terrain; both arms raised high in triumphant gesture\u00e2\u20ac\u201dfists clenched or claws spread; head thrown back in roaring expression; chest open; dominant victory posture.",
+      "pose_prompt": "Victory roar: wide powerful stance with one foot on raised terrain; both arms raised high in triumphant gesture - fists clenched or claws spread; head thrown back in roaring expression; chest open; dominant victory posture.",
       "base_prompt": "Round base with low rock under one foot."
     },
     {
