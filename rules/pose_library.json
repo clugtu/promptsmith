@@ -780,6 +780,46 @@
       "base_prompt": "Round base; flat surface."
     },
     {
+      "pose_id": "charge_lasso_overhead_swing",
+      "name": "Charging Lasso Swing",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "two-handed",
+        "attack",
+        "dynamic",
+        "charging",
+        "lasso"
+      ],
+      "pose_style": "dynamic",
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "two_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "flexible",
+          "long"
+        ],
+        "action": "swing",
+        "orientation": "high_overhead_arc"
+      },
+      "off_hand": {
+        "prop_slot": "OFF_HAND_PROP",
+        "prop_class": [
+          "flexible",
+          "long"
+        ],
+        "action": "grip",
+        "orientation": "low_center"
+      },
+      "pose_prompt": "Charging lasso swing: figure lunges forward in a running stride; lead foot planted, trail foot pushing off; torso pitched forward with rotational twist; MAIN_HAND_PROP raised high overhead by main hand, spinning in a wide arc kept clear of head silhouette; off hand grips the rope low at center body, anchoring and controlling the lasso; both hands actively grip the lasso rope; strong forward momentum with clear negative space around arms and rope loop.",
+      "base_prompt": "Round base; flat surface."
+    },
+    {
       "pose_id": "oh_melee_side_guard_low",
       "name": "Side Guard Low",
       "figure_type": "bipedal_humanoid",
