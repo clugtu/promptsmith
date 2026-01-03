@@ -221,184 +221,66 @@ def find_pose_in_library(pose_library: Dict[str, Any], pose_id: str) -> Optional
 def compose_pose_prompt_from_library(
     character_data: Dict[str, Any],
     pose_def: Dict[str, Any],
-    pose_library: Dict[str, Any]
+    pose_library: Dict[str, Any],
+    json_data: Dict[str, Any]
 ) -> str:
-    """Compose a complete pose prompt from library reference + weapon definitions.
+    """Compose a pose prompt by looking up a pose_library_ref.
     
     Args:
-        character_data: The character definition containing weapons and character_base
-        pose_def: The pose definition with pose_library_ref and overrides
-        pose_library: The loaded pose library data
-    
+        character_data: The character definition containing character_base
+        pose_def: The pose/refinement containing pose_library_ref
+        pose_library: The loaded pose library JSON
+        json_data: Full JSON data for figure_type validation
+        
     Returns:
-        Composed prompt string with weapons injected and overrides applied
+        Composed prompt string with character override applied
+        
+    Raises:
+        PromptNotFoundError: If pose_library_ref is missing or not found in library
     """
-    # Get the library pose reference
-    library_ref = pose_def.get("pose_library_ref")
-    if not library_ref:
-        # Fallback to old-style direct prompt if no library reference
-        return pose_def.get("prompt", "")
+    import sys
+    
+    pose_ref = pose_def.get("pose_library_ref")
+    if not pose_ref:
+        raise PromptNotFoundError("pose_library_ref is missing in pose definition")
     
     # Find the pose in the library
-    library_pose = find_pose_in_library(pose_library, library_ref)
+    library_pose = find_pose_in_library(pose_library, pose_ref)
     if not library_pose:
-        return f"[ERROR: Pose {library_ref} not found in library]"
+        available_ids = [p.get("pose_id", "?") for p in pose_library.get("poses", [])[:15]]
+        raise PromptNotFoundError(
+            f"Pose '{pose_ref}' not found in pose library.\n"
+            f"Available poses (first 15): {', '.join(available_ids)}"
+        )
     
-    # Validate pose compatibility and print warnings
-    warnings = validate_pose_compatibility(character_data, pose_def, library_pose, library_ref)
-    if warnings:
-        import sys
-        print("\n⚠️  Pose Compatibility Warnings:", file=sys.stderr)
-        for warning in warnings:
-            print(f"   {warning}", file=sys.stderr)
-        print(file=sys.stderr)
-    
-    # Get the base pose prompt from library
+    # Get the pose prompt template
     pose_prompt = library_pose.get("pose_prompt", "")
     
-    # Get weapon definitions
-    weapons = character_data.get("weapons", {})
-    main_hand_weapon = weapons.get("main_hand")
-    off_hand_weapon = weapons.get("off_hand")
+    # Validate figure types if present
+    pose_figure_type = library_pose.get("figure_type")
+    char_figure_type = pose_def.get("figure_type")
     
-    # Check if pose has custom weapons_for_pose (for dual-wield scenarios)
-    weapons_for_pose = pose_def.get("weapons_for_pose", {})
-    if weapons_for_pose:
-        # Use custom weapon assignment for this pose
-        main_hand_name = weapons_for_pose.get("main_hand")
-        off_hand_name = weapons_for_pose.get("off_hand")
+    if pose_figure_type and char_figure_type:
+        # Define compatible mismatches
+        compatible_mismatches = {
+            'facultatively_bipedal': ['bipedal_humanoid'],
+            'winged_bipedal': ['bipedal_humanoid'],
+            'winged_centauroid': ['centauroid'],
+            'multi_limbed_bipedal': ['bipedal_humanoid'],
+            'multi_limbed_centauroid': ['centauroid']
+        }
         
-        # Find weapons in holstered list if needed
-        holstered = weapons.get("holstered", [])
-        if main_hand_name and main_hand_name != weapons.get("main_hand", {}).get("name"):
-            for h_weapon in holstered:
-                if h_weapon.get("name") == main_hand_name:
-                    main_hand_weapon = h_weapon.copy()
-                    break
-        if off_hand_name:
-            for h_weapon in holstered:
-                if h_weapon.get("name") == off_hand_name:
-                    off_hand_weapon = h_weapon.copy()
-                    break
-    
-    # Build weapon detail strings
-    main_hand_detail = ""
-    main_hand_slung_detail = ""  # For slung weapons (not held)
-    if main_hand_weapon:
-        name = main_hand_weapon.get("name", "prop")
-        desc = main_hand_weapon.get("description", "")
-        visual = main_hand_weapon.get("visual_detail", "")
-        attachment = main_hand_weapon.get("attachment", "")
+        compatible = (pose_figure_type == char_figure_type) or \
+                     (char_figure_type in compatible_mismatches and 
+                      pose_figure_type in compatible_mismatches[char_figure_type])
         
-        # Check for prop state override
-        prop_override = pose_def.get("prop_override", {})
-        state = prop_override.get("main_hand_prop_state", "held_firmly")
-        orientation = prop_override.get("main_hand_orientation", "")
-        
-        if "slung" in state:
-            # Slung weapons - keep it simple to avoid spatial contradictions
-            sling_position = state.replace('_', ' ')
-            if not attachment:
-                attachment = "sling"
-                import sys
-                print(f"⚠️  Warning: Slung weapon '{name}' has no 'attachment' field. Using default: {attachment}", file=sys.stderr)
-            
-            main_hand_slung_detail = (
-                f"{name} ({desc}): {sling_position}; carried by {attachment}; "
-                f"weapon visible but not held in hands; hands free for pose action"
-            )
-            if visual:
-                main_hand_slung_detail += f"; {visual}"
-        else:
-            main_hand_detail = f"{name} ({desc}) {state.replace('_', ' ')}"
-            if orientation:
-                main_hand_detail += f", {orientation.replace('_', ' ')}"
-            if visual:
-                main_hand_detail += f"; {visual}"
+        if not compatible:
+            print(f"⚠️  Warning: Figure type mismatch - pose expects '{pose_figure_type}' but character has '{char_figure_type}'", file=sys.stderr)
     
-    off_hand_detail = ""
-    off_hand_slung_detail = ""  # For slung weapons (not held)
-    if off_hand_weapon:
-        name = off_hand_weapon.get("name", "prop")
-        desc = off_hand_weapon.get("description", "")
-        visual = off_hand_weapon.get("visual_detail", "")
-        attachment = off_hand_weapon.get("attachment", "")
-        
-        prop_override = pose_def.get("prop_override", {})
-        state = prop_override.get("off_hand_prop_state", "held_firmly")
-        orientation = prop_override.get("off_hand_orientation", "")
-        
-        if "slung" in state:
-            # Slung weapons - keep it simple to avoid spatial contradictions
-            sling_position = state.replace('_', ' ')
-            if not attachment:
-                attachment = "sling"
-                import sys
-                print(f"⚠️  Warning: Slung weapon '{name}' has no 'attachment' field. Using default: {attachment}", file=sys.stderr)
-            
-            off_hand_slung_detail = (
-                f"{name} ({desc}): {sling_position}; carried by {attachment}; "
-                f"weapon visible but not held in hands; hands free for pose action"
-            )
-            if visual:
-                off_hand_slung_detail += f"; weapon visual details: {visual}"
-        else:
-            off_hand_detail = f"{name} ({desc}) {state.replace('_', ' ')}"
-            if orientation:
-                off_hand_detail += f", {orientation.replace('_', ' ')}"
-            if visual:
-                off_hand_detail += f"; {visual}"
-    
-    # Replace placeholders in pose prompt
-    if main_hand_detail:
-        pose_prompt = pose_prompt.replace("MAIN_HAND_PROP", main_hand_detail)
-    elif main_hand_slung_detail:
-        # Weapon is slung, not held - remove MAIN_HAND_PROP references
-        pose_prompt = re.sub(r"MAIN_HAND_PROP[^;.]*[;.]?\s*", "", pose_prompt)
-        # Also clean up orphaned text about not gripping/holding
-        pose_prompt = re.sub(r"[Nn]o hands on\s*\[empty hand\][^;.]*[;.]?\s*", "", pose_prompt)
-        pose_prompt = re.sub(r"not gripped; not supported by hands[;.]?\s*", "", pose_prompt)
-    else:
-        pose_prompt = pose_prompt.replace("MAIN_HAND_PROP", "[empty hand]")
-    
-    if off_hand_detail:
-        pose_prompt = pose_prompt.replace("OFF_HAND_PROP", off_hand_detail)
-    elif off_hand_slung_detail:
-        # Weapon is slung, not held - remove OFF_HAND_PROP references
-        pose_prompt = re.sub(r"OFF_HAND_PROP[^;.]*[;.]?\s*", "", pose_prompt)
-    else:
-        # Remove OFF_HAND_PROP references for unarmed off-hand
-        pose_prompt = re.sub(r"OFF_HAND_PROP[^;.]*[;.]", "", pose_prompt)
-    
-    # CRITICAL: Insert slung weapon constraints immediately after pose (before character overrides)
-    # This enforces hand position as a hard pose constraint, not a styling suggestion
-    slung_constraints = []
-    if main_hand_slung_detail:
-        slung_constraints.append(main_hand_slung_detail)
-    if off_hand_slung_detail:
-        slung_constraints.append(off_hand_slung_detail)
-    
-    if slung_constraints:
-        pose_prompt += " " + " ".join(slung_constraints)
-    
-    # Add character-specific override text if present - this REPLACES the pose prompt
-    # to avoid redundancy between generic pose library language and character-specific details
+    # Apply character_override if present (replaces generic pose description)
     character_override = pose_def.get("character_override", "")
     if character_override:
         pose_prompt = character_override
-    
-    # Add holstered weapons as visible equipment (not slung - those are already handled above)
-    # Skip if pose_prompt uses structured format (starts with "SUBJECT:")
-    if not pose_prompt.startswith("SUBJECT:"):
-        holstered = weapons.get("holstered", [])
-        if holstered:
-            holstered_items = []
-            for h in holstered:
-                h_name = h.get("name", "item")
-                h_loc = h.get("location", "on belt")
-                holstered_items.append(f"{h_name} {h_loc}")
-            if holstered_items:
-                pose_prompt += f"; {'; '.join(holstered_items)}"
     
     return pose_prompt
 
@@ -527,7 +409,8 @@ def validate_pose_compatibility(
     character_data: Dict[str, Any],
     character_pose_def: Dict[str, Any],
     library_pose_def: Dict[str, Any],
-    pose_id: str
+    pose_id: str,
+    json_data: Dict[str, Any]
 ) -> List[str]:
     """Check if character weapons match pose requirements.
     
@@ -536,6 +419,7 @@ def validate_pose_compatibility(
         character_pose_def: Pose definition from character JSON (with overrides)
         library_pose_def: Pose definition from pose library
         pose_id: Pose ID for error messages
+        json_data: The full JSON data (for figure_type validation from forms)
         
     Returns:
         List of warning messages (empty if no issues)
@@ -556,117 +440,75 @@ def validate_pose_compatibility(
     main_prop_classes = main_hand_slot.get("prop_class", [])
     off_prop_classes = off_hand_slot.get("prop_class", [])
     
-    # Get prop overrides from character pose definition
-    prop_override = character_pose_def.get("prop_override", {})
-    main_prop_state = prop_override.get("main_hand_prop_state", "held_firmly")
-    off_prop_state = prop_override.get("off_hand_prop_state", "held_firmly")
+    # Validate figure_type compatibility
+    pose_figure_type = library_pose_def.get("figure_type", "bipedal_humanoid")
+    character_figure_type = character_data.get("figure_type")
     
-    # Check if using slung weapons
-    main_is_slung = "slung" in main_prop_state
-    off_is_slung = "slung" in off_prop_state
+    # Also check if character is using a form with figure_type
+    if not character_figure_type and "thematic_snippet" in character_pose_def:
+        # Try to get figure_type from form
+        thematic_forms = json_data.get("thematic_rules", {}).get("forms", {})
+        for snippet in character_pose_def.get("thematic_snippet", []):
+            if snippet in thematic_forms:
+                form_data = thematic_forms[snippet]
+                if isinstance(form_data, dict) and "figure_type" in form_data:
+                    character_figure_type = form_data["figure_type"]
+                    break
     
-    # Check handedness compatibility
-    if handedness_mode == "unarmed":
-        if main_hand_weapon and not main_is_slung:
-            warnings.append(
-                f"Pose '{pose_id}' is unarmed, but character has main hand weapon in non-slung state. "
-                f"Consider using 'slung_side_visible' or similar to display weapon without holding."
-            )
-        if off_hand_weapon and not off_is_slung:
-            warnings.append(
-                f"Pose '{pose_id}' is unarmed, but character has off hand weapon in non-slung state. "
-                f"Weapon will conflict with unarmed pose."
-            )
+    # Define valid figure types
+    VALID_FIGURE_TYPES = [
+        "bipedal_humanoid",
+        "quadrupedal",
+        "facultatively_bipedal",
+        "serpentine",
+        "naga_form",
+        "centauroid",
+        "multi_limbed_bipedal",
+        "multi_limbed_centauroid",
+        "winged_bipedal",
+        "winged_centauroid",
+        "amorphous",
+        "floating",
+        "arachnoid"
+    ]
     
-    elif handedness_mode == "single_handed":
-        if not main_hand_weapon:
-            if "none" not in main_prop_classes:
-                warnings.append(
-                    f"Pose '{pose_id}' requires a main hand weapon, but character has none equipped."
-                )
+    # Validate pose figure_type
+    if pose_figure_type not in VALID_FIGURE_TYPES:
+        warnings.append(
+            f"Pose '{pose_id}' has invalid figure_type '{pose_figure_type}'. "
+            f"Valid types: {', '.join(VALID_FIGURE_TYPES)}"
+        )
+    
+    # Validate character figure_type if present
+    if character_figure_type and character_figure_type not in VALID_FIGURE_TYPES:
+        warnings.append(
+            f"Character has invalid figure_type '{character_figure_type}'. "
+            f"Valid types: {', '.join(VALID_FIGURE_TYPES)}"
+        )
+    
+    # Check figure_type compatibility
+    if character_figure_type and pose_figure_type != character_figure_type:
+        # Check if it's a compatible mismatch
+        compatible_mismatches = {
+            # Facultatively bipedal can use bipedal poses when upright
+            ("facultatively_bipedal", "bipedal_humanoid"): "acceptable (facultatively bipedal using bipedal pose)",
+            # Winged variants can use base poses
+            ("winged_bipedal", "bipedal_humanoid"): "acceptable (winged using bipedal base)",
+            ("winged_centauroid", "centauroid"): "acceptable (winged using centauroid base)",
+            # Multi-limbed can use base poses (just won't use all arms)
+            ("multi_limbed_bipedal", "bipedal_humanoid"): "acceptable (multi-limbed using bipedal base)",
+            ("multi_limbed_centauroid", "centauroid"): "acceptable (multi-limbed using centauroid base)",
+        }
+        
+        mismatch_key = (character_figure_type, pose_figure_type)
+        if mismatch_key in compatible_mismatches:
+            # Compatible mismatch - just a note, not a warning
+            pass
         else:
-            if main_is_slung:
-                warnings.append(
-                    f"Pose '{pose_id}' expects an actively held weapon, but main hand is set to '{main_prop_state}'. "
-                    f"Pose description may reference holding/wielding actions that won't match."
-                )
-            else:
-                # Check if main hand weapon prop_class matches pose requirements
-                weapon_prop_class = main_hand_weapon.get("prop_class", "compact")
-                if weapon_prop_class not in main_prop_classes and "none" not in main_prop_classes:
-                    warnings.append(
-                        f"Pose '{pose_id}' expects main hand prop_class {main_prop_classes}, "
-                        f"but character has '{weapon_prop_class}'. May not render optimally."
-                    )
-        
-        if off_hand_weapon and not off_is_slung:
             warnings.append(
-                f"Pose '{pose_id}' is single-handed, but character has off hand weapon in non-slung state. "
-                f"Off hand weapon will be ignored or conflict with pose."
+                f"Figure type mismatch: character is '{character_figure_type}' but pose '{pose_id}' "
+                f"is designed for '{pose_figure_type}'. Pose may not work correctly."
             )
-    
-    elif handedness_mode == "two_handed":
-        if not main_hand_weapon:
-            warnings.append(
-                f"Pose '{pose_id}' requires a two-handed weapon in main hand, but character has none equipped."
-            )
-        else:
-            if main_is_slung:
-                warnings.append(
-                    f"Pose '{pose_id}' is a two-handed pose expecting weapon to be actively gripped, "
-                    f"but main hand is set to '{main_prop_state}'. This will likely not work."
-                )
-            else:
-                weapon_prop_class = main_hand_weapon.get("prop_class", "compact")
-                if weapon_prop_class not in main_prop_classes:
-                    warnings.append(
-                        f"Pose '{pose_id}' expects two-handed prop_class {main_prop_classes}, "
-                        f"but character has '{weapon_prop_class}'. May not render optimally."
-                    )
-        
-        if off_hand_weapon and not off_is_slung:
-            warnings.append(
-                f"Pose '{pose_id}' is two-handed, but character has separate off hand weapon in non-slung state. "
-                f"Off hand weapon will be ignored (both hands on main weapon)."
-            )
-    
-    elif handedness_mode == "dual_wield":
-        if not main_hand_weapon:
-            warnings.append(
-                f"Pose '{pose_id}' requires a main hand weapon, but character has none equipped."
-            )
-        if not off_hand_weapon:
-            warnings.append(
-                f"Pose '{pose_id}' requires an off hand weapon, but character has none equipped."
-            )
-        
-        if main_hand_weapon:
-            if main_is_slung:
-                warnings.append(
-                    f"Pose '{pose_id}' is dual-wield expecting main hand weapon to be held, "
-                    f"but main hand is set to '{main_prop_state}'."
-                )
-            else:
-                weapon_prop_class = main_hand_weapon.get("prop_class", "compact")
-                if weapon_prop_class not in main_prop_classes and "none" not in main_prop_classes:
-                    warnings.append(
-                        f"Pose '{pose_id}' expects main hand prop_class {main_prop_classes}, "
-                        f"but character has '{weapon_prop_class}'. May not render optimally."
-                    )
-        
-        if off_hand_weapon:
-            if off_is_slung:
-                warnings.append(
-                    f"Pose '{pose_id}' is dual-wield expecting off hand weapon to be held, "
-                    f"but off hand is set to '{off_prop_state}'."
-                )
-            else:
-                weapon_prop_class = off_hand_weapon.get("prop_class", "compact")
-                if weapon_prop_class not in off_prop_classes and "none" not in off_prop_classes:
-                    warnings.append(
-                        f"Pose '{pose_id}' expects off hand prop_class {off_prop_classes}, "
-                        f"but character has '{weapon_prop_class}'. May not render optimally."
-                    )
     
     return warnings
 
@@ -676,7 +518,7 @@ def resolve_prompt_from_json(
     character: Optional[Union[int, str]] = None,
     form: Optional[str] = None,
     refinement_path: Optional[str] = None
-) -> Tuple[str, List[str], Optional[str], str]:
+) -> Tuple[str, List[str], Optional[str], str, List[str]]:
     """Resolve a prompt from JSON using various addressing methods.
     
     Args:
@@ -686,7 +528,7 @@ def resolve_prompt_from_json(
         refinement_path: Full path like '1:1' or 'alpha:human'
     
     Returns:
-        Tuple of (prompt string, list of thematic snippets from refinement path, gender or None, proportions string)
+        Tuple of (prompt string, list of thematic snippets, gender or None, proportions string, equipment list)
     """
     # Extract form definitions once
     thematic_forms = extract_thematic_forms(json_data)
@@ -761,7 +603,7 @@ def resolve_prompt_from_json(
         # Check if this is a pose library reference
         if "pose_library_ref" in first_item and pose_library:
             refinement_prompt = compose_pose_prompt_from_library(
-                char_data, first_item, pose_library
+                char_data, first_item, pose_library, json_data
             )
         else:
             refinement_prompt = first_item.get("prompt", "")
@@ -775,8 +617,11 @@ def resolve_prompt_from_json(
 
         # Use item-level gender if present, else character-level
         gender = first_item.get("gender", char_gender)
+        
+        # Extract equipment array - check for pose-level equipment_override first
+        equipment = first_item.get("equipment_override", char_data.get("equipment", []))
 
-        return final_prompt, thematic, gender, proportions
+        return final_prompt, thematic, gender, proportions, equipment
     
     # Find the item (pose or refinement)
     item = find_refinement_by_id_or_name(items_to_search, form)
@@ -808,7 +653,7 @@ def resolve_prompt_from_json(
     # Check if this is a pose library reference
     if "pose_library_ref" in item and pose_library:
         refinement_prompt = compose_pose_prompt_from_library(
-            char_data, item, pose_library
+            char_data, item, pose_library, json_data
         )
     else:
         refinement_prompt = item.get("prompt", "")
@@ -822,8 +667,11 @@ def resolve_prompt_from_json(
 
     # Use item-level gender if present, else character-level
     gender = item.get("gender", char_gender)
+    
+    # Extract equipment array - check for pose-level equipment_override first
+    equipment = item.get("equipment_override", char_data.get("equipment", []))
 
-    return final_prompt, thematic, gender, proportions
+    return final_prompt, thematic, gender, proportions, equipment
 
 
 def build_final_prompt(
@@ -840,10 +688,32 @@ def build_final_prompt(
     include_generic: bool,
     include_miniature: bool,
     no_base: bool = False,
+    equipment: List[str] = None,
 ) -> str:
-    base_prompt = base_prompt.strip().rstrip(",")
-
-    parts = [base_prompt]
+    """Build the final prompt from components with structured sections.
+    
+    Args:
+        base_prompt: Character base + pose description
+        gender: Character gender
+        thematic_snippets: Thematic form snippets
+        thematic_general: General thematic prompt
+        proportions: Character proportions
+        default_proportions: Default proportions if character has none
+        style_snippet: Style rules
+        generic_snippet: Generic render rules
+        miniature_snippet: Miniature-specific rules
+        include_generic: Whether to include generic rules
+        include_miniature: Whether to include miniature rules
+        no_base: Whether to specify no base/stand
+        equipment: List of equipment/props with placement descriptions
+        
+    Returns:
+        Complete formatted prompt string with structured sections
+    """
+    sections = []
+    
+    # CHARACTER section
+    character_parts = [base_prompt.strip().rstrip(",")]
     
     # Add gender hint if provided and not already explicitly stated
     if gender:
@@ -858,36 +728,64 @@ def build_final_prompt(
         
         # Add gender to all forms unless already present
         if not has_gender:
-            parts.append(f"{gender_lower}")
+            character_parts.append(f"{gender_lower}")
     
-    # Add thematic snippets from refinements
+    sections.append("CHARACTER:\n" + ", ".join(p.strip().rstrip(",") for p in character_parts if p.strip()))
+    
+    # PROPS section
+    if equipment:
+        formatted_props = []
+        for item in equipment:
+            # Parse structured format: "item (details) : position : description"
+            if " : " in item:
+                parts = item.split(" : ", 2)
+                if len(parts) == 3:
+                    item_with_details = parts[0].strip()
+                    position = parts[1].strip()
+                    description = parts[2].strip()
+                    formatted_props.append(f"- {item_with_details} [{position}] {description}")
+                else:
+                    # Fallback for malformed entries
+                    formatted_props.append(f"- {item}")
+            else:
+                # Legacy format without colons
+                formatted_props.append(f"- {item}")
+        
+        props_lines = "\n".join(formatted_props)
+        sections.append(f"PROPS:\n{props_lines}")
+    
+    # THEME section
+    theme_parts = []
     if thematic_snippets:
-        parts.extend(thematic_snippets)
-    
-    # Add general thematic snippet
+        theme_parts.extend(thematic_snippets)
     if thematic_general:
-        parts.append(thematic_general)
+        theme_parts.append(thematic_general)
     
-    # Add proportions (character-specific or default)
+    if theme_parts:
+        sections.append("THEME:\n" + ", ".join(p.strip().rstrip(",") for p in theme_parts))
+    
+    # PROPORTIONS section
     proportions_to_use = proportions if proportions else default_proportions
     if proportions_to_use:
-        parts.append(proportions_to_use)
+        sections.append(f"PROPORTIONS:\n{proportions_to_use}")
     
-    # Add style snippet
+    # STYLE section
     if style_snippet:
-        parts.append(style_snippet)
+        sections.append(f"STYLE:\n{style_snippet}")
     
+    # RENDER RULES section
     if include_generic and generic_snippet:
-        parts.append(generic_snippet)
+        sections.append(f"RENDER RULES:\n{generic_snippet}")
+    
+    # MINIATURE RULES section
     if include_miniature and miniature_snippet:
-        parts.append(miniature_snippet)
-
+        sections.append(f"MINIATURE RULES:\n{miniature_snippet}")
+    
+    # BASE EXCLUSION section
     if no_base:
-        parts.append(
-            "no base, no stand, not mounted, no plinth, no pedestal, no ground plane"
-        )
-
-    return ", ".join(p.strip().rstrip(",") for p in parts if p.strip())
+        sections.append("BASE EXCLUSION:\nno base, no stand, not mounted, no plinth, no pedestal, no ground plane")
+    
+    return "\n\n".join(sections)
 
 
 def list_available_from_json(json_data: Dict[str, Any]) -> str:
@@ -1346,7 +1244,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     # Single (character, form) - form_id must be specified to reach here
-    prompt0, thematic_snip, gender, char_proportions = resolve_prompt_from_json(
+    prompt0, thematic_snip, gender, char_proportions, equipment = resolve_prompt_from_json(
         json_data, character=character_id, form=form_id
     )
     prompt = build_final_prompt(
@@ -1362,6 +1260,7 @@ def main(argv: list[str] | None = None) -> int:
         include_generic=include_generic,
         include_miniature=include_miniature,
         no_base=args.no_base,
+        equipment=equipment,
     )
     
     if args.dry_run:

@@ -53,65 +53,255 @@ Poses are categorized by **handedness_mode** (how many hands are used) and **pro
 - `two_hand_frame`: Two-handed weapons
 - `bulky`: Large bulky items
 
-### Complete Pose Library (30 Poses)
+### Complete Pose Library (39 Poses)
 
-| Pose ID | Handedness | Main Hand Props | Off Hand Props | Style | Notes |
-|---------|-----------|-----------------|----------------|-------|-------|
-| **Unarmed (3)** |
-| unarmed_001_fighter_ready | unarmed | none | none | ready | Fighting stance, hands up |
-| unarmed_002_aggressive_charge | unarmed | none | none | dynamic | Forward charge, fist extended |
-| unarmed_003_defensive_crouch | unarmed | none | none | crouch | Low defensive guard |
-| unarmed_004_victory_roar | unarmed | none | none | victory | Arms raised triumphant |
-| **Single-Handed (9)** |
-| melee_001_guarded_low_ready | single_handed | compact, long, small | none | ready | Guard stance, weapon low |
-| melee_002_over_shoulder_carry | single_handed | long, compact | none | static | Relaxed carry over shoulder |
-| melee_003_forward_lunge_action | single_handed | compact, long, flexible | none | dynamic | Forward lunge attack |
-| melee_004_triumph_raise | single_handed | compact, long, small | none | victory | Weapon raised overhead |
-| melee_005_defensive_crouch | single_handed | compact, long | none | crouch | Low defensive guard |
-| melee_006_sprint_carry | single_handed | long | none | dynamic | Running sprint |
-| melee_007_overhead_strike | single_handed | compact, long | none | dynamic | Overhead attack |
-| melee_008_side_guard_low | single_handed | compact, long | none | ready | Side guard stance |
-| mixed_001_shield_bash | single_handed | shield_plane | none | dynamic | Shield charge |
+**Naming Convention:**
+- Handedness codes: `un` (unarmed), `oh` (one-hand), `th` (two-hand), `dh` (dual-hand), `quad` (quadrupedal), `fbp` (facultatively bipedal)
+- Type qualifiers: `_melee` (melee-only), `_ranged` (ranged-only), `_object` (gesture/display), none (universal)
+- Format: `{handedness}{_type}_{description}`
+
+| Pose ID | Handedness | Main Hand Props | Off Hand Props | Style | Type | Figure Type |
+|---------|-----------|-----------------|----------------|-------|------|-------------|
+| **Unarmed Bipedal (4)** |
+| un_fighter_ready | unarmed | none | none | ready | - | bipedal_humanoid |
+| un_aggressive_charge | unarmed | none | none | dynamic | - | bipedal_humanoid |
+| un_defensive_crouch | unarmed | none | none | crouch | - | bipedal_humanoid |
+| un_victory_roar | unarmed | none | none | victory | - | bipedal_humanoid |
+| **One-Handed Bipedal (9)** |
+| oh_melee_guarded_low_ready | single_handed | compact, long, small | none | ready | melee | bipedal_humanoid |
+| oh_over_shoulder_carry | single_handed | long, compact | none | static | universal | bipedal_humanoid |
+| oh_melee_forward_lunge_action | single_handed | compact, long, flexible | none | dynamic | melee | bipedal_humanoid |
+| oh_triumph_raise | single_handed | compact, long, small | none | victory | universal | bipedal_humanoid |
+| oh_melee_defensive_crouch | single_handed | compact, long | none | crouch | melee | bipedal_humanoid |
+| oh_sprint_carry | single_handed | long | none | dynamic | universal | bipedal_humanoid |
+| oh_melee_overhead_strike | single_handed | compact, long | none | dynamic | melee | bipedal_humanoid |
+| oh_melee_side_guard_low | single_handed | compact, long | none | ready | melee | bipedal_humanoid |
+| oh_melee_shield_bash | single_handed | shield_plane | none | dynamic | melee | bipedal_humanoid |
 | **Two-Handed (7)** |
-| twohand_001_standing_aim_wide | two_handed | two_hand_frame, long, bulky | two_hand_frame, long, bulky | ready | Wide stance aim |
-| twohand_002_kneel_aim | two_handed | two_hand_frame, long, bulky | two_hand_frame, long, bulky | kneel | Kneeling aim |
-| twohand_003_dynamic_step_aim | two_handed | two_hand_frame, long, bulky | two_hand_frame, long, bulky | dynamic | Advancing aim |
-| twohand_004_low_sweep | two_handed | long, two_hand_frame | long, two_hand_frame | dynamic | Horizontal sweep |
-| twohand_005_overhead_chop | two_handed | long, two_hand_frame | long, two_hand_frame | dynamic | Overhead chop |
-| twohand_006_march_carry | two_handed | long, two_hand_frame | long, two_hand_frame | static | Marching carry |
-| twohand_007_defensive_brace | two_handed | long, shield_plane, two_hand_frame | long, shield_plane, two_hand_frame | ready | Defensive brace |
+| th_ranged_standing_aim_wide | two_handed | two_hand_frame, long, bulky | two_hand_frame, long, bulky | ready | ranged | bipedal_humanoid |
+| th_ranged_kneel_aim | two_handed | two_hand_frame, long, bulky | two_hand_frame, long, bulky | kneel | ranged | bipedal_humanoid |
+| th_ranged_dynamic_step_aim | two_handed | two_hand_frame, long, bulky | two_hand_frame, long, bulky | dynamic | ranged | bipedal_humanoid |
+| th_melee_low_sweep | two_handed | long, two_hand_frame | long, two_hand_frame | dynamic | melee | bipedal_humanoid |
+| th_melee_overhead_chop | two_handed | long, two_hand_frame | long, two_hand_frame | dynamic | melee | bipedal_humanoid |
+| th_march_carry | two_handed | long, two_hand_frame | long, two_hand_frame | static | universal | bipedal_humanoid |
+| th_melee_defensive_brace | two_handed | long, shield_plane, two_hand_frame | long, shield_plane, two_hand_frame | ready | melee | bipedal_humanoid |
 | **Dual-Wield (10)** |
-| dual_001_dual_aim_spread | dual_wield | compact, small | compact, small | dynamic | Both weapons aimed out |
-| dual_002_long_short_charge | dual_wield | long | compact, small, shield_plane | dynamic | Long weapon + short/shield |
-| dual_003_aim_and_cover | dual_wield | compact, small | shield_plane, long | dynamic | Ranged + shield |
-| dual_004_cqb_forward | dual_wield | compact, small | compact, small | ready | Close quarters ready |
-| dual_005_guardian_vigil | dual_wield | long, compact | small, compact | static | Protective vigil stance |
-| dual_006_spinning_strike | dual_wield | compact, small | compact, small | dynamic | Spinning attack |
-| dual_007_crossed_defense | dual_wield | long, compact | shield_plane, long | ready | Crossed X defense |
-| dual_008_asymmetric_ready | dual_wield | compact, small | long, compact | ready | Asymmetric stance |
-| mixed_002_transition_stance | dual_wield | long, compact | compact, small | ready | Weapon transition |
+| dh_ranged_dual_aim_spread | dual_wield | compact, small | compact, small | dynamic | ranged | bipedal_humanoid |
+| dh_melee_long_short_charge | dual_wield | long | compact, small, shield_plane | dynamic | melee | bipedal_humanoid |
+| dh_ranged_aim_and_cover | dual_wield | compact, small | shield_plane, long | dynamic | ranged | bipedal_humanoid |
+| dh_ranged_cqb_forward | dual_wield | compact, small | compact, small | ready | ranged | bipedal_humanoid |
+| dh_melee_guardian_vigil | dual_wield | long, compact | small, compact | static | melee | bipedal_humanoid |
+| dh_melee_spinning_strike | dual_wield | compact, small | compact, small | dynamic | melee | bipedal_humanoid |
+| dh_melee_crossed_defense | dual_wield | long, compact | shield_plane, long | ready | melee | bipedal_humanoid |
+| dh_ranged_asymmetric_ready | dual_wield | compact, small | long, compact | ready | ranged | bipedal_humanoid |
+| dh_transition_stance | dual_wield | long, compact | compact, small | ready | universal | bipedal_humanoid |
+| **Quadrupedal (6)** |
+| quad_stalking | unarmed | none | none | dynamic | - | quadrupedal |
+| quad_charging | unarmed | none | none | dynamic | - | quadrupedal |
+| quad_howling | unarmed | none | none | static | - | quadrupedal |
+| quad_seated_watch | unarmed | none | none | static | - | quadrupedal |
+| quad_circling | unarmed | none | none | dynamic | - | quadrupedal |
+| quad_loping | unarmed | none | none | dynamic | - | quadrupedal |
+| **Facultatively Bipedal (4)** |
+| fbp_melee_overhead_display | single_handed | long, compact, two_hand_frame | none | static | melee | facultatively_bipedal |
+| fbp_howling | single_handed | long, compact, two_hand_frame | none | victory | universal | facultatively_bipedal |
+| fbp_melee_low_sweep | single_handed | long, compact, flexible | none | dynamic | melee | facultatively_bipedal |
+| fbp_menacing_advance | single_handed | long, compact, two_hand_frame | none | ready | melee | facultatively_bipedal |
+
+### Type Categories
+
+**Melee (`_melee`):** Combat actions with striking/guarding weapons
+- Actions: `strike`, `guard`, `brace`
+- Examples: `oh_melee_overhead_strike`, `th_melee_low_sweep`, `dh_melee_spinning_strike`
+
+**Ranged (`_ranged`):** Aiming actions with ranged weapons
+- Actions: `aim`
+- Examples: `th_ranged_standing_aim_wide`, `dh_ranged_dual_aim_spread`
+
+**Object (`_object`):** Gesture/display actions with objects
+- Actions: `gesture`
+- Examples: None currently in library (unarmed poses use gesture without qualifier)
+
+**Universal (no qualifier):** Carry/present actions compatible with any weapon type
+- Actions: `carry`, `present`, `hold_object`, `reach`
+- Examples: `oh_over_shoulder_carry`, `oh_triumph_raise`, `th_march_carry`
+
+**Unarmed (no qualifier):** No weapon, hands free
+- Handedness: `unarmed`
+- All unarmed poses have no type qualifier regardless of action
+- Examples: `un_fighter_ready`, `un_victory_roar`
+
+### Figure Types
+
+**Understanding Body Types**
+
+The pose library supports three different body types based on how creatures move:
+
+**Bipedal (Two-Legged)**
+- Walks upright on two legs like humans, elves, dwarves
+- Can use weapons with hands
+- Standard humanoid proportions
+- Technical term: `bipedal_humanoid`
+- 29 poses covering all weapon combinations
+
+**Quadrupedal (Four-Legged)**
+- Walks on all four legs like wolves, cats, bears, horses
+- Cannot use hand-held weapons (no hands)
+- Animal body structure with four legs
+- Technical term: `quadrupedal`
+- 6 poses for stalking, running, howling, watching
+
+**Facultatively Bipedal**
+- Can walk upright on two legs OR drop to all fours
+- Real-world examples: gorillas, bears, some large lizards
+- When upright: can use weapons like bipeds
+- When on all fours: moves like quadrupeds (not yet implemented)
+- Used for werewolf war-form (crinos), werebears, large shapeshifters
+- Technical term: `facultatively_bipedal` (means "optional two-legged")
+- 4 poses showing upright weapon combat
+
+**Serpentine (Snake Body)**
+- Humanoid upper body with snake/serpent lower body instead of legs
+- Moves by slithering, coiling, or raising up on tail
+- Can use weapons with arms like bipeds
+- Real-world mythology: nagas, lamias, yuan-ti, merfolk
+- Technical term: `serpentine` or `naga_form`
+- No poses yet (future expansion)
+
+**Centauroid (Half-Human, Half-Beast)**
+- Humanoid torso mounted on four-legged animal body
+- Always has four legs (unlike facultatively bipedal)
+- Can use weapons like bipedal humanoids
+- Real-world mythology: centaurs (horse), driders (spider), sagittari
+- Technical term: `centauroid`
+- No poses yet (future expansion)
+
+**Multi-Limbed**
+- More than two arms (4, 6, or more)
+- Can be bipedal or centauroid base with extra arms
+- Special weapon combinations (triple-wield, quad-wield)
+- Examples: thri-kreen (4 arms), marilith demons (6 arms), aliens
+- Technical term: `multi_limbed_bipedal` or `multi_limbed_centauroid`
+- No poses yet (future expansion)
+
+**Winged**
+- Has wings that affect balance and silhouette
+- Usually bipedal base with wings added
+- Wing position matters for pose composition
+- Examples: angels, demons, aarakocra, dragonborn with wings
+- Technical term: `winged_bipedal` or `winged_centauroid`
+- No poses yet (uses modified bipedal poses)
+
+**Amorphous/Floating**
+- No ground contact, hovers or floats
+- No legs or feet
+- Examples: ghosts, specters, beholders, floating jellyfish creatures
+- Technical term: `amorphous` or `floating`
+- No poses yet (future expansion)
+
+**Arachnoid (Spider Body)**
+- Eight legs in spider configuration
+- Similar to centauroid but spider anatomy
+- Examples: giant spiders, phase spiders, ettercaps
+- Technical term: `arachnoid`
+- No poses yet (future expansion)
+
+---
+
+**bipedal_humanoid:** Standard two-legged humanoid characters
+- Uses standard handedness modes (unarmed, single_handed, two_handed, dual_wield)
+- All original 29 poses
+
+**quadrupedal:** Four-legged creatures (wolves, dire wolves, large cats, etc.)
+- Uses `quad` prefix
+- No weapon handling (all `unarmed` mode)
+- Examples: `quad_stalking`, `quad_charging`, `quad_howling`
+- 6 poses total
+
+**facultatively_bipedal:** Creatures that can move bipedally or quadrupedally (werewolf crinos form, werebears, etc.)
+- Uses `fbp` prefix when bipedal with weapons
+- Can use weapon-handling poses when upright
+- Examples: `fbp_melee_overhead_display`, `fbp_howling`, `fbp_menacing_advance`
+- 4 poses total
+
+**serpentine / naga_form:** Humanoid upper body, snake lower body (nagas, yuan-ti, lamias, merfolk)
+- Uses `serp` or `naga` prefix
+- Can use weapons like bipedal humanoids
+- Movement via slithering/coiling
+- 0 poses (planned future expansion)
+
+**centauroid:** Humanoid torso on four-legged animal body (centaurs, driders, sagittari)
+- Uses `cent` prefix
+- Can use weapons like bipedal humanoids
+- Always four legs (never walks on two)
+- 0 poses (planned future expansion)
+
+**multi_limbed_bipedal / multi_limbed_centauroid:** More than two arms (thri-kreen, marilith demons, aliens)
+- Uses `ml` prefix with arm count (e.g., `ml4` for 4 arms)
+- Special multi-weapon combat combinations
+- Can be bipedal or centauroid base
+- 0 poses (planned future expansion)
+
+**winged_bipedal / winged_centauroid:** Winged variants (angels, demons, aarakocra, dragonborn)
+- Uses base prefix with `w` suffix (e.g., `ohw` for one-handed winged)
+- Wings affect balance and silhouette
+- Currently uses modified bipedal/centauroid poses
+- 0 dedicated poses (uses existing poses with wing annotations)
+
+**amorphous / floating:** No ground contact, hovering creatures (ghosts, beholders, specters)
+- Uses `float` or `amor` prefix
+- No legs or ground contact
+- Hovering/floating poses only
+- 0 poses (planned future expansion)
+
+**arachnoid:** Eight-legged spider body (giant spiders, phase spiders, ettercaps)
+- Uses `arac` prefix
+- Spider anatomy with eight legs
+- Similar to centauroid but spider structure
+- 0 poses (planned future expansion)
 
 ### Pose Style Breakdown
 
 | Style | Count | Purpose |
 |-------|-------|---------|
-| **ready** | 10 | Alert guard stances, battle-ready positions |
-| **dynamic** | 12 | Action poses, attacks, movement |
-| **static** | 3 | Calm standing poses, heroic stances |
-| **victory** | 2 | Triumphant celebration poses |
+| **ready** | 12 | Alert guard stances, battle-ready positions |
+| **dynamic** | 18 | Action poses, attacks, movement, running, charging |
+| **static** | 6 | Calm standing poses, heroic stances, seated watch |
+| **victory** | 3 | Triumphant celebration poses, howling |
 | **crouch** | 2 | Low defensive or aggressive crouches |
 | **kneel** | 1 | Kneeling position |
 
-### Naming Convention Notes
+### Pose ID Structure
 
-Current pose IDs use legacy prefixes that don't perfectly match the handedness system:
-- `melee_*`: Mostly single_handed poses
-- `twohand_*`: Two-handed poses
-- `dual_*`: Dual-wield poses
-- `unarmed_*`: Unarmed poses
-- `mixed_*`: Special cases (shield bash, transitions)
+**Format:** `{handedness_code}{type_qualifier}_{descriptive_name}`
 
-The actual categorization is by **handedness_mode** field, not the ID prefix. When referencing poses, use the full `pose_id` as shown in the catalog.
+**Handedness Codes:**
+- `un`: unarmed (no weapons, bipedal humanoid)
+- `oh`: one-hand (single_handed mode, bipedal)
+- `th`: two-hand (two_handed mode, bipedal)
+- `dh`: dual-hand (dual_wield mode, bipedal)
+- `quad`: quadrupedal (four-legged creatures)
+- `fbp`: facultatively bipedal (can be bipedal or quadrupedal, shown bipedal with weapons)
+- `serp` or `naga`: serpentine/naga form (snake lower body)
+- `cent`: centauroid (humanoid torso on four-legged animal body)
+- `ml4`, `ml6`: multi-limbed (4 arms, 6 arms, etc.)
+- `ohw`, `thw`, `dhw`: winged variants (one-hand winged, two-hand winged, dual-hand winged)
+- `float` or `amor`: amorphous/floating (no ground contact)
+- `arac`: arachnoid (eight-legged spider body)
+
+**Type Qualifiers** (only when pose is specific to that weapon type):
+- `_melee`: Melee combat actions (strike, guard, brace)
+- `_ranged`: Ranged aiming actions (aim)
+- `_object`: Object gesture/display actions (gesture)
+- *(none)*: Universal poses (carry, present) compatible with any weapon type
+
+**Examples:**
+- `oh_melee_overhead_strike` → One-hand, melee-only, overhead strike
+- `th_ranged_standing_aim_wide` → Two-hand, ranged-only, standing aim
+- `oh_triumph_raise` → One-hand, universal (works with any weapon)
+- `un_fighter_ready` → Unarmed, no qualifier needed
+- `quad_stalking` → Quadrupedal, low stalking pose
+- `fbp_melee_overhead_display` → Facultatively bipedal, melee, overhead display
 
 ## System Architecture
 

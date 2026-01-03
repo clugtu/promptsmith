@@ -32,38 +32,17 @@
       "visual_notes": "Tall, armored, carrying sword and shield, battle-worn",
       "proportions": "Heroic athletic build, broad shoulders, strong limbs",
       "character_base": "Heroic warrior in weathered plate armor, battle-scarred but dignified. Face determined with slight scowl. Belt with pouches and rope. Strong contrast for armor plates, belt gear.",
-      "weapons": {
-        "main_hand": {
-          "name": "longsword",
-          "description": "Medieval longsword with cross-guard",
-          "prop_class": "long",
-          "visual_detail": "straight blade, wrapped leather grip, simple cross-guard"
-        },
-        "off_hand": {
-          "name": "round shield",
-          "description": "Round wooden shield with steel boss",
-          "prop_class": "shield_plane",
-          "visual_detail": "wood planks, steel rim, central boss"
-        },
-        "holstered": [
-          {
-            "name": "dagger",
-            "description": "Utility dagger",
-            "location": "sheathed at belt",
-            "visual_detail": "simple blade, leather sheath"
-          }
-        ]
-      },
+      "equipment": [
+        "longsword (straight blade, wrapped leather grip, simple cross-guard) : main_hand : held at ready",
+        "round shield (wood planks, steel rim, central boss) : off_hand : held at guard",
+        "dagger (simple blade, leather sheath) : holstered_belt : sheathed"
+      ],
       "poses": [
         {
           "id": 1,
           "name": "static_heroic",
           "description": "Calm, imposing guard stance",
           "pose_library_ref": "melee_001_guarded_low_ready",
-          "prop_override": {
-            "main_hand_prop_state": "held_firmly",
-            "main_hand_orientation": "low_outside"
-          },
           "character_override": "calm determined expression; armor plates clearly visible; strong grounded presence"
         },
         {
@@ -71,10 +50,6 @@
           "name": "combat_ready",
           "description": "Shield forward defensive stance",
           "pose_library_ref": "dual_003_aim_and_cover",
-          "prop_override": {
-            "main_hand_orientation": "forward_offset",
-            "off_hand_orientation": "forward"
-          },
           "character_override": "alert defensive posture; shield raised; sword ready; battle-ready expression"
         },
         {
@@ -82,9 +57,6 @@
           "name": "action_pose",
           "description": "Dynamic charging attack",
           "pose_library_ref": "melee_003_forward_lunge_action",
-          "prop_override": {
-            "main_hand_orientation": "forward_offset"
-          },
           "character_override": "dynamic forward momentum; armor flowing; both legs clearly visible and separated"
         },
         {
@@ -92,11 +64,19 @@
           "name": "victory_stance",
           "description": "Triumphant victory pose",
           "pose_library_ref": "melee_004_triumph_raise",
-          "prop_override": {
-            "main_hand_prop_state": "held_firmly",
-            "main_hand_orientation": "high_overhead"
-          },
           "character_override": "triumphant expression; weight shifted back; sword raised in victory; strong negative space"
+        },
+        {
+          "id": 5,
+          "name": "unarmed_ready",
+          "description": "Fighter ready stance with weapons set aside",
+          "pose_library_ref": "un_fighter_ready",
+          "equipment_override": [
+            "longsword (straight blade, wrapped leather grip, simple cross-guard) : holstered_back : slung on back",
+            "round shield (wood planks, steel rim, central boss) : holstered_back : slung on back",
+            "dagger (simple blade, leather sheath) : holstered_belt : sheathed"
+          ],
+          "character_override": "combat ready stance with hands empty; weapons visible but not held; prepared for unarmed combat"
         }
       ]
     },

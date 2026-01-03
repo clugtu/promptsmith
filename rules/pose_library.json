@@ -1,6 +1,6 @@
 {
-  "version": "1.1",
-  "description": "Miniature pose library (genericized). Poses describe stance + hand actions + compatible prop geometry classes. Actual weapons/props are injected elsewhere.",
+  "version": "1.2",
+  "description": "Miniature pose library (genericized). Includes bipedal_humanoid, quadrupedal, and facultatively_bipedal poses. Poses describe stance + hand actions + compatible prop geometry classes.",
   "global_rules": {
     "miniature_safe": [
       "At least one limb (foot/knee/hand) has clear contact with the base/terrain.",
@@ -50,22 +50,30 @@
     "pose_id": "string",
     "name": "string",
     "figure_type": "string",
-    "tags": ["string"],
+    "tags": [
+      "string"
+    ],
     "pose_style": "static | ready | dynamic | victory | crouch | kneel",
-    "support_points": ["lead_foot | trail_foot | left_foot | right_foot | knee"],
+    "support_points": [
+      "lead_foot | trail_foot | left_foot | right_foot | knee"
+    ],
     "base_contact_plan": "flat | rock_step | rubble_mound | ledge",
     "handedness_mode": "unarmed | single_handed | two_handed | dual_wield",
     "prop_visibility_mode": "presented | carried_attached (pose-wide default)",
     "main_hand": {
       "prop_slot": "NONE | MAIN_HAND_PROP",
-      "prop_class": ["prop_class"],
+      "prop_class": [
+        "prop_class"
+      ],
       "action": "action",
       "orientation": "orientation",
       "prop_visibility_mode": "presented | carried_attached (optional override)"
     },
     "off_hand": {
       "prop_slot": "NONE | OFF_HAND_PROP",
-      "prop_class": ["prop_class"],
+      "prop_class": [
+        "prop_class"
+      ],
       "action": "action",
       "orientation": "orientation",
       "prop_visibility_mode": "presented | carried_attached (optional override)"
@@ -75,49 +83,76 @@
   },
   "poses": [
     {
-      "pose_id": "melee_001_guarded_low_ready",
+      "pose_id": "oh_melee_guarded_low_ready",
       "name": "Guarded Low Ready",
       "figure_type": "bipedal_humanoid",
-      "tags": ["grounded", "clean-silhouette", "general-combat", "single-item"],
+      "tags": [
+        "grounded",
+        "clean-silhouette",
+        "general-combat",
+        "single-item"
+      ],
       "pose_style": "ready",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "long", "small"],
+        "prop_class": [
+          "compact",
+          "long",
+          "small"
+        ],
         "action": "guard",
         "orientation": "low_outside"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
-      "pose_prompt": "Feet shoulder-width, knees slightly bent; torso angled 10–20 degrees; MAIN_HAND_PROP visible low to the outside of the body with clear negative space (not crossing torso), not held in hands; off hand open or lightly clenched for balance; elbows away from ribs; head turned toward threat; keep chest/face unobstructed. No hands on MAIN_HAND_PROP; not gripped; not supported by hands.",
+      "pose_prompt": "Feet shoulder-width, knees slightly bent; torso angled 10\u00e2\u20ac\u201c20 degrees; MAIN_HAND_PROP visible low to the outside of the body with clear negative space (not crossing torso), not held in hands; off hand open or lightly clenched for balance; elbows away from ribs; head turned toward threat; keep chest/face unobstructed. No hands on MAIN_HAND_PROP; not gripped; not supported by hands.",
       "base_prompt": "Round base; subtle ground texture only."
     },
     {
-      "pose_id": "melee_002_over_shoulder_carry",
+      "pose_id": "oh_over_shoulder_carry",
       "name": "Over-Shoulder Carry (Relaxed Threat)",
       "figure_type": "bipedal_humanoid",
-      "tags": ["heroic", "static", "readable-silhouette", "single-item"],
+      "tags": [
+        "heroic",
+        "static",
+        "readable-silhouette",
+        "single-item"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long", "compact"],
+        "prop_class": [
+          "long",
+          "compact"
+        ],
         "action": "carry",
         "orientation": "over_shoulder"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
@@ -125,24 +160,38 @@
       "base_prompt": "Round base; optional small low rock near rear foot."
     },
     {
-      "pose_id": "melee_003_forward_lunge_action",
+      "pose_id": "oh_melee_forward_lunge_action",
       "name": "Forward Lunge Action",
       "figure_type": "bipedal_humanoid",
-      "tags": ["dynamic", "attack", "grounded", "single-item"],
+      "tags": [
+        "dynamic",
+        "attack",
+        "grounded",
+        "single-item"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["lead_foot", "trail_foot"],
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
       "base_contact_plan": "rubble_mound",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "long", "flexible"],
+        "prop_class": [
+          "compact",
+          "long",
+          "flexible"
+        ],
         "action": "strike",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "high_back"
       },
@@ -150,24 +199,36 @@
       "base_prompt": "Round base with a shallow broken-stone slab or rubble ridge under the lead foot."
     },
     {
-      "pose_id": "unarmed_001_fighter_ready",
+      "pose_id": "un_fighter_ready",
       "name": "Unarmed Fighter Ready",
       "figure_type": "bipedal_humanoid",
-      "tags": ["unarmed", "combat", "grounded", "clean-silhouette"],
+      "tags": [
+        "unarmed",
+        "combat",
+        "grounded",
+        "clean-silhouette"
+      ],
       "pose_style": "ready",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "guard",
         "orientation": "close_in"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "guard",
         "orientation": "close_in"
       },
@@ -175,50 +236,79 @@
       "base_prompt": "Round base; minimal texture."
     },
     {
-      "pose_id": "melee_004_triumph_raise",
+      "pose_id": "oh_triumph_raise",
       "name": "Triumph / Rally",
       "figure_type": "bipedal_humanoid",
-      "tags": ["victory", "heroic", "readable-silhouette", "single-item"],
+      "tags": [
+        "victory",
+        "heroic",
+        "readable-silhouette",
+        "single-item"
+      ],
       "pose_style": "victory",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "rock_step",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "long", "small"],
+        "prop_class": [
+          "compact",
+          "long",
+          "small"
+        ],
         "action": "present",
         "orientation": "high_overhead"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
       "pose_prompt": "Feet planted wide; chest lifted; MAIN_HAND_PROP visible overhead as a symbolic silhouette element (no hand contact), not held in hands; off hand clenched or open near waist; elbows away from body; strong upward gesture without crossing head silhouette. No hands on MAIN_HAND_PROP; not gripped; not supported by hands.",
       "base_prompt": "Round base with a low rock under one foot for a heroic height boost."
     },
-
     {
-      "pose_id": "twohand_001_standing_aim_wide",
+      "pose_id": "th_ranged_standing_aim_wide",
       "name": "Two-Hand Aim (Wide Stance)",
       "figure_type": "bipedal_humanoid",
-      "tags": ["two-handed", "aim", "grounded", "ranged-or-tools"],
+      "tags": [
+        "two-handed",
+        "aim",
+        "grounded",
+        "ranged-or-tools"
+      ],
       "pose_style": "ready",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "two_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["two_hand_frame", "long", "bulky"],
+        "prop_class": [
+          "two_hand_frame",
+          "long",
+          "bulky"
+        ],
         "action": "aim",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["two_hand_frame", "long", "bulky"],
+        "prop_class": [
+          "two_hand_frame",
+          "long",
+          "bulky"
+        ],
         "action": "brace",
         "orientation": "forward"
       },
@@ -226,24 +316,40 @@
       "base_prompt": "Round base; minimal texture."
     },
     {
-      "pose_id": "twohand_002_kneel_aim",
+      "pose_id": "th_ranged_kneel_aim",
       "name": "Two-Hand Kneel Aim",
       "figure_type": "bipedal_humanoid",
-      "tags": ["two-handed", "kneel", "aim", "grounded"],
+      "tags": [
+        "two-handed",
+        "kneel",
+        "aim",
+        "grounded"
+      ],
       "pose_style": "kneel",
-      "support_points": ["knee", "lead_foot"],
+      "support_points": [
+        "knee",
+        "lead_foot"
+      ],
       "base_contact_plan": "rubble_mound",
       "handedness_mode": "two_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["two_hand_frame", "long", "bulky"],
+        "prop_class": [
+          "two_hand_frame",
+          "long",
+          "bulky"
+        ],
         "action": "aim",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["two_hand_frame", "long", "bulky"],
+        "prop_class": [
+          "two_hand_frame",
+          "long",
+          "bulky"
+        ],
         "action": "brace",
         "orientation": "forward"
       },
@@ -251,50 +357,79 @@
       "base_prompt": "Round base with a low rubble mound supporting the kneeling contact."
     },
     {
-      "pose_id": "twohand_003_dynamic_step_aim",
+      "pose_id": "th_ranged_dynamic_step_aim",
       "name": "Two-Hand Dynamic Step Aim",
       "figure_type": "bipedal_humanoid",
-      "tags": ["two-handed", "dynamic", "aim", "grounded"],
+      "tags": [
+        "two-handed",
+        "dynamic",
+        "aim",
+        "grounded"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["lead_foot", "trail_foot"],
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
       "base_contact_plan": "rock_step",
       "handedness_mode": "two_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["two_hand_frame", "long", "bulky"],
+        "prop_class": [
+          "two_hand_frame",
+          "long",
+          "bulky"
+        ],
         "action": "aim",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["two_hand_frame", "long", "bulky"],
+        "prop_class": [
+          "two_hand_frame",
+          "long",
+          "bulky"
+        ],
         "action": "brace",
         "orientation": "forward"
       },
       "pose_prompt": "Lead foot planted on raised terrain, trailing foot planted behind; torso twisted mid-aim; both hands engaged on a two-hand object; keep the object offset from the torso for a clean silhouette; cloth/gear may flow but must not cover hands or the object.",
       "base_prompt": "Round base with a medium-low rock ledge under the lead foot."
     },
-
     {
-      "pose_id": "dual_001_dual_aim_spread",
+      "pose_id": "dh_ranged_dual_aim_spread",
       "name": "Dual Spread Aim",
       "figure_type": "bipedal_humanoid",
-      "tags": ["dual-wield", "dynamic", "grounded", "wide-silhouette"],
+      "tags": [
+        "dual-wield",
+        "dynamic",
+        "grounded",
+        "wide-silhouette"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["lead_foot", "trail_foot"],
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
       "base_contact_plan": "rock_step",
       "handedness_mode": "dual_wield",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "aim",
         "orientation": "side_out"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "aim",
         "orientation": "side_opposite"
       },
@@ -302,24 +437,38 @@
       "base_prompt": "Round base with a low rock shelf under the lead foot; low rubble only."
     },
     {
-      "pose_id": "dual_002_long_short_charge",
+      "pose_id": "dh_melee_long_short_charge",
       "name": "Long + Short Charge",
       "figure_type": "bipedal_humanoid",
-      "tags": ["dual-wield", "melee", "dynamic", "grounded"],
+      "tags": [
+        "dual-wield",
+        "melee",
+        "dynamic",
+        "grounded"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["lead_foot", "trail_foot"],
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
       "base_contact_plan": "rubble_mound",
       "handedness_mode": "dual_wield",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long"],
+        "prop_class": [
+          "long"
+        ],
         "action": "strike",
         "orientation": "high_back"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["compact", "small", "shield_plane"],
+        "prop_class": [
+          "compact",
+          "small",
+          "shield_plane"
+        ],
         "action": "guard",
         "orientation": "low_outside"
       },
@@ -327,49 +476,78 @@
       "base_prompt": "Round base with a shallow ridge under the lead foot to emphasize momentum."
     },
     {
-      "pose_id": "dual_003_aim_and_cover",
+      "pose_id": "dh_ranged_aim_and_cover",
       "name": "Aim + Cover",
       "figure_type": "bipedal_humanoid",
-      "tags": ["dual-wield", "mixed", "dynamic", "grounded", "asymmetric"],
+      "tags": [
+        "dual-wield",
+        "mixed",
+        "dynamic",
+        "grounded",
+        "asymmetric"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["lead_foot", "trail_foot"],
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
       "base_contact_plan": "rock_step",
       "handedness_mode": "dual_wield",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "aim",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["shield_plane", "long"],
+        "prop_class": [
+          "shield_plane",
+          "long"
+        ],
         "action": "guard",
         "orientation": "down_away"
       },
-      "pose_prompt": "Dynamic advance with asymmetric dual-wield: lead foot planted on raised terrain, rear foot grounded behind; torso rotated slightly toward main-hand aim; MAIN_HAND_PROP (compact weapon/tool) aimed forward with arm extended but offset from torso centerline, not crossing chest silhouette; OFF_HAND_PROP (shield or defensive plane) held down and angled away from body, slightly to the side—NOT vertical in front of chest, NOT used as firing platform; clear negative space between weapon arm, shield, and torso; arms must not collapse into flat frontal plane; chest and face fully readable; head turned toward aim line; shield and weapon must not overlap torso.",
+      "pose_prompt": "Dynamic advance with asymmetric dual-wield: lead foot planted on raised terrain, rear foot grounded behind; torso rotated slightly toward main-hand aim; MAIN_HAND_PROP (compact weapon/tool) aimed forward with arm extended but offset from torso centerline, not crossing chest silhouette; OFF_HAND_PROP (shield or defensive plane) held down and angled away from body, slightly to the side\u00e2\u20ac\u201dNOT vertical in front of chest, NOT used as firing platform; clear negative space between weapon arm, shield, and torso; arms must not collapse into flat frontal plane; chest and face fully readable; head turned toward aim line; shield and weapon must not overlap torso.",
       "base_prompt": "Round base with a low rock shelf under the lead foot; minimal debris only."
     },
     {
-      "pose_id": "dual_004_cqb_forward",
+      "pose_id": "dh_ranged_cqb_forward",
       "name": "CQB Forward",
       "figure_type": "bipedal_humanoid",
-      "tags": ["dual-wield", "close-combat", "grounded", "aggressive"],
+      "tags": [
+        "dual-wield",
+        "close-combat",
+        "grounded",
+        "aggressive"
+      ],
       "pose_style": "ready",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "dual_wield",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "aim",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "guard",
         "orientation": "low_outside"
       },
@@ -377,24 +555,39 @@
       "base_prompt": "Round base; optional low curb/step near front toe for contact emphasis."
     },
     {
-      "pose_id": "dual_005_guardian_vigil",
+      "pose_id": "dh_melee_guardian_vigil",
       "name": "Guardian Vigil",
       "figure_type": "bipedal_humanoid",
-      "tags": ["dual-wield", "static", "guardian", "grounded", "heroic"],
+      "tags": [
+        "dual-wield",
+        "static",
+        "guardian",
+        "grounded",
+        "heroic"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "dual_wield",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long", "compact"],
+        "prop_class": [
+          "long",
+          "compact"
+        ],
         "action": "guard",
         "orientation": "low_outside"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["small", "compact"],
+        "prop_class": [
+          "small",
+          "compact"
+        ],
         "action": "present",
         "orientation": "close_in"
       },
@@ -402,24 +595,37 @@
       "base_prompt": "Round base; subtle ground texture only."
     },
     {
-      "pose_id": "melee_005_defensive_crouch",
+      "pose_id": "oh_melee_defensive_crouch",
       "name": "Defensive Crouch",
       "figure_type": "bipedal_humanoid",
-      "tags": ["single-handed", "defensive", "grounded", "dynamic"],
+      "tags": [
+        "single-handed",
+        "defensive",
+        "grounded",
+        "dynamic"
+      ],
       "pose_style": "crouch",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "long"],
+        "prop_class": [
+          "compact",
+          "long"
+        ],
         "action": "guard",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "low_outside"
       },
@@ -427,24 +633,36 @@
       "base_prompt": "Round base; minimal texture."
     },
     {
-      "pose_id": "melee_006_sprint_carry",
+      "pose_id": "oh_sprint_carry",
       "name": "Sprint Carry",
       "figure_type": "bipedal_humanoid",
-      "tags": ["single-handed", "dynamic", "running", "grounded"],
+      "tags": [
+        "single-handed",
+        "dynamic",
+        "running",
+        "grounded"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["lead_foot", "trail_foot"],
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
       "base_contact_plan": "rock_step",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long"],
+        "prop_class": [
+          "long"
+        ],
         "action": "carry",
         "orientation": "side_out"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "high_back"
       },
@@ -452,24 +670,37 @@
       "base_prompt": "Round base with low rock under lead foot."
     },
     {
-      "pose_id": "melee_007_overhead_strike",
+      "pose_id": "oh_melee_overhead_strike",
       "name": "Overhead Strike",
       "figure_type": "bipedal_humanoid",
-      "tags": ["single-handed", "attack", "dynamic", "grounded"],
+      "tags": [
+        "single-handed",
+        "attack",
+        "dynamic",
+        "grounded"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["lead_foot", "trail_foot"],
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "long"],
+        "prop_class": [
+          "compact",
+          "long"
+        ],
         "action": "strike",
         "orientation": "high_overhead"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "low_outside"
       },
@@ -477,49 +708,76 @@
       "base_prompt": "Round base; flat surface."
     },
     {
-      "pose_id": "melee_008_side_guard_low",
+      "pose_id": "oh_melee_side_guard_low",
       "name": "Side Guard Low",
       "figure_type": "bipedal_humanoid",
-      "tags": ["single-handed", "defensive", "static", "grounded"],
+      "tags": [
+        "single-handed",
+        "defensive",
+        "static",
+        "grounded"
+      ],
       "pose_style": "ready",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "long"],
+        "prop_class": [
+          "compact",
+          "long"
+        ],
         "action": "guard",
         "orientation": "side_out"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "guard",
         "orientation": "close_in"
       },
-      "pose_prompt": "Side guard stance: feet shoulder-width; torso turned 45 degrees; MAIN_HAND_PROP held low at side with grip/stock at hip level, barrels angled sharply upward (approximately 35–45 degrees), with the muzzle clearly higher than the stock in screen space; strong upward foreshortening visible; entire prop from grip to tip clearly visible and separated from thigh and body; off hand raised in defensive position near chest; strong negative space between prop and torso; ready but patient posture.",
+      "pose_prompt": "Side guard stance: feet shoulder-width; torso turned 45 degrees; MAIN_HAND_PROP held low at side with grip/stock at hip level, barrels angled sharply upward (approximately 35\u00e2\u20ac\u201c45 degrees), with the muzzle clearly higher than the stock in screen space; strong upward foreshortening visible; entire prop from grip to tip clearly visible and separated from thigh and body; off hand raised in defensive position near chest; strong negative space between prop and torso; ready but patient posture.",
       "base_prompt": "Round base; minimal texture."
     },
     {
-      "pose_id": "twohand_004_low_sweep",
+      "pose_id": "th_melee_low_sweep",
       "name": "Two-Hand Low Sweep",
       "figure_type": "bipedal_humanoid",
-      "tags": ["two-handed", "attack", "dynamic", "grounded"],
+      "tags": [
+        "two-handed",
+        "attack",
+        "dynamic",
+        "grounded"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "two_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long", "two_hand_frame"],
+        "prop_class": [
+          "long",
+          "two_hand_frame"
+        ],
         "action": "strike",
         "orientation": "side_out"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["long", "two_hand_frame"],
+        "prop_class": [
+          "long",
+          "two_hand_frame"
+        ],
         "action": "brace",
         "orientation": "side_out"
       },
@@ -527,24 +785,38 @@
       "base_prompt": "Round base; flat surface."
     },
     {
-      "pose_id": "twohand_005_overhead_chop",
+      "pose_id": "th_melee_overhead_chop",
       "name": "Two-Hand Overhead Chop",
       "figure_type": "bipedal_humanoid",
-      "tags": ["two-handed", "attack", "dynamic", "grounded"],
+      "tags": [
+        "two-handed",
+        "attack",
+        "dynamic",
+        "grounded"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["lead_foot", "trail_foot"],
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
       "base_contact_plan": "rock_step",
       "handedness_mode": "two_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long", "two_hand_frame"],
+        "prop_class": [
+          "long",
+          "two_hand_frame"
+        ],
         "action": "strike",
         "orientation": "high_overhead"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["long", "two_hand_frame"],
+        "prop_class": [
+          "long",
+          "two_hand_frame"
+        ],
         "action": "brace",
         "orientation": "high_overhead"
       },
@@ -552,24 +824,38 @@
       "base_prompt": "Round base with low rock under lead foot."
     },
     {
-      "pose_id": "twohand_006_march_carry",
+      "pose_id": "th_march_carry",
       "name": "Two-Hand March Carry",
       "figure_type": "bipedal_humanoid",
-      "tags": ["two-handed", "static", "carry", "grounded"],
+      "tags": [
+        "two-handed",
+        "static",
+        "carry",
+        "grounded"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "two_handed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long", "two_hand_frame"],
+        "prop_class": [
+          "long",
+          "two_hand_frame"
+        ],
         "action": "carry",
         "orientation": "over_shoulder"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["long", "two_hand_frame"],
+        "prop_class": [
+          "long",
+          "two_hand_frame"
+        ],
         "action": "brace",
         "orientation": "over_shoulder"
       },
@@ -577,24 +863,40 @@
       "base_prompt": "Round base; flat surface."
     },
     {
-      "pose_id": "twohand_007_defensive_brace",
+      "pose_id": "th_melee_defensive_brace",
       "name": "Two-Hand Defensive Brace",
       "figure_type": "bipedal_humanoid",
-      "tags": ["two-handed", "defensive", "ready", "grounded"],
+      "tags": [
+        "two-handed",
+        "defensive",
+        "ready",
+        "grounded"
+      ],
       "pose_style": "ready",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "two_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long", "shield_plane", "two_hand_frame"],
+        "prop_class": [
+          "long",
+          "shield_plane",
+          "two_hand_frame"
+        ],
         "action": "guard",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["long", "shield_plane", "two_hand_frame"],
+        "prop_class": [
+          "long",
+          "shield_plane",
+          "two_hand_frame"
+        ],
         "action": "brace",
         "orientation": "forward_offset"
       },
@@ -602,24 +904,36 @@
       "base_prompt": "Round base; minimal texture."
     },
     {
-      "pose_id": "unarmed_002_aggressive_charge",
+      "pose_id": "un_aggressive_charge",
       "name": "Unarmed Aggressive Charge",
       "figure_type": "bipedal_humanoid",
-      "tags": ["unarmed", "dynamic", "attack", "grounded"],
+      "tags": [
+        "unarmed",
+        "dynamic",
+        "attack",
+        "grounded"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["lead_foot", "trail_foot"],
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
       "base_contact_plan": "rock_step",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "strike",
         "orientation": "forward"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "strike",
         "orientation": "high_back"
       },
@@ -627,74 +941,112 @@
       "base_prompt": "Round base with low rock under lead foot."
     },
     {
-      "pose_id": "unarmed_003_defensive_crouch",
+      "pose_id": "un_defensive_crouch",
       "name": "Unarmed Defensive Crouch",
       "figure_type": "bipedal_humanoid",
-      "tags": ["unarmed", "defensive", "crouch", "grounded"],
+      "tags": [
+        "unarmed",
+        "defensive",
+        "crouch",
+        "grounded"
+      ],
       "pose_style": "crouch",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "guard",
         "orientation": "forward"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "guard",
         "orientation": "side_out"
       },
-      "pose_prompt": "Defensive crouch: feet wide with knees deeply bent, hips low; hands up in guarding positions—one forward, one to side; torso forward; weight on balls of feet; alert ready posture; strong negative space between arms and body.",
+      "pose_prompt": "Defensive crouch: feet wide with knees deeply bent, hips low; hands up in guarding positions\u00e2\u20ac\u201done forward, one to side; torso forward; weight on balls of feet; alert ready posture; strong negative space between arms and body.",
       "base_prompt": "Round base; flat surface."
     },
     {
-      "pose_id": "unarmed_004_victory_roar",
+      "pose_id": "un_victory_roar",
       "name": "Unarmed Victory Roar",
       "figure_type": "bipedal_humanoid",
-      "tags": ["unarmed", "victory", "static", "grounded"],
+      "tags": [
+        "unarmed",
+        "victory",
+        "static",
+        "grounded"
+      ],
       "pose_style": "victory",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "rock_step",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "high_overhead"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "side_out"
       },
-      "pose_prompt": "Victory roar: wide powerful stance with one foot on raised terrain; both arms raised high in triumphant gesture—fists clenched or claws spread; head thrown back in roaring expression; chest open; dominant victory posture.",
+      "pose_prompt": "Victory roar: wide powerful stance with one foot on raised terrain; both arms raised high in triumphant gesture\u00e2\u20ac\u201dfists clenched or claws spread; head thrown back in roaring expression; chest open; dominant victory posture.",
       "base_prompt": "Round base with low rock under one foot."
     },
     {
-      "pose_id": "dual_006_spinning_strike",
+      "pose_id": "dh_melee_spinning_strike",
       "name": "Dual Spinning Strike",
       "figure_type": "bipedal_humanoid",
-      "tags": ["dual-wield", "dynamic", "attack", "grounded"],
+      "tags": [
+        "dual-wield",
+        "dynamic",
+        "attack",
+        "grounded"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "dual_wield",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "strike",
         "orientation": "side_out"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "strike",
         "orientation": "side_opposite"
       },
@@ -702,24 +1054,38 @@
       "base_prompt": "Round base; flat surface."
     },
     {
-      "pose_id": "dual_007_crossed_defense",
+      "pose_id": "dh_melee_crossed_defense",
       "name": "Dual Crossed Defense",
       "figure_type": "bipedal_humanoid",
-      "tags": ["dual-wield", "defensive", "ready", "grounded"],
+      "tags": [
+        "dual-wield",
+        "defensive",
+        "ready",
+        "grounded"
+      ],
       "pose_style": "ready",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "dual_wield",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long", "compact"],
+        "prop_class": [
+          "long",
+          "compact"
+        ],
         "action": "guard",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["shield_plane", "long"],
+        "prop_class": [
+          "shield_plane",
+          "long"
+        ],
         "action": "guard",
         "orientation": "forward_offset"
       },
@@ -727,24 +1093,39 @@
       "base_prompt": "Round base; minimal texture."
     },
     {
-      "pose_id": "dual_008_asymmetric_ready",
+      "pose_id": "dh_ranged_asymmetric_ready",
       "name": "Dual Asymmetric Ready",
       "figure_type": "bipedal_humanoid",
-      "tags": ["dual-wield", "ready", "static", "grounded", "asymmetric"],
+      "tags": [
+        "dual-wield",
+        "ready",
+        "static",
+        "grounded",
+        "asymmetric"
+      ],
       "pose_style": "ready",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "dual_wield",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "aim",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["long", "compact"],
+        "prop_class": [
+          "long",
+          "compact"
+        ],
         "action": "carry",
         "orientation": "low_outside"
       },
@@ -752,24 +1133,37 @@
       "base_prompt": "Round base; flat surface."
     },
     {
-      "pose_id": "mixed_001_shield_bash",
+      "pose_id": "oh_melee_shield_bash",
       "name": "Shield Bash Charge",
       "figure_type": "bipedal_humanoid",
-      "tags": ["mixed", "shield", "attack", "dynamic", "grounded"],
+      "tags": [
+        "mixed",
+        "shield",
+        "attack",
+        "dynamic",
+        "grounded"
+      ],
       "pose_style": "dynamic",
-      "support_points": ["lead_foot", "trail_foot"],
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
       "base_contact_plan": "rock_step",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["shield_plane"],
+        "prop_class": [
+          "shield_plane"
+        ],
         "action": "strike",
         "orientation": "forward"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "high_back"
       },
@@ -777,29 +1171,415 @@
       "base_prompt": "Round base with low rock under lead foot."
     },
     {
-      "pose_id": "mixed_002_transition_stance",
+      "pose_id": "dh_transition_stance",
       "name": "Weapon Transition",
       "figure_type": "bipedal_humanoid",
-      "tags": ["mixed", "versatile", "ready", "grounded"],
+      "tags": [
+        "mixed",
+        "versatile",
+        "ready",
+        "grounded"
+      ],
       "pose_style": "ready",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "dual_wield",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long", "compact"],
+        "prop_class": [
+          "long",
+          "compact"
+        ],
         "action": "carry",
         "orientation": "down_away"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "present",
         "orientation": "forward"
       },
       "pose_prompt": "Weapon transition: feet in ready stance; MAIN_HAND_PROP (long/compact) held low and angled away as if lowering or holstering; OFF_HAND_PROP (compact/small) raised forward in ready position; mid-transition posture between stances; both props visible with clear separation from torso.",
       "base_prompt": "Round base; flat surface."
+    },
+    {
+      "pose_id": "quad_stalking",
+      "name": "Low Stalking",
+      "figure_type": "quadrupedal",
+      "tags": [
+        "quadruped",
+        "low",
+        "predatory",
+        "grounded"
+      ],
+      "pose_style": "dynamic",
+      "support_points": [
+        "all_four_legs"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Low stalking quadruped pose: body low to ground, all four legs visible and separated, spine arched slightly, head forward, predatory focus; clear definition between legs and torso; weight distributed evenly.",
+      "base_prompt": "Round base; flat surface with subtle ground texture."
+    },
+    {
+      "pose_id": "quad_charging",
+      "name": "Charging Run",
+      "figure_type": "quadrupedal",
+      "tags": [
+        "quadruped",
+        "dynamic",
+        "charging",
+        "grounded"
+      ],
+      "pose_style": "dynamic",
+      "support_points": [
+        "three_legs_grounded"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "forward"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "forward"
+      },
+      "pose_prompt": "Charging quadruped: powerful forward momentum, extended front leg reaching, rear legs driving, spine stretched in running gait; all legs clearly visible and separated; dynamic forward lean.",
+      "base_prompt": "Round base; flat surface with motion implied."
+    },
+    {
+      "pose_id": "quad_howling",
+      "name": "Howling",
+      "figure_type": "quadrupedal",
+      "tags": [
+        "quadruped",
+        "static",
+        "howling",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "all_four_legs"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Howling quadruped: head thrown back, muzzle pointed upward, chest expanded, all four legs planted firmly; body stable and grounded; clear separation between legs.",
+      "base_prompt": "Round base; flat surface, slight elevation implied by posture only."
+    },
+    {
+      "pose_id": "quad_seated_watch",
+      "name": "Seated Watch",
+      "figure_type": "quadrupedal",
+      "tags": [
+        "quadruped",
+        "static",
+        "alert",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "rear_legs_seated"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Seated watch quadruped: rear haunches seated, front legs straight and upright, head alert and forward-facing; dignified sentinel posture; all legs clearly visible.",
+      "base_prompt": "Round base; flat surface."
+    },
+    {
+      "pose_id": "quad_circling",
+      "name": "Circling",
+      "figure_type": "quadrupedal",
+      "tags": [
+        "quadruped",
+        "dynamic",
+        "circling",
+        "grounded"
+      ],
+      "pose_style": "dynamic",
+      "support_points": [
+        "all_four_legs"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "side_out"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "side_out"
+      },
+      "pose_prompt": "Circling quadruped: body angled in circular motion, legs positioned for turning gait, head turned to track prey; all four legs visible; weight shifting into turn.",
+      "base_prompt": "Round base; flat surface with implied circular motion."
+    },
+    {
+      "pose_id": "quad_loping",
+      "name": "Long Distance Lope",
+      "figure_type": "quadrupedal",
+      "tags": [
+        "quadruped",
+        "dynamic",
+        "running",
+        "grounded"
+      ],
+      "pose_style": "dynamic",
+      "support_points": [
+        "three_legs_grounded"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "forward"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "forward"
+      },
+      "pose_prompt": "Endurance lope quadruped: efficient running gait, elongated stride, legs extended in loping rhythm; relaxed but relentless posture; all legs clearly defined.",
+      "base_prompt": "Round base; flat surface."
+    },
+    {
+      "pose_id": "fbp_melee_overhead_display",
+      "name": "Overhead Display",
+      "figure_type": "facultatively_bipedal",
+      "tags": [
+        "crinos",
+        "bipedal",
+        "display",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "long",
+          "compact",
+          "two_hand_frame"
+        ],
+        "action": "present",
+        "orientation": "high_overhead"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "side_out"
+      },
+      "pose_prompt": "Bipedal overhead display: standing upright on digitigrade legs, MAIN_HAND_PROP raised overhead as dramatic element, angled away from body for clear negative space; chest and torso fully exposed; arms raised for dramatic composition; both shoulders/arms/chest/face visible.",
+      "base_prompt": "Round base; flat surface."
+    },
+    {
+      "pose_id": "fbp_howling",
+      "name": "Full Howl",
+      "figure_type": "facultatively_bipedal",
+      "tags": [
+        "crinos",
+        "bipedal",
+        "howling",
+        "grounded"
+      ],
+      "pose_style": "victory",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "long",
+          "compact",
+          "two_hand_frame"
+        ],
+        "action": "present",
+        "orientation": "side_out"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "high_overhead"
+      },
+      "pose_prompt": "Bipedal howling: head thrown back in supernatural howl, MAIN_HAND_PROP extended outward showing full torso, off-hand visible; ecstatic commanding howl pose with both arms clearly visible and separated from body.",
+      "base_prompt": "Round base; flat surface."
+    },
+    {
+      "pose_id": "fbp_melee_low_sweep",
+      "name": "Low Sweeping Pose",
+      "figure_type": "facultatively_bipedal",
+      "tags": [
+        "crinos",
+        "bipedal",
+        "dynamic",
+        "grounded"
+      ],
+      "pose_style": "dynamic",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "long",
+          "compact",
+          "flexible"
+        ],
+        "action": "strike",
+        "orientation": "low_outside"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "side_out"
+      },
+      "pose_prompt": "Bipedal low sweep: low stance on digitigrade legs, MAIN_HAND_PROP extended away from torso in sweeping arc at low height; strong silhouette with weapon distinct from body.",
+      "base_prompt": "Round base; flat surface."
+    },
+    {
+      "pose_id": "fbp_menacing_advance",
+      "name": "Menacing Advance",
+      "figure_type": "facultatively_bipedal",
+      "tags": [
+        "crinos",
+        "bipedal",
+        "ready",
+        "grounded"
+      ],
+      "pose_style": "ready",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "rock_step",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "long",
+          "compact",
+          "two_hand_frame"
+        ],
+        "action": "guard",
+        "orientation": "forward_offset"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "forward"
+      },
+      "pose_prompt": "Bipedal menacing advance: forward stepping stance on digitigrade legs, MAIN_HAND_PROP positioned forward and away from body; threatening forward lean; upright stance with full torso visible.",
+      "base_prompt": "Round base; rock step with forward momentum."
     }
   ]
 }

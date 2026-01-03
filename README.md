@@ -46,7 +46,8 @@ Each character has:
 - `title` (string) - Display title
 - `description` (string) - Character background
 - `visual_notes` (string) - Visual reference notes
-- `refinements` (array) - Nested refinements (forms, poses, etc.)
+- `equipment` (array) - Equipment/props with structured format
+- `refinements` or `poses` (array) - Nested refinements (forms, poses, etc.)
 
 ### Refinement Structure
 
@@ -64,6 +65,59 @@ Each refinement can have:
   - The script resolves references and applies all snippets in order
   - If omitted, only global thematic rules are applied
 - `refinements` (array) - Optional nested sub-refinements
+
+### Equipment Structure (v5.0.0)
+
+Equipment uses a structured format that separates item details, position, and usage:
+
+**Format:**
+```json
+"equipment": [
+  "item_name (visual_detail) : position : usage_description"
+]
+```
+
+**Position values:**
+- `main_hand` - Primary weapon/tool in dominant hand
+- `off_hand` - Secondary weapon/shield in off hand
+- `dual_wield` - Paired weapons in both hands
+- `holstered_belt`, `holstered_hip`, `holstered_thigh`, `holstered_back` - Storage locations
+
+**Example:**
+```json
+"equipment": [
+  "longsword (straight blade, wrapped leather grip) : main_hand : held at ready",
+  "round shield (wood planks, steel rim) : off_hand : held at guard",
+  "dagger (simple blade, leather sheath) : holstered_belt : sheathed"
+]
+```
+
+**Output in prompts:**
+```
+PROPS:
+- longsword (straight blade, wrapped leather grip) [main_hand] held at ready
+- round shield (wood planks, steel rim) [off_hand] held at guard
+- dagger (simple blade, leather sheath) [holstered_belt] sheathed
+```
+
+**Pose-level equipment_override:**
+
+Poses can completely replace character equipment using the same format:
+
+```json
+{
+  "id": 5,
+  "name": "unarmed_ready",
+  "pose_library_ref": "un_fighter_ready",
+  "equipment_override": [
+    "longsword (straight blade) : holstered_back : slung on back",
+    "shield (wood planks) : holstered_back : slung on back"
+  ],
+  "character_override": "combat ready with hands empty; weapons stowed"
+}
+```
+
+This completely replaces the character's default equipment for that specific pose, allowing different equipment configurations per pose (e.g., weapons drawn vs weapons stowed).
 
 ### Thematic Rules
 
