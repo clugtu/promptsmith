@@ -689,6 +689,8 @@ def build_final_prompt(
     include_miniature: bool,
     no_base: bool = False,
     equipment: List[str] = None,
+    character_id: str = "",
+    form_id: str = "",
 ) -> str:
     """Build the final prompt from components with structured sections.
     
@@ -706,11 +708,18 @@ def build_final_prompt(
         include_miniature: Whether to include miniature rules
         no_base: Whether to specify no base/stand
         equipment: List of equipment/props with placement descriptions
+        character_id: Character ID for asset naming
+        form_id: Form/pose ID for asset naming
         
     Returns:
         Complete formatted prompt string with structured sections
     """
     sections = []
+    
+    # ASSET_NAME section (if both IDs provided)
+    if character_id and form_id:
+        asset_name = f"{character_id}_{form_id}"
+        sections.append(f"ASSET_NAME: {asset_name}")
     
     # CHARACTER section
     character_parts = [base_prompt.strip().rstrip(",")]
@@ -1247,6 +1256,11 @@ def main(argv: list[str] | None = None) -> int:
     prompt0, thematic_snip, gender, char_proportions, equipment = resolve_prompt_from_json(
         json_data, character=character_id, form=form_id
     )
+    
+    # Get character name for asset naming
+    char_data = find_character_by_id_or_name(json_data, character_id)
+    character_name = char_data.get("name", str(character_id)) if char_data else str(character_id)
+    
     prompt = build_final_prompt(
         prompt0,
         gender=gender,
@@ -1261,6 +1275,8 @@ def main(argv: list[str] | None = None) -> int:
         include_miniature=include_miniature,
         no_base=args.no_base,
         equipment=equipment,
+        character_id=character_name,
+        form_id=str(form_id),
     )
     
     if args.dry_run:
