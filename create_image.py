@@ -232,7 +232,7 @@ def compose_pose_prompt_from_library(
     pose_library: Dict[str, Any],
     json_data: Dict[str, Any],
     equipment: List[str]
-) -> Tuple[str, str]:
+) -> Tuple[str, str, Optional[int]]:
     """Compose a pose prompt by looking up a pose_library_ref.
     
     Args:
@@ -243,7 +243,7 @@ def compose_pose_prompt_from_library(
         equipment: Resolved equipment list to extract hand-held props
         
     Returns:
-        Tuple of (character_override, pose_prompt) - both strings
+        Tuple of (character_override, pose_prompt, camera_rotation) - character_override and pose_prompt are strings, camera_rotation is optional int
         
     Raises:
         PromptNotFoundError: If pose_library_ref is missing or not found in library
@@ -333,7 +333,10 @@ def compose_pose_prompt_from_library(
     # Get character_override (for appearance/expression modifications)
     character_override = pose_def.get("character_override", "")
     
-    return character_override, pose_prompt
+    # Extract camera_rotation if present
+    camera_rotation = library_pose.get("camera_rotation")
+    
+    return character_override, pose_prompt, camera_rotation
 
 
 def extract_thematic_forms(json_data: Dict[str, Any]) -> Dict[str, str]:
@@ -678,7 +681,7 @@ def resolve_prompt_from_json(
     character: Optional[Union[int, str]] = None,
     form: Optional[str] = None,
     refinement_path: Optional[str] = None
-) -> Tuple[str, List[str], Optional[str], str, List[str]]:
+) -> Tuple[str, List[str], Optional[str], str, List[str], str, Optional[int]]:
     """Resolve a prompt from JSON using various addressing methods.
     
     Args:
@@ -688,7 +691,7 @@ def resolve_prompt_from_json(
         refinement_path: Full path like '1:1' or 'alpha:human'
     
     Returns:
-        Tuple of (prompt string, list of thematic snippets, gender or None, proportions string, equipment list)
+        Tuple of (prompt string, list of thematic snippets, gender or None, proportions string, equipment list, pose_prompt, camera_rotation)
     """
     # Extract form definitions once
     thematic_forms = extract_thematic_forms(json_data)
@@ -775,8 +778,9 @@ def resolve_prompt_from_json(
         
         # Check if this is a pose library reference
         pose_prompt = ""
+        camera_rotation = None
         if "pose_library_ref" in first_item and pose_library:
-            character_override, pose_prompt = compose_pose_prompt_from_library(
+            character_override, pose_prompt, camera_rotation = compose_pose_prompt_from_library(
                 char_data, first_item, pose_library, json_data, equipment
             )
             # Use character_override for appearance/expression additions
@@ -793,7 +797,7 @@ def resolve_prompt_from_json(
         else:
             final_prompt = refinement_prompt
 
-        return final_prompt, thematic, gender, proportions, equipment, pose_prompt
+        return final_prompt, thematic, gender, proportions, equipment, pose_prompt, camera_rotation
     
     # Find the item (pose or refinement)
     item = find_refinement_by_id_or_name(items_to_search, form)
@@ -837,8 +841,9 @@ def resolve_prompt_from_json(
     
     # Check if this is a pose library reference
     pose_prompt = ""
+    camera_rotation = None
     if "pose_library_ref" in item and pose_library:
-        character_override, pose_prompt = compose_pose_prompt_from_library(
+        character_override, pose_prompt, camera_rotation = compose_pose_prompt_from_library(
             char_data, item, pose_library, json_data, equipment
         )
         # Use character_override for appearance/expression additions
@@ -855,7 +860,7 @@ def resolve_prompt_from_json(
     else:
         final_prompt = refinement_prompt
 
-    return final_prompt, thematic, gender, proportions, equipment, pose_prompt
+    return final_prompt, thematic, gender, proportions, equipment, pose_prompt, camera_rotation
 
 
 def build_final_prompt(
@@ -876,6 +881,7 @@ def build_final_prompt(
     character_id: str = "",
     form_id: str = "",
     pose_prompt: str = "",
+    camera_rotation: Optional[int] = None,
 ) -> str:
     """Build the final prompt from components with structured sections.
     
@@ -896,6 +902,7 @@ def build_final_prompt(
         character_id: Character ID for asset naming
         form_id: Form/pose ID for asset naming
         pose_prompt: Pose description from pose library
+        camera_rotation: Camera rotation override (degrees, default 45)
         
     Returns:
         Complete formatted prompt string with structured sections
@@ -981,6 +988,16 @@ def build_final_prompt(
                     title = section_data["title"]
                     content = section_data.get("content", "")
                     if content:
+                        # Apply camera rotation override if present and this is the framing section
+                        if section_key == "framing" and camera_rotation is not None:
+                            # Get default rotation
+                            default_rotation = section_data.get("default_camera_rotation", 45)
+                            rotation_to_use = camera_rotation if camera_rotation is not None else default_rotation
+                            content = content.replace("{camera_rotation}", str(rotation_to_use))
+                        elif section_key == "framing":
+                            # Use default if no override
+                            default_rotation = section_data.get("default_camera_rotation", 45)
+                            content = content.replace("{camera_rotation}", str(default_rotation))
                         sections.append(f"{title}:\n{content}")
         elif isinstance(generic_snippet, str) and generic_snippet:
             # Legacy prompt_snippet format
@@ -1187,7 +1204,7 @@ def handle_reference_sheet(
         
         for char_id, form_id in batch:
             try:
-                prompt0, thematic_snip, gender, char_proportions, equipment = resolve_prompt_from_json(
+                prompt0, thematic_snip, gender, char_proportions, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
                     json_data=json_data,
                     character=char_id,
                     form=form_id,
@@ -1434,7 +1451,7 @@ def main(argv: list[str] | None = None) -> int:
                 for ref in items_to_process:
                     ref_name = ref.get("name", "")
                     # Use resolve_prompt_from_json to handle pose library references
-                    p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+                    p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
                         json_data, character=character_id, form=ref_name
                     )
                     # Use character proportions if ref doesn't have its own
@@ -1456,6 +1473,7 @@ def main(argv: list[str] | None = None) -> int:
                         character_id=str(character_id),
                         form_id=ref_name,
                         pose_prompt=pose_prompt,
+                        camera_rotation=camera_rotation,
                     )
                     blocks.append(f"[{character_id}:{ref_name}]\n{sanitize_for_ascii(format_for_chat(p))}")
             
@@ -1485,7 +1503,7 @@ def main(argv: list[str] | None = None) -> int:
             for ref in items_to_process:
                 ref_name = ref.get("name", "")
                 # Use resolve_prompt_from_json to handle pose library references
-                p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+                p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
                     json_data, character=character_id, form=ref_name
                 )
                 # Use character proportions if ref doesn't have its own
@@ -1507,6 +1525,7 @@ def main(argv: list[str] | None = None) -> int:
                     character_id=str(character_id),
                     form_id=ref_name,
                     pose_prompt=pose_prompt,
+                    camera_rotation=camera_rotation,
                 )
                 png_bytes = generate_image_openai(p, model=args.model, size=args.size)
                 out_path = build_output_path(
@@ -1578,7 +1597,7 @@ def main(argv: list[str] | None = None) -> int:
             for ref in items_to_process:
                 ref_name = ref.get("name", "")
                 # Use resolve_prompt_from_json to handle pose library references
-                p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+                p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
                     json_data, character=character_id, form=ref_name
                 )
                 # Use character proportions if ref doesn't have its own
@@ -1600,6 +1619,7 @@ def main(argv: list[str] | None = None) -> int:
                     character_id=str(character_id),
                     form_id=ref_name,
                     pose_prompt=pose_prompt,
+                    camera_rotation=camera_rotation,
                 )
                 blocks.append(f"[{character_id}:{ref_name}]\n{sanitize_for_ascii(format_for_chat(p))}")
 
@@ -1613,7 +1633,7 @@ def main(argv: list[str] | None = None) -> int:
         for ref in items_to_process:
             ref_name = ref.get("name", "")
             # Use resolve_prompt_from_json to handle pose library references
-            p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+            p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
                 json_data, character=character_id, form=ref_name
             )
             # Use character proportions if ref doesn't have its own
@@ -1635,6 +1655,7 @@ def main(argv: list[str] | None = None) -> int:
                 character_id=str(character_id),
                 form_id=ref_name,
                 pose_prompt=pose_prompt,
+                camera_rotation=camera_rotation,
             )
             png_bytes = generate_image_openai(p, model=args.model, size=args.size)
             out_path = build_output_path(
@@ -1645,7 +1666,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     # Single (character, form) - form_id must be specified to reach here
-    prompt0, thematic_snip, gender, char_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+    prompt0, thematic_snip, gender, char_proportions, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
         json_data, character=character_id, form=form_id
     )
     
@@ -1668,8 +1689,9 @@ def main(argv: list[str] | None = None) -> int:
         no_base=args.no_base,
         equipment=equipment,
         character_id=character_name,
-        form_id=str(form_id),
+        form_id=form_id,
         pose_prompt=pose_prompt,
+        camera_rotation=camera_rotation,
     )
     
     if args.dry_run:

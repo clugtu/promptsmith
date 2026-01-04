@@ -799,6 +799,7 @@
       "base_contact_plan": "flat",
       "handedness_mode": "two_handed",
       "prop_visibility_mode": "presented",
+      "camera_rotation": -45,
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
         "prop_class": [
@@ -2112,6 +2113,7 @@
       "base_contact_plan": "flat",
       "handedness_mode": "two_handed",
       "prop_visibility_mode": "presented",
+      "camera_rotation": -45,
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
         "prop_class": [
