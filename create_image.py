@@ -9,6 +9,9 @@ Usage examples (PowerShell):
   python create_image.py garou.json --character 1 --form human
   python create_image.py garou.json 1 --all
   python create_image.py garou.json --list
+  python create_image.py garou.json --reference-sheet all --copy
+  python create_image.py garou.json --reference-sheet 1:1,1:2,2:1 --copy
+  python create_image.py garou.json --reference-sheet 1:1-5 --copy
 
 Notes:
 - First argument is the JSON filename (required)
@@ -16,6 +19,7 @@ Notes:
         $env:OPENAI_API_KEY = "..."
 - If you only want a copy/paste prompt for ChatGPT, use --prompt-only (no API key needed).
 - Supports nested refinements: use 1:1 or alpha:human or mixed (1:human, alpha:1)
+- Reference sheets combine up to 9 poses with shared rules for efficient prompt generation
 """
 
 from __future__ import annotations
@@ -891,6 +895,164 @@ def build_output_path(
     return out_dir / filename
 
 
+def handle_reference_sheet(
+    *,
+    json_data: dict,
+    spec: str,
+    generic_snippet: str,
+    miniature_snippet: str,
+    thematic_general: str,
+    style_snippet: str,
+    default_proportions: str,
+    thematic_forms: dict,
+    include_generic: bool,
+    include_miniature: bool,
+    no_base: bool,
+    copy: bool,
+) -> int:
+    """Generate a combined reference sheet prompt for multiple poses.
+    
+    Args:
+        spec: Either 'all', a range like '1:1-5', or comma-separated like '1:1,1:2,2:3'
+        
+    Returns:
+        0 on success
+    """
+    characters = json_data.get("characters", [])
+    if not characters:
+        raise PromptNotFoundError("No characters found in JSON")
+    
+    # Parse the spec to get list of (character_id, form_id) tuples
+    pose_specs = []
+    
+    if spec.lower() == "all":
+        # Collect all poses from all characters (max 9)
+        for char_data in characters:
+            character_id = char_data.get("name", "") or char_data.get("id", "")
+            
+            # Support poses (array), refinements (legacy array), or pose (single object)
+            poses = char_data.get("poses", [])
+            refinements = char_data.get("refinements", [])
+            single_pose = char_data.get("pose", None)
+            
+            if single_pose and not poses and not refinements:
+                items = [single_pose]
+            else:
+                items = poses if poses else refinements
+            
+            for idx, item in enumerate(items, 1):
+                pose_specs.append((character_id, idx))
+                if len(pose_specs) >= 9:
+                    break
+            if len(pose_specs) >= 9:
+                break
+    else:
+        # Parse comma-separated or range specs
+        parts = [p.strip() for p in spec.split(",")]
+        for part in parts:
+            if "-" in part and ":" in part:
+                # Range like "1:1-5"
+                char_part, range_part = part.split(":")
+                if "-" in range_part:
+                    start, end = range_part.split("-")
+                    for i in range(int(start), int(end) + 1):
+                        pose_specs.append((char_part, i))
+                        if len(pose_specs) >= 9:
+                            break
+            elif ":" in part:
+                # Single spec like "1:1"
+                char_id, form_id = part.split(":")
+                # Try to parse form_id as int, or keep as string
+                try:
+                    form_id = int(form_id)
+                except ValueError:
+                    pass
+                pose_specs.append((char_id, form_id))
+            else:
+                raise ValueError(f"Invalid reference sheet spec: {part}. Use format like '1:1' or '1:1-5'")
+            
+            if len(pose_specs) >= 9:
+                break
+    
+    if not pose_specs:
+        raise PromptNotFoundError("No poses found for reference sheet")
+    
+    # Batch poses into groups of 9
+    batches = []
+    for i in range(0, len(pose_specs), 9):
+        batches.append(pose_specs[i:i+9])
+    
+    # Generate a prompt for each batch
+    all_prompts = []
+    
+    for batch_num, batch in enumerate(batches, 1):
+        # Collect all character-specific prompts for this batch
+        character_sections = []
+        
+        for char_id, form_id in batch:
+            try:
+                prompt0, thematic_snip, gender, char_proportions, equipment = resolve_prompt_from_json(
+                    json_data=json_data,
+                    character=char_id,
+                    form=form_id,
+                )
+                
+                # Build just the character-specific part (no shared rules yet)
+                char_section = f"POSE {len(character_sections) + 1} [{char_id}:{form_id}]:\n{prompt0}"
+                character_sections.append(char_section)
+                
+            except Exception as e:
+                print(f"Warning: Could not resolve {char_id}:{form_id} - {e}", file=sys.stderr)
+                continue
+        
+        if not character_sections:
+            continue
+        
+        # Build the combined prompt with shared header/footer
+        parts = []
+        
+        if len(batches) > 1:
+            parts.append(f"REFERENCE SHEET {batch_num}/{len(batches)}: Multiple character poses for tabletop miniature sculpt study")
+        else:
+            parts.append("REFERENCE SHEET: Multiple character poses for tabletop miniature sculpt study")
+        
+        parts.append(f"\nGenerate {len(character_sections)} miniature figures arranged in a grid layout (3 per row).")
+        parts.append("Each figure should be clearly labeled with its pose identifier below it.\n")
+        
+        # Add all character-specific sections
+        parts.extend(character_sections)
+        
+        # Add shared rules once at the end
+        if thematic_general:
+            parts.append(f"\n\nTHEME (applies to all):\n{thematic_general}")
+        
+        if style_snippet:
+            parts.append(f"\n\nSTYLE (applies to all):\n{style_snippet}")
+        
+        if include_generic and generic_snippet:
+            parts.append(f"\n\nRENDER RULES (applies to all):\n{generic_snippet}")
+        
+        if include_miniature and miniature_snippet:
+            parts.append(f"\n\nMINIATURE RULES (applies to all):\n{miniature_snippet}")
+        
+        combined_prompt = "\n".join(parts)
+        all_prompts.append(combined_prompt)
+    
+    if not all_prompts:
+        raise PromptNotFoundError("No valid poses resolved for reference sheet")
+    
+    # Join multiple prompts with clear separators
+    final_output = "\n\n" + "="*80 + "\n\n".join(all_prompts)
+    
+    # Output
+    if copy:
+        copy_to_clipboard_windows(final_output)
+    
+    print(sanitize_for_ascii(format_for_chat(final_output)))
+    
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="create_image",
@@ -994,6 +1156,13 @@ def main(argv: list[str] | None = None) -> int:
         help="Do not append the shared generic rendering rules snippet to prompts.",
     )
 
+    parser.add_argument(
+        "--reference-sheet",
+        "--ref-sheet",
+        type=str,
+        help="Generate a combined reference sheet prompt with multiple poses. Accepts identifiers (1:1,1:2,2:1), ranges (1:1-5), or 'all'. Max 9 poses per sheet. Outputs a single combined prompt with shared rules.",
+    )
+
     args = parser.parse_args(argv)
 
     if args.prompt_only:
@@ -1023,6 +1192,23 @@ def main(argv: list[str] | None = None) -> int:
         print(list_available_from_json(json_data))
         return 0
 
+    # Handle --reference-sheet
+    if args.reference_sheet:
+        return handle_reference_sheet(
+            json_data=json_data,
+            spec=args.reference_sheet,
+            generic_snippet=generic_snippet,
+            miniature_snippet=miniature_snippet,
+            thematic_general=thematic_general,
+            style_snippet=style_snippet,
+            default_proportions=default_proportions,
+            thematic_forms=thematic_forms,
+            include_generic=include_generic,
+            include_miniature=include_miniature,
+            no_base=args.no_base,
+            copy=args.copy,
+        )
+
     # Handle positional or flag-based character argument
     character_arg = args.character_positional or args.character
     
@@ -1038,9 +1224,18 @@ def main(argv: list[str] | None = None) -> int:
                 character_id = char_data.get("name", "") or char_data.get("id", "")
                 char_gender = char_data.get("gender", None)
                 char_proportions = char_data.get("proportions", "").strip()
+                
+                # Support poses (array), refinements (legacy array), or pose (single object)
+                poses = char_data.get("poses", [])
                 refinements = char_data.get("refinements", [])
+                single_pose = char_data.get("pose", None)
+                
+                if single_pose and not poses and not refinements:
+                    items_to_process = [single_pose]
+                else:
+                    items_to_process = poses if poses else refinements
 
-                for ref in refinements:
+                for ref in items_to_process:
                     ref_name = ref.get("name", "")
                     p0 = ref.get("prompt", "")
                     # Prefer refinement-level gender when present
@@ -1084,9 +1279,18 @@ def main(argv: list[str] | None = None) -> int:
             character_id = char_data.get("name", "") or char_data.get("id", "")
             char_gender = char_data.get("gender", None)
             char_proportions = char_data.get("proportions", "").strip()
+            
+            # Support poses (array), refinements (legacy array), or pose (single object)
+            poses = char_data.get("poses", [])
             refinements = char_data.get("refinements", [])
+            single_pose = char_data.get("pose", None)
+            
+            if single_pose and not poses and not refinements:
+                items_to_process = [single_pose]
+            else:
+                items_to_process = poses if poses else refinements
 
-            for ref in refinements:
+            for ref in items_to_process:
                 ref_name = ref.get("name", "")
                 p0 = ref.get("prompt", "")
                 # Prefer refinement-level gender when present
@@ -1162,18 +1366,28 @@ def main(argv: list[str] | None = None) -> int:
         if not char_data:
             raise PromptNotFoundError(f"Character not found: {character_id}")
         
-        # Extract gender from character data (refinements may override)
+        # Extract gender from character data (refinements/poses may override)
         char_gender = char_data.get("gender", None)
         
+        # Check for both 'poses' (new format), 'refinements' (legacy), or single 'pose' object
+        poses = char_data.get("poses", [])
         refinements = char_data.get("refinements", [])
-        if not refinements:
+        single_pose = char_data.get("pose", None)
+        
+        # If there's a single pose object, wrap it in a list for uniform processing
+        if single_pose and not poses and not refinements:
+            items_to_process = [single_pose]
+        else:
+            items_to_process = poses if poses else refinements
+        
+        if not items_to_process:
             raise PromptNotFoundError(
-                f"No refinements found for character: {character_id}"
+                f"No pose/poses/refinements found for character: {character_id}"
             )
 
         if args.dry_run:
             blocks: list[str] = []
-            for ref in refinements:
+            for ref in items_to_process:
                 ref_name = ref.get("name", "")
                 p0 = ref.get("prompt", "")
                 # Prefer refinement-level gender when present
@@ -1213,7 +1427,7 @@ def main(argv: list[str] | None = None) -> int:
             return 0
 
         args.out.mkdir(parents=True, exist_ok=True)
-        for ref in refinements:
+        for ref in items_to_process:
             ref_name = ref.get("name", "")
             p0 = ref.get("prompt", "")
             # Prefer refinement-level gender when present
