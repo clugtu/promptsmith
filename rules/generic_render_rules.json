@@ -47,7 +47,8 @@
       },
       "framing": {
         "title": "FRAMING",
-        "content": "Single humanoid figure, full body visible head-to-feet, centered.\nNeutral blank background.\nFull-body figure entirely visible from head to feet; no cropping at ankles, knees, hips, shoulders, elbows, wrists, or head.\nAll limbs fully inside frame; no cinematic crop, no hero crop, no portrait crop.\nGenerous negative space around entire figure.\nView: 3/4 (~45 degree rotation)—three-quarter sculpt view, NOT straight-on front view.\nOrthographic or near-orthographic projection for accurate geometry.\nCamera pulled back to include entire silhouette.\nNo close-up, no medium shot, no waist-up framing.\nFraming priority over facial detail.\nNo cinematic perspective."
+        "content": "Single humanoid figure, full body visible head-to-feet, centered.\nNeutral blank background.\nFull-body figure entirely visible from head to feet; no cropping at ankles, knees, hips, shoulders, elbows, wrists, or head.\nAll limbs fully inside frame; no cinematic crop, no hero crop, no portrait crop.\nGenerous negative space around entire figure.\nView: 3/4 (~{camera_rotation} degree rotation)—three-quarter sculpt view, NOT straight-on front view.\nOrthographic or near-orthographic projection for accurate geometry.\nCamera pulled back to include entire silhouette.\nNo close-up, no medium shot, no waist-up framing.\nFraming priority over facial detail.\nNo cinematic perspective.",
+        "default_camera_rotation": 45
       },
       "rendering": {
         "title": "RENDERING",
