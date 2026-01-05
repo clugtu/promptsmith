@@ -6,12 +6,11 @@ Generate an image from prompts stored in a JSON file (garou.json).
 Usage examples (PowerShell):
   python create_image.py garou.json 1:1
   python create_image.py myproject.json alpha:human --dry-run
-  python create_image.py garou.json --character 1 --form human
   python create_image.py garou.json 1 --all
   python create_image.py garou.json --list
-  python create_image.py garou.json --reference-sheet all --copy
-  python create_image.py garou.json --reference-sheet 1:1,1:2,2:1 --copy
-  python create_image.py garou.json --reference-sheet 1:1-5 --copy
+  python create_image.py garou.json --page 1 --copy
+  python create_image.py garou.json --page 2 --copy
+  python create_image.py garou.json --page all --copy
 
 Notes:
 - First argument is the JSON filename (required)
@@ -107,7 +106,38 @@ def load_json_data(json_path: Path) -> Dict[str, Any]:
     if "imports" in data:
         data = resolve_imports(data, Path.cwd())
     
+    # Validate character IDs are sequential
+    if "characters" in data:
+        validate_character_ids(data["characters"])
+    
     return data
+
+
+def validate_character_ids(characters: List[Dict[str, Any]]) -> None:
+    """Validate that character IDs are sequential with no gaps or duplicates."""
+    if not characters:
+        return
+    
+    ids = [char.get("id") for char in characters if "id" in char]
+    if not ids:
+        return
+    
+    # Check for duplicates
+    duplicates = [x for x in ids if ids.count(x) > 1]
+    if duplicates:
+        raise ValueError(f"Duplicate character IDs found: {sorted(set(duplicates))}")
+    
+    # Check for sequential numbering
+    expected_ids = list(range(1, len(ids) + 1))
+    if sorted(ids) != expected_ids:
+        missing = set(expected_ids) - set(ids)
+        extra = set(ids) - set(expected_ids)
+        errors = []
+        if missing:
+            errors.append(f"Missing IDs: {sorted(missing)}")
+        if extra:
+            errors.append(f"Unexpected IDs: {sorted(extra)}")
+        raise ValueError(f"Character IDs must be sequential from 1 to {len(ids)}. {' '.join(errors)}")
 
 
 def resolve_imports(data: Dict[str, Any], base_path: Path) -> Dict[str, Any]:
@@ -740,9 +770,37 @@ def resolve_prompt_from_json(
     # If no form specified, return character description or first item
     if form is None:
         if not items_to_search:
-            raise PromptNotFoundError(
-                f"No poses/refinements found for character: {character}"
-            )
+            # No refinements/poses array - check for single 'pose' object
+            single_pose = char_data.get("pose", None)
+            
+            thematic = []
+            gender = char_gender
+            equipment = char_data.get("equipment", [])
+            
+            # Resolve prop references if prop_definitions exist
+            prop_definitions = char_data.get("prop_definitions", {})
+            equipment = resolve_prop_references(equipment, prop_definitions)
+            
+            # Validate hand assignments
+            validate_hand_assignments(equipment, str(character), None, char_data)
+            
+            # Check if this is a pose library reference
+            pose_prompt = ""
+            if single_pose and "pose_library_ref" in single_pose and pose_library:
+                character_override, pose_prompt = compose_pose_prompt_from_library(
+                    char_data, single_pose, pose_library, json_data, equipment
+                )
+                # Use character_override for appearance/expression additions if present
+                if character_override:
+                    final_prompt = character_override
+                else:
+                    final_prompt = character_base or char_data.get("description", "")
+            else:
+                # Use character_base or description as the prompt
+                final_prompt = character_base or char_data.get("description", "")
+            
+            return final_prompt, thematic, gender, proportions, equipment, pose_prompt
+        
         # Return the first item's prompt and its thematic snippet
         first_item = items_to_search[0]
         thematic = []
@@ -1109,7 +1167,8 @@ def handle_reference_sheet(
     """Generate a combined reference sheet prompt for multiple poses.
     
     Args:
-        spec: Either 'all', a range like '1:1-5', or comma-separated like '1:1,1:2,2:3'
+        spec: Either 'all' for all pages, or a page number (e.g., '1', '2', '3')
+              Each page contains up to 9 poses.
         
     Returns:
         0 on success
@@ -1118,118 +1177,155 @@ def handle_reference_sheet(
     if not characters:
         raise PromptNotFoundError("No characters found in JSON")
     
-    # Parse the spec to get list of (character_id, form_id) tuples
-    pose_specs = []
+    # Collect all available poses from all characters
+    all_pose_specs = []
     
-    if spec.lower() == "all":
-        # Collect all poses from all characters (max 9)
-        for char_data in characters:
-            character_id = char_data.get("name", "") or char_data.get("id", "")
-            
-            # Support poses (array), refinements (legacy array), or pose (single object)
-            poses = char_data.get("poses", [])
-            refinements = char_data.get("refinements", [])
-            single_pose = char_data.get("pose", None)
-            
-            if single_pose and not poses and not refinements:
-                items = [single_pose]
-            else:
-                items = poses if poses else refinements
-            
+    # First, gather ALL poses from all characters
+    for char_data in characters:
+        character_id = char_data.get("name", "") or char_data.get("id", "")
+        
+        # Support poses (array), refinements (legacy array), or pose (single object)
+        poses = char_data.get("poses", [])
+        refinements = char_data.get("refinements", [])
+        single_pose = char_data.get("pose", None)
+        
+        # If character has a single 'pose' object (not 'poses' array), treat as single-pose character
+        if single_pose and not poses and not refinements:
+            all_pose_specs.append((character_id, None))
+        elif poses or refinements:
+            # Character has multiple refinements/poses
+            items = poses if poses else refinements
             for idx, item in enumerate(items, 1):
-                pose_specs.append((character_id, idx))
-                if len(pose_specs) >= 9:
-                    break
-            if len(pose_specs) >= 9:
-                break
-    else:
-        # Parse comma-separated or range specs
-        parts = [p.strip() for p in spec.split(",")]
-        for part in parts:
-            if "-" in part and ":" in part:
-                # Range like "1:1-5"
-                char_part, range_part = part.split(":")
-                if "-" in range_part:
-                    start, end = range_part.split("-")
-                    for i in range(int(start), int(end) + 1):
-                        pose_specs.append((char_part, i))
-                        if len(pose_specs) >= 9:
-                            break
-            elif ":" in part:
-                # Single spec like "1:1"
-                char_id, form_id = part.split(":")
-                # Try to parse form_id as int, or keep as string
-                try:
-                    form_id = int(form_id)
-                except ValueError:
-                    pass
-                pose_specs.append((char_id, form_id))
-            else:
-                raise ValueError(f"Invalid reference sheet spec: {part}. Use format like '1:1' or '1:1-5'")
-            
-            if len(pose_specs) >= 9:
-                break
+                all_pose_specs.append((character_id, idx))
+        else:
+            # No poses, refinements, or single pose - treat as single-pose character
+            all_pose_specs.append((character_id, None))
     
-    if not pose_specs:
+    if not all_pose_specs:
         raise PromptNotFoundError("No poses found for reference sheet")
     
-    # Batch poses into groups of 9
-    batches = []
-    for i in range(0, len(pose_specs), 9):
-        batches.append(pose_specs[i:i+9])
+    # Parse page specification
+    if spec.lower() == "all":
+        # Generate all pages
+        batches = []
+        for i in range(0, len(all_pose_specs), 9):
+            batches.append(all_pose_specs[i:i+9])
+    else:
+        # Parse page number
+        try:
+            page_num = int(spec)
+            if page_num < 1:
+                raise ValueError("Page number must be 1 or greater")
+        except ValueError:
+            raise ValueError(f"Invalid page specification: {spec}. Use a page number (1, 2, 3...) or 'all'")
+        
+        # Calculate start and end indices for this page
+        start_idx = (page_num - 1) * 9
+        end_idx = start_idx + 9
+        
+        if start_idx >= len(all_pose_specs):
+            total_pages = (len(all_pose_specs) + 8) // 9  # Round up
+            raise PromptNotFoundError(f"Page {page_num} is out of range. Total poses: {len(all_pose_specs)}, total pages: {total_pages}")
+        
+        # Extract the poses for this page
+        pose_specs = all_pose_specs[start_idx:end_idx]
+        batches = [pose_specs]
     
     # Generate a prompt for each batch
     all_prompts = []
     
     for batch_num, batch in enumerate(batches, 1):
         # Collect all character-specific prompts for this batch
-        character_sections = []
+        character_descriptions = []
         
-        for char_id, form_id in batch:
+        for idx, (char_id, form_id) in enumerate(batch, 1):
             try:
-                prompt0, thematic_snip, gender, char_proportions, equipment = resolve_prompt_from_json(
-                    json_data=json_data,
-                    character=char_id,
-                    form=form_id,
-                )
+                # If form_id is None, it means single-pose character without refinements
+                if form_id is None:
+                    prompt0, thematic_snip, gender, char_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+                        json_data=json_data,
+                        character=char_id,
+                        form=None,
+                    )
+                else:
+                    prompt0, thematic_snip, gender, char_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+                        json_data=json_data,
+                        character=char_id,
+                        form=form_id,
+                    )
                 
-                # Build just the character-specific part (no shared rules yet)
-                char_section = f"POSE {len(character_sections) + 1} [{char_id}:{form_id}]:\n{prompt0}"
-                character_sections.append(char_section)
+                # Build complete description including pose and equipment
+                desc_parts = [prompt0]
+                
+                # Add equipment/props if present
+                if equipment:
+                    props_list = []
+                    for item in equipment:
+                        # Parse structured format: "item (details) : position : description"
+                        if " : " in item:
+                            parts = item.split(" : ", 2)
+                            if len(parts) == 3:
+                                item_with_details = parts[0].strip()
+                                position = parts[1].strip()
+                                description = parts[2].strip()
+                                props_list.append(f"{item_with_details} [{position}] {description}")
+                            else:
+                                props_list.append(item)
+                        else:
+                            props_list.append(item)
+                    if props_list:
+                        desc_parts.append(f"Props: {'; '.join(props_list)}")
+                
+                # Add pose library description if present
+                if pose_prompt:
+                    desc_parts.append(f"Pose: {pose_prompt}")
+                
+                full_description = ". ".join(desc_parts)
+                character_descriptions.append(f"Figure {idx}: {full_description}")
                 
             except Exception as e:
-                print(f"Warning: Could not resolve {char_id}:{form_id} - {e}", file=sys.stderr)
-                continue
+                raise PromptNotFoundError(f"Could not resolve character '{char_id}' (pose {form_id}): {e}")
         
-        if not character_sections:
+        if not character_descriptions:
             continue
         
-        # Build the combined prompt with shared header/footer
+        # Build the combined prompt as a natural image generation prompt
         parts = []
         
+        # Opening instruction
         if len(batches) > 1:
-            parts.append(f"REFERENCE SHEET {batch_num}/{len(batches)}: Multiple character poses for tabletop miniature sculpt study")
+            parts.append(f"Create a reference sheet image showing {len(character_descriptions)} tabletop miniature figures arranged in a 3x3 grid layout (page {batch_num} of {len(batches)}).")
         else:
-            parts.append("REFERENCE SHEET: Multiple character poses for tabletop miniature sculpt study")
+            parts.append(f"Create a reference sheet image showing {len(character_descriptions)} tabletop miniature figures arranged in a 3x3 grid layout.")
         
-        parts.append(f"\nGenerate {len(character_sections)} miniature figures arranged in a grid layout (3 per row).")
-        parts.append("Each figure should be clearly labeled with its pose identifier below it.\n")
+        parts.append("Each figure is a separate miniature sculpt with full body visible, clearly separated with white space between them.")
+        parts.append("CRITICAL: All figures must be completely in frame from head to toe with no clipping at any edges. Full body visibility is mandatory for every figure.")
+        parts.append("")
         
-        # Add all character-specific sections
-        parts.extend(character_sections)
+        # Add character descriptions as numbered list
+        parts.extend(character_descriptions)
+        parts.append("")
         
-        # Add shared rules once at the end
+        # Add shared thematic and style rules
         if thematic_general:
-            parts.append(f"\n\nTHEME (applies to all):\n{thematic_general}")
+            parts.append(f"THEME: {thematic_general}")
         
         if style_snippet:
-            parts.append(f"\n\nSTYLE (applies to all):\n{style_snippet}")
+            parts.append(f"STYLE: {style_snippet}")
         
+        # Add technical rendering rules
         if include_generic and generic_snippet:
-            parts.append(f"\n\nRENDER RULES (applies to all):\n{generic_snippet}")
+            # Format generic snippet if it's a dict
+            if isinstance(generic_snippet, dict):
+                parts.append("RENDERING:")
+                for section_key, section_data in generic_snippet.items():
+                    if isinstance(section_data, dict) and 'content' in section_data:
+                        parts.append(f"  {section_data.get('title', section_key)}: {section_data['content']}")
+            else:
+                parts.append(f"RENDERING: {generic_snippet}")
         
         if include_miniature and miniature_snippet:
-            parts.append(f"\n\nMINIATURE RULES (applies to all):\n{miniature_snippet}")
+            parts.append(f"MINIATURE SCALE: {miniature_snippet}")
         
         combined_prompt = "\n".join(parts)
         all_prompts.append(combined_prompt)
@@ -1238,13 +1334,19 @@ def handle_reference_sheet(
         raise PromptNotFoundError("No valid poses resolved for reference sheet")
     
     # Join multiple prompts with clear separators
-    final_output = "\n\n" + "="*80 + "\n\n".join(all_prompts)
+    if len(all_prompts) > 1:
+        final_output = "\n\n" + ("\n\n" + "="*80 + "\n\n").join(all_prompts)
+    else:
+        final_output = all_prompts[0]
+    
+    # Sanitize unicode before output
+    final_output = sanitize_for_ascii(final_output)
     
     # Output
     if copy:
         copy_to_clipboard_windows(final_output)
     
-    print(sanitize_for_ascii(format_for_chat(final_output)))
+    print(format_for_chat(final_output))
     
     return 0
 
@@ -1273,12 +1375,6 @@ def main(argv: list[str] | None = None) -> int:
         "-c",
         type=str,
         help="Character ID (number or name) or full path like '1:1' or 'alpha:human'. Required unless using --list.",
-    )
-    parser.add_argument(
-        "--form",
-        "-f",
-        type=str,
-        help="Form/refinement name or ID. Not needed if using path syntax in --character.",
     )
     parser.add_argument(
         "--json",
@@ -1353,10 +1449,10 @@ def main(argv: list[str] | None = None) -> int:
     )
 
     parser.add_argument(
-        "--reference-sheet",
-        "--ref-sheet",
+        "--page",
+        "-p",
         type=str,
-        help="Generate a combined reference sheet prompt with multiple poses. Accepts identifiers (1:1,1:2,2:1), ranges (1:1-5), or 'all'. Max 9 poses per sheet. Outputs a single combined prompt with shared rules.",
+        help="Generate a reference sheet for a specific page number (each page shows up to 9 poses). Use 'all' to generate all pages. Page 1 shows poses 1-9, page 2 shows poses 10-18, etc.",
     )
 
     args = parser.parse_args(argv)
@@ -1388,11 +1484,11 @@ def main(argv: list[str] | None = None) -> int:
         print(list_available_from_json(json_data))
         return 0
 
-    # Handle --reference-sheet
-    if args.reference_sheet:
+    # Handle --page
+    if args.page:
         return handle_reference_sheet(
             json_data=json_data,
-            spec=args.reference_sheet,
+            spec=args.page,
             generic_snippet=generic_snippet,
             miniature_snippet=miniature_snippet,
             thematic_general=thematic_general,
@@ -1533,10 +1629,6 @@ def main(argv: list[str] | None = None) -> int:
         
     else:
         character_id = character_arg
-    
-    # If form is also specified as argument, it overrides path
-    if args.form:
-        form_id = args.form
 
     if args.all and form_id:
         parser.error("Use either --all or specify a form, not both")

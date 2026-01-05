@@ -190,7 +190,7 @@
         "action": "gesture",
         "orientation": "side_out"
       },
-      "pose_prompt": "Asymmetric relaxed carry stance: weight clearly committed to the back leg (70–80%), front leg relaxed with slight bend; subtle contrapposto through hips and shoulders; torso leaned back slightly (2–5 degrees) to counterbalance the load. MAIN_HAND_PROP rests diagonally across the upper back and rear shoulder blade—not the neck—with the forward end extending past the shoulder but remaining below head height; prop must stay fully outside the head and neck silhouette with visible air gap. Main hand grips the MAIN_HAND_PROP at its natural grip point (handle/grip section for weapons, balanced point for tools)—NOT the barrel, blade, or head; arm bent naturally to support the weight. Off hand held slightly away from torso (side-out) for balance and micro-tension. Chest open, head forward or slightly turned; calm dominance posture with strong, readable silhouette.",
+      "pose_prompt": "Asymmetric relaxed carry stance: weight clearly committed to the back leg (70\u201380%), front leg relaxed with slight bend; subtle contrapposto through hips and shoulders; torso leaned back slightly (2\u20135 degrees) to counterbalance the load. MAIN_HAND_PROP rests diagonally across the upper back and rear shoulder blade\u2014not the neck\u2014with the forward end extending past the shoulder but remaining below head height; prop must stay fully outside the head and neck silhouette with visible air gap. Main hand grips the MAIN_HAND_PROP at its natural grip point (handle/grip section for weapons, balanced point for tools)\u2014NOT the barrel, blade, or head; arm bent naturally to support the weight. Off hand held slightly away from torso (side-out) for balance and micro-tension. Chest open, head forward or slightly turned; calm dominance posture with strong, readable silhouette.",
       "base_prompt": "Round base; optional small low rock near rear foot for weight emphasis."
     },
     {
@@ -1698,46 +1698,72 @@
       "pose_id": "cw_idle_hands_in_belt_lean",
       "name": "Hands-in-Belt Lean",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "idle", "frontier-town", "grounded", "low-drama"],
+      "tags": [
+        "crowd",
+        "idle",
+        "frontier-town",
+        "grounded",
+        "low-drama"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
-      "pose_prompt": "Casual town idle: weight 70–80% on the back leg; front foot relaxed and slightly forward; thumbs hooked into belt/suspenders area (hands close-in); shoulders slightly rounded; head turned 10–20 degrees as if watching street activity. Keep elbows slightly away from ribs to preserve small negative space; no heroic chest-out posture.",
+      "pose_prompt": "Casual town idle: weight 70\u201380% on the back leg; front foot relaxed and slightly forward; thumbs hooked into belt/suspenders area (hands close-in); shoulders slightly rounded; head turned 10\u201320 degrees as if watching street activity. Keep elbows slightly away from ribs to preserve small negative space; no heroic chest-out posture.",
       "base_prompt": "Round base; subtle dirt/boardwalk texture only."
     },
     {
       "pose_id": "cw_social_hat_tip_acknowledgment",
       "name": "Hat Tip Acknowledgment",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "social", "frontier-town", "polite", "grounded"],
+      "tags": [
+        "crowd",
+        "social",
+        "frontier-town",
+        "polite",
+        "grounded"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "side_out"
       },
@@ -1748,21 +1774,34 @@
       "pose_id": "cw_idle_arms_folded_foot_tap",
       "name": "Arms Folded, Foot Tapped",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "idle", "waiting", "frontier-town", "grounded"],
+      "tags": [
+        "crowd",
+        "idle",
+        "waiting",
+        "frontier-town",
+        "grounded"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "guard",
         "orientation": "close_in"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "guard",
         "orientation": "close_in"
       },
@@ -1773,71 +1812,110 @@
       "pose_id": "cw_social_one_hand_talker",
       "name": "One-Hand Talker",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "social", "conversation", "frontier-town", "grounded"],
+      "tags": [
+        "crowd",
+        "social",
+        "conversation",
+        "frontier-town",
+        "grounded"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "side_out"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
-      "pose_prompt": "Conversation gesture: torso turned 10–20 degrees toward an implied listener; one hand mid-gesture side-out (palm half-open), elbow away from ribs for a clean silhouette; other hand close-in near waistline. Keep motion small and natural—no grand speeches.",
+      "pose_prompt": "Conversation gesture: torso turned 10\u201320 degrees toward an implied listener; one hand mid-gesture side-out (palm half-open), elbow away from ribs for a clean silhouette; other hand close-in near waistline. Keep motion small and natural\u2014no grand speeches.",
       "base_prompt": "Round base; minimal texture."
     },
     {
       "pose_id": "cw_social_listener_head_tilt",
       "name": "Listener with Head Tilt",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "social", "conversation", "frontier-town", "idle"],
+      "tags": [
+        "crowd",
+        "social",
+        "conversation",
+        "frontier-town",
+        "idle"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "hold_object",
         "orientation": "close_in"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "hold_object",
         "orientation": "close_in"
       },
-      "pose_prompt": "Passive listener: slight lean toward implied speaker; hands clasped close-in at waist or behind back (choose one when sculpting); head tilted 10–15 degrees. Keep elbows from merging into torso; preserve small negative space where possible.",
+      "pose_prompt": "Passive listener: slight lean toward implied speaker; hands clasped close-in at waist or behind back (choose one when sculpting); head tilted 10\u201315 degrees. Keep elbows from merging into torso; preserve small negative space where possible.",
       "base_prompt": "Round base; subtle dirt or boardwalk texture."
     },
     {
       "pose_id": "cw_motion_slow_street_walk",
       "name": "Slow Street Walk",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "motion", "frontier-town", "street-life", "grounded"],
+      "tags": [
+        "crowd",
+        "motion",
+        "frontier-town",
+        "street-life",
+        "grounded"
+      ],
       "pose_style": "ready",
-      "support_points": ["lead_foot", "trail_foot"],
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "down_away"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "down_away"
       },
@@ -1848,46 +1926,73 @@
       "pose_id": "cw_react_turn_look_over_shoulder",
       "name": "Turn-and-Look Over Shoulder",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "reaction", "frontier-town", "street-life", "grounded"],
+      "tags": [
+        "crowd",
+        "reaction",
+        "frontier-town",
+        "street-life",
+        "grounded"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
-      "pose_prompt": "Subtle reaction: hips mostly forward, torso rotated 20–30 degrees, head turned farther over shoulder as if hearing a call; arms close-in and relaxed (optionally one hand holding coat/lapel). Keep pose compact and repeatable; no dramatic twist.",
+      "pose_prompt": "Subtle reaction: hips mostly forward, torso rotated 20\u201330 degrees, head turned farther over shoulder as if hearing a call; arms close-in and relaxed (optionally one hand holding coat/lapel). Keep pose compact and repeatable; no dramatic twist.",
       "base_prompt": "Round base; subtle texture."
     },
     {
       "pose_id": "cw_work_crate_brace_rest",
       "name": "Crate Brace & Rest",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "workaday", "frontier-town", "dock", "storefront", "grounded"],
+      "tags": [
+        "crowd",
+        "workaday",
+        "frontier-town",
+        "dock",
+        "storefront",
+        "grounded"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "ledge",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "brace",
         "orientation": "close_in"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
@@ -1898,21 +2003,34 @@
       "pose_id": "cw_work_broom_idle_hold",
       "name": "Broom / Tool Idle Hold",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "workaday", "frontier-town", "maintenance", "prop-friendly"],
+      "tags": [
+        "crowd",
+        "workaday",
+        "frontier-town",
+        "maintenance",
+        "prop-friendly"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long"],
+        "prop_class": [
+          "long"
+        ],
         "action": "hold_object",
         "orientation": "down_away"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
@@ -1923,21 +2041,36 @@
       "pose_id": "cw_read_newspaper_stand",
       "name": "Standing Newspaper Read",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "era-specific", "frontier-town", "newspaper", "idle"],
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "newspaper",
+        "idle"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "two_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "hold_object",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "hold_object",
         "orientation": "forward_offset"
       },
@@ -1948,21 +2081,34 @@
       "pose_id": "cw_saloon_drink_toast",
       "name": "Saloon Drink / Toast",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "era-specific", "saloon", "social", "idle"],
+      "tags": [
+        "crowd",
+        "era-specific",
+        "saloon",
+        "social",
+        "idle"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["small"],
+        "prop_class": [
+          "small"
+        ],
         "action": "present",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
@@ -1973,21 +2119,34 @@
       "pose_id": "cw_work_water_bucket_carry",
       "name": "Water Bucket Carry",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "era-specific", "frontier-town", "workaday", "carry"],
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "workaday",
+        "carry"
+      ],
       "pose_style": "ready",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["bulky"],
+        "prop_class": [
+          "bulky"
+        ],
         "action": "carry",
         "orientation": "down_away"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "side_out"
       },
@@ -1998,46 +2157,75 @@
       "pose_id": "cw_era_lady_sun_umbrella_stroll",
       "name": "Lady with Sun Umbrella",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "era-specific", "frontier-town", "civilian", "umbrella"],
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "civilian",
+        "umbrella"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "single_handed",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["long", "bulky"],
+        "prop_class": [
+          "long",
+          "bulky"
+        ],
         "action": "carry",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "gesture",
         "orientation": "close_in"
       },
-      "pose_prompt": "Victorian/frontier lady stroll: upright posture; MAIN_HAND_PROP (sun umbrella/parasol) held forward-offset with canopy above shoulder line but not covering the face; elbow slightly away from torso so the shaft reads cleanly. Off hand close-in lightly gathering skirt or holding a small accessory. Keep umbrella separate from head silhouette (visible air gap) and avoid ultra-thin shaft spans—prefer a slightly thicker, print-safe shaft.",
+      "pose_prompt": "Victorian/frontier lady stroll: upright posture; MAIN_HAND_PROP (sun umbrella/parasol) held forward-offset with canopy above shoulder line but not covering the face; elbow slightly away from torso so the shaft reads cleanly. Off hand close-in lightly gathering skirt or holding a small accessory. Keep umbrella separate from head silhouette (visible air gap) and avoid ultra-thin shaft spans\u2014prefer a slightly thicker, print-safe shaft.",
       "base_prompt": "Round base; minimal texture."
     },
     {
       "pose_id": "cw_era_whittling_stand",
       "name": "Whittling (Standing)",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "era-specific", "frontier-town", "idle", "craft"],
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "idle",
+        "craft"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "dual_wield",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["small", "compact"],
+        "prop_class": [
+          "small",
+          "compact"
+        ],
         "action": "hold_object",
         "orientation": "close_in"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["small", "compact"],
+        "prop_class": [
+          "small",
+          "compact"
+        ],
         "action": "hold_object",
         "orientation": "close_in"
       },
@@ -2048,21 +2236,36 @@
       "pose_id": "cw_era_fiddle_player",
       "name": "Fiddle Player",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "era-specific", "saloon", "music", "civilian"],
+      "tags": [
+        "crowd",
+        "era-specific",
+        "saloon",
+        "music",
+        "civilian"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "dual_wield",
       "prop_visibility_mode": "presented",
       "main_hand": {
         "prop_slot": "MAIN_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "hold_object",
         "orientation": "side_out"
       },
       "off_hand": {
         "prop_slot": "OFF_HAND_PROP",
-        "prop_class": ["compact", "small"],
+        "prop_class": [
+          "compact",
+          "small"
+        ],
         "action": "hold_object",
         "orientation": "close_in"
       },
@@ -2073,21 +2276,34 @@
       "pose_id": "cw_era_shopkeeper_apron_gesture",
       "name": "Shopkeeper / Vendor Gesture",
       "figure_type": "bipedal_humanoid",
-      "tags": ["crowd", "era-specific", "frontier-town", "vendor", "social"],
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "vendor",
+        "social"
+      ],
       "pose_style": "static",
-      "support_points": ["left_foot", "right_foot"],
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
       "base_contact_plan": "flat",
       "handedness_mode": "unarmed",
       "prop_visibility_mode": "carried_attached",
       "main_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "present",
         "orientation": "forward_offset"
       },
       "off_hand": {
         "prop_slot": "NONE",
-        "prop_class": ["none"],
+        "prop_class": [
+          "none"
+        ],
         "action": "hold_object",
         "orientation": "close_in"
       },
@@ -2130,8 +2346,1464 @@
         "action": "brace",
         "orientation": "close_in"
       },
-      "pose_prompt": "Dynamic leaping charge: lead foot just planted or pushing off with explosive force, trail leg extended behind with foot lifting off ground showing forward leap motion; body pitched forward with aggressive momentum. Main hand extended high overhead at full reach gripping MAIN_HAND_PROP (lasso/rope) at the throwing point, arm straight and committed to the throw with lasso loop visible overhead in wide arc. Off hand grips the rope lower down near torso (close-in), bracing and controlling the coils or slack—creating clear hand separation and distinct roles (thrower vs holder). Torso twisted with throwing motion; shoulders engaged showing power transfer from body to throw. Face intense and locked on target ahead; whole body expressing explosive forward leap into action. Lasso loop must be clearly visible overhead with both the thrown loop and the held coils/rope visible, creating strong dynamic silhouette. Clear air gap between rope elements and body/head.",
+      "pose_prompt": "Dynamic leaping charge: lead foot just planted or pushing off with explosive force, trail leg extended behind with foot lifting off ground showing forward leap motion; body pitched forward with aggressive momentum. Main hand extended high overhead at full reach gripping MAIN_HAND_PROP (lasso/rope) at the throwing point, arm straight and committed to the throw with lasso loop visible overhead in wide arc. Off hand grips the rope lower down near torso (close-in), bracing and controlling the coils or slack\u2014creating clear hand separation and distinct roles (thrower vs holder). Torso twisted with throwing motion; shoulders engaged showing power transfer from body to throw. Face intense and locked on target ahead; whole body expressing explosive forward leap into action. Lasso loop must be clearly visible overhead with both the thrown loop and the held coils/rope visible, creating strong dynamic silhouette. Clear air gap between rope elements and body/head.",
       "base_prompt": "Round base; optional small rock or ground texture under lead foot to emphasize leap and push-off."
+    },
+    {
+      "pose_id": "cw_church_hymnbook_hold",
+      "name": "Churchgoer Hymnbook Hold",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "church",
+        "social"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "two_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "small",
+          "compact"
+        ],
+        "action": "hold_object",
+        "orientation": "chest_offset_outside"
+      },
+      "off_hand": {
+        "prop_slot": "OFF_HAND_PROP",
+        "prop_class": [
+          "small",
+          "compact"
+        ],
+        "action": "support",
+        "orientation": "chest_offset_outside"
+      },
+      "pose_prompt": "Churchgoer standing in calm reverence: feet planted shoulder-width; elbows slightly away from ribs to preserve air gaps. Both hands hold a thick hymnbook/prayer book at upper chest height, book rotated 30\u201345\u00b0 outward so it clearly breaks the camera plane. Keep the book fully separated from torso with a visible gap; hands touch only at clear grip points on the book edges; head slightly bowed or forward-facing; composed, respectful posture.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_church_prayer_clasped",
+      "name": "Church Prayer (Hands Clasped)",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "church",
+        "idle"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "none",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "clasp",
+        "orientation": "front_offset"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "clasp",
+        "orientation": "front_offset"
+      },
+      "pose_prompt": "Quiet prayer stance: feet together or slightly apart; shoulders relaxed; hands clasped at mid-chest but held 2\u20133 cm forward from torso to keep negative space; elbows out slightly for a clean silhouette; head gently bowed. No props.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_church_hat_in_hand",
+      "name": "Churchgoer Hat-in-Hand",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "church",
+        "respectful"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "compact",
+          "small"
+        ],
+        "action": "hold_object",
+        "orientation": "low_outside"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Respectful standing pose: one hand holds a thick-brim hat down at the side, hat rotated outward 30\u201345\u00b0 to break the camera plane and keep an air gap from thigh/hip. Off-hand relaxed near beltline, not touching torso. Upright posture, calm expression.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_era_rich_cane_stroll",
+      "name": "Rich Townsman Cane Stroll",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "rich",
+        "motion"
+      ],
+      "pose_style": "walk",
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "compact",
+          "long"
+        ],
+        "action": "carry",
+        "orientation": "forward_low_outside"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Affluent strolling gait: lead foot stepping forward, trail foot grounded behind. Main hand carries a thick cane angled forward and outward (30\u201345\u00b0) so it clearly breaks the camera plane; keep cane tip away from base edge and maintain a clean air gap from legs. Off-hand relaxed near waist. Upright chest and confident carriage.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_era_rich_lady_fan_pose",
+      "name": "Rich Lady Hand Fan",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "rich",
+        "social"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "small"
+        ],
+        "action": "present",
+        "orientation": "chest_offset_outside"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Elegant standing pose: weight slightly on back foot; main hand holds a thick folding fan at upper chest height, fan rotated outward with a clear gap from torso (no contact). Elbow away from ribs to preserve negative space. Off-hand near hip or lightly curled, not touching body. Small composed head tilt.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_era_poor_beggar_bowl",
+      "name": "Poor Beggar Bowl Hold",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "poor",
+        "street"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "small"
+        ],
+        "action": "present",
+        "orientation": "forward_offset"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Humbled street pose: shoulders slightly rounded but full silhouette clear. Main hand extends forward holding a thick bowl/cup, wrist rotated so the bowl faces slightly upward and outward; keep an air gap between arm and torso; elbow away from ribs. Off-hand rests near abdomen but held slightly forward from body. Head slightly lowered.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_work_butcher_cleaver_rest",
+      "name": "Butcher Cleaver Rest",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "working-class",
+        "butcher",
+        "work"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "compact"
+        ],
+        "action": "hold_object",
+        "orientation": "down_outside"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Working stance: feet planted, torso upright. Main hand holds a thick cleaver down and outward beside the leg, blade angled 30\u201345\u00b0 away from body with visible foreshortening and a clear air gap from thigh/hip. Off-hand open, small explanatory gesture near chest but offset forward from torso. Neutral, focused expression.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_work_baker_loaf_offer",
+      "name": "Baker Loaf Offer",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "working-class",
+        "vendor",
+        "baker"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "small",
+          "compact"
+        ],
+        "action": "present",
+        "orientation": "forward_offset"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Vendor offer pose: main hand extends forward holding a thick bread loaf (or wrapped parcel) angled outward; keep loaf fully separated from torso with visible air gap; elbow lifted away from ribs. Off-hand rests near waistline. Friendly posture with slight forward lean.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_work_carpenter_saw_shoulder",
+      "name": "Carpenter Saw Shoulder Carry",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "working-class",
+        "carpenter",
+        "carry"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "long",
+          "compact"
+        ],
+        "action": "carry",
+        "orientation": "over_shoulder_outside"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "balance",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Work carry: main hand grips a thick hand saw resting diagonally near shoulder, with the blade plane rotated outward so it does NOT overlap head/neck silhouette; maintain clear air gaps from torso. Off-hand slightly out for balance. Stance grounded and practical.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_work_miner_pickaxe_rest",
+      "name": "Miner Pickaxe Rest",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "working-class",
+        "miner",
+        "carry"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "two_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "long"
+        ],
+        "action": "hold_object",
+        "orientation": "diagonal_outside"
+      },
+      "off_hand": {
+        "prop_slot": "OFF_HAND_PROP",
+        "prop_class": [
+          "long"
+        ],
+        "action": "support",
+        "orientation": "diagonal_outside"
+      },
+      "pose_prompt": "Sturdy rest pose: both hands hold a thick pickaxe shaft diagonally across the front, kept forward-offset so it does not touch the torso; pick head angled outward 30\u201345\u00b0 to break camera plane; elbows away from ribs for negative space. Calm, tired posture.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_era_doctor_bag_check",
+      "name": "Doctor Bag Check",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "professional",
+        "doctor"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "compact"
+        ],
+        "action": "hold_object",
+        "orientation": "low_outside"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "chest_offset_outside"
+      },
+      "pose_prompt": "Professional pause: main hand holds a thick medical bag by handle at side, bag rotated outward with air gap from thigh. Off-hand raised slightly, palm inward as if thinking/checking a note (no paper required). Upright attentive posture.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_social_gambler_card_shuffle",
+      "name": "Gambler Card Shuffle",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "saloon",
+        "gambler",
+        "social"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "two_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "small"
+        ],
+        "action": "hold_object",
+        "orientation": "chest_offset_outside"
+      },
+      "off_hand": {
+        "prop_slot": "OFF_HAND_PROP",
+        "prop_class": [
+          "small"
+        ],
+        "action": "manipulate",
+        "orientation": "chest_offset_outside"
+      },
+      "pose_prompt": "Saloon-ready stance: both hands held forward-offset at mid-chest manipulating a thick deck of cards (cards as a single solid block for 3D safety). Keep the deck and hands clearly separated from torso with visible air gaps; elbows out to maintain negative space. Subtle confident lean.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_work_sign_hammer_nail",
+      "name": "Posting Notice (Hammer)",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "work",
+        "notice-board"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "compact"
+        ],
+        "action": "hold_object",
+        "orientation": "raised_outside"
+      },
+      "off_hand": {
+        "prop_slot": "OFF_HAND_PROP",
+        "prop_class": [
+          "small",
+          "compact"
+        ],
+        "action": "hold_object",
+        "orientation": "forward_offset"
+      },
+      "pose_prompt": "Town notice pose: off-hand holds a thick placard/paper board forward and outward (as a single rigid slab), not touching torso. Main hand raises a thick hammer to the side of the head (kept outside head silhouette), angled outward to break the camera plane. Arms separated from body with clear air gaps; stable stance.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_social_handshake_offer",
+      "name": "Handshake Offer",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "social",
+        "greeting"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "none",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "offer_hand",
+        "orientation": "forward_offset"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Greeting stance: main hand extended forward at mid height as an offered handshake, palm vertical, arm offset from torso centerline with visible air gap. Off-hand relaxed near beltline. Friendly neutral posture; compact and repeatable for crowds.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_kid_marble_crouch",
+      "name": "Kid Marble Game Crouch",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "child",
+        "street"
+      ],
+      "pose_style": "crouch",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "none",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "reach",
+        "orientation": "down_forward"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "balance",
+        "orientation": "side_out"
+      },
+      "pose_prompt": "Child crouch: deep squat with heels grounded; torso leaned forward but clear silhouette. Main hand reaches toward ground in front (marbles implied; no tiny props), fingers together as a simplified scoop. Off-hand out to the side for balance. Keep arms separated from torso with air gaps.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_kid_treat_hold",
+      "name": "Kid Holding Treat",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "child",
+        "idle"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "small"
+        ],
+        "action": "hold_object",
+        "orientation": "chest_offset_outside"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Child idle: upright stance with small steps implied. Main hand holds a thick treat/candy stick at chest height, rotated outward and kept away from torso. Off-hand relaxed. Head turned slightly as if watching something interesting.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_era_market_basket_carry",
+      "name": "Market Basket Carry",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "shopping",
+        "working-class"
+      ],
+      "pose_style": "walk",
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "single_handed",
+      "prop_visibility_mode": "presented",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "compact"
+        ],
+        "action": "carry",
+        "orientation": "low_outside"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "swing",
+        "orientation": "side_out"
+      },
+      "pose_prompt": "Shopping walk: lead foot stepping, trail foot planted behind. Main hand carries a thick market basket down at side, basket rotated outward with air gap from leg. Off arm swings slightly outward (kept off torso) for a clean silhouette.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_social_two_hand_gossip",
+      "name": "Two-Hand Gossip Talk",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "social",
+        "talk"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "none",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "forward_offset"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "forward_offset"
+      },
+      "pose_prompt": "Animated but compact gossip: both hands raised at mid-chest, palms slightly up, held forward-offset from torso with elbows away from ribs to preserve negative space. Torso leaned forward 5\u201310\u00b0 as if confiding. No props.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_era_church_procession_walk",
+      "name": "Church Procession Walk",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "era-specific",
+        "frontier-town",
+        "church",
+        "motion"
+      ],
+      "pose_style": "walk",
+      "support_points": [
+        "lead_foot",
+        "trail_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "none",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Measured walk suitable for church crowd: small forward step with upright spine; arms held closer than a normal walk but still offset from torso with slight bend at elbows to keep air gaps. Calm forward gaze.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_social_restrained_disagree",
+      "name": "Restrained Disagreement",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "social",
+        "conversation",
+        "frontier-town",
+        "grounded",
+        "argument"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "side_out"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "side_out"
+      },
+      "pose_prompt": "Restrained disagreement: feet planted; both hands raised slightly at mid-chest level with palms forward in a 'hold on' or 'wait' gesture; elbows away from ribs; torso upright but slightly tense; expression shows frustration but controlled. Keep gestures compact and readable; avoid wild arm movements.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_social_watchful_stand",
+      "name": "Watchful Stand",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "idle",
+        "observant",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Watchful standing posture: feet planted shoulder-width; hands relaxed at sides or one hand resting near belt; torso upright; head slightly turned as if scanning surroundings; alert but calm demeanor. Keep silhouette simple and readable.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_child_looking_up",
+      "name": "Child Looking Up",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "child",
+        "frontier-town",
+        "grounded",
+        "idle"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Child looking upward: feet together or slightly apart; hands relaxed at sides; head tilted back 20-30 degrees; attentive expression as if watching or listening to an adult. Keep silhouette compact.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_child_fidget_stand",
+      "name": "Child Fidgeting",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "child",
+        "frontier-town",
+        "grounded",
+        "idle"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Child fidgeting: weight shifted to one leg; one hand fiddling with clothing or scratching; other hand at side; slight twist in torso; restless but grounded posture.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_domestic_shawl_adjust",
+      "name": "Adjusting Shawl",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "domestic",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Adjusting shawl: feet planted; one or both hands raised to shoulder/neck area as if pulling or adjusting a shawl; keep hands close to body; head slightly tilted.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_domestic_bundle_carry",
+      "name": "Bundle Carry",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "domestic",
+        "work",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "two_handed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "small",
+          "medium"
+        ],
+        "action": "carry",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "small",
+          "medium"
+        ],
+        "action": "carry",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Two-handed bundle carry: both arms supporting a thick wrapped bundle at mid-chest height; elbows slightly out for clearance; feet planted; upright posture.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_social_idle_sway",
+      "name": "Idle Sway",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "idle",
+        "frontier-town",
+        "grounded",
+        "drunk"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Off-balance idle sway: feet wider apart than normal; weight shifted to one side; slight lean in torso; one hand near body for balance; relaxed but unsteady posture suggesting intoxication or fatigue.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_child_hands_in_pockets",
+      "name": "Child Hands In Pockets",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "child",
+        "idle",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Child with hands in pockets: feet slightly apart; both hands tucked into trouser or jacket pockets at hip level; shoulders slightly forward; closed-off posture; head neutral or slightly down.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_social_wall_lean",
+      "name": "Wall Lean",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "idle",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Casual wall lean: weight on one foot; other foot crossed or resting; shoulder tilted as if leaning against an implied surface; arms relaxed or crossed loosely; casual observant demeanor.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_social_gesture_point",
+      "name": "Pointing Gesture",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "social",
+        "gesture",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "side_out"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Pointing gesture: one arm extended side-out with index finger pointing; elbow slightly bent; other hand relaxed near body; torso turned toward pointing direction; clear directional indication.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_domestic_child_hold_side",
+      "name": "Holding Child At Side",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "domestic",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "one_hand_occupied",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "small"
+        ],
+        "action": "carry",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Holding child at side: one arm supporting a small bundled form (implied child) at hip level; other arm free at side; weight balanced; protective posture; careful stance.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_idle_lean_wall",
+      "name": "Idle Wall Lean",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "idle",
+        "frontier-town",
+        "grounded",
+        "watchful"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Idle lean with awareness: shoulder angled as if leaning on wall; arms loosely crossed or one hand near belt; feet planted with slight hip shift; alert expression; casual but watchful.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_tool_idle_vertical",
+      "name": "Tool Idle Stand",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "work",
+        "tool",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "one_hand_occupied",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "pole",
+          "staff"
+        ],
+        "action": "hold",
+        "orientation": "vertical"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Tool idle: one hand holding a long tool (broom, rake, shovel) vertically at side; tool butt near ground; other hand relaxed near body; upright resting stance.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_rest_crate_lean",
+      "name": "Crate Lean Rest",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "rest",
+        "work",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Crate rest: one foot propped on implied low surface; elbow or hand resting on raised knee; relaxed tired posture; other hand near body; taking a break stance.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_walk_slow",
+      "name": "Slow Walk",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "motion",
+        "walk",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "motion",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Slow measured walk: small stride mid-step; lead foot forward, trail foot planted; arms hanging naturally with minimal swing; deliberate careful gait; upright posture.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_carry_bucket_heavy",
+      "name": "Heavy Bucket Carry",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "work",
+        "carry",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "two_handed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "medium"
+        ],
+        "action": "carry",
+        "orientation": "side_out"
+      },
+      "off_hand": {
+        "prop_slot": "MAIN_HAND_PROP",
+        "prop_class": [
+          "medium"
+        ],
+        "action": "carry",
+        "orientation": "side_out"
+      },
+      "pose_prompt": "Two-handed bucket carry: both hands gripping bucket handle at chest or hip height; arms slightly away from body with weight evident; elbows out for clearance; strain visible in posture; feet planted wide.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_idle_arms_folded",
+      "name": "Idle Arms Folded",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "idle",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Reserved arms folded: forearms crossed at mid-chest with small air gaps from torso; feet together or slightly apart; upright closed posture; neutral or disapproving expression.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_vendor_present_open_palm",
+      "name": "Vendor Presentation",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "work",
+        "vendor",
+        "gesture",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "side_out"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "gesture",
+        "orientation": "side_out"
+      },
+      "pose_prompt": "Vendor presentation: one or both hands extended forward with palms up in presenting gesture; welcoming posture; slight lean forward; friendly expression; showcasing implied goods.",
+      "base_prompt": "Round base; minimal texture."
+    },
+    {
+      "pose_id": "cw_idle_hands_in_pockets",
+      "name": "Hands In Pockets",
+      "figure_type": "bipedal_humanoid",
+      "tags": [
+        "crowd",
+        "idle",
+        "frontier-town",
+        "grounded"
+      ],
+      "pose_style": "static",
+      "support_points": [
+        "left_foot",
+        "right_foot"
+      ],
+      "base_contact_plan": "flat",
+      "handedness_mode": "unarmed",
+      "prop_visibility_mode": "carried_attached",
+      "main_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "off_hand": {
+        "prop_slot": "NONE",
+        "prop_class": [
+          "none"
+        ],
+        "action": "rest",
+        "orientation": "close_in"
+      },
+      "pose_prompt": "Casual hands in pockets: both hands tucked into trouser or jacket pockets at hip level; shoulders relaxed; weight on one leg or evenly distributed; casual closed-off posture.",
+      "base_prompt": "Round base; minimal texture."
     }
   ]
 }

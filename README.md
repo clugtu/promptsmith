@@ -1,6 +1,6 @@
-# Garou Character Prompt System
+# PromptSmith
 
-A JSON-based system for organizing and generating AI image prompts for tabletop miniatures with nested refinements.
+A JSON-based system for organizing and generating AI image prompts with nested refinements. Designed for flexible prompt management with support for multiple characters, variants, poses, and hierarchical rule application.
 
 ## Overview
 
@@ -8,10 +8,15 @@ This system organizes character prompts with support for nested refinements. Eac
 
 ## File Structure
 
-- **`template.json`** - Generic template for creating new character databases
-- **`garou.json`** - Old West Werewolf Pack character database (9 characters, 45 refinements)
+- **`template.json`** - Generic template for creating new projects
 - **`create_image.py`** - Python script to generate images using OpenAI API
+- **`rules/`** - Directory for reusable rule definitions (optional)
+  - **`generic_render_rules.json`** - Universal rendering rules
+  - **`pose_library.json`** - Reusable pose definitions
 - **`readme.md`** - This file
+
+### Example Projects
+- **`garou.json`** - Old West Werewolf Pack (9 characters, 45 refinements) - demonstrates the system
 
 ## Addressing Syntax
 
@@ -188,59 +193,76 @@ The `thematic_rules` section supports project-wide theming:
 ### Script Usage
 
 ```powershell
-# Activate conda environment (if needed)
-conda activate sc
-
 # List all available characters and refinements
-python create_image.py garou.json --list
+python create_image.py myproject.json --list
 
-# Generate prompts for all forms of a character (default behavior)
-python create_image.py garou.json 1 --dry-run
-python create_image.py garou.json alpha --prompt-only
+# Generate prompts for all refinements of a character (default behavior)
+python create_image.py myproject.json 1 --dry-run
+python create_image.py myproject.json hero_name --prompt-only
 
-# Generate prompt for a specific form
-python create_image.py garou.json 1:3 --dry-run
-python create_image.py garou.json alpha:crinos --dry-run
+# Generate prompt for a specific refinement
+python create_image.py myproject.json 1:3 --dry-run
+python create_image.py myproject.json hero_name:variant --dry-run
 
 # Generate actual images (requires OpenAI API key)
 $env:OPENAI_API_KEY = "your-key-here"
-python create_image.py garou.json 1              # All forms for character 1
-python create_image.py garou.json alpha:human    # Just human form
+python create_image.py myproject.json 1              # All refinements for character 1
+python create_image.py myproject.json hero_name:variant  # Specific variant
 
 # Copy prompt to clipboard (Windows)
-python create_image.py garou.json 1:1 --dry-run --copy
+python create_image.py myproject.json 1:1 --dry-run --copy
 
 # Remove miniature base from prompt
-python create_image.py garou.json 1:1 --no-base
+python create_image.py myproject.json 1:1 --no-base
 
 # Exclude generic or miniature rules
-python create_image.py garou.json 1:1 --no-generic
-python create_image.py garou.json 1:1 --no-miniature
+python create_image.py myproject.json 1:1 --no-generic
+python create_image.py myproject.json 1:1 --no-miniature
 
-# Use a different JSON file
-python create_image.py myproject.json 1 --dry-run
-python create_image.py template.json --list
+# Generate reference sheets (multiple poses in one prompt)
+python create_image.py myproject.json --page 1 --prompt-only --copy  # First 9 poses
+python create_image.py myproject.json --page 2 --prompt-only --copy  # Poses 10-18
+python create_image.py myproject.json --page all --prompt-only       # All pages
+
+# Example using the garou.json demo project
+python create_image.py garou.json alpha:human --dry-run
+python create_image.py garou.json --list
 ```
 
 ### Command-Line Options
 
-- **`filename`** - JSON file to use (required, first argument)
+#### Required Arguments
+- **`filename`** - JSON file to use (e.g., `garou.json`, `myproject.json`)
 - **`character`** - Character ID or path (positional or `--character/-c`)
   - Format: `1`, `alpha`, `1:2`, or `alpha:human`
   - If only character specified (e.g., `1` or `alpha`), generates all refinements
   - If full path specified (e.g., `1:2`), generates only that specific refinement
-- `--form, -f` - Refinement/form (e.g., `human`, `crinos`) - alternative to path syntax
-- `--json, -j` - Alternative way to specify JSON file (overrides positional argument)
+  - Not required when using `--list` or `--reference-sheet`
+
+#### Output Options
 - `--out` - Output directory (default: `./out`)
 - `--model` - OpenAI model (default: `gpt-image-1`)
 - `--size` - Image size (default: `1024x1024`)
+
+#### Preview & Clipboard Options
 - `--dry-run` - Print prompt only, don't call API
 - `--prompt-only` - Alias for `--dry-run`
-- `--copy` - Copy prompt to clipboard (Windows)
-- `--list` - List all available characters/refinements
-- `--all` - (Optional) Explicitly request all refinements - same as omitting form
+- `--copy` - Copy prompt to clipboard (Windows only)
+
+#### Selection Options
+- `--json, -j` - Alternative way to specify JSON file (overrides positional filename)
+- `--list` - List all available characters/refinements and exit
+- `--all` - Generate all refinements for specified character (default behavior when no refinement path specified)
+- `--page, -p` - Generate reference sheet for a specific page number (each page shows up to 9 poses)
+  - Page 1: poses 1-9
+  - Page 2: poses 10-18
+  - Page 3: poses 19-27, etc.
+  - Use `all` to generate all pages
+  - Examples: `--page 1`, `--page 2`, `--page all`
+
+#### Rule Modification Options
 - `--no-miniature` - Don't append miniature scale rules
-- `--no-base` - Remove base/stand from miniature rules
+- `--no-base` - Remove base/stand from miniature rules (keeps miniature styling)
 - `--no-generic` - Don't append generic render rules
 
 ## Workflow for Creating New Projects
@@ -320,7 +342,9 @@ The final prompt is constructed in this order:
 
 This layering ensures consistent theming across all variants while allowing refinement-specific details.
 
-## Examples from Garou Pack
+## Example Project: Garou Pack
+
+The included `garou.json` demonstrates the system's capabilities with a complete Old West werewolf pack project.
 
 ### Character List
 1. **Alpha** (The Iron Wolf) - Native American war leader
