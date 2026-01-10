@@ -287,9 +287,18 @@ def compose_pose_prompt_from_library(
     # Find the pose in the library
     library_pose = find_pose_in_library(pose_library, pose_ref)
     if not library_pose:
+        # Fall back to embedded pose definition if available
+        if "pose_prompt" in pose_def:
+            print(f"⚠️  Warning: Pose '{pose_ref}' not found in library, using embedded pose definition", file=sys.stderr)
+            character_override = pose_def.get("character_override", "")
+            pose_prompt = pose_def.get("pose_prompt", "")
+            camera_rotation = pose_def.get("camera_rotation")
+            return character_override, pose_prompt, camera_rotation
+        
+        # If no embedded definition, raise error
         available_ids = [p.get("pose_id", "?") for p in pose_library.get("poses", [])[:15]]
         raise PromptNotFoundError(
-            f"Pose '{pose_ref}' not found in pose library.\n"
+            f"Pose '{pose_ref}' not found in pose library and no embedded 'pose_prompt' provided.\n"
             f"Available poses (first 15): {', '.join(available_ids)}"
         )
     
@@ -711,7 +720,7 @@ def resolve_prompt_from_json(
     character: Optional[Union[int, str]] = None,
     form: Optional[str] = None,
     refinement_path: Optional[str] = None
-) -> Tuple[str, List[str], Optional[str], str, List[str], str, Optional[int]]:
+) -> Tuple[str, List[str], Optional[str], str, str, List[str], str, Optional[int]]:
     """Resolve a prompt from JSON using various addressing methods.
     
     Args:
@@ -721,7 +730,7 @@ def resolve_prompt_from_json(
         refinement_path: Full path like '1:1' or 'alpha:human'
     
     Returns:
-        Tuple of (prompt string, list of thematic snippets, gender or None, proportions string, equipment list, pose_prompt, camera_rotation)
+        Tuple of (prompt string, list of thematic snippets, gender or None, proportions string, age string, equipment list, pose_prompt, camera_rotation)
     """
     # Extract form definitions once
     thematic_forms = extract_thematic_forms(json_data)
@@ -760,6 +769,10 @@ def resolve_prompt_from_json(
     # Get proportions from character data
     proportions = char_data.get("proportions", "").strip()
     
+    # Get age from character tags
+    tags = char_data.get("tags", {})
+    age = tags.get("age", "") if isinstance(tags, dict) else ""
+    
     # Get gender from character data (refinements may override)
     char_gender = char_data.get("gender", None)
     
@@ -789,20 +802,21 @@ def resolve_prompt_from_json(
             
             # Check if this is a pose library reference
             pose_prompt = ""
+            camera_rotation = None
             if single_pose and "pose_library_ref" in single_pose and pose_library:
-                character_override, pose_prompt = compose_pose_prompt_from_library(
+                character_override, library_pose_prompt, camera_rotation = compose_pose_prompt_from_library(
                     char_data, single_pose, pose_library, json_data, equipment
                 )
-                # Use character_override for appearance/expression additions if present
+                # Combine library pose with character override (additive)
                 if character_override:
-                    final_prompt = character_override
+                    pose_prompt = f"{library_pose_prompt}. {character_override}" if library_pose_prompt else character_override
                 else:
-                    final_prompt = character_base or char_data.get("description", "")
-            else:
-                # Use character_base or description as the prompt
-                final_prompt = character_base or char_data.get("description", "")
+                    pose_prompt = library_pose_prompt
             
-            return final_prompt, thematic, gender, proportions, equipment, pose_prompt
+            # Always use character_base or description as the character prompt
+            final_prompt = character_base or char_data.get("description", "")
+            
+            return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation
         
         # Return the first item's prompt and its thematic snippet
         first_item = items_to_search[0]
@@ -838,24 +852,25 @@ def resolve_prompt_from_json(
         pose_prompt = ""
         camera_rotation = None
         if "pose_library_ref" in first_item and pose_library:
-            character_override, pose_prompt, camera_rotation = compose_pose_prompt_from_library(
+            character_override, library_pose_prompt, camera_rotation = compose_pose_prompt_from_library(
                 char_data, first_item, pose_library, json_data, equipment
             )
-            # Use character_override for appearance/expression additions
-            refinement_prompt = character_override if character_override else ""
+            # Combine library pose with character override (additive)
+            if character_override:
+                pose_prompt = f"{library_pose_prompt}. {character_override}" if library_pose_prompt else character_override
+            else:
+                pose_prompt = library_pose_prompt
         else:
-            refinement_prompt = first_item.get("prompt", "")
+            # No pose library, check for inline prompt
+            inline_prompt = first_item.get("prompt", "")
+            if inline_prompt and not inline_prompt.startswith("SUBJECT:"):
+                # This is a pose-specific addition, add it to pose_prompt
+                pose_prompt = inline_prompt
         
-        # Prepend character_base to refinement prompt if present
-        # Skip if refinement_prompt uses structured format (starts with "SUBJECT:")
-        if character_base and refinement_prompt and not refinement_prompt.startswith("SUBJECT:"):
-            final_prompt = f"{character_base}, {refinement_prompt}"
-        elif character_base:
-            final_prompt = character_base
-        else:
-            final_prompt = refinement_prompt
+        # Always use character_base or description as the character prompt
+        final_prompt = character_base or char_data.get("description", "")
 
-        return final_prompt, thematic, gender, proportions, equipment, pose_prompt, camera_rotation
+        return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation
     
     # Find the item (pose or refinement)
     item = find_refinement_by_id_or_name(items_to_search, form)
@@ -901,24 +916,25 @@ def resolve_prompt_from_json(
     pose_prompt = ""
     camera_rotation = None
     if "pose_library_ref" in item and pose_library:
-        character_override, pose_prompt, camera_rotation = compose_pose_prompt_from_library(
+        character_override, library_pose_prompt, camera_rotation = compose_pose_prompt_from_library(
             char_data, item, pose_library, json_data, equipment
         )
-        # Use character_override for appearance/expression additions
-        refinement_prompt = character_override if character_override else ""
+        # Combine library pose with character override (additive)
+        if character_override:
+            pose_prompt = f"{library_pose_prompt}. {character_override}" if library_pose_prompt else character_override
+        else:
+            pose_prompt = library_pose_prompt
     else:
-        refinement_prompt = item.get("prompt", "")
+        # No pose library, check for inline prompt
+        inline_prompt = item.get("prompt", "")
+        if inline_prompt and not inline_prompt.startswith("SUBJECT:"):
+            # This is a pose-specific addition, add it to pose_prompt
+            pose_prompt = inline_prompt
     
-    # Prepend character_base to refinement prompt if present
-    # Skip if refinement_prompt uses structured format (starts with "SUBJECT:")
-    if character_base and refinement_prompt and not refinement_prompt.startswith("SUBJECT:"):
-        final_prompt = f"{character_base}, {refinement_prompt}"
-    elif character_base:
-        final_prompt = character_base
-    else:
-        final_prompt = refinement_prompt
+    # Always use character_base or description as the character prompt
+    final_prompt = character_base or char_data.get("description", "")
 
-    return final_prompt, thematic, gender, proportions, equipment, pose_prompt, camera_rotation
+    return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation
 
 
 def build_final_prompt(
@@ -928,6 +944,7 @@ def build_final_prompt(
     thematic_snippets: List[str] = None,
     thematic_general: str = "",
     proportions: str = "",
+    age: str = "",
     default_proportions: str = "",
     style_snippet: str = "",
     generic_snippet,  # Can be str or dict of sections
@@ -949,6 +966,7 @@ def build_final_prompt(
         thematic_snippets: Thematic form snippets
         thematic_general: General thematic prompt
         proportions: Character proportions
+        age: Character age (child, teen, young_adult, adult, older, elder)
         default_proportions: Default proportions if character has none
         style_snippet: Style rules
         generic_snippet: Generic render rules (str or dict of sections)
@@ -975,7 +993,12 @@ def build_final_prompt(
     # CHARACTER section
     character_parts = [base_prompt.strip().rstrip(",")]
     
-    # Add gender hint if provided and not already explicitly stated
+    # Add age and gender as demographic descriptors
+    demographic_parts = []
+    
+    if age:
+        demographic_parts.append(age.lower())
+    
     if gender:
         gender_lower = gender.lower()
         base_lower = base_prompt.lower()
@@ -986,9 +1009,13 @@ def build_final_prompt(
             'feminine', 'masculine'
         ])
         
-        # Add gender to all forms unless already present
+        # Add gender unless already present
         if not has_gender:
-            character_parts.append(f"{gender_lower}")
+            demographic_parts.append(gender_lower)
+    
+    # Add demographics to character description
+    if demographic_parts:
+        character_parts.append(" ".join(demographic_parts))
     
     sections.append("CHARACTER:\n" + ", ".join(p.strip().rstrip(",") for p in character_parts if p.strip()))
     
@@ -1069,7 +1096,7 @@ def build_final_prompt(
     if no_base:
         sections.append("BASE EXCLUSION:\nno base, no stand, not mounted, no plinth, no pedestal, no ground plane")
     
-    return "\n\n".join(sections)
+    return "create image\n\n" + "\n\n".join(sections)
 
 
 def list_available_from_json(json_data: Dict[str, Any]) -> str:
@@ -1259,22 +1286,46 @@ def handle_reference_sheet(
             try:
                 # If form_id is None, it means single-pose character without refinements
                 if form_id is None:
-                    prompt0, thematic_snip, gender, char_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+                    prompt0, thematic_snip, gender, char_proportions, age, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
                         json_data=json_data,
                         character=char_id,
                         form=None,
                     )
                 else:
-                    prompt0, thematic_snip, gender, char_proportions, equipment, pose_prompt = resolve_prompt_from_json(
+                    prompt0, thematic_snip, gender, char_proportions, age, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
                         json_data=json_data,
                         character=char_id,
                         form=form_id,
                     )
                 
-                # Build complete description including pose and equipment
-                desc_parts = [prompt0]
+                # Build character description using same logic as single image generation
+                desc_parts = []
                 
-                # Add equipment/props if present
+                # CHARACTER section with age/gender
+                char_parts = [prompt0.strip().rstrip(",")]
+                
+                # Add age and gender as demographic descriptors
+                demographic_parts = []
+                if age:
+                    demographic_parts.append(age.lower())
+                if gender:
+                    gender_lower = gender.lower()
+                    base_lower = prompt0.lower()
+                    # Check for explicit gender words
+                    has_gender = any(word in base_lower for word in [
+                        'female', 'male', 'woman', 'man ', ' man,', 'girl', 'boy',
+                        'feminine', 'masculine'
+                    ])
+                    if not has_gender:
+                        demographic_parts.append(gender_lower)
+                
+                if demographic_parts:
+                    char_parts.append(" ".join(demographic_parts))
+                
+                character_desc = ", ".join(p.strip().rstrip(",") for p in char_parts if p.strip())
+                desc_parts.append(f"CHARACTER: {character_desc}")
+                
+                # PROPS section if present
                 if equipment:
                     props_list = []
                     for item in equipment:
@@ -1291,11 +1342,15 @@ def handle_reference_sheet(
                         else:
                             props_list.append(item)
                     if props_list:
-                        desc_parts.append(f"Props: {'; '.join(props_list)}")
+                        desc_parts.append(f"PROPS: {'; '.join(props_list)}")
                 
-                # Add pose library description if present
+                # POSE section if present
                 if pose_prompt:
-                    desc_parts.append(f"Pose: {pose_prompt}")
+                    desc_parts.append(f"POSE: {pose_prompt}")
+                
+                # PROPORTIONS section if present
+                if char_proportions:
+                    desc_parts.append(f"PROPORTIONS: {char_proportions}")
                 
                 full_description = ". ".join(desc_parts)
                 character_descriptions.append(f"Figure {idx}: {full_description}")
@@ -1309,12 +1364,13 @@ def handle_reference_sheet(
         # Build the combined prompt as a natural image generation prompt
         parts = []
         
-        # Opening instruction
+        # Opening instruction with aspect ratio specification
         if len(batches) > 1:
-            parts.append(f"Create a reference sheet image showing {len(character_descriptions)} tabletop miniature figures arranged in a 3x3 grid layout (page {batch_num} of {len(batches)}).")
+            parts.append(f"create image\n\nCreate a reference sheet image showing {len(character_descriptions)} tabletop miniature figures arranged in a 3x3 grid layout (page {batch_num} of {len(batches)}).")
         else:
-            parts.append(f"Create a reference sheet image showing {len(character_descriptions)} tabletop miniature figures arranged in a 3x3 grid layout.")
+            parts.append(f"create image\n\nCreate a reference sheet image showing {len(character_descriptions)} tabletop miniature figures arranged in a 3x3 grid layout.")
         
+        parts.append("Image format: 3:4 aspect ratio (portrait orientation).")
         parts.append("Each figure is a separate miniature sculpt with full body visible, clearly separated with white space between them.")
         parts.append("CRITICAL: All figures must be completely in frame from head to toe with no clipping at any edges. Full body visibility is mandatory for every figure.")
         parts.append("")
@@ -1547,7 +1603,7 @@ def main(argv: list[str] | None = None) -> int:
                 for ref in items_to_process:
                     ref_name = ref.get("name", "")
                     # Use resolve_prompt_from_json to handle pose library references
-                    p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
+                    p0, thematic_snip, gender_for_prompt, ref_proportions, age, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
                         json_data, character=character_id, form=ref_name
                     )
                     # Use character proportions if ref doesn't have its own
@@ -1558,6 +1614,7 @@ def main(argv: list[str] | None = None) -> int:
                         thematic_snippets=thematic_snip,
                         thematic_general=thematic_general,
                         proportions=proportions_to_use,
+                        age=age,
                         default_proportions=default_proportions,
                         style_snippet=style_snippet,
                         generic_snippet=generic_snippet,
@@ -1599,7 +1656,7 @@ def main(argv: list[str] | None = None) -> int:
             for ref in items_to_process:
                 ref_name = ref.get("name", "")
                 # Use resolve_prompt_from_json to handle pose library references
-                p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
+                p0, thematic_snip, gender_for_prompt, ref_proportions, age, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
                     json_data, character=character_id, form=ref_name
                 )
                 # Use character proportions if ref doesn't have its own
@@ -1610,6 +1667,7 @@ def main(argv: list[str] | None = None) -> int:
                     thematic_snippets=thematic_snip,
                     thematic_general=thematic_general,
                     proportions=proportions_to_use,
+                    age=age,
                     default_proportions=default_proportions,
                     style_snippet=style_snippet,
                     generic_snippet=generic_snippet,
@@ -1689,8 +1747,10 @@ def main(argv: list[str] | None = None) -> int:
             for ref in items_to_process:
                 ref_name = ref.get("name", "")
                 # Use resolve_prompt_from_json to handle pose library references
-                p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
-                    json_data, character=character_id, form=ref_name
+                # For single-pose characters, pass form=None to use the pose object directly
+                form_to_pass = None if (single_pose and not poses and not refinements) else ref_name
+                p0, thematic_snip, gender_for_prompt, ref_proportions, age, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
+                    json_data, character=character_id, form=form_to_pass
                 )
                 # Use character proportions if ref doesn't have its own
                 proportions_to_use = ref_proportions if ref_proportions else char_proportions
@@ -1700,6 +1760,7 @@ def main(argv: list[str] | None = None) -> int:
                     thematic_snippets=thematic_snip,
                     thematic_general=thematic_general,
                     proportions=proportions_to_use,
+                    age=age,
                     default_proportions=default_proportions,
                     style_snippet=style_snippet,
                     generic_snippet=generic_snippet,
@@ -1725,8 +1786,10 @@ def main(argv: list[str] | None = None) -> int:
         for ref in items_to_process:
             ref_name = ref.get("name", "")
             # Use resolve_prompt_from_json to handle pose library references
-            p0, thematic_snip, gender_for_prompt, ref_proportions, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
-                json_data, character=character_id, form=ref_name
+            # For single-pose characters, pass form=None to use the pose object directly
+            form_to_pass = None if (single_pose and not poses and not refinements) else ref_name
+            p0, thematic_snip, gender_for_prompt, ref_proportions, age, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
+                json_data, character=character_id, form=form_to_pass
             )
             # Use character proportions if ref doesn't have its own
             proportions_to_use = ref_proportions if ref_proportions else char_proportions
@@ -1736,6 +1799,7 @@ def main(argv: list[str] | None = None) -> int:
                 thematic_snippets=thematic_snip,
                 thematic_general=thematic_general,
                 proportions=proportions_to_use,
+                age=age,
                 default_proportions=default_proportions,
                 style_snippet=style_snippet,
                 generic_snippet=generic_snippet,
@@ -1758,7 +1822,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     # Single (character, form) - form_id must be specified to reach here
-    prompt0, thematic_snip, gender, char_proportions, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
+    prompt0, thematic_snip, gender, char_proportions, age, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
         json_data, character=character_id, form=form_id
     )
     
@@ -1772,6 +1836,7 @@ def main(argv: list[str] | None = None) -> int:
         thematic_snippets=thematic_snip,
         thematic_general=thematic_general,
         proportions=char_proportions,
+        age=age,
         default_proportions=default_proportions,
         style_snippet=style_snippet,
         generic_snippet=generic_snippet,
