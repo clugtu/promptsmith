@@ -1,0 +1,206 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$comment": "Weird West Vampire Hunters - Sisters of the Crimson Veil",
+  "imports": {
+    "generic_render_rules": "rules/generic_render_rules.json",
+    "style_rules": "rules/realistic_weird_west_style.json"
+  },
+  "metadata": {
+    "title": "Sisters of the Crimson Veil",
+    "version": "1.0.0",
+    "description": "Six-nun vampire-hunter warband for a Weird West setting. Ragged habit remnants worn like cloaks; battle-worn frontier gear underneath."
+  },
+  "thematic_rules": {
+    "description": "Shared faction theme applied to all sister prompts",
+    "theme": "Weird West Vampire Hunters - Sisters of the Crimson Veil",
+    "character_archetype": "Fanatical but disciplined vampire hunters traveling as a six-sister cell; religious relics, frontier survival gear, and period weapons",
+    "prompt_snippet": "weird west, old west vampire hunters, nun remnants worn like ragged cloaks, frontier battle gear, worn leathers, improvised 1800s wastelander style, crosses, crucifixes, rosary beads, holy relics, strong readable silhouette, miniature-friendly",
+    "forms": {
+      "habit_rule": "Habit is NOT a full garment. Only ragged cloak/mantle/cowl remnants; face and most battle gear visible.",
+      "gear_rule": "Avoid fantasy armor. Protection is frontier layers: butcher/leather aprons, canvas wraps, saddle leather, scrap tin/iron bits, belts, pouches.",
+      "artifact_rule": "Relics must read clearly: crosses, rosaries, nailed icons, reliquary vials, scripture strips."
+    }
+  },
+  "characters": [
+    {
+      "id": 1,
+      "name": "Sister Magdalene Graves",
+      "archetype": "leader_blaster",
+      "description": "The cell leader and executioner-shotgun verdicts and cold authority.",
+      "visual_notes": "Tall, commanding stance; ragged mantle like a judge’s cloak; hard eyes; minimal ornament beyond one dominant crucifix. Battle gear reads frontier: belts, shell loops, heavy leather apron under cloak.",
+      "proportions": "Tall imposing build (6 feet); broad shoulders; strong frame; commanding presence; grounded authoritative stance.",
+      "character_base": "Old West vampire-hunting nun (female, older) wearing a torn black mantle-cloak (no full habit); NO skirt, NO loin cloth. Rugged frontier layers: worn leathers, butcher apron, fitted trousers (NOT a skirt) showing full legs from hip to ankle, frontier boots, belts, shell loops. Adorned with large iron crucifix on chest, rosary beads wrapped around belt, small silver cross pinned to shoulder, reliquary vial on chain. Wields 1880s double-barrel break-action shotgun: two side-by-side barrels (exactly two barrels, NOT three); exposed hammers on top; full-length wooden shoulder stock with flat butt plate; distinct break-action hinge at breech; classic Old West shotgun profile. Simple feminine face; grim hardened expression; weathered but feminine.",
+      "poses": [
+        {
+          "id": 1,
+          "name": "shotgun_low_ready",
+          "description": "Execution-ready stance, weapon controlled and readable.",
+          "camera_rotation": 45,
+          "prompt": "Standing with feet planted shoulder-width; period-accurate 1880s double-barrel break-action shotgun held firmly in both hands at low-ready angled slightly down and away from torso; shotgun clearly shows TWO side-by-side barrels (exactly two parallel barrels, NOT three), exposed hammers on top of breech, full-length wooden shoulder stock extending rearward with flat butt plate; break-action hinge visible at breech; both hands gripping weapon securely (rear hand on stock near trigger, front hand on forearm); elbows kept clear for silhouette; head forward, eyes locked ahead; cloak remnants drape off shoulders but firmly attached at neck, not floating; face unobstructed; compact, authoritative posture."
+        },
+        {
+          "id": 2,
+          "name": "shotgun_advancing_stride",
+          "description": "Aggressive forward stride with shotgun raised.",
+          "camera_rotation": 45,
+          "prompt": "Dynamic advancing pose: front leg stepping forward mid-stride with knee bent bearing weight, back leg pushing off with heel raised; period-accurate double-barrel shotgun with TWO side-by-side barrels raised high at head/shoulder level pointed forward; arms extended outward from body showing weapon profile; body leaning aggressively into forward motion; cloak streaming backward from movement, attached at shoulders; face showing grim determination; powerful striding motion captured mid-step; completely different body angle from standing pose."
+        }
+      ],
+      "tags": {
+        "gender": "female",
+        "age": "older",
+        "trope": "blaster"
+      }
+    },
+    {
+      "id": 2,
+      "name": "Sister Mercy Calder",
+      "archetype": "scrapper_gunfighter",
+      "description": "Close-range scrapper with dual pistols-controlled crossfire and relentless pressure.",
+      "visual_notes": "Sleeves rolled; hands steady; cloak scraps tied at shoulders like a short ragged shawl; bandage wraps; tool pouches; twin holsters visible. Calm eyes, surgical focus rather than swagger.",
+      "proportions": "Average height (5'6\"); athletic agile build; lean frame; quick balanced stance; forward-leaning ready posture.",
+      "character_base": "Old West vampire-hunting nun (female, adult) wearing ragged habit scraps as a short cloak/shawl (no full habit); NO skirt, NO loin cloth. Fitted trousers (NOT a skirt) showing full legs, frontier boots, bandage wraps and pouches. Wields two 1880s single-action revolvers: visible cylinder with six chambers, exposed hammer, classic Old West revolver profile with wooden grips; rosary beads wrapped around wrist, small silver crosses on both pistol grips, reliquary vials on belt, wooden crucifix dangling from belt, blessed medallion on bandolier strap. Simple feminine face; confident subtle grin; youthful.",
+      "poses": [
+        {
+          "id": 1,
+          "name": "dual_pistols_static",
+          "description": "Standing straight up, pistols in both hands to the side.",
+          "camera_rotation": 45,
+          "prompt": "Standing tall and motionless, Sister Mercy faces forward in a stark, cinematic tableau. Both arms hang straight at her sides, each hand gripping a period-accurate 1880s single-action revolver—barrels angled down, parallel to her legs, not yet raised. The pistols' six-chamber cylinders and exposed hammers catch the light; wooden grips frame her silhouette. Feet together, posture perfectly upright, she radiates a poised, unspoken threat—like a gunfighter awaiting the signal. Her cloak remnants drape from her shoulders, falling in sharp lines that echo her stillness. Her face is calm, eyes fixed ahead, the entire scene charged with tension and anticipation, as if the world is holding its breath before the draw."
+        },
+        {
+          "id": 2,
+          "name": "diving_crossfire",
+          "description": "Sideways diving leap with dual pistols firing.",
+          "camera_rotation": 45,
+          "prompt": "Dynamic grounded action: Sister Mercy lunges sideways, one foot planted firmly on the ground for full 3D print stability, the other leg extended behind in a dramatic push-off. Both arms are fully extended away from her body, each hand gripping a period-accurate 1880s single-action revolver at different angles, creating a bold crossfire silhouette. The revolvers' six-chamber cylinders and exposed hammers are clearly readable, with wooden grips visible. Her cloak streams horizontally from the motion but remains attached at the shoulders, never floating. All gear is secured tightly to her belt—no loose or floating elements. Her face is simple, with a clear, confident expression and minimal fine detail, ensuring strong readability at 35mm scale. The entire pose is designed for miniature printing: no unsupported limbs, all major forms thick and distinct, and every detail large enough to render cleanly in 3D."
+        }
+      ],
+      "tags": {
+        "gender": "female",
+        "age": "adult",
+        "trope": "scrapper"
+      }
+    },
+    {
+      "id": 3,
+      "name": "Sister Ruth Holloway",
+      "archetype": "scrapper_hunter",
+      "description": "Skirmisher and hunter-precision positioning, knife finish, rifle setup.",
+      "visual_notes": "Lean trail silhouette; one-shoulder cloak panel; dust wraps; minimal kit; knife carried high; watchful eyes; hair practical. Relics small but obvious: a simple cross charm, rosary segment tied to belt.",
+      "proportions": "Petite build (5'3\"); lean wiry frame; light on feet; compact hunter silhouette; agile ready posture.",
+      "character_base": "Old West vampire-hunting nun (female, adult) with a split ragged cloak panel worn off one shoulder (no full habit); NO skirt, NO loin cloth. Trail gear: dust wraps, worn leathers, fitted trousers (NOT a skirt) showing full legs from hip to ankle, frontier boots, minimal pouches. Wields 1880s lever-action rifle: prominent lever loop beneath receiver, tubular magazine under barrel, wooden stock and forearm, classic Old West repeating rifle profile; Bowie knife worn chest-high; small cross charm necklace, rosary segment tied to belt, silver crucifix wired to rifle stock, blessed icon pinned to vest. Simple feminine face; stoic unreadable expression.",
+      "poses": [
+        {
+          "id": 1,
+          "name": "rifle_sling_knife_ready",
+          "description": "Hunter posture-rifle present, knife ready.",
+          "camera_rotation": 45,
+          "prompt": "Standing with torso slightly turned; period-accurate 1880s lever-action repeating rifle prominently displayed (ICONIC LEVER LOOP clearly visible beneath receiver forming distinctive loop shape, tubular magazine running under barrel, wooden stock and forearm, classic Winchester-style profile) held low in off hand angled to show lever mechanism; main hand rests on Bowie knife grip (knife securely sheathed at chest); rifle's lever-action mechanism is the focal point; head turned as if scanning; feet planted firmly; cloak remnants trail behind shoulder, attached at neck, not covering gear; calm alert expression; compact silhouette emphasizing the distinctive lever-action rifle."
+        },
+        {
+          "id": 2,
+          "name": "running_rifle_ready",
+          "description": "Dynamic running stride with lever-action rifle raised.",
+          "camera_rotation": 45,
+          "prompt": "Dynamic running pose captured mid-stride: front leg forward with knee high and bent, back leg extended behind pushing off with toe; period-accurate 1880s lever-action repeating rifle held up at chest/shoulder height in running carry; ICONIC LEVER LOOP clearly visible beneath receiver, tubular magazine running under barrel, wooden stock and forearm distinct; rifle angled diagonally across body away from torso for visibility; both arms bent holding rifle with elbows out creating negative space; body leaning forward into run; head turned slightly looking ahead; cloak streaming dramatically backward from running motion, attached at shoulders; stoic hunter expression; weight shifting forward dynamically; entire pose shows agile movement and mobility; rifle clearly readable in profile."
+        }
+      ],
+      "tags": {
+        "gender": "female",
+        "age": "adult",
+        "trope": "scrapper"
+      }
+    },
+    {
+      "id": 4,
+      "name": "Sister Agnes Blackthorn",
+      "archetype": "tank_melee",
+      "description": "The tank and melee master-an immovable breaker who draws the fight.",
+      "visual_notes": "Scarred, muscular; habit reduced to a shredded cowl/mantle strip; heavy gloves; layered belts; crude tin/iron bits wired onto clothing; huge iron crossbreaker dominates silhouette.",
+      "proportions": "Amazonian build (6'2\"); powerful muscular frame; broad shoulders; heavy set; imposing physical presence; planted immovable stance.",
+      "character_base": "Old West vampire-hunting nun (female, adult) wearing shredded habit remnants as a ragged cowl and mantle strips (no full habit); NO skirt, NO loin cloth. Frontier wastelander layers: saddle leather straps, canvas wraps, fitted trousers (NOT a skirt) showing full legs, heavy boots, scrap tin bits. Wields massive two-handed war hammer forged from an old huge iron crucifix: heavy iron hammerhead shows crucifix origin (crossbar visible across top forming T-shape, vertical beam forms striking face), long wooden haft (handle) extending full arm's length or longer, giant sledgehammer profile with elongated handle; the weapon clearly reads as a repurposed crucifix beaten into a brutal hammer; multiple small crosses nailed to leather straps, rosary beads woven into belt, iron crucifix charm on chest, blessed coins sewn into mantle. Simple feminine face; silent rage barely contained; clenched jaw.",
+      "poses": [
+        {
+          "id": 1,
+          "name": "two_hand_hammer_guard",
+          "description": "Static guard pose—massive hammer held low and horizontal in both hands.",
+          "camera_rotation": 45,
+          "prompt": "Standing with feet planted wide and solid, Sister Agnes grips her massive two-handed war hammer forged from an old crucifix with both hands, holding it low and horizontally in front of her thighs. The long wooden haft (handle) is parallel to the ground, elbows slightly bent, hammerhead facing left or right, clearly showing the crucifix origin (crossbar and vertical beam forming a T-shape). Shoulders squared, chin down, expression stoic and immovable. Cloak remnants hang from neck and shoulders, attached and not floating, leaving the weapon and hands fully visible. The pose is static, defensive, and grounded—ready to block or absorb impact, with the hammer forming a strong horizontal line across her body."
+        },
+        {
+          "id": 2,
+          "name": "hammer_overhead_strike",
+          "description": "Overhead strike ready position with hammer raised high.",
+          "camera_rotation": 45,
+          "prompt": "Dynamic overhead strike pose: wide stable stance with feet planted shoulder-width or wider; both hands gripping massive two-handed war hammer forged from old crucifix; hammer raised HIGH overhead behind head with arms extended upward; LARGE heavy iron hammerhead clearly visible above showing crucifix origin (crossbar and vertical beam forming T-shape) at highest point; long wooden haft held vertically or slightly angled; body upright and stable with slight lean back; chest open; cloak hanging down from shoulders, attached; face showing determined fury looking forward at target; arms and hammer create clear vertical line above body; weapon fully visible and separated from body with strong negative space; powerful grounded stance ready to bring hammer down."
+        }
+      ],
+      "tags": {
+        "gender": "female",
+        "age": "adult",
+        "trope": "tank"
+      }
+    },
+    {
+      "id": 5,
+      "name": "Sister Beatrice Hale",
+      "archetype": "blaster_control",
+      "description": "Control blaster-silent suppression with a heavy crossbow and ritual calm.",
+      "visual_notes": "Gaunt, composed; mantle covered with stitched prayer strips; belts with bolt cases and small reliquary charms; crossbow looks heavy, wood-and-iron; eyes unwavering. Optional chain censer clipped at belt (not required in pose).",
+      "proportions": "Tall slender build (5'10\"); gaunt frame; deliberate measured posture; still watchful stance.",
+      "character_base": "Old West vampire-hunting nun (female, older) with ragged mantle-cloak stitched with scripture strips (no full habit); NO skirt, NO loin cloth. Fitted trousers (NOT a skirt) showing full legs from hip to ankle, frontier boots. Belt with bolt cases, multiple reliquary charms, rosary beads draped from belt, silver crucifix on chest chain, blessed icons sewn to mantle edges, small crosses pinned to bolt cases. Wields crossbow (medieval weapon for shooting bolts/arrows): thick chunky horizontal bow arms made of heavy solid wood or reinforced horn limbs mounted perpendicular across top of thick wooden stock (forms T-shape or cross shape when viewed from front); bow arms are THICK and SOLID with substantial depth for printability; straight arrow-like bolt resting in groove along top of stock; heavy trigger mechanism hangs below stock; NO strings or bowstrings visible; held like a rifle but with perpendicular bow; NOT a gun. Simple feminine face; serene otherworldly expression; pale.",
+      "poses": [
+        {
+          "id": 1,
+          "name": "crossbow_low_ready",
+          "description": "Low ready stance-crossbow angled for clear profile.",
+          "camera_rotation": 45,
+          "prompt": "Standing with feet braced; crossbow (medieval bolt-shooting weapon, NOT a gun) held in both hands angled downward to the right at waist/hip level for maximum visibility; weapon clearly shows thick chunky horizontal bow arms mounted perpendicular across heavy wooden stock forming T-shape or cross shape, bow arms are SOLID and THICK with substantial depth, straight arrow-like bolt resting in groove on top of stock, heavy trigger mechanism hanging below stock, NO strings or bowstrings visible; downward-right angle gives clear view of perpendicular chunky bow arms crossing the stock; elbows away from torso; mantle remnants frame shoulders but leave arms and weapon fully visible; expression serene, eyes focused; posture deliberate and controlled."
+        },
+        {
+          "id": 2,
+          "name": "combat_reload_kneel",
+          "description": "Kneeling rapid combat reload.",
+          "camera_rotation": 45,
+          "prompt": "Tense reloading pose: one knee down in kneeling position, other foot planted forward; crossbow braced against ground with one hand holding thick heavy stock down; other hand drawing fresh bolt from belt case; T-shaped chunky solid bow arms perpendicular to stock clearly visible; bow arms are THICK and SUBSTANTIAL; body hunched over weapon protectively; mantle draped around creating dramatic silhouette; serene expression contrasts urgent motion; empty bolt groove visible; fingers gripping new bolt; grounded defensive posture."
+        }
+      ],
+      "tags": {
+        "gender": "female",
+        "age": "older",
+        "trope": "blaster"
+      }
+    },
+    {
+      "id": 6,
+      "name": "Sister Lucinda \\\"Red\\\" Marrow",
+      "archetype": "blaster_fire",
+      "description": "Fire blaster-area denial with holy oil vials and a torch-staff.",
+      "visual_notes": "Soot-streaked; cloak remnants scorched and short; bandolier or padded wraps carrying glass/ceramic vials; torch-staff reads as a rough post topped with a cruciform head; stance confident and dangerous.",
+      "proportions": "Stocky compact build (5'4\"); sturdy muscular frame; powerful legs; low center of gravity; purposeful aggressive stance.",
+      "character_base": "Old West vampire-hunting nun (female, adult) with burned habit remnants worn like a short cloak (no full habit); NO skirt, NO loin cloth. Fitted trousers (NOT a skirt) showing full legs from hip to ankle, frontier boots, leathers and wraps; vial bandolier carrying holy oil, scorched rosary beads around neck, multiple small crosses tied to bandolier, iron crucifix dangling from belt, blessed medallions wired to vials. Wields two small orb-like glass vials (holy oil molotov cocktails; round bulbous bottles the size of large eggs with cloth wicks protruding from tops); smoke/soot marks on hands and clothing. Simple feminine face; manic fierce grin.",
+      "poses": [
+        {
+          "id": 1,
+          "name": "dual_molotov_ready",
+          "description": "Fire denial-dual molotov ready stance.",
+          "camera_rotation": 45,
+          "prompt": "Standing with feet planted in aggressive stance; both hands raised holding holy oil molotov cocktails (glass vials with cloth wicks clearly visible); main hand drawn back ready to throw, off hand held at chest height as follow-up; arms kept clear of torso for readable silhouette; cloak remnants do not cover hands or vials; face visible; posture reads controlled and dangerous, prepared to deny space with fire."
+        },
+        {
+          "id": 2,
+          "name": "molotov_lunge_attack",
+          "description": "Aggressive lunge with both molotovs in hand—no objects released or floating.",
+          "camera_rotation": 45,
+          "prompt": "Aggressive lunge pose: Sister Lucinda drives forward with front leg deeply bent and planted, back leg extended behind for balance. Both hands grip holy oil molotov cocktails (glass vials with cloth wicks) tightly—main hand extended forward at shoulder height, off hand drawn back at chest or waist, both vials clearly visible and never released. Arms kept clear of torso for strong silhouette; no objects floating or thrown. Torso leans forward in attack, cloak streaming back from motion but attached at shoulders. Face shows a fierce, manic grin with simplified features for 35mm printability. Bandolier and gear secured tightly to body, no loose elements. All major forms thick and distinct, with every detail large enough for clean 3D rendering. Pose is fully grounded and stable for miniature printing."
+        }
+      ],
+      "tags": {
+        "gender": "female",
+        "age": "adult",
+        "trope": "blaster"
+      }
+    }
+  ]
+}

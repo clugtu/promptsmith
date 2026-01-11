@@ -1,6 +1,6 @@
 {
-  "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$comment": "Template for character database with pose library system. Weapons defined with handedness; poses reference reusable library templates.",
+  "$schema": "character_schema.json",
+  "$comment": "Template for character database with pose library system. Equipment as simple array; poses reference reusable library templates.",
   
   "imports": {
     "generic_render_rules": "rules/generic_render_rules.json",
@@ -10,10 +10,10 @@
 
   "metadata": {
     "title": "Character Prompt Template",
-    "version": "3.0.0",
-    "description": "Template for pose library system - weapons defined separately, poses reference reusable templates with placeholders",
-    "created": "2026-01-02",
-    "architecture": "Pose library system with weapon injection, validation, and prop visibility modes"
+    "version": "4.0.0",
+    "description": "Template for pose library system - standardized structure validated against character_schema.json",
+    "created": "2026-01-10",
+    "architecture": "Pose library system with equipment as simple arrays, validated structure"
   },
 
   "thematic_rules": {
@@ -28,8 +28,9 @@
     {
       "id": 1,
       "name": "example_warrior",
+      "archetype": "warrior",
       "description": "A heroic warrior character with sword and shield",
-      "visual_notes": "Tall, armored, carrying sword and shield, battle-worn",
+      "visual_notes": "Tall, armored, carrying sword and shield, battle-worn. Strong angular face with determined expression.",
       "proportions": "Heroic athletic build, broad shoulders, strong limbs",
       "character_base": "Heroic warrior in weathered plate armor, battle-scarred but dignified. Face determined with slight scowl. Belt with pouches and rope. Strong contrast for armor plates, belt gear.",
       "equipment": [
@@ -37,34 +38,43 @@
         "round shield (wood planks, steel rim, central boss) : off_hand : held at guard",
         "dagger (simple blade, leather sheath) : holstered_belt : sheathed"
       ],
+      "tags": {
+        "gender": "male",
+        "age": "adult",
+        "trope": "tank"
+      },
       "poses": [
         {
           "id": 1,
           "name": "static_heroic",
           "description": "Calm, imposing guard stance",
-          "pose_library_ref": "melee_001_guarded_low_ready",
-          "character_override": "calm determined expression; armor plates clearly visible; strong grounded presence"
+          "pose_library_ref": "oh_melee_guarded_low_ready",
+          "character_override": "calm determined expression; armor plates clearly visible; strong grounded presence",
+          "camera_rotation": 45
         },
         {
           "id": 2,
           "name": "combat_ready",
           "description": "Shield forward defensive stance",
-          "pose_library_ref": "dual_003_aim_and_cover",
-          "character_override": "alert defensive posture; shield raised; sword ready; battle-ready expression"
+          "pose_library_ref": "dh_ranged_aim_and_cover",
+          "character_override": "alert defensive posture; shield raised; sword ready; battle-ready expression",
+          "camera_rotation": 45
         },
         {
           "id": 3,
           "name": "action_pose",
           "description": "Dynamic charging attack",
-          "pose_library_ref": "melee_003_forward_lunge_action",
-          "character_override": "dynamic forward momentum; armor flowing; both legs clearly visible and separated"
+          "pose_library_ref": "oh_melee_forward_lunge_action",
+          "character_override": "dynamic forward momentum; armor flowing; both legs clearly visible and separated",
+          "camera_rotation": 45
         },
         {
           "id": 4,
           "name": "victory_stance",
           "description": "Triumphant victory pose",
-          "pose_library_ref": "melee_004_triumph_raise",
-          "character_override": "triumphant expression; weight shifted back; sword raised in victory; strong negative space"
+          "pose_library_ref": "oh_triumph_raise",
+          "character_override": "triumphant expression; weight shifted back; sword raised in victory; strong negative space",
+          "camera_rotation": 45
         },
         {
           "id": 5,
@@ -76,157 +86,119 @@
             "round shield (wood planks, steel rim, central boss) : holstered_back : slung on back",
             "dagger (simple blade, leather sheath) : holstered_belt : sheathed"
           ],
-          "character_override": "combat ready stance with hands empty; weapons visible but not held; prepared for unarmed combat"
+          "character_override": "combat ready stance with hands empty; weapons visible but not held; prepared for unarmed combat",
+          "camera_rotation": 45
         }
       ]
     },
     {
       "id": 2,
       "name": "example_archer",
+      "archetype": "ranger",
       "description": "A ranger with longbow",
-      "visual_notes": "Light armor, longbow, quiver of arrows",
+      "visual_notes": "Light armor, longbow, quiver of arrows. Weathered face with keen eyes and focused expression.",
       "proportions": "Lean athletic build, fit ranger physique",
       "character_base": "Forest ranger in light leather armor, practical woodland gear. Face alert and focused. Belt with pouches and hunting knife. Quiver of arrows on back.",
-      "weapons": {
-        "main_hand": {
-          "name": "longbow",
-          "description": "Tall hunting longbow",
-          "prop_class": "two_hand_frame",
-          "visual_detail": "curved wood, wrapped grip, tall profile"
-        },
-        "off_hand": null,
-        "holstered": [
-          {
-            "name": "hunting knife",
-            "description": "Utility hunting knife",
-            "location": "sheathed at belt",
-            "visual_detail": "simple blade, leather wrap"
-          },
-          {
-            "name": "quiver",
-            "description": "Quiver of arrows",
-            "location": "on back",
-            "visual_detail": "leather quiver, arrow fletching visible"
-          }
-        ]
+      "equipment": [
+        "longbow (tall curved wood, wrapped grip) : main_hand : held vertically",
+        "hunting knife (simple blade, leather wrap) : holstered_belt : sheathed",
+        "quiver (leather quiver with arrows) : holstered_back : slung on back"
+      ],
+      "tags": {
+        "gender": "male",
+        "age": "adult",
+        "trope": "ranged"
       },
       "poses": [
         {
           "id": 1,
           "name": "static_heroic",
           "description": "Calm ready stance with bow",
-          "pose_library_ref": "twohand_007_defensive_brace",
-          "prop_override": {
-            "main_hand_orientation": "low_outside"
-          },
-          "character_override": "calm alert expression; bow held vertically; ranger stance"
+          "pose_library_ref": "th_ranged_standing_aim_wide",
+          "character_override": "calm alert expression; bow held vertically; ranger stance",
+          "camera_rotation": 45
         },
         {
           "id": 2,
           "name": "combat_ready",
           "description": "Bow drawn ready to shoot",
-          "pose_library_ref": "twohand_003_dynamic_step_aim",
-          "character_override": "focused expression; bow at ready; quiver visible on back"
+          "pose_library_ref": "th_ranged_dynamic_step_aim",
+          "character_override": "focused expression; bow at ready; quiver visible on back",
+          "camera_rotation": 45
         }
       ]
     },
     {
       "id": 3,
-      "name": "example_unarmed_monk",
-      "description": "An unarmed martial artist monk",
-      "visual_notes": "Simple robes, prayer beads, martial stance",
-      "proportions": "Balanced athletic build, lean muscular definition",
-      "character_base": "Martial monk in simple robes, belt with prayer beads. Face calm but focused. Hands wrapped in cloth strips. Bare feet.",
-      "weapons": {
-        "main_hand": null,
-        "off_hand": null,
-        "holstered": [
-          {
-            "name": "prayer beads",
-            "description": "Wooden prayer beads",
-            "location": "on belt",
-            "visual_detail": "carved wood beads on cord"
-          }
-        ]
+      "name": "example_townsperson",
+      "archetype": "civilian",
+      "description": "An ordinary townsfolk character",
+      "visual_notes": "Simple clothes, practical appearance. Friendly open face with warm smile.",
+      "proportions": "Average build, everyday posture",
+      "character_base": "Town resident in simple shirt and trousers; practical boots; approachable demeanor.",
+      "tags": {
+        "gender": "female",
+        "age": "adult"
       },
-      "poses": [
-        {
-          "id": 1,
-          "name": "static_heroic",
-          "description": "Calm meditative stance",
-          "pose_library_ref": "unarmed_001_fighter_ready",
-          "character_override": "calm meditative expression; hands in guard position; centered balance"
-        },
-        {
-          "id": 2,
-          "name": "combat_ready",
-          "description": "Martial arts fighting stance",
-          "pose_library_ref": "unarmed_003_defensive_crouch",
-          "character_override": "focused combat expression; hands up in defensive guard; robes flowing"
-        },
-        {
-          "id": 3,
-          "name": "action_pose",
-          "description": "Dynamic striking pose",
-          "pose_library_ref": "unarmed_002_aggressive_charge",
-          "character_override": "intense expression; forward momentum; robes not covering limbs"
-        }
-      ]
+      "pose": {
+        "name": "idle_stand",
+        "description": "Casual standing pose",
+        "pose_library_ref": "cw_idle_arms_folded_foot_tap",
+        "character_override": "relaxed friendly expression; natural everyday posture",
+        "camera_rotation": 45
+      }
     }
   ],
 
   "system_documentation": {
     "pose_library_system": {
       "description": "Poses are defined in rules/pose_library.json as reusable templates with placeholders",
-      "weapon_separation": "Weapons defined on character.weapons object, separate from poses",
-      "composition": "At generation time, weapon descriptions replace MAIN_HAND_PROP/OFF_HAND_PROP placeholders in pose templates",
-      "validation": "System checks pose handedness_mode and prop_class match character weapons"
+      "equipment_format": "Equipment defined as simple array of strings with format: 'item (details) : position : usage'",
+      "composition": "At generation time, equipment is parsed and injected into pose placeholders (MAIN_HAND_PROP, OFF_HAND_PROP)",
+      "validation": "System checks pose handedness_mode matches equipment assignments"
     },
-    "weapon_structure": {
-      "main_hand": "Primary weapon held in main hand (or both hands for two-handed weapons)",
-      "off_hand": "Secondary weapon or item in off hand (null if empty)",
-      "holstered": "Array of items carried but not actively held (sheathed, slung, stowed)",
-      "prop_class_values": ["none", "small", "compact", "long", "flexible", "shield_plane", "two_hand_frame", "bulky"]
+    "structure_requirements": {
+      "character_id": "Sequential integers starting at 1, no gaps or duplicates",
+      "character_name": "Human-readable string used for lookups (e.g., 'example_warrior')",
+      "character_base": "Main character description - the base visual prompt",
+      "equipment": "Array of strings in format: 'item (details) : position : usage'",
+      "tags": "Object with gender, age, trope fields (recommended over character-level gender field)",
+      "poses_or_pose": "Use 'pose' object for single-pose, 'poses' array for multiple poses",
+      "pose_library_ref": "Preferred over inline 'prompt' - references pose_library.json",
+      "camera_rotation": "Optional integer 0-360 degrees"
     },
-    "pose_structure": {
-      "pose_library_ref": "ID of pose template in pose_library.json (e.g., 'melee_001_guarded_low_ready')",
-      "prop_override": {
-        "main_hand_prop_state": "Optional: 'held_firmly', 'slung_side_visible', 'set_aside_visible'",
-        "main_hand_orientation": "Optional: spatial orientation override",
-        "off_hand_prop_state": "Optional: state override for off hand",
-        "off_hand_orientation": "Optional: orientation override for off hand"
-      },
-      "character_override": "Character-specific additions to pose description"
+    "equipment_positions": {
+      "main_hand": "Primary weapon actively held",
+      "off_hand": "Secondary item actively held",
+      "holstered_belt": "Item on belt (sheathed, clipped)",
+      "holstered_back": "Item on back (slung, strapped)",
+      "holstered_hip": "Item at hip",
+      "holstered_chest": "Item on chest"
     },
-    "handedness_modes": {
-      "unarmed": "No weapons in hands (fists, claws, empty)",
-      "single_handed": "One weapon in main hand, off hand empty or gesturing",
-      "two_handed": "Both hands on same weapon (bows, two-handed swords, staves)",
-      "dual_wield": "Different weapon in each hand (sword+shield, dual pistols)"
-    },
-    "prop_visibility_modes": {
-      "presented": "Weapon fully visible with clear negative space, held away from torso (default)",
-      "carried_attached": "Weapon carried by equipment (sling/strap), overlap allowed at attachment zones"
+    "pose_patterns": {
+      "single_pose": "Use 'pose' object for characters with one pose (e.g., ambient NPCs)",
+      "multi_pose": "Use 'poses' array for characters with multiple poses (e.g., combat characters)",
+      "library_reference": "Use 'pose_library_ref' to reference shared pose templates",
+      "inline_prompt": "Use 'prompt' for unique poses not in library (legacy, less preferred)"
     }
   },
 
   "usage_examples": {
+    "validation": "jsonschema -i your_file.json character_schema.json",
     "by_number": {
-      "1": "Returns all poses for character 1 (example_warrior)",
-      "1:1": "Returns character 1, pose 1 (static_heroic)",
-      "1:2": "Returns character 1, pose 2 (combat_ready)",
-      "2:1": "Returns character 2, pose 1 (example_archer static_heroic)"
+      "1": "Returns character 1 with first/only pose",
+      "1:1": "Returns character 1, pose 1",
+      "1:2": "Returns character 1, pose 2"
     },
     "by_name": {
       "example_warrior": "Returns all poses for example_warrior",
       "example_warrior:static_heroic": "Returns warrior static_heroic pose",
-      "example_warrior:combat_ready": "Returns warrior combat_ready pose",
-      "example_archer:combat_ready": "Returns archer combat_ready pose"
+      "example_townsperson": "Returns single-pose character"
     },
-    "mixed": {
-      "1:static_heroic": "Character 1, pose named 'static_heroic'",
-      "example_warrior:1": "Character named 'example_warrior', pose number 1",
-      "2:2": "Character 2, pose 2"
+    "reference_sheets": {
+      "--page 1": "First 9 poses (1-9)",
+      "--page 2": "Next 9 poses (10-18)",
+      "--page all": "All pages"
     }
   }
 }

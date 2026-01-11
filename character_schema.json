@@ -1,0 +1,225 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://promptsmith.example.com/character-schema.json",
+  "title": "PromptSmith Character Database Schema",
+  "description": "JSON schema for character databases used with create_image.py",
+  "type": "object",
+  "required": ["characters"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "$comment": {
+      "type": "string",
+      "description": "File-level comment"
+    },
+    "imports": {
+      "type": "object",
+      "description": "External file references",
+      "properties": {
+        "generic_render_rules": {
+          "type": "string",
+          "description": "Path to generic rendering rules JSON"
+        },
+        "style_rules": {
+          "type": "string",
+          "description": "Path to style-specific rules JSON"
+        },
+        "pose_library": {
+          "type": "string",
+          "description": "Path to pose library JSON (required if using pose_library_ref)"
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "description": "File metadata",
+      "properties": {
+        "title": {"type": "string"},
+        "version": {"type": "string"},
+        "description": {"type": "string"},
+        "created": {"type": "string", "format": "date"},
+        "source": {"type": "string"}
+      }
+    },
+    "thematic_rules": {
+      "type": "object",
+      "description": "Shared thematic rules applied to all characters",
+      "properties": {
+        "description": {"type": "string"},
+        "theme": {"type": "string"},
+        "character_archetype": {"type": "string"},
+        "prompt_snippet": {"type": "string"},
+        "forms": {
+          "type": "object",
+          "description": "Form definitions (e.g., werewolf forms)",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "description": {"type": "string"},
+              "anatomy": {"type": "string"},
+              "prompt_snippet": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "characters": {
+      "type": "array",
+      "description": "Array of character definitions",
+      "items": {
+        "$ref": "#/definitions/character"
+      }
+    }
+  },
+  "definitions": {
+    "character": {
+      "type": "object",
+      "required": ["id", "name", "character_base"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Unique character ID (sequential, no gaps)",
+          "minimum": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Character name (human-readable, used for lookups)"
+        },
+        "archetype": {
+          "type": "string",
+          "description": "Character archetype/role classification"
+        },
+        "description": {
+          "type": "string",
+          "description": "Short character description"
+        },
+        "visual_notes": {
+          "type": "string",
+          "description": "Visual details and appearance notes"
+        },
+        "proportions": {
+          "type": "string",
+          "description": "Body proportions and build description"
+        },
+        "character_base": {
+          "type": "string",
+          "description": "Main character description used as base prompt"
+        },
+        "equipment": {
+          "type": "array",
+          "description": "Equipment carried by character (simple format)",
+          "items": {"type": "string"}
+        },
+        "prop_definitions": {
+          "type": "object",
+          "description": "Reusable prop definitions that can be referenced",
+          "additionalProperties": {"type": "string"}
+        },
+        "tags": {
+          "type": "object",
+          "description": "Character tags (gender, age, etc.)",
+          "properties": {
+            "gender": {
+              "type": "string",
+              "enum": ["male", "female", "other"]
+            },
+            "age": {
+              "type": "string",
+              "enum": ["child", "teen", "adult", "older", "elder", "ancient"]
+            },
+            "trope": {"type": "string"}
+          }
+        },
+        "pose": {
+          "$ref": "#/definitions/pose_definition",
+          "description": "Single pose (for single-pose characters)"
+        },
+        "poses": {
+          "type": "array",
+          "description": "Multiple poses (for multi-pose characters)",
+          "items": {
+            "$ref": "#/definitions/pose_definition"
+          }
+        },
+        "refinements": {
+          "type": "array",
+          "description": "Legacy: use 'poses' instead",
+          "deprecated": true,
+          "items": {
+            "$ref": "#/definitions/pose_definition"
+          }
+        }
+      },
+      "oneOf": [
+        {"required": ["pose"]},
+        {"required": ["poses"]},
+        {"required": ["refinements"]},
+        {"not": {"anyOf": [
+          {"required": ["pose"]},
+          {"required": ["poses"]},
+          {"required": ["refinements"]}
+        ]}}
+      ]
+    },
+    "pose_definition": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "description": "Pose ID (when in poses array)",
+          "minimum": 1
+        },
+        "name": {
+          "type": "string",
+          "description": "Pose name (used for lookups)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Short pose description"
+        },
+        "pose_library_ref": {
+          "type": "string",
+          "description": "Reference to pose in pose_library.json (preferred)"
+        },
+        "character_override": {
+          "type": "string",
+          "description": "Character-specific additions to library pose (additive)"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "Inline full pose prompt (use when not using pose_library_ref)"
+        },
+        "camera_rotation": {
+          "type": "integer",
+          "description": "Camera rotation angle in degrees",
+          "minimum": 0,
+          "maximum": 360
+        },
+        "equipment_override": {
+          "type": "array",
+          "description": "Override equipment for this specific pose",
+          "items": {"type": "string"}
+        },
+        "thematic_snippet": {
+          "oneOf": [
+            {"type": "string"},
+            {"type": "array", "items": {"type": "string"}}
+          ],
+          "description": "Thematic additions for this pose"
+        },
+        "gender": {
+          "type": "string",
+          "description": "Override character gender for this pose",
+          "enum": ["male", "female", "other"]
+        }
+      },
+      "oneOf": [
+        {"required": ["pose_library_ref"]},
+        {"required": ["prompt"]}
+      ]
+    }
+  }
+}

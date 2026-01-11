@@ -1221,30 +1221,24 @@ def handle_reference_sheet(
     if not characters:
         raise PromptNotFoundError("No characters found in JSON")
     
-    # Collect all available poses from all characters
+    # Collect all available poses from all characters grouped by character: 1:1, 1:2, ..., 2:1, 2:2, ...
     all_pose_specs = []
-    
-    # First, gather ALL poses from all characters
     for char_data in characters:
         character_id = char_data.get("name", "") or char_data.get("id", "")
-        
-        # Support poses (array), refinements (legacy array), or pose (single object)
         poses = char_data.get("poses", [])
         refinements = char_data.get("refinements", [])
         single_pose = char_data.get("pose", None)
-        
-        # If character has a single 'pose' object (not 'poses' array), treat as single-pose character
-        if single_pose and not poses and not refinements:
+        if poses:
+            for pose_idx in range(1, len(poses) + 1):
+                all_pose_specs.append((character_id, pose_idx))
+        elif refinements:
+            for pose_idx in range(1, len(refinements) + 1):
+                all_pose_specs.append((character_id, pose_idx))
+        elif single_pose:
             all_pose_specs.append((character_id, None))
-        elif poses or refinements:
-            # Character has multiple refinements/poses
-            items = poses if poses else refinements
-            for idx, item in enumerate(items, 1):
-                all_pose_specs.append((character_id, idx))
         else:
-            # No poses, refinements, or single pose - treat as single-pose character
             all_pose_specs.append((character_id, None))
-    
+
     if not all_pose_specs:
         raise PromptNotFoundError("No poses found for reference sheet")
     
@@ -1291,19 +1285,21 @@ def handle_reference_sheet(
                         character=char_id,
                         form=None,
                     )
+                    pose_label = f"{char_id}"
                 else:
                     prompt0, thematic_snip, gender, char_proportions, age, equipment, pose_prompt, camera_rotation = resolve_prompt_from_json(
                         json_data=json_data,
                         character=char_id,
                         form=form_id,
                     )
-                
+                    pose_label = f"{char_id}:{form_id}"
+
                 # Build character description using same logic as single image generation
                 desc_parts = []
-                
-                # CHARACTER section with age/gender
+
+                # CHARACTER section with age/gender (pose_label will be outside)
                 char_parts = [prompt0.strip().rstrip(",")]
-                
+
                 # Add age and gender as demographic descriptors
                 demographic_parts = []
                 if age:
@@ -1318,10 +1314,10 @@ def handle_reference_sheet(
                     ])
                     if not has_gender:
                         demographic_parts.append(gender_lower)
-                
+
                 if demographic_parts:
                     char_parts.append(" ".join(demographic_parts))
-                
+
                 character_desc = ", ".join(p.strip().rstrip(",") for p in char_parts if p.strip())
                 desc_parts.append(f"CHARACTER: {character_desc}")
                 
@@ -1353,7 +1349,7 @@ def handle_reference_sheet(
                     desc_parts.append(f"PROPORTIONS: {char_proportions}")
                 
                 full_description = ". ".join(desc_parts)
-                character_descriptions.append(f"Figure {idx}: {full_description}")
+                character_descriptions.append(f"Figure {idx} [{pose_label}]: {full_description}")
                 
             except Exception as e:
                 raise PromptNotFoundError(f"Could not resolve character '{char_id}' (pose {form_id}): {e}")
@@ -1373,6 +1369,7 @@ def handle_reference_sheet(
         parts.append("Image format: 3:4 aspect ratio (portrait orientation).")
         parts.append("Each figure is a separate miniature sculpt with full body visible, clearly separated with white space between them.")
         parts.append("CRITICAL: All figures must be completely in frame from head to toe with no clipping at any edges. Full body visibility is mandatory for every figure.")
+        parts.append("IMPORTANT: Arrange figures in the EXACT ORDER specified below. Do NOT reorder, group by character, or rearrange in any way. The figure numbers (Figure 1, Figure 2, etc.) indicate the precise grid position from left to right, top to bottom.")
         parts.append("")
         
         # Add character descriptions as numbered list
