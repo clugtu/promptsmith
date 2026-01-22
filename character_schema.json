@@ -91,6 +91,12 @@
           "type": "string",
           "description": "Character archetype/role classification"
         },
+        "figure_type": {
+          "type": "string",
+          "description": "Body plan/anatomy type for pose compatibility validation",
+          "enum": ["bipedal_humanoid", "quadrupedal", "facultatively_bipedal", "multi_limbed"],
+          "default": "bipedal_humanoid"
+        },
         "description": {
           "type": "string",
           "description": "Short character description"
@@ -183,6 +189,11 @@
         "pose_library_ref": {
           "type": "string",
           "description": "Reference to pose in pose_library.json (preferred)"
+        },
+        "figure_type": {
+          "type": "string",
+          "description": "Override figure type for this specific pose (for validation)",
+          "enum": ["bipedal_humanoid", "quadrupedal", "facultatively_bipedal", "multi_limbed"]
         },
         "character_override": {
           "type": "string",

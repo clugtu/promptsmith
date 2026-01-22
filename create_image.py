@@ -207,7 +207,25 @@ def resolve_imports(data: Dict[str, Any], base_path: Path) -> Dict[str, Any]:
 
 
 def resolve_path(path_str: str, base_path: Path) -> Path:
-    """Resolve a path string relative to base_path or as absolute."""
+    """Resolve a path string relative to base_path or as absolute.
+
+    Notes (Windows):
+    - Git Bash / MSYS paths like '/d/dev/...' are *not* native Windows absolute paths.
+      If passed directly to pathlib on Windows, they are treated as '\\d\\dev\\...' on the
+      current drive (e.g. 'D:\\d\\dev\\...').
+    - To make JSON `imports` portable for Git Bash users, translate '/<drive>/' to
+      '<DRIVE>:/'.
+    """
+
+    # Translate Git Bash / MSYS drive paths (e.g. /d/dev/...) into Windows drive paths.
+    # Only do this on Windows; on POSIX systems '/d/...' is a normal absolute path.
+    if os.name == "nt":
+        msys_drive_match = re.match(r"^/([a-zA-Z])/(.*)$", path_str)
+        if msys_drive_match:
+            drive_letter = msys_drive_match.group(1).upper()
+            remainder = msys_drive_match.group(2)
+            path_str = f"{drive_letter}:/{remainder}"
+
     path = Path(path_str)
     if path.is_absolute():
         return path
@@ -954,6 +972,7 @@ def build_final_prompt(
     no_base: bool = False,
     equipment: List[str] = None,
     character_id: str = "",
+    character_name: str = "",
     form_id: str = "",
     pose_prompt: str = "",
     camera_rotation: Optional[int] = None,
@@ -985,8 +1004,20 @@ def build_final_prompt(
     """
     sections = []
     
-    # ASSET_NAME section (if both IDs provided)
-    if character_id and form_id:
+    # ASSET_NAME section
+    # Debug output
+    if False:  # Set to True for debugging
+        print(f"DEBUG: character_id={character_id}, character_name={character_name}, gender={gender}, form_id={form_id}", file=sys.stderr)
+    
+    if character_name and gender:
+        # Use ID + character name + gender for readable asset names
+        if character_id:
+            asset_name = f"{character_id}_{character_name}_{gender}".replace(" ", "_").lower()
+        else:
+            asset_name = f"{character_name}_{gender}".replace(" ", "_").lower()
+        sections.append(f"ASSET_NAME: {asset_name}")
+    elif character_id and form_id:
+        # Fallback to ID-based naming
         asset_name = f"{character_id}_{form_id}"
         sections.append(f"ASSET_NAME: {asset_name}")
     
@@ -1584,7 +1615,8 @@ def main(argv: list[str] | None = None) -> int:
             blocks: list[str] = []
             for char_data in characters:
                 character_id = char_data.get("name", "") or char_data.get("id", "")
-                char_gender = char_data.get("gender", None)
+                character_archetype = char_data.get("archetype", "")
+                char_gender = char_data.get("gender", None) or char_data.get("tags", {}).get("gender", None)
                 char_proportions = char_data.get("proportions", "").strip()
                 
                 # Support poses (array), refinements (legacy array), or pose (single object)
@@ -1621,6 +1653,7 @@ def main(argv: list[str] | None = None) -> int:
                         no_base=args.no_base,
                         equipment=equipment,
                         character_id=str(character_id),
+                        character_name=character_archetype,
                         form_id=ref_name,
                         pose_prompt=pose_prompt,
                         camera_rotation=camera_rotation,
@@ -1637,7 +1670,8 @@ def main(argv: list[str] | None = None) -> int:
         args.out.mkdir(parents=True, exist_ok=True)
         for char_data in characters:
             character_id = char_data.get("name", "") or char_data.get("id", "")
-            char_gender = char_data.get("gender", None)
+            character_archetype = char_data.get("archetype", "")
+            char_gender = char_data.get("gender", None) or char_data.get("tags", {}).get("gender", None)
             char_proportions = char_data.get("proportions", "").strip()
             
             # Support poses (array), refinements (legacy array), or pose (single object)
@@ -1674,6 +1708,7 @@ def main(argv: list[str] | None = None) -> int:
                     no_base=args.no_base,
                     equipment=equipment,
                     character_id=str(character_id),
+                    character_name=character_archetype,
                     form_id=ref_name,
                     pose_prompt=pose_prompt,
                     camera_rotation=camera_rotation,
@@ -1720,8 +1755,10 @@ def main(argv: list[str] | None = None) -> int:
         if not char_data:
             raise PromptNotFoundError(f"Character not found: {character_id}")
         
-        # Extract gender from character data (refinements/poses may override)
-        char_gender = char_data.get("gender", None)
+        # Extract gender and archetype from character data (refinements/poses may override)
+        character_archetype = char_data.get("archetype", "")
+        char_gender = char_data.get("gender", None) or char_data.get("tags", {}).get("gender", None)
+        char_proportions = char_data.get("proportions", "").strip()
         
         # Check for both 'poses' (new format), 'refinements' (legacy), or single 'pose' object
         poses = char_data.get("poses", [])
@@ -1751,9 +1788,11 @@ def main(argv: list[str] | None = None) -> int:
                 )
                 # Use character proportions if ref doesn't have its own
                 proportions_to_use = ref_proportions if ref_proportions else char_proportions
+                # Use char_gender if pose doesn't override it
+                gender_to_use = gender_for_prompt if gender_for_prompt else char_gender
                 p = build_final_prompt(
                     p0,
-                    gender=gender_for_prompt,
+                    gender=gender_to_use,
                     thematic_snippets=thematic_snip,
                     thematic_general=thematic_general,
                     proportions=proportions_to_use,
@@ -1767,6 +1806,7 @@ def main(argv: list[str] | None = None) -> int:
                     no_base=args.no_base,
                     equipment=equipment,
                     character_id=str(character_id),
+                    character_name=character_archetype,
                     form_id=ref_name,
                     pose_prompt=pose_prompt,
                     camera_rotation=camera_rotation,
@@ -1790,9 +1830,11 @@ def main(argv: list[str] | None = None) -> int:
             )
             # Use character proportions if ref doesn't have its own
             proportions_to_use = ref_proportions if ref_proportions else char_proportions
+            # Use char_gender if pose doesn't override it
+            gender_to_use = gender_for_prompt if gender_for_prompt else char_gender
             p = build_final_prompt(
                 p0,
-                gender=gender_for_prompt,
+                gender=gender_to_use,
                 thematic_snippets=thematic_snip,
                 thematic_general=thematic_general,
                 proportions=proportions_to_use,
@@ -1806,6 +1848,7 @@ def main(argv: list[str] | None = None) -> int:
                 no_base=args.no_base,
                 equipment=equipment,
                 character_id=str(character_id),
+                character_name=character_archetype,
                 form_id=ref_name,
                 pose_prompt=pose_prompt,
                 camera_rotation=camera_rotation,
@@ -1823,8 +1866,9 @@ def main(argv: list[str] | None = None) -> int:
         json_data, character=character_id, form=form_id
     )
     
-    # Get character name for asset naming
+    # Get character archetype for asset naming
     char_data = find_character_by_id_or_name(json_data, character_id)
+    character_archetype = char_data.get("archetype", "") if char_data else ""
     character_name = char_data.get("name", str(character_id)) if char_data else str(character_id)
     
     prompt = build_final_prompt(
@@ -1843,6 +1887,7 @@ def main(argv: list[str] | None = None) -> int:
         no_base=args.no_base,
         equipment=equipment,
         character_id=character_name,
+        character_name=character_archetype,
         form_id=form_id,
         pose_prompt=pose_prompt,
         camera_rotation=camera_rotation,
