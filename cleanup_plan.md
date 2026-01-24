@@ -152,10 +152,12 @@ The `create_image.py` script is ~1200 lines and handles multiple responsibilitie
 - [x] All tests passing (148/148) with 90% coverage on new modules
 
 ### 2.2 Extract Equipment/Props Layer
-- [ ] Create `equipment_handler.py` module
-- [ ] Move prop resolution
-- [ ] Move hand validation
-- [ ] Add comprehensive prop definitions support
+- [x] Create `equipment_handler.py` module
+- [x] Move prop resolution
+- [x] Move hand validation
+- [x] Update tests to import from new module
+- [x] Create comprehensive unit tests for equipment_handler module
+- [x] All tests passing (174/174) with 91% coverage on equipment_handler
 
 ### 2.3 Extract Pose Library Layer
 - [ ] Create `pose_library.py` module
@@ -210,8 +212,10 @@ The `create_image.py` script is ~1200 lines and handles multiple responsibilitie
 - Regression test script working ✓
 
 ⏳ Phase 2 In Progress:
+- [x] JSON/Data Layer - `json_loader.py` and `character_resolver.py` created ✓
+- [x] Equipment/Props Layer - `equipment_handler.py` created ✓
 - Code split into logical modules
-- All tests still passing
+- All tests still passing (148/148)
 - No behavioral changes (same outputs)
 - Code is more maintainable
 - Cyclomatic complexity reduced
