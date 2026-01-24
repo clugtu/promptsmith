@@ -160,21 +160,40 @@ The `create_image.py` script is ~1200 lines and handles multiple responsibilitie
 - [x] All tests passing (174/174) with 91% coverage on equipment_handler
 
 ### 2.3 Extract Pose Library Layer
-- [ ] Create `pose_library.py` module
-- [ ] Move pose lookup and composition
-- [ ] Move compatibility validation
-- [ ] Improve error messages
+- [x] Create `pose_library.py` module
+- [x] Move pose lookup and composition
+- [x] Move compatibility validation
+- [x] Move remove_base_language utility
+- [x] Move PromptNotFoundError exception
+- [x] Update tests to import from new module
+- [x] Create comprehensive unit tests for pose_library module
+- [x] All tests passing (209/209) with 100% coverage on pose_library
+- [ ] Update tests to import from new module
+- [ ] Create comprehensive unit tests for pose_library module
+- [ ] Verify all tests passing with >80% coverage
 
 ### 2.4 Extract Prompt Building Layer
 - [ ] Create `prompt_builder.py` module
 - [ ] Separate section builders
 - [ ] Create PromptSection dataclass
 - [ ] Improve section assembly logic
+- [ ] Update tests to import from new module
+- [ ] Create comprehensive unit tests for prompt_builder module
+- [ ] Verify all tests passing with >80% coverage
+- [ ] Update tests to import from new module
+- [ ] Create comprehensive unit tests for prompt_builder module
+- [ ] Verify all tests passing with >80% coverage
 
 ### 2.5 Extract Reference Sheet Layer
 - [ ] Create `reference_sheet.py` module
 - [ ] Break down large functions
 - [ ] Improve page/grid layout logic
+- [ ] Update tests to import from new module
+- [ ] Create comprehensive unit tests for reference_sheet module
+- [ ] Verify all tests passing with >80% coverage
+- [ ] Update tests to import from new module
+- [ ] Create comprehensive unit tests for reference_sheet module
+- [ ] Verify all tests passing with >80% coverage
 
 ### 2.6 Simplify Main Script
 - [ ] Keep only CLI and orchestration
@@ -214,8 +233,10 @@ The `create_image.py` script is ~1200 lines and handles multiple responsibilitie
 ⏳ Phase 2 In Progress:
 - [x] JSON/Data Layer - `json_loader.py` and `character_resolver.py` created ✓
 - [x] Equipment/Props Layer - `equipment_handler.py` created ✓
+- [x] Pose Library Layer - `pose_library.py` created ✓
 - Code split into logical modules
-- All tests still passing (148/148)
+- Each new module has comprehensive unit tests (>80% coverage)
+- All tests still passing (209/209)
 - No behavioral changes (same outputs)
 - Code is more maintainable
 - Cyclomatic complexity reduced
@@ -230,6 +251,7 @@ The `create_image.py` script is ~1200 lines and handles multiple responsibilitie
 ## Notes
 
 - **DO NOT SKIP PHASE 1** - Tests are critical for safe refactoring
+- **ALWAYS CREATE UNIT TESTS** - Each new module must have comprehensive unit tests (>80% coverage)
 - Run tests after every change during refactoring
 - Keep commits small and focused
 - Each commit should have passing tests
