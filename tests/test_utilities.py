@@ -1,6 +1,13 @@
 """Tests for utility functions."""
 import pytest
+from pathlib import Path
+import sys
+
+# Add parent directory to path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
 import create_image
+from reference_sheet import parse_page_spec
 
 
 class TestSanitization:
@@ -101,40 +108,40 @@ class TestPageSpecParsing:
     
     def test_parse_page_spec_all(self):
         """Test parsing 'all' pages."""
-        page_spec, subrefs = create_image.parse_page_spec("all")
+        page_spec, subrefs = parse_page_spec("all")
         assert page_spec == "all"
         assert subrefs is None
     
     def test_parse_page_spec_single_page(self):
         """Test parsing single page number."""
-        page_spec, subrefs = create_image.parse_page_spec("1")
+        page_spec, subrefs = parse_page_spec("1")
         assert page_spec == 1
         assert subrefs is None
     
     def test_parse_page_spec_with_single_subref(self):
         """Test parsing page with single subrefinement."""
-        page_spec, subrefs = create_image.parse_page_spec("1:1")
+        page_spec, subrefs = parse_page_spec("1:1")
         assert page_spec == 1
         assert subrefs == [1]
     
     def test_parse_page_spec_with_subref_range(self):
         """Test parsing page with subrefinement range."""
-        page_spec, subrefs = create_image.parse_page_spec("1:{1:3}")
+        page_spec, subrefs = parse_page_spec("1:{1:3}")
         assert page_spec == 1
         assert subrefs == [1, 2, 3]
     
     def test_parse_page_spec_with_subref_list(self):
         """Test parsing page with subrefinement list."""
-        page_spec, subrefs = create_image.parse_page_spec("1:{1,4,5}")
+        page_spec, subrefs = parse_page_spec("1:{1,4,5}")
         assert page_spec == 1
         assert subrefs == [1, 4, 5]
     
     def test_parse_page_spec_invalid_page_number(self):
         """Test error for invalid page number."""
         with pytest.raises(ValueError, match="Invalid page"):
-            create_image.parse_page_spec("abc")
+            parse_page_spec("abc")
     
     def test_parse_page_spec_zero_page(self):
         """Test error for page number less than 1."""
         with pytest.raises(ValueError, match="Invalid page specification|Page number must be 1 or greater"):
-            create_image.parse_page_spec("0")
+            parse_page_spec("0")

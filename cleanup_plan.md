@@ -179,14 +179,12 @@ The `create_image.py` script is ~1200 lines and handles multiple responsibilitie
 - [x] All tests passing (249/249) with 99% coverage on prompt_builder
 
 ### 2.5 Extract Reference Sheet Layer
-- [ ] Create `reference_sheet.py` module
-- [ ] Break down large functions
-- [ ] Improve page/grid layout logic
-- [ ] Update tests to import from new module
-- [ ] Create comprehensive unit tests for reference_sheet module
-- [ ] Verify all tests passing with >80% coverage
-- [ ] Update tests to import from new module
-- [ ] Create comprehensive unit tests for reference_sheet module
+- [x] Create `reference_sheet.py` module
+- [x] Move deduplicate_figure_sections function
+- [x] Move parse_page_spec function
+- [x] Update create_image.py imports
+- [x] Update tests/test_utilities.py imports
+- [ ] Create comprehensive unit tests for reference_sheet module (currently 70% coverage)
 - [ ] Verify all tests passing with >80% coverage
 
 ### 2.6 Simplify Main Script
@@ -229,8 +227,9 @@ The `create_image.py` script is ~1200 lines and handles multiple responsibilitie
 - [x] Equipment/Props Layer - `equipment_handler.py` created ✓
 - [x] Pose Library Layer - `pose_library.py` created ✓
 - [x] Prompt Building Layer - `prompt_builder.py` created ✓
+- [~] Reference Sheet Layer - `reference_sheet.py` created (functions extracted, needs comprehensive tests)
 - Code split into logical modules
-- Each new module has comprehensive unit tests (>80% coverage)
+- Each new module has comprehensive unit tests (target >80% coverage)
 - All tests still passing (249/249)
 - No behavioral changes (same outputs)
 - Code is more maintainable
