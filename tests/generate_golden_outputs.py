@@ -27,13 +27,13 @@ def run_command(args, output_file):
         )
         output_file.parent.mkdir(parents=True, exist_ok=True)
         output_file.write_text(result.stdout, encoding='utf-8')
-        print(f"  ✓ Saved to {output_file}")
+        print(f"  [OK] Saved to {output_file}")
         return True
     except subprocess.CalledProcessError as e:
-        print(f"  ✗ Error: {e.stderr}", file=sys.stderr)
+        print(f"  [ERROR] {e.stderr}", file=sys.stderr)
         return False
     except Exception as e:
-        print(f"  ✗ Error: {e}", file=sys.stderr)
+        print(f"  [ERROR] {e}", file=sys.stderr)
         return False
 
 
@@ -115,12 +115,12 @@ def main():
             ):
                 success_count += 1
             
-            # Sample individual character forms
+            # Sample individual character forms (using actual character names from garou.json)
             test_cases = [
-                ("The Howling Wind", "human"),
-                ("The Howling Wind", "crinos"),
-                ("The Iron Fang", "human"),
-                ("The Iron Fang", "glabro"),
+                ("alpha", "human"),
+                ("alpha", "crinos"),
+                ("breaker", "human"),
+                ("breaker", "glabro"),
             ]
             
             for char_name, form in test_cases:
@@ -165,10 +165,10 @@ def main():
     print(f"Output directory: {golden_dir}")
     
     if success_count < total_count:
-        print(f"\n⚠️  Some outputs failed to generate. Check errors above.")
+        print(f"\n[WARNING] Some outputs failed to generate. Check errors above.")
         return 1
     
-    print(f"\n✓ All golden outputs generated successfully!")
+    print(f"\n[SUCCESS] All golden outputs generated successfully!")
     return 0
 
 
