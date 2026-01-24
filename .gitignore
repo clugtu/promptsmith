@@ -9,6 +9,7 @@ __pycache__/
 dist/
 build/
 *.whl
+./pytest_cache/
 
 # Virtual Environments
 venv/
