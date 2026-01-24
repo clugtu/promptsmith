@@ -168,21 +168,15 @@ The `create_image.py` script is ~1200 lines and handles multiple responsibilitie
 - [x] Update tests to import from new module
 - [x] Create comprehensive unit tests for pose_library module
 - [x] All tests passing (209/209) with 100% coverage on pose_library
-- [ ] Update tests to import from new module
-- [ ] Create comprehensive unit tests for pose_library module
-- [ ] Verify all tests passing with >80% coverage
 
 ### 2.4 Extract Prompt Building Layer
-- [ ] Create `prompt_builder.py` module
-- [ ] Separate section builders
-- [ ] Create PromptSection dataclass
-- [ ] Improve section assembly logic
-- [ ] Update tests to import from new module
-- [ ] Create comprehensive unit tests for prompt_builder module
-- [ ] Verify all tests passing with >80% coverage
-- [ ] Update tests to import from new module
-- [ ] Create comprehensive unit tests for prompt_builder module
-- [ ] Verify all tests passing with >80% coverage
+- [x] Create `prompt_builder.py` module
+- [x] Move format_for_chat utility
+- [x] Move build_final_prompt function
+- [x] Update create_image.py imports
+- [x] Update tests/test_integration.py imports
+- [x] Create comprehensive unit tests for prompt_builder module
+- [x] All tests passing (249/249) with 99% coverage on prompt_builder
 
 ### 2.5 Extract Reference Sheet Layer
 - [ ] Create `reference_sheet.py` module
@@ -234,9 +228,10 @@ The `create_image.py` script is ~1200 lines and handles multiple responsibilitie
 - [x] JSON/Data Layer - `json_loader.py` and `character_resolver.py` created ✓
 - [x] Equipment/Props Layer - `equipment_handler.py` created ✓
 - [x] Pose Library Layer - `pose_library.py` created ✓
+- [x] Prompt Building Layer - `prompt_builder.py` created ✓
 - Code split into logical modules
 - Each new module has comprehensive unit tests (>80% coverage)
-- All tests still passing (209/209)
+- All tests still passing (249/249)
 - No behavioral changes (same outputs)
 - Code is more maintainable
 - Cyclomatic complexity reduced

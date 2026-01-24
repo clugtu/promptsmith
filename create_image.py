@@ -70,6 +70,10 @@ from pose_library import (
     remove_base_language,
     PromptNotFoundError,
 )
+from prompt_builder import (
+    format_for_chat,
+    build_final_prompt,
+)
 
 
 def sanitize_for_ascii(text: str) -> str:
@@ -88,11 +92,6 @@ def sanitize_for_ascii(text: str) -> str:
     for unicode_char, ascii_equiv in replacements.items():
         text = text.replace(unicode_char, ascii_equiv)
     return text
-
-
-def format_for_chat(prompt: str) -> str:
-    """Format a prompt for copy/paste into ChatGPT."""
-    return prompt.strip()
 
 
 def copy_to_clipboard_windows(text: str) -> None:
@@ -353,186 +352,6 @@ def resolve_prompt_from_json(
     final_prompt = character_base or char_data.get("description", "")
 
     return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation, visual_notes
-
-
-def build_final_prompt(
-    base_prompt: str,
-    *,
-    gender: Optional[str] = None,
-    thematic_snippets: List[str] = None,
-    thematic_general: str = "",
-    proportions: str = "",
-    age: str = "",
-    default_proportions: str = "",
-    style_snippet: str = "",
-    generic_snippet,  # Can be str or dict of sections
-    miniature_snippet: str = "",
-    include_generic: bool,
-    include_miniature: bool,
-    no_base: bool = False,
-    equipment: List[str] = None,
-    character_id: str = "",
-    character_name: str = "",
-    form_id: str = "",
-    pose_prompt: str = "",
-    camera_rotation: Optional[int] = None,
-    visual_notes: str = "",
-) -> str:
-    """Build the final prompt from components with structured sections.
-    
-    Args:
-        base_prompt: Character base + pose description
-        gender: Character gender
-        thematic_snippets: Thematic form snippets
-        thematic_general: General thematic prompt
-        proportions: Character proportions
-        age: Character age (child, teen, young_adult, adult, older, elder)
-        default_proportions: Default proportions if character has none
-        style_snippet: Style rules
-        generic_snippet: Generic render rules (str or dict of sections)
-        miniature_snippet: Miniature-specific rules
-        include_generic: Whether to include generic rules
-        include_miniature: Whether to include miniature rules
-        no_base: Whether to specify no base/stand
-        equipment: List of equipment/props with placement descriptions
-        character_id: Character ID for asset naming
-        form_id: Form/pose ID for asset naming
-        pose_prompt: Pose description from pose library
-        camera_rotation: Camera rotation override (degrees, default 45)
-        
-    Returns:
-        Complete formatted prompt string with structured sections
-    """
-    sections = []
-    
-    # ASSET_NAME section
-    # Debug output
-    if False:  # Set to True for debugging
-        print(f"DEBUG: character_id={character_id}, character_name={character_name}, gender={gender}, form_id={form_id}", file=sys.stderr)
-    
-    if character_name and gender:
-        # Use ID + character name + gender for readable asset names
-        if character_id:
-            asset_name = f"{character_id}_{character_name}_{gender}".replace(" ", "_").lower()
-        else:
-            asset_name = f"{character_name}_{gender}".replace(" ", "_").lower()
-        sections.append(f"ASSET_NAME: {asset_name}")
-    elif character_id and form_id:
-        # Fallback to ID-based naming
-        asset_name = f"{character_id}_{form_id}"
-        sections.append(f"ASSET_NAME: {asset_name}")
-    
-    # VISUAL section (if present, before CHARACTER)
-    if visual_notes:
-        sections.append(f"VISUAL:\n{visual_notes}")
-    
-    # CHARACTER section
-    character_parts = [base_prompt.strip().rstrip(",")]
-    
-    # Add age and gender as demographic descriptors
-    demographic_parts = []
-    
-    if age:
-        demographic_parts.append(age.lower())
-    
-    if gender:
-        gender_lower = gender.lower()
-        base_lower = base_prompt.lower()
-        
-        # Check for explicit gender words
-        has_gender = any(word in base_lower for word in [
-            'female', 'male', 'woman', 'man ', ' man,', 'girl', 'boy',
-            'feminine', 'masculine'
-        ])
-        
-        # Add gender unless already present
-        if not has_gender:
-            demographic_parts.append(gender_lower)
-    
-    # Add demographics to character description
-    if demographic_parts:
-        character_parts.append(" ".join(demographic_parts))
-    
-    sections.append("CHARACTER:\n" + ", ".join(p.strip().rstrip(",") for p in character_parts if p.strip()))
-    
-    # PROPS section
-    if equipment:
-        formatted_props = []
-        for item in equipment:
-            # Parse structured format: "item (details) : position : description"
-            if " : " in item:
-                parts = item.split(" : ", 2)
-                if len(parts) == 3:
-                    item_with_details = parts[0].strip()
-                    position = parts[1].strip()
-                    description = parts[2].strip()
-                    formatted_props.append(f"- {item_with_details} [{position}] {description}")
-                else:
-                    # Fallback for malformed entries
-                    formatted_props.append(f"- {item}")
-            else:
-                # Legacy format without colons
-                formatted_props.append(f"- {item}")
-        
-        props_lines = "\n".join(formatted_props)
-        sections.append(f"PROPS:\n{props_lines}")
-    
-    # POSE section (from pose library)
-    if pose_prompt:
-        sections.append(f"POSE:\n{pose_prompt}")
-    
-    # THEME section
-    theme_parts = []
-    if thematic_snippets:
-        theme_parts.extend(thematic_snippets)
-    if thematic_general:
-        theme_parts.append(thematic_general)
-    
-    if theme_parts:
-        sections.append("THEME:\n" + ", ".join(p.strip().rstrip(",") for p in theme_parts))
-    
-    # PROPORTIONS section
-    proportions_to_use = proportions if proportions else default_proportions
-    if proportions_to_use:
-        sections.append(f"PROPORTIONS:\n{proportions_to_use}")
-    
-    # STYLE section
-    if style_snippet:
-        sections.append(f"STYLE:\n{style_snippet}")
-    
-    # RENDER RULES sections (from generic_render_rules.json - includes 3D-safe geometry)
-    if include_generic and generic_snippet:
-        if isinstance(generic_snippet, dict):
-            # New section-based format
-            for section_key, section_data in generic_snippet.items():
-                if isinstance(section_data, dict) and "title" in section_data:
-                    title = section_data["title"]
-                    content = section_data.get("content", "")
-                    if content:
-                        # Apply camera rotation override if present and this is the framing section
-                        if section_key == "framing" and camera_rotation is not None:
-                            # Get default rotation
-                            default_rotation = section_data.get("default_camera_rotation", 45)
-                            rotation_to_use = camera_rotation if camera_rotation is not None else default_rotation
-                            content = content.replace("{camera_rotation}", str(rotation_to_use))
-                        elif section_key == "framing":
-                            # Use default if no override
-                            default_rotation = section_data.get("default_camera_rotation", 45)
-                            content = content.replace("{camera_rotation}", str(default_rotation))
-                        sections.append(f"{title}:\n{content}")
-        elif isinstance(generic_snippet, str) and generic_snippet:
-            # Legacy prompt_snippet format
-            sections.append(f"RENDER RULES:\n{generic_snippet}")
-    
-    # MINIATURE RULES section
-    if include_miniature and miniature_snippet:
-        sections.append(f"MINIATURE RULES:\n{miniature_snippet}")
-    
-    # BASE EXCLUSION section
-    if no_base:
-        sections.append("BASE EXCLUSION:\nno base, no stand, not mounted, no plinth, no pedestal, no ground plane")
-    
-    return "create image\n\n" + "\n\n".join(sections)
 
 
 def list_available_from_json(json_data: Dict[str, Any]) -> str:
