@@ -85,20 +85,32 @@ Tests need to locate character JSON files in different locations:
 ### OneDrive Files (Custom)
 - Located in user's OneDrive directory
 - Path varies by machine and user
-- Use `PROMPTSMITH_CUSTOM_PATH` environment variable:
+- Configure using one of these methods:
 
+#### Option 1: Environment Variable (Recommended)
 ```bash
 # Set environment variable (bash)
 export PROMPTSMITH_CUSTOM_PATH="/path/to/Custom"
 
 # Set environment variable (PowerShell)
-$env:PROMPTSMITH_CUSTOM_PATH = "C:\Users\clugtu\OneDrive\3D Printing\SoB\Custom"
+$env:PROMPTSMITH_CUSTOM_PATH = "D:\OneDrive\3D Printing\SoB\Custom"
 
 # Then run tests
 pytest tests/
 ```
 
-- Tests will skip if OneDrive files are not found
+#### Option 2: Edit conftest.py
+Add your path to the `candidates` list in the `custom_path` fixture:
+
+```python
+candidates = [
+    Path.home() / "OneDrive" / "3D Printing" / "SoB" / "Custom",
+    Path("C:/Users/clugtu/OneDrive/3D Printing/SoB/Custom"),
+    Path("D:/OneDrive/3D Printing/SoB/Custom"),  # Add your path here
+]
+```
+
+**Note:** Tests requiring Custom character files will be skipped if the path is not found.
 
 ## Test Fixtures
 

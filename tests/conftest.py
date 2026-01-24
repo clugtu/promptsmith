@@ -49,6 +49,7 @@ def custom_path():
     candidates = [
         Path.home() / "OneDrive" / "3D Printing" / "SoB" / "Custom",
         Path("C:/Users/clugtu/OneDrive/3D Printing/SoB/Custom"),
+        Path("D:/OneDrive/3D Printing/SoB/Custom"),
     ]
     
     for path in candidates:

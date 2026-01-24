@@ -40,6 +40,25 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 
+# Import from new modules
+from json_loader import (
+    load_json_data,
+    validate_character_ids,
+    resolve_imports,
+    resolve_path,
+    extract_generic_snippet,
+    extract_miniature_snippet,
+    extract_thematic_snippet,
+    extract_style_snippet,
+    extract_default_proportions,
+    extract_thematic_forms,
+)
+from character_resolver import (
+    find_character_by_id_or_name,
+    find_refinement_by_id_or_name,
+    parse_refinement_path,
+)
+
 
 def sanitize_for_ascii(text: str) -> str:
     """Replace common Unicode characters with ASCII equivalents for safe terminal output."""
@@ -95,198 +114,6 @@ class CharacterData:
 
     def get_refinements(self) -> List[Dict[str, Any]]:
         return self.data.get("refinements", [])
-
-
-def load_json_data(json_path: Path) -> Dict[str, Any]:
-    """Load and parse the JSON file, resolving any imports."""
-    if not json_path.exists():
-        # Check if there's a similar file nearby
-        parent_dir = json_path.parent
-        filename = json_path.name
-        similar_files = []
-        
-        if parent_dir.exists():
-            # Look for files with similar names
-            for file in parent_dir.glob("*.json"):
-                if file.stem.lower().replace('_', '').replace('-', '') == filename.lower().replace('.json', '').replace('_', '').replace('-', ''):
-                    similar_files.append(file.name)
-        
-        error_msg = f"JSON file not found: {json_path}"
-        if similar_files:
-            error_msg += f"\n\nDid you mean one of these?\n  " + "\n  ".join(similar_files)
-        elif parent_dir.exists():
-            json_files = [f.name for f in parent_dir.glob("*.json")]
-            if json_files:
-                error_msg += f"\n\nAvailable JSON files in {parent_dir}:\n  " + "\n  ".join(json_files)
-            else:
-                error_msg += f"\n\nNo JSON files found in {parent_dir}"
-        else:
-            error_msg += f"\n\nDirectory does not exist: {parent_dir}"
-        
-        raise FileNotFoundError(error_msg)
-    
-    with open(json_path, "r", encoding="utf-8") as f:
-        data = json.load(f)
-    
-    # Resolve imports if present.
-    # Intentionally resolve relative import paths against the current working directory
-    # (the directory create_image.py is run from) to make libraries portable across machines.
-    if "imports" in data:
-        data = resolve_imports(data, Path.cwd())
-    
-    # Validate character IDs are sequential
-    if "characters" in data:
-        validate_character_ids(data["characters"])
-    
-    return data
-
-
-def validate_character_ids(characters: List[Dict[str, Any]]) -> None:
-    """Validate that character IDs are sequential with no gaps or duplicates."""
-    if not characters:
-        return
-    
-    ids = [char.get("id") for char in characters if "id" in char]
-    if not ids:
-        return
-    
-    # Check for duplicates
-    duplicates = [x for x in ids if ids.count(x) > 1]
-    if duplicates:
-        raise ValueError(f"Duplicate character IDs found: {sorted(set(duplicates))}")
-    
-    # Check for sequential numbering
-    expected_ids = list(range(1, len(ids) + 1))
-    if sorted(ids) != expected_ids:
-        missing = set(expected_ids) - set(ids)
-        extra = set(ids) - set(expected_ids)
-        errors = []
-        if missing:
-            errors.append(f"Missing IDs: {sorted(missing)}")
-        if extra:
-            errors.append(f"Unexpected IDs: {sorted(extra)}")
-        raise ValueError(f"Character IDs must be sequential from 1 to {len(ids)}. {' '.join(errors)}")
-
-
-def resolve_imports(data: Dict[str, Any], base_path: Path) -> Dict[str, Any]:
-    """Resolve file references in the imports section and merge them into the data.
-    
-    This function loads referenced JSON files and merges their content into the main data structure.
-    Files are cached to avoid loading the same file multiple times.
-    """
-    imports = data.get("imports", {})
-    if not imports:
-        return data
-    
-    # Cache for loaded files to avoid duplicate loads
-    file_cache = {}
-    
-    # Resolve generic_render_rules
-    if "generic_render_rules" in imports:
-        rules_path = resolve_path(imports["generic_render_rules"], base_path)
-        if rules_path not in file_cache:
-            with open(rules_path, "r", encoding="utf-8") as f:
-                file_cache[rules_path] = json.load(f)
-        data["generic_render_rules"] = file_cache[rules_path].get("generic_render_rules", {})
-    
-    # Resolve miniature_scale_rules
-    if "miniature_scale_rules" in imports:
-        rules_path = resolve_path(imports["miniature_scale_rules"], base_path)
-        if rules_path not in file_cache:
-            with open(rules_path, "r", encoding="utf-8") as f:
-                file_cache[rules_path] = json.load(f)
-        data["miniature_scale_rules"] = file_cache[rules_path].get("miniature_scale_rules", {})
-    
-    # Resolve common_thematic_forms
-    if "common_thematic_forms" in imports:
-        forms_path = resolve_path(imports["common_thematic_forms"], base_path)
-        if forms_path not in file_cache:
-            with open(forms_path, "r", encoding="utf-8") as f:
-                file_cache[forms_path] = json.load(f)
-        # Merge common forms into thematic_rules.forms
-        common_forms = file_cache[forms_path].get("common_thematic_forms", {})
-        if "thematic_rules" not in data:
-            data["thematic_rules"] = {}
-        if "forms" not in data["thematic_rules"]:
-            data["thematic_rules"]["forms"] = {}
-        # Merge common forms (character file forms take precedence)
-        for form_name, form_data in common_forms.items():
-            if form_name not in data["thematic_rules"]["forms"]:
-                data["thematic_rules"]["forms"][form_name] = form_data
-    
-    # Resolve style_rules
-    if "style_rules" in imports:
-        style_path = resolve_path(imports["style_rules"], base_path)
-        if style_path not in file_cache:
-            with open(style_path, "r", encoding="utf-8") as f:
-                file_cache[style_path] = json.load(f)
-        # Import the entire style file content (it has prompt_snippet at root level)
-        data["style_rules"] = file_cache[style_path]
-    
-    # Resolve pose_library
-    if "pose_library" in imports:
-        pose_path = resolve_path(imports["pose_library"], base_path)
-        if pose_path not in file_cache:
-            with open(pose_path, "r", encoding="utf-8") as f:
-                file_cache[pose_path] = json.load(f)
-        data["pose_library"] = file_cache[pose_path]
-    
-    return data
-
-
-def resolve_path(path_str: str, base_path: Path) -> Path:
-    """Resolve a path string relative to base_path or as absolute.
-
-    Notes (Windows):
-    - Git Bash / MSYS paths like '/d/dev/...' are *not* native Windows absolute paths.
-      If passed directly to pathlib on Windows, they are treated as '\\d\\dev\\...' on the
-      current drive (e.g. 'D:\\d\\dev\\...').
-    - To make JSON `imports` portable for Git Bash users, translate '/<drive>/' to
-      '<DRIVE>:/'.
-    """
-
-    # Translate Git Bash / MSYS drive paths (e.g. /d/dev/...) into Windows drive paths.
-    # Only do this on Windows; on POSIX systems '/d/...' is a normal absolute path.
-    if os.name == "nt":
-        msys_drive_match = re.match(r"^/([a-zA-Z])/(.*)$", path_str)
-        if msys_drive_match:
-            drive_letter = msys_drive_match.group(1).upper()
-            remainder = msys_drive_match.group(2)
-            path_str = f"{drive_letter}:/{remainder}"
-
-    path = Path(path_str)
-    if path.is_absolute():
-        return path
-    return (base_path / path).resolve()
-
-
-def extract_generic_snippet(json_data: Dict[str, Any]) -> str:
-    """Extract the generic render rules sections from JSON."""
-    sections = json_data.get("generic_render_rules", {}).get("sections", {})
-    # For backwards compatibility, also check for prompt_snippet
-    if not sections:
-        return json_data.get("generic_render_rules", {}).get("prompt_snippet", "")
-    return sections
-
-
-def extract_miniature_snippet(json_data: Dict[str, Any]) -> str:
-    """Extract the miniature scale rules prompt snippet from JSON."""
-    return json_data.get("miniature_scale_rules", {}).get("prompt_snippet", "")
-
-
-def extract_thematic_snippet(json_data: Dict[str, Any]) -> str:
-    """Extract the general thematic rules prompt snippet from JSON."""
-    return json_data.get("thematic_rules", {}).get("prompt_snippet", "")
-
-
-def extract_style_snippet(json_data: Dict[str, Any]) -> str:
-    """Extract the style rules prompt snippet from JSON."""
-    return json_data.get("style_rules", {}).get("prompt_snippet", "")
-
-
-def extract_default_proportions(json_data: Dict[str, Any]) -> str:
-    """Extract default proportions from style rules."""
-    return json_data.get("style_rules", {}).get("default_proportions", "")
 
 
 def extract_pose_library(json_data: Dict[str, Any]) -> Dict[str, Any]:
@@ -424,18 +251,6 @@ def compose_pose_prompt_from_library(
     return character_override, pose_prompt, camera_rotation
 
 
-def extract_thematic_forms(json_data: Dict[str, Any]) -> Dict[str, str]:
-    """Extract form definitions from thematic_rules.forms.
-    Returns a dict mapping form names to their prompt_snippet."""
-    forms = json_data.get("thematic_rules", {}).get("forms", {})
-    result = {}
-    for name, form in forms.items():
-        # Skip non-dict entries (like _comment)
-        if not isinstance(form, dict):
-            continue
-        result[name] = form.get("prompt_snippet", "")
-    return result
-
 
 def remove_base_language(miniature_snippet: str) -> str:
     """Remove 'mounted on a ... base' phrase from the 40mm snippet.
@@ -475,73 +290,6 @@ def remove_base_language(miniature_snippet: str) -> str:
 
 class PromptNotFoundError(RuntimeError):
     pass
-
-
-def find_character_by_id_or_name(
-    json_data: Dict[str, Any], identifier: Union[int, str]
-) -> Optional[Dict[str, Any]]:
-    """Find a character by numeric ID or string name."""
-    characters = json_data.get("characters", [])
-    
-    # Try as integer ID first
-    if isinstance(identifier, int):
-        for char in characters:
-            if char.get("id") == identifier:
-                return char
-    
-    # Try as string (name or string representation of number)
-    id_str = str(identifier).lower()
-    
-    # Try as numeric string
-    try:
-        num_id = int(identifier)
-        for char in characters:
-            if char.get("id") == num_id:
-                return char
-    except (ValueError, TypeError):
-        pass
-    
-    # Try as name
-    for char in characters:
-        if char.get("name", "").lower() == id_str:
-            return char
-    
-    return None
-
-
-def find_refinement_by_id_or_name(
-    refinements: List[Dict[str, Any]], identifier: Union[int, str]
-) -> Optional[Dict[str, Any]]:
-    """Find a refinement by numeric ID or string name."""
-    # Try as integer ID
-    if isinstance(identifier, int):
-        for ref in refinements:
-            if ref.get("id") == identifier:
-                return ref
-    
-    # Try as string
-    id_str = str(identifier).lower()
-    
-    # Try as numeric string
-    try:
-        num_id = int(identifier)
-        for ref in refinements:
-            if ref.get("id") == num_id:
-                return ref
-    except (ValueError, TypeError):
-        pass
-    
-    # Try as name
-    for ref in refinements:
-        if ref.get("name", "").lower() == id_str:
-            return ref
-    
-    return None
-
-
-def parse_refinement_path(path_str: str) -> List[str]:
-    """Parse a refinement path like '1:1' or 'alpha:human' into components."""
-    return [p.strip() for p in path_str.split(":") if p.strip()]
 
 
 def validate_pose_compatibility(
