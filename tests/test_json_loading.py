@@ -3,8 +3,8 @@ import pytest
 from pathlib import Path
 import json
 import tempfile
-import json_loader
-import create_image  # Keep for backwards compatibility in some tests
+from src import json_loader
+from src import create_image  # Keep for backwards compatibility in some tests
 
 
 class TestJSONLoading:

@@ -49,7 +49,7 @@ def main():
     # Paths
     script_dir = Path(__file__).parent
     repo_root = script_dir.parent
-    create_image = repo_root / "create_image.py"
+    create_image = repo_root / "src" / "create_image.py"
     golden_dir = script_dir / "golden_outputs"
     
     # Git-tracked standees path

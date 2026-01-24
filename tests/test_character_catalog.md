@@ -170,27 +170,27 @@ def custom_path():
 ### Standees (Git)
 ```bash
 # Player denizens - all characters, all poses
-./create_image.py ../shattered_citadel/assets/standees/player_denizen_standees.json --all --prompt-only --no-base > tests/golden_outputs/player_denizens_all.txt
+./src/create_image.py ../shattered_citadel/assets/standees/player_denizen_standees.json --all --prompt-only --no-base > tests/golden_outputs/player_denizens_all.txt
 
 # Individual poses
-./create_image.py ../shattered_citadel/assets/standees/player_denizen_standees.json 1:1 --prompt-only --no-base > tests/golden_outputs/player_denizen_1_1.txt
-./create_image.py ../shattered_citadel/assets/standees/player_denizen_standees.json 1:2 --prompt-only --no-base > tests/golden_outputs/player_denizen_1_2.txt
+./src/create_image.py ../shattered_citadel/assets/standees/player_denizen_standees.json 1:1 --prompt-only --no-base > tests/golden_outputs/player_denizen_1_1.txt
+./src/create_image.py ../shattered_citadel/assets/standees/player_denizen_standees.json 1:2 --prompt-only --no-base > tests/golden_outputs/player_denizen_1_2.txt
 # ... repeat for all
 ```
 
 ### Garou (OneDrive)
 ```bash
 # All characters, all forms
-./create_image.py "$CUSTOM_PATH/Garou/garou.json" --all --prompt-only --no-base > tests/golden_outputs/garou_all.txt
+./src/create_image.py "$CUSTOM_PATH/Garou/garou.json" --all --prompt-only --no-base > tests/golden_outputs/garou_all.txt
 
 # Individual character forms
-./create_image.py "$CUSTOM_PATH/Garou/garou.json" "The Howling Wind:human" --prompt-only > tests/golden_outputs/garou_howling_wind_human.txt
-./create_image.py "$CUSTOM_PATH/Garou/garou.json" "The Howling Wind:crinos" --prompt-only > tests/golden_outputs/garou_howling_wind_crinos.txt
+./src/create_image.py "$CUSTOM_PATH/Garou/garou.json" "The Howling Wind:human" --prompt-only > tests/golden_outputs/garou_howling_wind_human.txt
+./src/create_image.py "$CUSTOM_PATH/Garou/garou.json" "The Howling Wind:crinos" --prompt-only > tests/golden_outputs/garou_howling_wind_crinos.txt
 # ... etc
 
 # Reference sheets
-./create_image.py "$CUSTOM_PATH/Garou/garou.json" --page 1 --prompt-only > tests/golden_outputs/garou_ref_page1.txt
-./create_image.py "$CUSTOM_PATH/Garou/garou.json" --page 2 --prompt-only > tests/golden_outputs/garou_ref_page2.txt
+./src/create_image.py "$CUSTOM_PATH/Garou/garou.json" --page 1 --prompt-only > tests/golden_outputs/garou_ref_page1.txt
+./src/create_image.py "$CUSTOM_PATH/Garou/garou.json" --page 2 --prompt-only > tests/golden_outputs/garou_ref_page2.txt
 ```
 
 ---

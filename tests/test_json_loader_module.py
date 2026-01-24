@@ -2,7 +2,7 @@
 import pytest
 from pathlib import Path
 import json
-import json_loader
+from src import json_loader
 
 
 class TestExtractFunctions:

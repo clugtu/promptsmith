@@ -1,7 +1,7 @@
 """Tests for equipment and prop handling."""
 import pytest
-import create_image
-import equipment_handler
+from src import create_image
+from src import equipment_handler
 
 
 class TestPropResolution:

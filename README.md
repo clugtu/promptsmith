@@ -9,7 +9,8 @@ This system organizes character prompts with support for nested refinements. Eac
 ## File Structure
 
 - **`template.json`** - Generic template for creating new projects
-- **`create_image.py`** - Python script to generate images using OpenAI API
+- **`src/create_image.py`** - Python script to generate images using OpenAI API
+- **`src/`** - Python source modules
 - **`rules/`** - Directory for reusable rule definitions (optional)
   - **`generic_render_rules.json`** - Universal rendering rules
   - **`pose_library.json`** - Reusable pose definitions
@@ -194,39 +195,39 @@ The `thematic_rules` section supports project-wide theming:
 
 ```powershell
 # List all available characters and refinements
-python create_image.py myproject.json --list
+python src/create_image.py myproject.json --list
 
 # Generate prompts for all refinements of a character (default behavior)
-python create_image.py myproject.json 1 --dry-run
-python create_image.py myproject.json hero_name --prompt-only
+python src/create_image.py myproject.json 1 --dry-run
+python src/create_image.py myproject.json hero_name --prompt-only
 
 # Generate prompt for a specific refinement
-python create_image.py myproject.json 1:3 --dry-run
-python create_image.py myproject.json hero_name:variant --dry-run
+python src/create_image.py myproject.json 1:3 --dry-run
+python src/create_image.py myproject.json hero_name:variant --dry-run
 
 # Generate actual images (requires OpenAI API key)
 $env:OPENAI_API_KEY = "your-key-here"
-python create_image.py myproject.json 1              # All refinements for character 1
-python create_image.py myproject.json hero_name:variant  # Specific variant
+python src/create_image.py myproject.json 1              # All refinements for character 1
+python src/create_image.py myproject.json hero_name:variant  # Specific variant
 
 # Copy prompt to clipboard (Windows)
-python create_image.py myproject.json 1:1 --dry-run --copy
+python src/create_image.py myproject.json 1:1 --dry-run --copy
 
 # Remove miniature base from prompt
-python create_image.py myproject.json 1:1 --no-base
+python src/create_image.py myproject.json 1:1 --no-base
 
 # Exclude generic or miniature rules
-python create_image.py myproject.json 1:1 --no-generic
-python create_image.py myproject.json 1:1 --no-miniature
+python src/create_image.py myproject.json 1:1 --no-generic
+python src/create_image.py myproject.json 1:1 --no-miniature
 
 # Generate reference sheets (multiple poses in one prompt)
-python create_image.py myproject.json --page 1 --prompt-only --copy  # First 9 poses
-python create_image.py myproject.json --page 2 --prompt-only --copy  # Poses 10-18
-python create_image.py myproject.json --page all --prompt-only       # All pages
+python src/create_image.py myproject.json --page 1 --prompt-only --copy  # First 9 poses
+python src/create_image.py myproject.json --page 2 --prompt-only --copy  # Poses 10-18
+python src/create_image.py myproject.json --page all --prompt-only       # All pages
 
 # Example using the garou.json demo project
-python create_image.py garou.json alpha:human --dry-run
-python create_image.py garou.json --list
+python src/create_image.py garou.json alpha:human --dry-run
+python src/create_image.py garou.json --list
 ```
 
 ### Command-Line Options
@@ -295,8 +296,8 @@ python create_image.py garou.json --list
 
 6. **Test prompts**
    ```powershell
-   python create_image.py myproject.json --list
-   python create_image.py myproject.json 1:1 --dry-run
+   python src/create_image.py myproject.json --list
+   python src/create_image.py myproject.json 1:1 --dry-run
    ```
 
 ## Best Practices
@@ -387,17 +388,17 @@ Each character's refinements reference these form definitions in their `thematic
 
 ```powershell
 # Alpha in Crinos form (by number)
-python create_image.py garou.json 1:3 --dry-run
+python src/create_image.py garou.json 1:3 --dry-run
 
 # Alpha in human form (by name)
-python create_image.py garou.json alpha:human --dry-run
+python src/create_image.py garou.json alpha:human --dry-run
 
 # All forms for the Lost Cub (default behavior when no form specified)
-python create_image.py garou.json 9 --dry-run
-python create_image.py garou.json lost_cub --dry-run
+python src/create_image.py garou.json 9 --dry-run
+python src/create_image.py garou.json lost_cub --dry-run
 
 # Breaker in wolf form with no base
-python create_image.py garou.json breaker:wolf --no-base --dry-run
+python src/create_image.py garou.json breaker:wolf --no-base --dry-run
 ```
 
 ## Requirements

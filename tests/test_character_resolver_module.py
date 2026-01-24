@@ -1,6 +1,6 @@
 """Additional unit tests for character_resolver module to ensure complete coverage."""
 import pytest
-import character_resolver
+from src import character_resolver
 
 
 class TestFindCharacterEdgeCases:

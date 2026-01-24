@@ -1,6 +1,6 @@
 # Test Infrastructure
 
-This directory contains the test suite for `create_image.py`.
+This directory contains the test suite for the promptsmith source code.
 
 ## Structure
 

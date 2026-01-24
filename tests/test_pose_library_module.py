@@ -1,6 +1,6 @@
 """Additional unit tests for pose_library module to ensure complete coverage."""
 import pytest
-import pose_library
+from src import pose_library
 
 
 class TestExtractPoseLibrary:

@@ -9,7 +9,7 @@ from pathlib import Path
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from prompt_builder import format_for_chat, build_final_prompt
+from src.prompt_builder import format_for_chat, build_final_prompt
 
 
 class TestFormatForChat:

@@ -10,7 +10,7 @@ import re
 from collections import Counter
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-from pose_library import PromptNotFoundError
+from .pose_library import PromptNotFoundError
 
 
 def deduplicate_figure_sections(figure_descriptions: List[str]) -> Tuple[List[str], Dict[str, str]]:

@@ -1,7 +1,7 @@
 """Tests for character and refinement lookup functions."""
 import pytest
-import character_resolver
-import create_image  # Keep for backwards compatibility
+from src import character_resolver
+from src import create_image  # Keep for backwards compatibility
 
 
 class TestCharacterLookup:

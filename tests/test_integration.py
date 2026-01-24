@@ -11,8 +11,8 @@ import sys
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import create_image
-from prompt_builder import build_final_prompt
+from src import create_image
+from src.prompt_builder import build_final_prompt
 
 
 class TestPlayerDenizenIntegration:

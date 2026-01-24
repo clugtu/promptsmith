@@ -1,6 +1,6 @@
 """Additional unit tests for equipment_handler module to ensure complete coverage."""
 import pytest
-import equipment_handler
+from src import equipment_handler
 
 
 class TestResolvePropReferencesEdgeCases:

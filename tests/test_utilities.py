@@ -6,8 +6,8 @@ import sys
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import create_image
-from reference_sheet import parse_page_spec, deduplicate_figure_sections
+from src import create_image
+from src.reference_sheet import parse_page_spec, deduplicate_figure_sections
 
 
 class TestSanitization:

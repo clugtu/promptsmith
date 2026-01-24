@@ -40,44 +40,86 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-# Import from new modules
-from json_loader import (
-    load_json_data,
-    validate_character_ids,
-    resolve_imports,
-    resolve_path,
-    extract_generic_snippet,
-    extract_miniature_snippet,
-    extract_thematic_snippet,
-    extract_style_snippet,
-    extract_default_proportions,
-    extract_thematic_forms,
-)
-from character_resolver import (
-    find_character_by_id_or_name,
-    find_refinement_by_id_or_name,
-    parse_refinement_path,
-)
-from equipment_handler import (
-    resolve_prop_references,
-    validate_hand_assignments,
-)
-from pose_library import (
-    extract_pose_library,
-    find_pose_in_library,
-    compose_pose_prompt_from_library,
-    validate_pose_compatibility,
-    remove_base_language,
-    PromptNotFoundError,
-)
-from prompt_builder import (
-    format_for_chat,
-    build_final_prompt,
-)
-from reference_sheet import (
-    deduplicate_figure_sections,
-    parse_page_spec,
-)
+# Handle imports for both direct script execution and module import
+if __name__ == "__main__" and __package__ is None:
+    # Running as a script - add parent dir to path and use absolute imports
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    from src.json_loader import (
+        load_json_data,
+        validate_character_ids,
+        resolve_imports,
+        resolve_path,
+        extract_generic_snippet,
+        extract_miniature_snippet,
+        extract_thematic_snippet,
+        extract_style_snippet,
+        extract_default_proportions,
+        extract_thematic_forms,
+    )
+    from src.character_resolver import (
+        find_character_by_id_or_name,
+        find_refinement_by_id_or_name,
+        parse_refinement_path,
+    )
+    from src.equipment_handler import (
+        resolve_prop_references,
+        validate_hand_assignments,
+    )
+    from src.pose_library import (
+        extract_pose_library,
+        find_pose_in_library,
+        compose_pose_prompt_from_library,
+        validate_pose_compatibility,
+        remove_base_language,
+        PromptNotFoundError,
+    )
+    from src.prompt_builder import (
+        format_for_chat,
+        build_final_prompt,
+    )
+    from src.reference_sheet import (
+        deduplicate_figure_sections,
+        parse_page_spec,
+    )
+else:
+    # Running as a module - use relative imports
+    from .json_loader import (
+        load_json_data,
+        validate_character_ids,
+        resolve_imports,
+        resolve_path,
+        extract_generic_snippet,
+        extract_miniature_snippet,
+        extract_thematic_snippet,
+        extract_style_snippet,
+        extract_default_proportions,
+        extract_thematic_forms,
+    )
+    from .character_resolver import (
+        find_character_by_id_or_name,
+        find_refinement_by_id_or_name,
+        parse_refinement_path,
+    )
+    from .equipment_handler import (
+        resolve_prop_references,
+        validate_hand_assignments,
+    )
+    from .pose_library import (
+        extract_pose_library,
+        find_pose_in_library,
+        compose_pose_prompt_from_library,
+        validate_pose_compatibility,
+        remove_base_language,
+        PromptNotFoundError,
+    )
+    from .prompt_builder import (
+        format_for_chat,
+        build_final_prompt,
+    )
+    from .reference_sheet import (
+        deduplicate_figure_sections,
+        parse_page_spec,
+    )
 
 
 def sanitize_for_ascii(text: str) -> str:

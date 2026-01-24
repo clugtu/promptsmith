@@ -4,10 +4,10 @@ import sys
 from pathlib import Path
 import pytest
 
-# Add parent directory to path so we can import create_image
+# Add parent directory to path so we can import from src
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-import create_image
+from src import create_image
 
 
 # ==============================================================================

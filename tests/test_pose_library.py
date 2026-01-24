@@ -1,7 +1,7 @@
 """Tests for pose library integration."""
 import pytest
-import create_image
-import pose_library
+from src import create_image
+from src import pose_library
 
 
 class TestPoseLibraryLookup:
