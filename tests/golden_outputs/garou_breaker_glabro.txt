@@ -1,0 +1,47 @@
+create image: create image
+
+ASSET_NAME: breaker_glabro
+
+VISUAL:
+European-American, Male. Thick-set, scar-covered, hunched. Clothing: torn duster with iron rivets. Weapons: heavy sledgehammer (transforms to iron-bone maul).
+
+CHARACTER:
+European-American heritage; dead-eyed stare with wide cruel grin (cruel); heavily scarred; ruthless enforcer presence, adult male
+
+PROPS:
+- railroad sledgehammer (heavy iron head, wooden handle) [main_hand] gripped two-handed; becomes iron-bone maul in crinos
+
+POSE:
+Glabro (passable as human at distance), predominantly human anatomy with harsh corruption. Uneven bulky frame. Human facial structure with widened jaw and extended canines (no muzzle); dead-eyed cruel grin (cruel); worn teeth. Fully human feet, plantigrade stance. Human hands with massive knuckles, split/scarred thick; fingers elongated with claw-like nails. Iron rivets merging into skin as textured brands (restraints). Coiled forward posture--weight loaded, head angled toward unseen threat; arms pulled wide for strong silhouette; breath-held tension implied. Rabid cruelty, bared teeth; forward weight shift; maul thickening
+
+THEME:
+Glabro near-human form, subtle feral traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.

@@ -1,0 +1,2214 @@
+[alpha:human]
+create image
+
+ASSET_NAME: alpha_human
+
+VISUAL:
+Native American - Plains tribe, Female. Tall, athletic, broad-shouldered but clearly feminine; braided hair threaded with bone beads and feathers. Eyes steady, unnervingly calm. Clothing: sleek, fitted buffalo-hide/leather war regalia (wrapped bodice and narrow belted sash), close-fitting mantle/short shoulder cape (not baggy), and fitted leggings with beadwork/war-symbol striping. Weapons: stone-headed war club and ceremonial knife (club fuses into bone-obsidian mass in crinos).
+
+CHARACTER:
+Native American Plains tribe heritage; unnervingly calm steady eyes (never blinks); war-leader presence; bone beads and feathers as signature adornments, adult female
+
+PROPS:
+- stone-headed war club (stone head bound with sinew, wrapped leather grip, bone beads on thong) [main_hand] held at ready; becomes bone-obsidian war club in crinos
+- ceremonial knife (flint blade, bone handle, decorative beadwork on sheath) [holstered_belt] sheathed
+
+POSE:
+War leader, tall athletic broad-shouldered, defined waist and strong hips, braided hair with bone beads and feathers. Unnervingly calm predatory stare (merciless, never blinks); deeply carved tear-track grooves beneath eyes (ritual scarification); war-symbols as raised relief carvings in skin; small finger-bone trophy charm in braid (subtle). Judge-enforcer presence, dark ritual implied. Fitted buffalo-hide war regalia (wrapped bodice, narrow belted sash, fitted leggings) with decorative beadwork, close-fitting shoulder cape; ceremonial stone-headed war club visible angled to the side (clear negative space), ceremonial knife visible to the side; confident grounded stance with both arms clearly visible and separated from torso
+
+THEME:
+fully human form, NO visible transformation traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[alpha:glabro]
+create image
+
+ASSET_NAME: alpha_glabro
+
+VISUAL:
+Native American - Plains tribe, Female. Tall, athletic, broad-shouldered but clearly feminine; braided hair threaded with bone beads and feathers. Eyes steady, unnervingly calm. Clothing: sleek, fitted buffalo-hide/leather war regalia (wrapped bodice and narrow belted sash), close-fitting mantle/short shoulder cape (not baggy), and fitted leggings with beadwork/war-symbol striping. Weapons: stone-headed war club and ceremonial knife (club fuses into bone-obsidian mass in crinos).
+
+CHARACTER:
+Native American Plains tribe heritage; unnervingly calm steady eyes (never blinks); war-leader presence; bone beads and feathers as signature adornments, adult female
+
+PROPS:
+- stone-headed war club (stone head bound with sinew, wrapped leather grip, bone beads on thong) [main_hand] held at ready; becomes bone-obsidian war club in crinos
+- ceremonial knife (flint blade, bone handle, decorative beadwork on sheath) [holstered_belt] sheathed
+
+POSE:
+Glabro (passable as human at first glance), predominantly human anatomy with restrained feral traits. Sleek predatory build, narrowed waist, powerful thighs. Human facial structure with widened jawline and extended canines (no muzzle/snout); calm predatory stare (merciless, never blinks); carved tear-track grooves beneath eyes. Fully human feet, plantigrade stance. Human hands with claw-like nail tips, knuckles heavily textured/scarred (ritual beating). War-symbol burn-scar brands as textured relief on skin. Reactive posture--torso slightly twisted toward unseen threat, weight shifted forward, shoulders squared; head turned sharply, eyes locked; breath-held tension implied. Spirit-hide mantle fused to shoulders (formed collar); fitted leather sash/beadwork; ceremonial club thickening with bone growth positioned angled away from torso for open space, ceremonial knife positioned visibly at the side; stance with both legs visible; both arms clearly visible and separated from torso
+
+THEME:
+Glabro near-human form, subtle feral traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[alpha:crinos]
+create image
+
+ASSET_NAME: alpha_crinos
+
+VISUAL:
+Native American - Plains tribe, Female. Tall, athletic, broad-shouldered but clearly feminine; braided hair threaded with bone beads and feathers. Eyes steady, unnervingly calm. Clothing: sleek, fitted buffalo-hide/leather war regalia (wrapped bodice and narrow belted sash), close-fitting mantle/short shoulder cape (not baggy), and fitted leggings with beadwork/war-symbol striping. Weapons: stone-headed war club and ceremonial knife (club fuses into bone-obsidian mass in crinos).
+
+CHARACTER:
+Native American Plains tribe heritage; unnervingly calm steady eyes (never blinks); war-leader presence; bone beads and feathers as signature adornments, adult female
+
+PROPS:
+- stone-headed war club (stone head bound with sinew, wrapped leather grip, bone beads on thong) [main_hand] held at ready; becomes bone-obsidian war club in crinos
+- ceremonial knife (flint blade, bone handle, decorative beadwork on sheath) [holstered_belt] sheathed
+
+POSE:
+Bipedal menacing advance: forward stepping stance on digitigrade legs, stone-headed war club positioned forward and away from body; threatening forward lean; upright stance with full torso visible.. Massive crinos, thick layered fur; bone-obsidian war club fused to forearm; spirit-hide mantle as shoulder collar and back-drape (sleek). Calm predatory stare (merciless, never blinks); carved tear-track grooves beneath eyes; war-symbol relief patterns beneath fur (ritual scarification); trophy notches carved in club (trophy count). Enforcer aura--ritual cruelty implied. Bared fangs, controlled snarl
+
+THEME:
+Crinos war form, massive bipedal werewolf, fully monstrous, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[alpha:hispo]
+create image
+
+ASSET_NAME: alpha_hispo
+
+VISUAL:
+Native American - Plains tribe, Female. Tall, athletic, broad-shouldered but clearly feminine; braided hair threaded with bone beads and feathers. Eyes steady, unnervingly calm. Clothing: sleek, fitted buffalo-hide/leather war regalia (wrapped bodice and narrow belted sash), close-fitting mantle/short shoulder cape (not baggy), and fitted leggings with beadwork/war-symbol striping. Weapons: stone-headed war club and ceremonial knife (club fuses into bone-obsidian mass in crinos).
+
+CHARACTER:
+Native American Plains tribe heritage; unnervingly calm steady eyes (never blinks); war-leader presence; bone beads and feathers as signature adornments, adult female
+
+PROPS:
+- stone-headed war club (stone head bound with sinew, wrapped leather grip, bone beads on thong) [main_hand] held at ready; becomes bone-obsidian war club in crinos
+- ceremonial knife (flint blade, bone handle, decorative beadwork on sheath) [holstered_belt] sheathed
+
+POSE:
+Low stalking quadruped pose: body low to ground, all four legs visible and separated, spine arched slightly, head forward, predatory focus; clear definition between legs and torso; weight distributed evenly.. Enormous dire wolf, thick layered fur with war-symbol relief patterns beneath hide. Calm predatory stare (merciless, never blinks); carved tear-track grooves under eyes; war-symbol textured relief beneath coat (territorial hex); subtle muzzle texture/wear marks. Alpha predator--silent inevitability, ritual claiming implied. Powerful shoulder definition; naturalistic musculature
+
+THEME:
+Hispo dire wolf form, massive quadruped, prehistoric proportions, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[alpha:wolf]
+create image
+
+ASSET_NAME: alpha_wolf
+
+VISUAL:
+Native American - Plains tribe, Female. Tall, athletic, broad-shouldered but clearly feminine; braided hair threaded with bone beads and feathers. Eyes steady, unnervingly calm. Clothing: sleek, fitted buffalo-hide/leather war regalia (wrapped bodice and narrow belted sash), close-fitting mantle/short shoulder cape (not baggy), and fitted leggings with beadwork/war-symbol striping. Weapons: stone-headed war club and ceremonial knife (club fuses into bone-obsidian mass in crinos).
+
+CHARACTER:
+Native American Plains tribe heritage; unnervingly calm steady eyes (never blinks); war-leader presence; bone beads and feathers as signature adornments, adult female
+
+PROPS:
+- stone-headed war club (stone head bound with sinew, wrapped leather grip, bone beads on thong) [main_hand] held at ready; becomes bone-obsidian war club in crinos
+- ceremonial knife (flint blade, bone handle, decorative beadwork on sheath) [holstered_belt] sheathed
+
+POSE:
+Seated watch quadruped: rear haunches seated, front legs straight and upright, head alert and forward-facing; dignified sentinel posture; all legs clearly visible.. Large intelligent wolf, slightly oversized, bone beads in fur. Calm predatory stare (merciless, never blinks); carved tear-track grooves beneath eyes; war-symbol textured relief in fur (warning sign); tiny tooth-string trophy in beads (subtle). Sentry guarding stolen territory
+
+THEME:
+Wolf form, natural wolf anatomy (slightly oversized), evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[breaker:human]
+create image
+
+ASSET_NAME: breaker_human
+
+VISUAL:
+European-American, Male. Thick-set, scar-covered, hunched. Clothing: torn duster with iron rivets. Weapons: heavy sledgehammer (transforms to iron-bone maul).
+
+CHARACTER:
+European-American heritage; dead-eyed stare with wide cruel grin (cruel); heavily scarred; ruthless enforcer presence, adult male
+
+PROPS:
+- railroad sledgehammer (heavy iron head, wooden handle) [main_hand] gripped two-handed; becomes iron-bone maul in crinos
+
+POSE:
+Scarred thick-set man, torn iron-riveted duster, railroad sledgehammer positioned angled to the side (clear negative space). Dead-eyed stare, wide cruel grin (cruel); fresh split knuckles deeply textured; iron-rivet brand indentations in skin (shackles); textured mouth area (recent roughness); arms extended showing full torso. Heavy-handed bruiser, ruthless intent implied. Hunched aggressive stance with sledgehammer clearly visible and separated from body
+
+THEME:
+fully human form, NO visible transformation traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[breaker:glabro]
+create image
+
+ASSET_NAME: breaker_glabro
+
+VISUAL:
+European-American, Male. Thick-set, scar-covered, hunched. Clothing: torn duster with iron rivets. Weapons: heavy sledgehammer (transforms to iron-bone maul).
+
+CHARACTER:
+European-American heritage; dead-eyed stare with wide cruel grin (cruel); heavily scarred; ruthless enforcer presence, adult male
+
+PROPS:
+- railroad sledgehammer (heavy iron head, wooden handle) [main_hand] gripped two-handed; becomes iron-bone maul in crinos
+
+POSE:
+Glabro (passable as human at distance), predominantly human anatomy with harsh corruption. Uneven bulky frame. Human facial structure with widened jaw and extended canines (no muzzle); dead-eyed cruel grin (cruel); worn teeth. Fully human feet, plantigrade stance. Human hands with massive knuckles, split/scarred thick; fingers elongated with claw-like nails. Iron rivets merging into skin as textured brands (restraints). Coiled forward posture--weight loaded, head angled toward unseen threat; arms pulled wide for strong silhouette; breath-held tension implied. Rabid cruelty, bared teeth; forward weight shift; maul thickening
+
+THEME:
+Glabro near-human form, subtle feral traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[breaker:crinos]
+create image
+
+ASSET_NAME: breaker_crinos
+
+VISUAL:
+European-American, Male. Thick-set, scar-covered, hunched. Clothing: torn duster with iron rivets. Weapons: heavy sledgehammer (transforms to iron-bone maul).
+
+CHARACTER:
+European-American heritage; dead-eyed stare with wide cruel grin (cruel); heavily scarred; ruthless enforcer presence, adult male
+
+PROPS:
+- railroad sledgehammer (heavy iron head, wooden handle) [main_hand] gripped two-handed; becomes iron-bone maul in crinos
+
+POSE:
+Bipedal overhead display: standing upright on digitigrade legs, railroad sledgehammer raised overhead as dramatic element, angled away from body for clear negative space; chest and torso fully exposed; arms raised for dramatic composition; both shoulders/arms/chest/face visible.. Massive crinos, iron-bone maul fused to hands. Dead-eyed cruel grin (cruel); knuckle-scar texture in thickened forelimbs; iron-rivet brands stamped in hide (ownership); forearms/weapon with wear marks (recent wear). Hulking enforcer presence, savage menace implied. Roaring
+
+THEME:
+Crinos war form, massive bipedal werewolf, fully monstrous, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[breaker:hispo]
+create image
+
+ASSET_NAME: breaker_hispo
+
+VISUAL:
+European-American, Male. Thick-set, scar-covered, hunched. Clothing: torn duster with iron rivets. Weapons: heavy sledgehammer (transforms to iron-bone maul).
+
+CHARACTER:
+European-American heritage; dead-eyed stare with wide cruel grin (cruel); heavily scarred; ruthless enforcer presence, adult male
+
+PROPS:
+- railroad sledgehammer (heavy iron head, wooden handle) [main_hand] gripped two-handed; becomes iron-bone maul in crinos
+
+POSE:
+Charging quadruped: powerful forward momentum, extended front leg reaching, rear legs driving, spine stretched in running gait; all legs clearly visible and separated; dynamic forward lean.. Hulking dire wolf, iron-like shoulder growths. Dead-eyed cruel grin at muzzle (cruel); scarred forepaws (split knuckles); iron-rivet brands under fur (shackles); subtle jaw wear texture. Sudden pounce implied. Predatory leap
+
+THEME:
+Hispo dire wolf form, massive quadruped, prehistoric proportions, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[breaker:wolf]
+create image
+
+ASSET_NAME: breaker_wolf
+
+VISUAL:
+European-American, Male. Thick-set, scar-covered, hunched. Clothing: torn duster with iron rivets. Weapons: heavy sledgehammer (transforms to iron-bone maul).
+
+CHARACTER:
+European-American heritage; dead-eyed stare with wide cruel grin (cruel); heavily scarred; ruthless enforcer presence, adult male
+
+PROPS:
+- railroad sledgehammer (heavy iron head, wooden handle) [main_hand] gripped two-handed; becomes iron-bone maul in crinos
+
+POSE:
+Low stalking quadruped pose: body low to ground, all four legs visible and separated, spine arched slightly, head forward, predatory focus; clear definition between legs and torso; weight distributed evenly.. Large wolf, scarred muzzle, broken teeth. Dead-eyed stare (cruel); pleased grin-snarl; iron-rivet brands beneath fur (warning label); textured lip-line with wear marks. Ruthless hunter presence
+
+THEME:
+Wolf form, natural wolf anatomy (slightly oversized), evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[crow_eyed_one:human]
+create image
+
+ASSET_NAME: crow_eyed_one_human
+
+VISUAL:
+Native American - Plateau tribe, Female. Slim, angular, deeply shadowed eyes. Clothing: buckskin leathers etched with bird glyphs. Weapons: short spear and obsidian knife (spear becomes barbed shadow-lance).
+
+CHARACTER:
+Native American Plateau tribe heritage; deeply shadowed eyes with intense crow-like focus (cold, calculating); silent hunter presence; feather motifs as signature, adult female
+
+PROPS:
+- short spear (barbed point, leather-wrapped shaft) [main_hand] held at ready; becomes barbed shadow-lance in crinos
+- obsidian knife (black volcanic glass blade, wrapped grip) [holstered_belt] sheathed
+
+POSE:
+Scout, slim angular build, deeply set eyes, buckskin with bird glyphs, ceremonial short spear positioned angled to the side, ceremonial obsidian knife visible at the other side. Intense crow-like focus (cold, calculating); feather-pattern texturing at collar/shoulders (omen); fingernails with carved ridges (trophy-keeping); predatory stillness. Silent hunter, dark intent implied, ravens as witnesses. Wide stance with slight forward lean, both legs visible and separated, torso upright, both arms extended outward from body showing full chest, both arms clearly visible
+
+THEME:
+fully human form, NO visible transformation traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[crow_eyed_one:glabro]
+create image
+
+ASSET_NAME: crow_eyed_one_glabro
+
+VISUAL:
+Native American - Plateau tribe, Female. Slim, angular, deeply shadowed eyes. Clothing: buckskin leathers etched with bird glyphs. Weapons: short spear and obsidian knife (spear becomes barbed shadow-lance).
+
+CHARACTER:
+Native American Plateau tribe heritage; deeply shadowed eyes with intense crow-like focus (cold, calculating); silent hunter presence; feather motifs as signature, adult female
+
+PROPS:
+- short spear (barbed point, leather-wrapped shaft) [main_hand] held at ready; becomes barbed shadow-lance in crinos
+- obsidian knife (black volcanic glass blade, wrapped grip) [holstered_belt] sheathed
+
+POSE:
+Glabro (passable as human at first glance), predominantly human anatomy with subtle avian corruption. Slim build. Human facial structure with widened jawline and extended canines (no muzzle/snout); intense crow-like focus (cold, calculating). Fully human feet, plantigrade stance. Human hands with elongated nails forming sharp claw tips with wear texture. Skin with feather-pattern textured relief (symbolic ridges along back, not full coverage); buckskin with bird glyphs as fitted texture. Silent hunter, dark ritual implied. Torso rotated toward unseen movement, weight shifted; head snapped toward threat, eyes locked; taut poised tension implied. Ceremonial shadow-lance elongating positioned angled to the side, ceremonial obsidian knife positioned visibly at the other side; sideways pose with both arms clearly visible
+
+THEME:
+Glabro near-human form, subtle feral traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[crow_eyed_one:crinos]
+create image
+
+ASSET_NAME: crow_eyed_one_crinos
+
+VISUAL:
+Native American - Plateau tribe, Female. Slim, angular, deeply shadowed eyes. Clothing: buckskin leathers etched with bird glyphs. Weapons: short spear and obsidian knife (spear becomes barbed shadow-lance).
+
+CHARACTER:
+Native American Plateau tribe heritage; deeply shadowed eyes with intense crow-like focus (cold, calculating); silent hunter presence; feather motifs as signature, adult female
+
+PROPS:
+- short spear (barbed point, leather-wrapped shaft) [main_hand] held at ready; becomes barbed shadow-lance in crinos
+- obsidian knife (black volcanic glass blade, wrapped grip) [holstered_belt] sheathed
+
+POSE:
+Bipedal overhead display: standing upright on digitigrade legs, short spear raised overhead as dramatic element, angled away from body for clear negative space; chest and torso fully exposed; arms raised for dramatic composition; both shoulders/arms/chest/face visible.. Sleek crinos with feather-pattern textured markings, ceremonial barbed shadow-lance. Intense crow-like focus (cold, calculating); feather-pattern texturing across shoulders/back (omen); predatory stillness. Silent hunter, cold intent implied
+
+THEME:
+Crinos war form, massive bipedal werewolf, fully monstrous, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[crow_eyed_one:hispo]
+create image
+
+ASSET_NAME: crow_eyed_one_hispo
+
+VISUAL:
+Native American - Plateau tribe, Female. Slim, angular, deeply shadowed eyes. Clothing: buckskin leathers etched with bird glyphs. Weapons: short spear and obsidian knife (spear becomes barbed shadow-lance).
+
+CHARACTER:
+Native American Plateau tribe heritage; deeply shadowed eyes with intense crow-like focus (cold, calculating); silent hunter presence; feather motifs as signature, adult female
+
+PROPS:
+- short spear (barbed point, leather-wrapped shaft) [main_hand] held at ready; becomes barbed shadow-lance in crinos
+- obsidian knife (black volcanic glass blade, wrapped grip) [holstered_belt] sheathed
+
+POSE:
+Circling quadruped: body angled in circular motion, legs positioned for turning gait, head turned to track prey; all four legs visible; weight shifting into turn.. Dire wolf with feather-patterned textured fur. Intense crow-like focus (cold, calculating); feather-pattern texturing across coat (omen); subtle muzzle wear texture (precision); predatory stillness while circling. Silent hunter, threat implied
+
+THEME:
+Hispo dire wolf form, massive quadruped, prehistoric proportions, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[crow_eyed_one:wolf]
+create image
+
+ASSET_NAME: crow_eyed_one_wolf
+
+VISUAL:
+Native American - Plateau tribe, Female. Slim, angular, deeply shadowed eyes. Clothing: buckskin leathers etched with bird glyphs. Weapons: short spear and obsidian knife (spear becomes barbed shadow-lance).
+
+CHARACTER:
+Native American Plateau tribe heritage; deeply shadowed eyes with intense crow-like focus (cold, calculating); silent hunter presence; feather motifs as signature, adult female
+
+PROPS:
+- short spear (barbed point, leather-wrapped shaft) [main_hand] held at ready; becomes barbed shadow-lance in crinos
+- obsidian knife (black volcanic glass blade, wrapped grip) [holstered_belt] sheathed
+
+POSE:
+Seated watch quadruped: rear haunches seated, front legs straight and upright, head alert and forward-facing; dignified sentinel posture; all legs clearly visible.. Wolf elevated and watchful. Intense crow-like focus (cold, calculating); feather-pattern texturing along neck/spine (omen); tiny bone bead/tooth charm in fur; motionless omen-like stillness. Silent hunter
+
+THEME:
+Wolf form, natural wolf anatomy (slightly oversized), evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[long_shadow:human]
+create image
+
+ASSET_NAME: long_shadow_human
+
+VISUAL:
+Mexican / Mestizo, Male. Tall, wiry. Clothing: tattered serape that trails as textured streamers. Weapons: machete that becomes crescent bone-edge.
+
+CHARACTER:
+Mexican/Mestizo heritage; deeply sunken emotionless eyes (living silhouette); relentless unstoppable presence; tattered streamers as signature, adult male
+
+PROPS:
+- machete (steel blade, worn wooden grip) [main_hand] held loosely; becomes crescent bone-edge in crinos
+
+POSE:
+Tracker, tattered serape, machete positioned loosely angled to the side (clear negative space). Deeply sunken eyes (emotionless, living silhouette); serape trails as flowing textured streamers; rawhide cord at belt with tooth/tendon trophy knot (subtle); relentless posture (never tired, never hurried); arms extended away from body showing full torso. Unstoppable pursuit, restraint implied. Long-stride walking with machete clearly visible and separated from body
+
+THEME:
+fully human form, NO visible transformation traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[long_shadow:glabro]
+create image
+
+ASSET_NAME: long_shadow_glabro
+
+VISUAL:
+Mexican / Mestizo, Male. Tall, wiry. Clothing: tattered serape that trails as textured streamers. Weapons: machete that becomes crescent bone-edge.
+
+CHARACTER:
+Mexican/Mestizo heritage; deeply sunken emotionless eyes (living silhouette); relentless unstoppable presence; tattered streamers as signature, adult male
+
+PROPS:
+- machete (steel blade, worn wooden grip) [main_hand] held loosely; becomes crescent bone-edge in crinos
+
+POSE:
+Glabro (passable as human at distance), predominantly human anatomy with elongated proportions. Tall wiry frame with stretched limbs. Human facial structure with gaunt features and extended canines (no muzzle); deeply sunken eyes (emotionless, living silhouette). Fully human feet, plantigrade stance (elongated). Human hands with elongated fingers and claw-like nails. Wrists with tight rawhide binding scars (restraints). Tattered serape trailing as textured streamers. Unstoppable pursuit, closing-in implied. Torso twist with arm extension toward unseen motion; head low and eyes locked; snare-closing intent without overt attack language
+
+THEME:
+Glabro near-human form, subtle feral traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[long_shadow:crinos]
+create image
+
+ASSET_NAME: long_shadow_crinos
+
+VISUAL:
+Mexican / Mestizo, Male. Tall, wiry. Clothing: tattered serape that trails as textured streamers. Weapons: machete that becomes crescent bone-edge.
+
+CHARACTER:
+Mexican/Mestizo heritage; deeply sunken emotionless eyes (living silhouette); relentless unstoppable presence; tattered streamers as signature, adult male
+
+PROPS:
+- machete (steel blade, worn wooden grip) [main_hand] held loosely; becomes crescent bone-edge in crinos
+
+POSE:
+Bipedal low sweep: low stance on digitigrade legs, machete extended away from torso in sweeping arc at low height; strong silhouette with weapon distinct from body.. Tall crinos with crescent bone blade from forearm. Deeply sunken eyes (emotionless, living silhouette); textured streamers trail from body; bone blade shows serrations/scrape-marks. Unstoppable pursuit, closing-in implied
+
+THEME:
+Crinos war form, massive bipedal werewolf, fully monstrous, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[long_shadow:hispo]
+create image
+
+ASSET_NAME: long_shadow_hispo
+
+VISUAL:
+Mexican / Mestizo, Male. Tall, wiry. Clothing: tattered serape that trails as textured streamers. Weapons: machete that becomes crescent bone-edge.
+
+CHARACTER:
+Mexican/Mestizo heritage; deeply sunken emotionless eyes (living silhouette); relentless unstoppable presence; tattered streamers as signature, adult male
+
+PROPS:
+- machete (steel blade, worn wooden grip) [main_hand] held loosely; becomes crescent bone-edge in crinos
+
+POSE:
+Endurance lope quadruped: efficient running gait, elongated stride, legs extended in loping rhythm; relaxed but relentless posture; all legs clearly defined.. Dire wolf, elongated legs/spine in endurance lope. Deeply sunken eyes (emotionless); faint textured streamers trailing from neck/back; subtle muzzle wear texture; relentless pursuit vibe. Unstoppable pursuit implied
+
+THEME:
+Hispo dire wolf form, massive quadruped, prehistoric proportions, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[long_shadow:wolf]
+create image
+
+ASSET_NAME: long_shadow_wolf
+
+VISUAL:
+Mexican / Mestizo, Male. Tall, wiry. Clothing: tattered serape that trails as textured streamers. Weapons: machete that becomes crescent bone-edge.
+
+CHARACTER:
+Mexican/Mestizo heritage; deeply sunken emotionless eyes (living silhouette); relentless unstoppable presence; tattered streamers as signature, adult male
+
+PROPS:
+- machete (steel blade, worn wooden grip) [main_hand] held loosely; becomes crescent bone-edge in crinos
+
+POSE:
+Endurance lope quadruped: efficient running gait, elongated stride, legs extended in loping rhythm; relaxed but relentless posture; all legs clearly defined.. Wolf mid-stride, dramatic silhouette. Deeply sunken eyes (emotionless); strong form definition; relentless inevitable gait. Unstoppable pursuit, vanishing into darkness implied
+
+THEME:
+Wolf form, natural wolf anatomy (slightly oversized), evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[powder_burn:human]
+create image
+
+ASSET_NAME: powder_burn_human
+
+VISUAL:
+Irish-American, Female. Short hair, crooked grin, burn scars. Clothing: bandolier and battered coat. Weapons: twin revolvers that fuse into iron forearm growths.
+
+CHARACTER:
+Irish-American heritage; crooked wicked grin (cruel); burn scars across face/neck/body; reckless outlaw presence, adult female
+
+PROPS:
+- twin revolvers (weathered steel, worn wooden grips) [dual_wield] held in both hands; fuse into iron forearm growths in crinos
+
+POSE:
+Outlaw, bandolier and battered coat, ceremonial twin revolvers positioned at different heights/angles away from body as symbolic elements, not actively wielded. Crooked wicked grin (cruel); burn-scar texturing across cheek/neck (branded sin); bullet-cartridge necklace with single carved tooth (lucky charm, subtle); both arms extended outward for dramatic composition showing full torso, revolvers distinct from body. Ruthless gunfighter energy implied. Cocky stance with dramatic silhouette
+
+THEME:
+fully human form, NO visible transformation traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[powder_burn:glabro]
+create image
+
+ASSET_NAME: powder_burn_glabro
+
+VISUAL:
+Irish-American, Female. Short hair, crooked grin, burn scars. Clothing: bandolier and battered coat. Weapons: twin revolvers that fuse into iron forearm growths.
+
+CHARACTER:
+Irish-American heritage; crooked wicked grin (cruel); burn scars across face/neck/body; reckless outlaw presence, adult female
+
+PROPS:
+- twin revolvers (weathered steel, worn wooden grips) [dual_wield] held in both hands; fuse into iron forearm growths in crinos
+
+POSE:
+Glabro (passable as human at first glance), predominantly human anatomy with aggressive corruption. Athletic build. Human facial structure with widened jaw and extended canines (no muzzle/snout); crooked wicked grin (cruel); burn-scar texturing across skin (branded sin). Fully human feet, plantigrade stance. Human hands with revolvers fusing into forearms as iron growths; tense posture. Torso twisted toward unseen threat, weight shifted forward, head angled and eyes locked; breath-held tension implied. Twisted 3/4 view, both shoulders visible, revolvers at different heights (one high one low)
+
+THEME:
+Glabro near-human form, subtle feral traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[powder_burn:crinos]
+create image
+
+ASSET_NAME: powder_burn_crinos
+
+VISUAL:
+Irish-American, Female. Short hair, crooked grin, burn scars. Clothing: bandolier and battered coat. Weapons: twin revolvers that fuse into iron forearm growths.
+
+CHARACTER:
+Irish-American heritage; crooked wicked grin (cruel); burn scars across face/neck/body; reckless outlaw presence, adult female
+
+PROPS:
+- twin revolvers (weathered steel, worn wooden grips) [dual_wield] held in both hands; fuse into iron forearm growths in crinos
+
+POSE:
+Bipedal menacing advance: forward stepping stance on digitigrade legs, MAIN_HAND_PROP positioned forward and away from body; threatening forward lean; upright stance with full torso visible.. Crinos with jagged iron growths on arms. Crooked wicked grin turned feral (cruel); burn-scar texturing along muzzle/neck fur (branded sin); eager twitchy posture; subtle jawline wear texture. Close-range menace implied. Gleeful cruelty
+
+THEME:
+Crinos war form, massive bipedal werewolf, fully monstrous, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[powder_burn:hispo]
+create image
+
+ASSET_NAME: powder_burn_hispo
+
+VISUAL:
+Irish-American, Female. Short hair, crooked grin, burn scars. Clothing: bandolier and battered coat. Weapons: twin revolvers that fuse into iron forearm growths.
+
+CHARACTER:
+Irish-American heritage; crooked wicked grin (cruel); burn scars across face/neck/body; reckless outlaw presence, adult female
+
+PROPS:
+- twin revolvers (weathered steel, worn wooden grips) [dual_wield] held in both hands; fuse into iron forearm growths in crinos
+
+POSE:
+Charging quadruped: powerful forward momentum, extended front leg reaching, rear legs driving, spine stretched in running gait; all legs clearly visible and separated; dynamic forward lean.. Dire wolf, embedded iron nodules. Grin-snarl (cruel); burn-scarred textured coat patches (branded sin); restless twitchy eagerness; worn teeth texture. Cornering quarry, threat implied
+
+THEME:
+Hispo dire wolf form, massive quadruped, prehistoric proportions, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[powder_burn:wolf]
+create image
+
+ASSET_NAME: powder_burn_wolf
+
+VISUAL:
+Irish-American, Female. Short hair, crooked grin, burn scars. Clothing: bandolier and battered coat. Weapons: twin revolvers that fuse into iron forearm growths.
+
+CHARACTER:
+Irish-American heritage; crooked wicked grin (cruel); burn scars across face/neck/body; reckless outlaw presence, adult female
+
+PROPS:
+- twin revolvers (weathered steel, worn wooden grips) [dual_wield] held in both hands; fuse into iron forearm growths in crinos
+
+POSE:
+Charging quadruped: powerful forward momentum, extended front leg reaching, rear legs driving, spine stretched in running gait; all legs clearly visible and separated; dynamic forward lean.. Wolf sprinting. Crooked grin-snarl (cruel); burn-scarred textured coat patches (branded sin); twitchy gunfighter energy as predatory sprint; subtle muzzle wear texture. Ruthless intent implied
+
+THEME:
+Wolf form, natural wolf anatomy (slightly oversized), evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[undertaker:human]
+create image
+
+ASSET_NAME: undertaker_human
+
+VISUAL:
+African-American, Male. Tall, skeletal, deep-set eyes. Clothing: black frock coat, gloves. Weapons: long shovel to grave-bone halberd.
+
+CHARACTER:
+African-American heritage; hollow deep-set eyes with graveyard calm (no empathy); ritualistic unsettling presence, adult male
+
+PROPS:
+- long-handled shovel (worn wooden handle, steel blade) [main_hand] dragged alongside; becomes grave-bone halberd in crinos
+
+POSE:
+Tall, black frock coat, dragging shovel angled to the side for open space. Hollow graveyard-calm eyes (no empathy); worn gloves with textured fingertips (grave-soil exposure); cloth strip at belt with carved burial-knot symbols (ritual ledger); ritualistic posture (burial rite implied). Mortuary ritual implied. Unsettling funereal calm with faint cruel smirk; shovel clearly visible to side
+
+THEME:
+fully human form, NO visible transformation traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[undertaker:glabro]
+create image
+
+ASSET_NAME: undertaker_glabro
+
+VISUAL:
+African-American, Male. Tall, skeletal, deep-set eyes. Clothing: black frock coat, gloves. Weapons: long shovel to grave-bone halberd.
+
+CHARACTER:
+African-American heritage; hollow deep-set eyes with graveyard calm (no empathy); ritualistic unsettling presence, adult male
+
+PROPS:
+- long-handled shovel (worn wooden handle, steel blade) [main_hand] dragged alongside; becomes grave-bone halberd in crinos
+
+POSE:
+Glabro (passable as human in darkness), predominantly human anatomy with skeletal corruption. Gaunt tall frame, elongated back. Human facial structure with hollow features and extended canines (no muzzle); hollow graveyard-calm eyes (no empathy). Fully human feet, plantigrade stance. Human hands with elongated fingers and claw-like nails, textured fingertips (grave-soil wear). Faint carved scar-lines over abdomen (crude sutures). Tattered black coat/glove remnants. Body arranger, grave-digging/stitching implied. Head angled toward disturbance; shoulders square; breath-held tension implied. Ceremonial shovel positioned angled to the side as symbolic element; upright stance with full torso visible
+
+THEME:
+Glabro near-human form, subtle feral traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[undertaker:crinos]
+create image
+
+ASSET_NAME: undertaker_crinos
+
+VISUAL:
+African-American, Male. Tall, skeletal, deep-set eyes. Clothing: black frock coat, gloves. Weapons: long shovel to grave-bone halberd.
+
+CHARACTER:
+African-American heritage; hollow deep-set eyes with graveyard calm (no empathy); ritualistic unsettling presence, adult male
+
+PROPS:
+- long-handled shovel (worn wooden handle, steel blade) [main_hand] dragged alongside; becomes grave-bone halberd in crinos
+
+POSE:
+Bipedal overhead display: standing upright on digitigrade legs, long-handled shovel raised overhead as dramatic element, angled away from body for clear negative space; chest and torso fully exposed; arms raised for dramatic composition; both shoulders/arms/chest/face visible.. Skeletal crinos, ceremonial grave-bone halberd; tattered black frock coat draping from shoulders. Hollow graveyard-calm eyes (no empathy); textured claw tips with wear (grave-soil); ritualistic posture (arranging remains); halberd hook clearly visible. Mortuary ritual implied
+
+THEME:
+Crinos war form, massive bipedal werewolf, fully monstrous, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[undertaker:hispo]
+create image
+
+ASSET_NAME: undertaker_hispo
+
+VISUAL:
+African-American, Male. Tall, skeletal, deep-set eyes. Clothing: black frock coat, gloves. Weapons: long shovel to grave-bone halberd.
+
+CHARACTER:
+African-American heritage; hollow deep-set eyes with graveyard calm (no empathy); ritualistic unsettling presence, adult male
+
+PROPS:
+- long-handled shovel (worn wooden handle, steel blade) [main_hand] dragged alongside; becomes grave-bone halberd in crinos
+
+POSE:
+Endurance lope quadruped: efficient running gait, elongated stride, legs extended in loping rhythm; relaxed but relentless posture; all legs clearly defined.. Dire wolf, elongated ribs. Hollow graveyard-calm eyes (no empathy); textured claw tips with wear (grave-soil); ritualistic measured gait; chest fur with matted texture (hauling heavy loads, subtle). Burial ritual implied
+
+THEME:
+Hispo dire wolf form, massive quadruped, prehistoric proportions, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[undertaker:wolf]
+create image
+
+ASSET_NAME: undertaker_wolf
+
+VISUAL:
+African-American, Male. Tall, skeletal, deep-set eyes. Clothing: black frock coat, gloves. Weapons: long shovel to grave-bone halberd.
+
+CHARACTER:
+African-American heritage; hollow deep-set eyes with graveyard calm (no empathy); ritualistic unsettling presence, adult male
+
+PROPS:
+- long-handled shovel (worn wooden handle, steel blade) [main_hand] dragged alongside; becomes grave-bone halberd in crinos
+
+POSE:
+Endurance lope quadruped: efficient running gait, elongated stride, legs extended in loping rhythm; relaxed but relentless posture; all legs clearly defined.. Wolf walking slowly, head low. Hollow graveyard-calm eyes (no empathy); textured claw tips with wear (grave-soil); ritualistic measured steps (funeral march); faint textured muzzle wear marks. Body arranger, grave ritual implied
+
+THEME:
+Wolf form, natural wolf anatomy (slightly oversized), evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[red_howl:human]
+create image
+
+ASSET_NAME: red_howl_human
+
+VISUAL:
+Scandinavian-American, Male. Broad-chested, ritual scars. Clothing: minimal leather straps and charms. Weapons: wood-handled axe to serrated bone cleaver.
+
+CHARACTER:
+Scandinavian-American heritage; wide feral grin (thrilled by havoc); deep ritual scars (rune patterns); ecstatic savage presence, adult male
+
+PROPS:
+- wood-handled axe (iron head, carved wooden handle) [main_hand] held at ready; becomes serrated bone cleaver in crinos
+
+POSE:
+Broad-chested, ritual scars, leather straps/charms, wood-handled axe positioned angled to the side for open space. Textured teeth, wide feral grin (thrilled by havoc); ritual scars carved deep (runes); crude ear-string trophy at belt (subtle); ecstatic posture; arms extended away from body showing full torso. Craves domination, dark trophy-taking implied. Roaring challenge with axe clearly visible and separated from body
+
+THEME:
+fully human form, NO visible transformation traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[red_howl:glabro]
+create image
+
+ASSET_NAME: red_howl_glabro
+
+VISUAL:
+Scandinavian-American, Male. Broad-chested, ritual scars. Clothing: minimal leather straps and charms. Weapons: wood-handled axe to serrated bone cleaver.
+
+CHARACTER:
+Scandinavian-American heritage; wide feral grin (thrilled by havoc); deep ritual scars (rune patterns); ecstatic savage presence, adult male
+
+PROPS:
+- wood-handled axe (iron head, carved wooden handle) [main_hand] held at ready; becomes serrated bone cleaver in crinos
+
+POSE:
+Glabro (passable as human at distance), predominantly human anatomy embracing feral transformation. Broad-chested muscular frame. Human facial structure with widened jaw and extended canines (no muzzle); textured teeth, feral grin (thrilled by havoc). Fully human feet, plantigrade stance. Human hands with thick fingers and claw-like nails; wrists with textured leather (butcher's bindings). Rune-like ritual scars across torso. Leather straps/charms retained. Head snapped toward threat; weight shifted forward; breath-held tension under gleeful grin. Axe warping into serrated bone cleaver positioned angled to the side; cleaver-bearing arm extended away from body, off-hand forward in beckoning gesture, both arms clearly visible and separated from torso
+
+THEME:
+Glabro near-human form, subtle feral traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[red_howl:crinos]
+create image
+
+ASSET_NAME: red_howl_crinos
+
+VISUAL:
+Scandinavian-American, Male. Broad-chested, ritual scars. Clothing: minimal leather straps and charms. Weapons: wood-handled axe to serrated bone cleaver.
+
+CHARACTER:
+Scandinavian-American heritage; wide feral grin (thrilled by havoc); deep ritual scars (rune patterns); ecstatic savage presence, adult male
+
+PROPS:
+- wood-handled axe (iron head, carved wooden handle) [main_hand] held at ready; becomes serrated bone cleaver in crinos
+
+POSE:
+Bipedal howling: head thrown back in supernatural howl, wood-handled axe extended outward showing full torso, off-hand visible; ecstatic commanding howl pose with both arms clearly visible and separated from body.. Massive crinos, throat fur with layered texture, serrated bone cleaver fused to forearm. Textured teeth, feral grin (thrilled by havoc); rune-like ritual scars across torso; dense throat fur layering (constant ritual); ecstatic, head thrown back in supernatural howl. Craves domination, frenzy implied
+
+THEME:
+Crinos war form, massive bipedal werewolf, fully monstrous, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[red_howl:hispo]
+create image
+
+ASSET_NAME: red_howl_hispo
+
+VISUAL:
+Scandinavian-American, Male. Broad-chested, ritual scars. Clothing: minimal leather straps and charms. Weapons: wood-handled axe to serrated bone cleaver.
+
+CHARACTER:
+Scandinavian-American heritage; wide feral grin (thrilled by havoc); deep ritual scars (rune patterns); ecstatic savage presence, adult male
+
+PROPS:
+- wood-handled axe (iron head, carved wooden handle) [main_hand] held at ready; becomes serrated bone cleaver in crinos
+
+POSE:
+Charging quadruped: powerful forward momentum, extended front leg reaching, rear legs driving, spine stretched in running gait; all legs clearly visible and separated; dynamic forward lean.. Dire wolf charging uphill. Textured muzzle/teeth (thrilled by havoc); rune-like scar patterns in coat; ecstatic aggressive posture; subtle jaw textured detail. Craves domination, savage frenzy implied. Sinew-wrapped armor remnants
+
+THEME:
+Hispo dire wolf form, massive quadruped, prehistoric proportions, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[red_howl:wolf]
+create image
+
+ASSET_NAME: red_howl_wolf
+
+VISUAL:
+Scandinavian-American, Male. Broad-chested, ritual scars. Clothing: minimal leather straps and charms. Weapons: wood-handled axe to serrated bone cleaver.
+
+CHARACTER:
+Scandinavian-American heritage; wide feral grin (thrilled by havoc); deep ritual scars (rune patterns); ecstatic savage presence, adult male
+
+PROPS:
+- wood-handled axe (iron head, carved wooden handle) [main_hand] held at ready; becomes serrated bone cleaver in crinos
+
+POSE:
+Howling quadruped: head thrown back, muzzle pointed upward, chest expanded, all four legs planted firmly; body stable and grounded; clear separation between legs.. Wolf howling on ridge. Textured muzzle/teeth (thrilled by havoc); rune-like scar patterning; ecstatic posture, chest expanded; howl feels like a terror-signal. Craves domination implied. Terrifying pack-arrival call
+
+THEME:
+Wolf form, natural wolf anatomy (slightly oversized), evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[bone_singer:human]
+create image
+
+ASSET_NAME: bone_singer_human
+
+VISUAL:
+Native American - Southwest tribe, Female. Bent spine, braided white hair, ritual scars. Clothing: layered bone talismans and woven robes. Weapons: rattle-staff to spine-staff.
+
+CHARACTER:
+Native American Southwest tribe heritage; eyes like old knives (unblinking, judging, no mercy); vertebrae-like ridge patterns; ritualistic unsettling aura, elder female
+
+PROPS:
+- bone rattle-staff (bone decorations, ritual rattles) [main_hand] held upright; becomes spine-staff in crinos
+
+POSE:
+Elder, braided white hair, layered bone talismans, woven robes, bone rattle-staff positioned angled to the side for open space. Eyes like old knives (unblinking, judging, no mercy); bone talismans arranged like vertebrae (trophies); hands with precise controlling ritual gestures (binding curse) positioned on staff; robe hem with textured wear marks (very old, subtle); staff clearly visible and separated from body. Curse-maker, bone-trophy priestess, dark ritual implied. Sinister ritual authority; ritual chanting posture with staff extended
+
+THEME:
+fully human form, NO visible transformation traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[bone_singer:glabro]
+create image
+
+ASSET_NAME: bone_singer_glabro
+
+VISUAL:
+Native American - Southwest tribe, Female. Bent spine, braided white hair, ritual scars. Clothing: layered bone talismans and woven robes. Weapons: rattle-staff to spine-staff.
+
+CHARACTER:
+Native American Southwest tribe heritage; eyes like old knives (unblinking, judging, no mercy); vertebrae-like ridge patterns; ritualistic unsettling aura, elder female
+
+PROPS:
+- bone rattle-staff (bone decorations, ritual rattles) [main_hand] held upright; becomes spine-staff in crinos
+
+POSE:
+Glabro (passable as human elder at distance), predominantly human anatomy with ritualistic corruption. Bent frame, skeletal build. Human facial structure with gaunt features and extended canines (no muzzle); eyes like old knives (unblinking, judging, no mercy). Fully human feet, plantigrade stance. Human hands with elongated fingers and claw-like nails, textured wear (repeated ritual use); precise ritual hand posture (binding curse). Bone talismans arranged like vertebrae (trophies); woven robe remnants. Head angled toward unseen presence; stillness tightened; invocation arrested mid-breath. Rattle-staff elongating as symbolic element; invocation pose
+
+THEME:
+Glabro near-human form, subtle feral traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[bone_singer:crinos]
+create image
+
+ASSET_NAME: bone_singer_crinos
+
+VISUAL:
+Native American - Southwest tribe, Female. Bent spine, braided white hair, ritual scars. Clothing: layered bone talismans and woven robes. Weapons: rattle-staff to spine-staff.
+
+CHARACTER:
+Native American Southwest tribe heritage; eyes like old knives (unblinking, judging, no mercy); vertebrae-like ridge patterns; ritualistic unsettling aura, elder female
+
+PROPS:
+- bone rattle-staff (bone decorations, ritual rattles) [main_hand] held upright; becomes spine-staff in crinos
+
+POSE:
+Bipedal howling: head thrown back in supernatural howl, bone rattle-staff extended outward showing full torso, off-hand visible; ecstatic commanding howl pose with both arms clearly visible and separated from body.. Skeletal crinos, raised relief bone lattice, spine-staff humming with spirit energy, tattered woven robe draping from shoulders. Eyes like old knives (unblinking, judging, no mercy); vertebrae-like talismans fused along body (trophies); precise controlling ritual posture (binding curse); bone lattice carved with sacrificial runes. Curse-maker, ritual priest implied
+
+THEME:
+Crinos war form, massive bipedal werewolf, fully monstrous, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[bone_singer:hispo]
+create image
+
+ASSET_NAME: bone_singer_hispo
+
+VISUAL:
+Native American - Southwest tribe, Female. Bent spine, braided white hair, ritual scars. Clothing: layered bone talismans and woven robes. Weapons: rattle-staff to spine-staff.
+
+CHARACTER:
+Native American Southwest tribe heritage; eyes like old knives (unblinking, judging, no mercy); vertebrae-like ridge patterns; ritualistic unsettling aura, elder female
+
+PROPS:
+- bone rattle-staff (bone decorations, ritual rattles) [main_hand] held upright; becomes spine-staff in crinos
+
+POSE:
+Circling quadruped: body angled in circular motion, legs positioned for turning gait, head turned to track prey; all four legs visible; weight shifting into turn.. Dire wolf with raised relief bone patterns. Eyes like old knives (unblinking, no mercy); vertebrae-like talisman shapes in patterning (trophies); precise ritual circling (marking curse); pawprints implied to leave textured ritual marks. Curse-maker, sacrificial ritual implied
+
+THEME:
+Hispo dire wolf form, massive quadruped, prehistoric proportions, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[bone_singer:wolf]
+create image
+
+ASSET_NAME: bone_singer_wolf
+
+VISUAL:
+Native American - Southwest tribe, Female. Bent spine, braided white hair, ritual scars. Clothing: layered bone talismans and woven robes. Weapons: rattle-staff to spine-staff.
+
+CHARACTER:
+Native American Southwest tribe heritage; eyes like old knives (unblinking, judging, no mercy); vertebrae-like ridge patterns; ritualistic unsettling aura, elder female
+
+PROPS:
+- bone rattle-staff (bone decorations, ritual rattles) [main_hand] held upright; becomes spine-staff in crinos
+
+POSE:
+Seated watch quadruped: rear haunches seated, front legs straight and upright, head alert and forward-facing; dignified sentinel posture; all legs clearly visible.. Wolf seated upright. Eyes like old knives (unblinking, judging, no mercy); vertebrae-like talisman shapes in markings (trophies); still posture (elder priest); muzzle with faint textured ritual mark. Curse-maker, sacrificial rite implied
+
+THEME:
+Wolf form, natural wolf anatomy (slightly oversized), evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[lost_cub:human]
+create image
+
+ASSET_NAME: lost_cub_human
+
+VISUAL:
+Chinese-American, Male. Young, narrow-shouldered, fearful eyes. Clothing: laborer's vest and cloth wraps. Weapons: simple hatchet to crude bone blade.
+
+CHARACTER:
+Chinese-American heritage; fearful eyes with new predatory glint (hunger leaking through); unstable dangerous presence; claw-scratch marks as signature, adult male
+
+PROPS:
+- simple hatchet (iron head, wooden handle) [main_hand] held nervously; becomes crude bone blade in crinos
+
+POSE:
+Young laborer, worn vest/cloth wraps, simple hatchet positioned nervously angled to the side. Fearful eyes with new predatory glint (hunger leaking through); claw-scratches on forearms/cloth wraps (fresh, subtle); textured wear mark at sleeve cuff (tried to clean, failed); posture timid but hungry (curse winning); arms extended showing weapons separate from body. Dangerous, unstable, first danger implied. Nervous, looking over shoulder with hatchet clearly visible
+
+THEME:
+fully human form, NO visible transformation traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[lost_cub:glabro]
+create image
+
+ASSET_NAME: lost_cub_glabro
+
+VISUAL:
+Chinese-American, Male. Young, narrow-shouldered, fearful eyes. Clothing: laborer's vest and cloth wraps. Weapons: simple hatchet to crude bone blade.
+
+CHARACTER:
+Chinese-American heritage; fearful eyes with new predatory glint (hunger leaking through); unstable dangerous presence; claw-scratch marks as signature, adult male
+
+PROPS:
+- simple hatchet (iron head, wooden handle) [main_hand] held nervously; becomes crude bone blade in crinos
+
+POSE:
+Glabro (barely passable as human, unstable transformation), predominantly human anatomy with awkward uneven corruption. Young narrow-shouldered frame with oversized proportions. Human facial structure with widened jaw and extended canines (no muzzle); fearful eyes with new predatory glint (hunger leaking through). Fully human feet, plantigrade stance. Human hands oversized with elongated fingers and claw-like nails, textured wear (hard use, subtle). Visible claw-scratch marks on forearms (fresh, subtle). Torn vest remnants/cloth wraps. Dangerous, unstable, first danger implied. Simple hatchet warping into crude bone axe positioned angled away from body, off-hand extended outward for balance; defensive stance with both arms clearly visible and separated from torso
+
+THEME:
+Glabro near-human form, subtle feral traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[lost_cub:crinos]
+create image
+
+ASSET_NAME: lost_cub_crinos
+
+VISUAL:
+Chinese-American, Male. Young, narrow-shouldered, fearful eyes. Clothing: laborer's vest and cloth wraps. Weapons: simple hatchet to crude bone blade.
+
+CHARACTER:
+Chinese-American heritage; fearful eyes with new predatory glint (hunger leaking through); unstable dangerous presence; claw-scratch marks as signature, adult male
+
+PROPS:
+- simple hatchet (iron head, wooden handle) [main_hand] held nervously; becomes crude bone blade in crinos
+
+POSE:
+Bipedal menacing advance: forward stepping stance on digitigrade legs, simple hatchet positioned forward and away from body; threatening forward lean; upright stance with full torso visible.. Young male crinos with awkward immature build and lingering human proportions, crude bone-bladed hatchet fused to hand (axe-shaped with hatchet head, NOT a knife). Fearful eyes with new predatory glint (hunger leaking through); claw-scratch marks carried into fur (fresh, subtle); crude bone hatchet freshly made with textured handle and axe-blade shape (subtle); posture timid but hungry turning feral. Dangerous, unstable, messy ferocity implied
+
+THEME:
+Crinos war form, massive bipedal werewolf, fully monstrous, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[lost_cub:hispo]
+create image
+
+ASSET_NAME: lost_cub_hispo
+
+VISUAL:
+Chinese-American, Male. Young, narrow-shouldered, fearful eyes. Clothing: laborer's vest and cloth wraps. Weapons: simple hatchet to crude bone blade.
+
+CHARACTER:
+Chinese-American heritage; fearful eyes with new predatory glint (hunger leaking through); unstable dangerous presence; claw-scratch marks as signature, adult male
+
+PROPS:
+- simple hatchet (iron head, wooden handle) [main_hand] held nervously; becomes crude bone blade in crinos
+
+POSE:
+Low stalking quadruped pose: body low to ground, all four legs visible and separated, spine arched slightly, head forward, predatory focus; clear definition between legs and torso; weight distributed evenly.. Dire wolf form. Fearful eyes with predatory glint (hunger leaking through); claw-scratch marks in coat (fresh, subtle); muzzle with faint textured wear (restless, subtle); hesitant posture but hungry intent building. Dangerous, unstable, first danger implied
+
+THEME:
+Hispo dire wolf form, massive quadruped, prehistoric proportions, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
+
+[lost_cub:wolf]
+create image
+
+ASSET_NAME: lost_cub_wolf
+
+VISUAL:
+Chinese-American, Male. Young, narrow-shouldered, fearful eyes. Clothing: laborer's vest and cloth wraps. Weapons: simple hatchet to crude bone blade.
+
+CHARACTER:
+Chinese-American heritage; fearful eyes with new predatory glint (hunger leaking through); unstable dangerous presence; claw-scratch marks as signature, adult male
+
+PROPS:
+- simple hatchet (iron head, wooden handle) [main_hand] held nervously; becomes crude bone blade in crinos
+
+POSE:
+Low stalking quadruped pose: body low to ground, all four legs visible and separated, spine arched slightly, head forward, predatory focus; clear definition between legs and torso; weight distributed evenly.. Wolf form. Fearful intelligence with predatory glint (hunger leaking through); scratch-marked fur (fresh); tiny textured mark at mouth (secret); retreating but hungry posture. Dangerous, unstable, first danger implied. Sinister spark in eyes
+
+THEME:
+Wolf form, natural wolf anatomy (slightly oversized), evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.

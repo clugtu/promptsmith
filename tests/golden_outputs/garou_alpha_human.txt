@@ -1,0 +1,48 @@
+create image: create image
+
+ASSET_NAME: alpha_human
+
+VISUAL:
+Native American - Plains tribe, Female. Tall, athletic, broad-shouldered but clearly feminine; braided hair threaded with bone beads and feathers. Eyes steady, unnervingly calm. Clothing: sleek, fitted buffalo-hide/leather war regalia (wrapped bodice and narrow belted sash), close-fitting mantle/short shoulder cape (not baggy), and fitted leggings with beadwork/war-symbol striping. Weapons: stone-headed war club and ceremonial knife (club fuses into bone-obsidian mass in crinos).
+
+CHARACTER:
+Native American Plains tribe heritage; unnervingly calm steady eyes (never blinks); war-leader presence; bone beads and feathers as signature adornments, adult female
+
+PROPS:
+- stone-headed war club (stone head bound with sinew, wrapped leather grip, bone beads on thong) [main_hand] held at ready; becomes bone-obsidian war club in crinos
+- ceremonial knife (flint blade, bone handle, decorative beadwork on sheath) [holstered_belt] sheathed
+
+POSE:
+War leader, tall athletic broad-shouldered, defined waist and strong hips, braided hair with bone beads and feathers. Unnervingly calm predatory stare (merciless, never blinks); deeply carved tear-track grooves beneath eyes (ritual scarification); war-symbols as raised relief carvings in skin; small finger-bone trophy charm in braid (subtle). Judge-enforcer presence, dark ritual implied. Fitted buffalo-hide war regalia (wrapped bodice, narrow belted sash, fitted leggings) with decorative beadwork, close-fitting shoulder cape; ceremonial stone-headed war club visible angled to the side (clear negative space), ceremonial knife visible to the side; confident grounded stance with both arms clearly visible and separated from torso
+
+THEME:
+fully human form, NO visible transformation traits, evil werewolf pack, territorial predators, frontier horror, ruthless hunters, sinister presence
+
+PROPORTIONS:
+Anatomically plausible proportions appropriate to character type. Avoid heroic scale exaggeration.
+
+STYLE:
+Weird West aesthetic: weathered period materials (1880s American + feudal Japan fusion), HIGHLY STYLIZED bold graphic forms for tabletop scale.
+
+MATERIAL & APPEARANCE:
+Unpainted grey resin tabletop miniature sculpt--NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human.
+
+3D-SAFE GEOMETRY:
+Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.
+WIELDED ITEMS: Angled 30-45 degrees from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.
+STOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.
+CLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles.
+
+FACE (3D-SAFE):
+Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes--NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait.
+
+POSE CLARITY:
+One pose only, one emotional state only.
+Each limb has one clear job (grip, gesture, support, or rest).
+No mixed or transitional poses.
+
+FRAMING:
+Full-body centered, head to feet, blank background. All limbs in frame--no cropping. Generous negative space. 3/4 view (~45 degrees), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.
+
+RENDERING:
+Unpainted resin miniature sculpt under studio lighting--NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human.
