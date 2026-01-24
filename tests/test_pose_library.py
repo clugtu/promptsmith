@@ -1,6 +1,7 @@
 """Tests for pose library integration."""
 import pytest
 import create_image
+import pose_library
 
 
 class TestPoseLibraryLookup:
@@ -26,19 +27,19 @@ class TestPoseLibraryLookup:
     
     def test_find_pose_in_library(self, sample_pose_library):
         """Test finding a pose by pose_id."""
-        result = create_image.find_pose_in_library(sample_pose_library, "stand_relaxed")
+        result = pose_library.find_pose_in_library(sample_pose_library, "stand_relaxed")
         assert result is not None
         assert result["pose_prompt"] == "Standing in a relaxed pose"
     
     def test_find_pose_in_library_not_found(self, sample_pose_library):
         """Test that None is returned for non-existent pose."""
-        result = create_image.find_pose_in_library(sample_pose_library, "nonexistent")
+        result = pose_library.find_pose_in_library(sample_pose_library, "nonexistent")
         assert result is None
     
     def test_find_pose_in_library_empty(self):
         """Test searching in empty pose library."""
         empty_library = {"poses": []}
-        result = create_image.find_pose_in_library(empty_library, "any_pose")
+        result = pose_library.find_pose_in_library(empty_library, "any_pose")
         assert result is None
 
 
@@ -77,7 +78,7 @@ class TestPoseComposition:
         json_data = {}
         equipment = []
         
-        char_override, pose_prompt, camera_rotation = create_image.compose_pose_prompt_from_library(
+        char_override, pose_prompt, camera_rotation = pose_library.compose_pose_prompt_from_library(
             sample_char_data, sample_pose_def, sample_pose_library, json_data, equipment
         )
         
@@ -94,7 +95,7 @@ class TestPoseComposition:
         json_data = {}
         equipment = []
         
-        char_override, pose_prompt, camera_rotation = create_image.compose_pose_prompt_from_library(
+        char_override, pose_prompt, camera_rotation = pose_library.compose_pose_prompt_from_library(
             sample_char_data, pose_def, sample_pose_library, json_data, equipment
         )
         
@@ -104,7 +105,7 @@ class TestPoseComposition:
     
     def test_compose_pose_prompt_with_camera_rotation(self, sample_char_data, sample_pose_def):
         """Test extracting camera_rotation from library pose."""
-        pose_library = {
+        pose_library_data = {
             "poses": [
                 {
                     "pose_id": "combat_ready",
@@ -116,8 +117,8 @@ class TestPoseComposition:
         json_data = {}
         equipment = []
         
-        char_override, pose_prompt, camera_rotation = create_image.compose_pose_prompt_from_library(
-            sample_char_data, sample_pose_def, pose_library, json_data, equipment
+        char_override, pose_prompt, camera_rotation = pose_library.compose_pose_prompt_from_library(
+            sample_char_data, sample_pose_def, pose_library_data, json_data, equipment
         )
         
         assert camera_rotation == 45
@@ -128,8 +129,8 @@ class TestPoseComposition:
         json_data = {}
         equipment = []
         
-        with pytest.raises(create_image.PromptNotFoundError, match="pose_library_ref is missing"):
-            create_image.compose_pose_prompt_from_library(
+        with pytest.raises(pose_library.PromptNotFoundError, match="pose_library_ref is missing"):
+            pose_library.compose_pose_prompt_from_library(
                 sample_char_data, pose_def, sample_pose_library, json_data, equipment
             )
     
@@ -141,8 +142,8 @@ class TestPoseComposition:
         json_data = {}
         equipment = []
         
-        with pytest.raises(create_image.PromptNotFoundError, match="not found in pose library"):
-            create_image.compose_pose_prompt_from_library(
+        with pytest.raises(pose_library.PromptNotFoundError, match="not found in pose library"):
+            pose_library.compose_pose_prompt_from_library(
                 sample_char_data, pose_def, sample_pose_library, json_data, equipment
             )
     
@@ -152,13 +153,13 @@ class TestPoseComposition:
             "pose_library_ref": "nonexistent",
             "pose_prompt": "embedded pose description"
         }
-        pose_library = {"poses": []}
+        pose_library_data = {"poses": []}
         json_data = {}
         equipment = []
         
         # Should use embedded pose_prompt as fallback
-        char_override, pose_prompt, camera_rotation = create_image.compose_pose_prompt_from_library(
-            sample_char_data, pose_def, pose_library, json_data, equipment
+        char_override, pose_prompt, camera_rotation = pose_library.compose_pose_prompt_from_library(
+            sample_char_data, pose_def, pose_library_data, json_data, equipment
         )
         
         assert pose_prompt == "embedded pose description"

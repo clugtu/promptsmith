@@ -12,6 +12,7 @@ import sys
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import create_image
+from prompt_builder import build_final_prompt
 
 
 class TestPlayerDenizenIntegration:
@@ -49,7 +50,7 @@ class TestPlayerDenizenIntegration:
         character_name = char_data.get("name", "1") if char_data else "1"
         character_archetype = char_data.get("archetype", "") if char_data else ""
         
-        prompt = create_image.build_final_prompt(
+        prompt = build_final_prompt(
             prompt0,
             gender=gender,
             thematic_snippets=thematic,
@@ -113,7 +114,7 @@ class TestPlayerDenizenIntegration:
                 
                 proportions_to_use = ref_proportions if ref_proportions else char_data.get("proportions", "").strip()
                 
-                p = create_image.build_final_prompt(
+                p = build_final_prompt(
                     p0,
                     gender=gender_for_prompt,
                     thematic_snippets=thematic_snip,
@@ -184,7 +185,7 @@ class TestEnemyDenizenIntegration:
         character_name = char_data.get("name", str(char_id)) if char_data else str(char_id)
         character_archetype = char_data.get("archetype", "") if char_data else ""
         
-        prompt = create_image.build_final_prompt(
+        prompt = build_final_prompt(
             prompt0,
             gender=gender,
             thematic_snippets=thematic,
@@ -258,7 +259,7 @@ class TestGarouIntegration:
         char_data = create_image.find_character_by_id_or_name(garou_json_data, char_name)
         character_archetype = char_data.get("archetype", "") if char_data else ""
         
-        prompt = create_image.build_final_prompt(
+        prompt = build_final_prompt(
             prompt0,
             gender=gender,
             thematic_snippets=thematic,
@@ -325,7 +326,7 @@ class TestGarouIntegration:
                 proportions_to_use = ref_proportions if ref_proportions else char_proportions
                 gender_to_use = gender_for_prompt if gender_for_prompt else char_gender
                 
-                p = create_image.build_final_prompt(
+                p = build_final_prompt(
                     p0,
                     gender=gender_to_use,
                     thematic_snippets=thematic_snip,
