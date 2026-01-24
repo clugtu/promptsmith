@@ -101,7 +101,6 @@ The old `weapons` structure is deprecated. Use simple equipment array instead.
   - `trope`: String describing character archetype (optional)
 
 ### Optional Fields
-- `description`: Detailed character background
 - `visual_notes`: Physical appearance details
 - `proportions`: Body proportions adjustments
 - `equipment`: Array of equipment strings

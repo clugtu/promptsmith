@@ -276,7 +276,7 @@ def resolve_prompt_from_json(
                 else:
                     pose_prompt = library_pose_prompt
             
-            # Always use character_base or description as the character prompt
+            # Use character_base (with fallback to description for backward compatibility)
             final_prompt = character_base or char_data.get("description", "")
             
             return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation, visual_notes
@@ -330,7 +330,7 @@ def resolve_prompt_from_json(
                 # This is a pose-specific addition, add it to pose_prompt
                 pose_prompt = inline_prompt
         
-        # Always use character_base or description as the character prompt
+        # Use character_base (with fallback to description for backward compatibility)
         final_prompt = character_base or char_data.get("description", "")
 
         return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation, visual_notes
@@ -394,7 +394,7 @@ def resolve_prompt_from_json(
             # This is a pose-specific addition, add it to pose_prompt
             pose_prompt = inline_prompt
     
-    # Always use character_base or description as the character prompt
+    # Use character_base (with fallback to description for backward compatibility)
     final_prompt = character_base or char_data.get("description", "")
 
     return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation, visual_notes

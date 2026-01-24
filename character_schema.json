@@ -97,10 +97,6 @@
           "enum": ["bipedal_humanoid", "quadrupedal", "facultatively_bipedal", "multi_limbed"],
           "default": "bipedal_humanoid"
         },
-        "description": {
-          "type": "string",
-          "description": "Short character description"
-        },
         "visual_notes": {
           "type": "string",
           "description": "Visual details and appearance notes"
