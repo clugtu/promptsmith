@@ -358,55 +358,19 @@ def resolve_prompt_from_json(
     return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation, visual_notes
 
 
-def list_available_from_json(json_data: Dict[str, Any]) -> str:
-    """Return a human-friendly listing of available characters and refinements."""
-    characters = json_data.get("characters", [])
-    lines: List[str] = []
-    
-    total_refinements = sum(len(c.get("refinements", [])) for c in characters)
-    lines.append(f"Total characters: {len(characters)}")
-    lines.append(f"Total refinements: {total_refinements}")
-    lines.append("")
-    
-    for char in characters:
-        char_id = char.get("id", "?")
-        char_name = char.get("name", "unknown")
-        char_title = char.get("title", "")
-        
-        lines.append(f"{char_id} ({char_name}): {char_title}")
-        
-        refinements = char.get("refinements", [])
-        for ref in refinements:
-            ref_id = ref.get("id", "?")
-            ref_name = ref.get("name", "?")
-            ref_desc = ref.get("description", "")
-            lines.append(f"  {char_id}:{ref_id} or {char_name}:{ref_name} - {ref_desc}")
-        
-        lines.append("")
-    
-    return "\n".join(lines)
-
-
-def resolve_prompt(prompts: Dict[PromptKey, str], character: int, form: str) -> str:
-    key = PromptKey(character=character, form=form.lower())
-    try:
-        return prompts[key]
-    except KeyError as e:
-        available = sorted(
-            (k for k in prompts.keys() if k.character == character),
-            key=lambda k: k.form,
-        )
-        available_forms = ", ".join(k.form for k in available) if available else "(none)"
-        raise PromptNotFoundError(
-            f"No prompt found for character={character} form={form!r}. "
-            f"Available for that character: {available_forms}"
-        ) from e
-
-
 def generate_image_openai(prompt: str, *, model: str, size: str) -> bytes:
-    """Call OpenAI Images API and return PNG bytes.
+    """Generate image using OpenAI API and return PNG bytes.
 
-    Uses the official OpenAI Python SDK.
+    Args:
+        prompt: Text description of image to generate
+        model: OpenAI model name (e.g., 'dall-e-3')
+        size: Image size string (e.g., '1024x1024')
+        
+    Returns:
+        PNG image data as bytes
+        
+    Raises:
+        RuntimeError: If openai package is not installed
     """
     try:
         from openai import OpenAI  # type: ignore
@@ -445,6 +409,16 @@ def generate_image_openai(prompt: str, *, model: str, size: str) -> bytes:
 def build_output_path(
     out_dir: Path, *, character: Union[int, str], form: str
 ) -> Path:
+    """Build timestamped output path for generated image.
+    
+    Args:
+        out_dir: Directory where image will be saved
+        character: Character ID or name
+        form: Form/refinement name
+        
+    Returns:
+        Full path with format: generated_{character}_{form}_{timestamp}.png
+    """
     ts = datetime.now().strftime("%Y%m%d-%H%M%S")
     safe_form = str(form).lower()
     safe_char = str(character).replace(":", "_")
