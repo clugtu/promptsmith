@@ -1,29 +1,49 @@
 #!/usr/bin/env python
-"""create_image.py
+"""Image generation from character JSON files.
 
-Generate an image from prompts stored in a JSON file (garou.json).
+This is the main entry point for generating AI images from character definitions.
+It orchestrates the entire workflow: loading character data, resolving poses,
+building prompts, and optionally calling the OpenAI API.
 
-Usage examples (PowerShell):
-  python create_image.py garou.json 1:1
-  python create_image.py myproject.json alpha:human --dry-run
-  python create_image.py garou.json 1 --all
-  python create_image.py garou.json --list
-  python create_image.py garou.json --page 1 --copy
-  python create_image.py garou.json --page 2 --copy
-  python create_image.py garou.json --page all --copy
-  python create_image.py garou.json --page 1:1 --copy
-  python create_image.py garou.json --page 1:{1:3} --copy
-  python create_image.py garou.json --page 1:{1,4,5} --copy
+Features:
+- Load and validate character JSON files
+- Resolve character and pose lookups by ID or name
+- Compose prompts from pose libraries and character details
+- Generate reference sheets (multiple poses on one page)
+- Support for equipment, props, and pose-specific details
+- Optional OpenAI API integration for image generation
+- Copy-to-clipboard functionality for manual prompting
 
-Notes:
-- First argument is the JSON filename (required)
-- API calls require an OpenAI API key in the environment:
-        $env:OPENAI_API_KEY = "..."
-- If you only want a copy/paste prompt for ChatGPT, use --prompt-only (no API key needed).
-- Supports nested refinements: use 1:1 or alpha:human or mixed (1:human, alpha:1)
-- Reference sheets combine up to 9 poses with shared rules for efficient prompt generation
-- Page specification supports subrefinement filtering: --page 1:1 (first subrefinement only), 
-  --page 1:{1:3} (subrefinements 1-3), --page 1:{1,4,5} (subrefinements 1, 4, and 5)
+Usage:
+    # Generate prompt for character 1, pose 1
+    python create_image.py characters.json 1:1
+    
+    # Generate reference sheet
+    python create_image.py characters.json --page 1
+    
+    # List available characters
+    python create_image.py characters.json --list
+    
+    # Copy prompt to clipboard
+    python create_image.py characters.json 1:1 --copy
+
+Command-line options:
+  --prompt-only     Generate prompt without API call
+  --copy           Copy prompt to clipboard
+  --dry-run        Show prompt without generating image
+  --page N         Generate reference sheet page N (or 'all')
+  --list           List available characters and poses
+  --all            Generate all poses for a character
+
+Environment:
+  OPENAI_API_KEY   Required for API calls (optional for --prompt-only)
+
+Note:
+  Reference sheets combine up to 9 poses with shared rules for efficient
+  prompt generation. Page specification supports pose filtering:
+  - --page 1:1 (first pose only)
+  - --page 1:{1:3} (poses 1-3)
+  - --page 1:{1,4,5} (poses 1, 4, and 5)
 """
 
 from __future__ import annotations

@@ -1,7 +1,21 @@
 #!/usr/bin/env python3
-"""
-Validate character JSON files against the character_schema.json schema.
-Also performs additional consistency checks beyond basic schema validation.
+"""Validate character JSON files against schema.
+
+This module validates character JSON files against character_schema.json and
+performs additional consistency checks beyond basic schema validation.
+
+The validator checks:
+- Sequential character IDs (1, 2, 3, ...) with no gaps or duplicates
+- Valid pose structure (pose or poses, not both)
+- Pose library imports when using pose_library_ref
+- Required pose definitions (pose_library_ref or prompt)
+- Tags structure and deprecated fields
+
+Usage:
+    python validate_character_file.py <file.json> [file2.json ...]
+
+Returns:
+    Exit code 0 if all files pass validation, 1 if any fail
 """
 
 import json
