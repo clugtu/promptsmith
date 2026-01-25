@@ -10,10 +10,6 @@
       "type": "string",
       "description": "JSON Schema reference"
     },
-    "$comment": {
-      "type": "string",
-      "description": "File-level comment"
-    },
     "imports": {
       "type": "object",
       "description": "External file references",
@@ -144,25 +140,11 @@
           "items": {
             "$ref": "#/definitions/pose_definition"
           }
-        },
-        "refinements": {
-          "type": "array",
-          "description": "Legacy: use 'poses' instead",
-          "deprecated": true,
-          "items": {
-            "$ref": "#/definitions/pose_definition"
-          }
         }
       },
       "oneOf": [
         {"required": ["pose"]},
-        {"required": ["poses"]},
-        {"required": ["refinements"]},
-        {"not": {"anyOf": [
-          {"required": ["pose"]},
-          {"required": ["poses"]},
-          {"required": ["refinements"]}
-        ]}}
+        {"required": ["poses"]}
       ]
     },
     "pose_definition": {
@@ -186,11 +168,6 @@
           "type": "string",
           "description": "Reference to pose in pose_library.json (preferred)"
         },
-        "figure_type": {
-          "type": "string",
-          "description": "Override figure type for this specific pose (for validation)",
-          "enum": ["bipedal_humanoid", "quadrupedal", "facultatively_bipedal", "multi_limbed"]
-        },
         "pose_details": {
           "type": "string",
           "description": "Pose-specific character details (expression, posture adjustments, etc.)"
@@ -201,9 +178,10 @@
         },
         "camera_rotation": {
           "type": "integer",
-          "description": "Camera rotation angle in degrees",
+          "description": "Camera rotation angle in degrees (optional, defaults to 45)",
           "minimum": 0,
-          "maximum": 360
+          "maximum": 360,
+          "default": 45
         },
         "equipment_override": {
           "type": "array",
@@ -216,11 +194,6 @@
             {"type": "array", "items": {"type": "string"}}
           ],
           "description": "Thematic additions for this pose"
-        },
-        "gender": {
-          "type": "string",
-          "description": "Override character gender for this pose",
-          "enum": ["male", "female", "other"]
         }
       },
       "oneOf": [

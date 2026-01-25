@@ -51,12 +51,11 @@ def validate_pose_structure(char: Dict[str, Any], char_id: str) -> List[str]:
     
     has_pose = 'pose' in char
     has_poses = 'poses' in char
-    has_refinements = 'refinements' in char
     
-    count = sum([has_pose, has_poses, has_refinements])
+    count = sum([has_pose, has_poses])
     
     if count == 0:
-        errors.append(f"Character {char_id} has no pose/poses/refinements field")
+        errors.append(f"Character {char_id} has no pose/poses field")
     elif count > 1:
         errors.append(f"Character {char_id} has multiple pose fields (should have only one)")
     
@@ -66,8 +65,6 @@ def validate_pose_structure(char: Dict[str, Any], char_id: str) -> List[str]:
         poses_to_check = [char['pose']]
     elif has_poses:
         poses_to_check = char['poses']
-    elif has_refinements:
-        poses_to_check = char['refinements']
     
     for i, pose in enumerate(poses_to_check):
         pose_id = pose.get('name', f'pose_{i}')
@@ -94,13 +91,12 @@ def validate_imports(data: Dict[str, Any]) -> List[str]:
     for char in data.get('characters', []):
         pose = char.get('pose', {})
         poses = char.get('poses', [])
-        refinements = char.get('refinements', [])
         
         if 'pose_library_ref' in pose:
             uses_pose_library = True
             break
         
-        for p in poses + refinements:
+        for p in poses:
             if 'pose_library_ref' in p:
                 uses_pose_library = True
                 break

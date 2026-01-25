@@ -1,6 +1,5 @@
 {
   "$schema": "character_schema.json",
-  "$comment": "Template for character database with pose library system. Equipment as simple array; poses reference reusable library templates.",
   
   "imports": {
     "generic_render_rules": "rules/generic_render_rules.json",
@@ -162,7 +161,7 @@
       "tags": "Object with gender, age, trope fields (recommended over character-level gender field)",
       "poses_or_pose": "Use 'pose' object for single-pose, 'poses' array for multiple poses",
       "pose_library_ref": "Preferred over inline 'prompt' - references pose_library.json",
-      "camera_rotation": "Optional integer 0-360 degrees"
+      "camera_rotation": "Optional integer 0-360 degrees (defaults to 45 if not specified)"
     },
     "equipment_positions": {
       "main_hand": "Primary weapon actively held",

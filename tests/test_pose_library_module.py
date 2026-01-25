@@ -188,10 +188,11 @@ class TestComposePoseEdgeCases:
     
     def test_compose_figure_type_mismatch_warning(self, capsys):
         """Test that figure type mismatch generates warning."""
-        character_data = {}
-        pose_def = {
-            "pose_library_ref": "test_pose",
+        character_data = {
             "figure_type": "bipedal_humanoid"
+        }
+        pose_def = {
+            "pose_library_ref": "test_pose"
         }
         pose_library_data = {
             "poses": [
@@ -215,10 +216,11 @@ class TestComposePoseEdgeCases:
     
     def test_compose_figure_type_compatible_mismatch(self):
         """Test compatible figure type mismatches (no warning)."""
-        character_data = {}
-        pose_def = {
-            "pose_library_ref": "test_pose",
+        character_data = {
             "figure_type": "facultatively_bipedal"
+        }
+        pose_def = {
+            "pose_library_ref": "test_pose"
         }
         pose_library_data = {
             "poses": [

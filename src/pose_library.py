@@ -150,7 +150,17 @@ def compose_pose_prompt_from_library(
     
     # Validate figure types if present
     pose_figure_type = library_pose.get("figure_type")
-    char_figure_type = pose_def.get("figure_type")
+    
+    # Get character figure_type from character data or thematic forms
+    char_figure_type = character_data.get("figure_type")
+    
+    # If not found at character level, check thematic forms
+    if not char_figure_type and "form" in pose_def and "thematic_rules" in character_data:
+        thematic_rules = character_data.get("thematic_rules", {})
+        forms = thematic_rules.get("forms", {})
+        form_name = pose_def["form"]
+        if form_name in forms:
+            char_figure_type = forms[form_name].get("figure_type")
     
     if pose_figure_type and char_figure_type:
         # Define compatible mismatches

@@ -46,22 +46,6 @@ The script supports three different ways to define character poses:
 }
 ```
 
-### Pattern 3: Refinements Array (Legacy - inline prompts)
-```json
-{
-  "id": 1,
-  "name": "Custom Character",
-  "character_base": "description",
-  "refinements": [
-    {
-      "id": 1,
-      "name": "Custom Pose",
-      "prompt": "full inline pose prompt text"
-    }
-  ]
-}
-```
-
 ## Pose Definition Options
 
 Each pose MUST have either:
@@ -134,7 +118,7 @@ The old `weapons` structure is deprecated. Use simple equipment array instead.
 ## Validation Requirements
 
 1. **Sequential IDs**: Character IDs must be sequential (1, 2, 3, ...) with no gaps or duplicates
-2. **Pose Structure**: Each character must have ONE of: `pose`, `poses`, or `refinements`
+2. **Pose Structure**: Each character must have ONE of: `pose` or `poses`
 3. **Pose Library Import**: If using `pose_library_ref`, must have `imports.pose_library`
 4. **Pose Definition**: Each pose must have either `pose_library_ref` OR `prompt`
 

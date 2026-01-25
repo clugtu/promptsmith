@@ -236,20 +236,16 @@ def resolve_prompt_from_json(
     tags = char_data.get("tags", {})
     age = tags.get("age", "") if isinstance(tags, dict) else ""
     
-    # Get gender from character data (refinements may override)
+    # Get gender from character data (poses may override)
     char_gender = char_data.get("gender", None)
     
-    # Check if this is a v2 structure with 'poses' instead of 'refinements'
+    # Get poses array
     poses = char_data.get("poses", [])
-    refinements = char_data.get("refinements", [])
-    
-    # Use whichever is present
-    items_to_search = poses if poses else refinements
     
     # If no form specified, return character description or first item
     if form is None:
-        if not items_to_search:
-            # No refinements/poses array - check for single 'pose' object
+        if not poses:
+            # No poses array - check for single 'pose' object
             single_pose = char_data.get("pose", None)
             
             thematic = []
@@ -298,8 +294,8 @@ def resolve_prompt_from_json(
                 # Legacy: single string value
                 thematic.append(snippet_val)
         
-        # Use item-level gender if present, else character-level
-        gender = first_item.get("gender", char_gender)
+        # Use character-level gender (no pose-level override)
+        gender = char_gender
         
         # Extract equipment array - check for pose-level equipment_override first
         equipment = first_item.get("equipment_override", char_data.get("equipment", []))
@@ -335,15 +331,14 @@ def resolve_prompt_from_json(
 
         return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation, visual_notes
     
-    # Find the item (pose or refinement)
-    item = find_refinement_by_id_or_name(items_to_search, form)
+    # Find the specific pose
+    item = find_refinement_by_id_or_name(poses, form)
     
     if not item:
-        item_type = "poses" if poses else "refinements"
-        available = [f"{r.get('id')}:{r.get('name')}" for r in items_to_search]
+        available = [f"{r.get('id')}:{r.get('name')}" for r in poses]
         raise PromptNotFoundError(
-            f"Pose/refinement '{form}' not found for character '{character}'.\n"
-            f"Available {item_type}: {', '.join(available)}"
+            f"Pose '{form}' not found for character '{character}'.\n"
+            f"Available poses: {', '.join(available)}"
         )
     
     # Collect thematic snippet from this item
@@ -362,8 +357,8 @@ def resolve_prompt_from_json(
             # Legacy: single string value
             thematic.append(snippet_val)
     
-    # Use item-level gender if present, else character-level
-    gender = item.get("gender", char_gender)
+    # Use character-level gender (no pose-level override)
+    gender = char_gender
     
     # Extract equipment array - check for pose-level equipment_override first
     equipment = item.get("equipment_override", char_data.get("equipment", []))
@@ -469,13 +464,13 @@ def build_output_path(
 
 
 def list_available_from_json(json_data: Dict[str, Any]) -> str:
-    """Return a human-friendly listing of available characters and refinements."""
+    """Return a human-friendly listing of available characters and poses."""
     characters = json_data.get("characters", [])
     lines: List[str] = []
     
-    total_refinements = sum(len(c.get("refinements", [])) for c in characters)
+    total_poses = sum(len(c.get("poses", [])) for c in characters)
     lines.append(f"Total characters: {len(characters)}")
-    lines.append(f"Total refinements: {total_refinements}")
+    lines.append(f"Total poses: {total_poses}")
     lines.append("")
     
     for char in characters:
@@ -485,12 +480,12 @@ def list_available_from_json(json_data: Dict[str, Any]) -> str:
         
         lines.append(f"{char_id} ({char_name}): {char_title}")
         
-        refinements = char.get("refinements", [])
-        for ref in refinements:
-            ref_id = ref.get("id", "?")
-            ref_name = ref.get("name", "?")
-            ref_desc = ref.get("description", "")
-            lines.append(f"  {char_id}:{ref_id} or {char_name}:{ref_name} - {ref_desc}")
+        poses = char.get("poses", [])
+        for pose in poses:
+            pose_id = pose.get("id", "?")
+            pose_name = pose.get("name", "?")
+            pose_desc = pose.get("description", "")
+            lines.append(f"  {char_id}:{pose_id} or {char_name}:{pose_name} - {pose_desc}")
         
         lines.append("")
     
