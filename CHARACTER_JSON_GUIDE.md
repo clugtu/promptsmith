@@ -16,7 +16,7 @@ The script supports three different ways to define character poses:
   "pose": {
     "name": "Standing Ready",
     "pose_library_ref": "oh_melee_guarded_low_ready",
-    "character_override": "optional overrides",
+    "pose_details": "optional pose-specific details",
     "camera_rotation": 45
   }
 }
@@ -33,7 +33,7 @@ The script supports three different ways to define character poses:
       "id": 1,
       "name": "Attack Pose",
       "pose_library_ref": "oh_melee_overhead_chop",
-      "character_override": "optional overrides",
+      "pose_details": "optional pose-specific details",
       "camera_rotation": 45
     },
     {
@@ -69,7 +69,7 @@ Each pose MUST have either:
 - `prompt`: Inline pose description (legacy, less reusable)
 
 Optional pose fields:
-- `character_override`: Additional character details specific to this pose
+- `pose_details`: Pose-specific character details (expression, posture adjustments, etc.)
 - `camera_rotation`: Integer 0-360 degrees for camera angle
 
 ## Equipment Format

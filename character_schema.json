@@ -191,9 +191,9 @@
           "description": "Override figure type for this specific pose (for validation)",
           "enum": ["bipedal_humanoid", "quadrupedal", "facultatively_bipedal", "multi_limbed"]
         },
-        "character_override": {
+        "pose_details": {
           "type": "string",
-          "description": "Character-specific additions to library pose (additive)"
+          "description": "Pose-specific character details (expression, posture adjustments, etc.)"
         },
         "prompt": {
           "type": "string",

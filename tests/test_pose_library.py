@@ -86,11 +86,11 @@ class TestPoseComposition:
         assert char_override == ""
         assert camera_rotation is None
     
-    def test_compose_pose_prompt_with_character_override(self, sample_char_data, sample_pose_library):
-        """Test composing pose with character_override."""
+    def test_compose_pose_prompt_with_pose_details(self, sample_char_data, sample_pose_library):
+        """Test composing pose with pose_details."""
         pose_def = {
             "pose_library_ref": "combat_ready",
-            "character_override": "eyes glowing red"
+            "pose_details": "eyes glowing red"
         }
         json_data = {}
         equipment = []

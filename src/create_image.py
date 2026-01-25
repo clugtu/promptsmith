@@ -267,17 +267,17 @@ def resolve_prompt_from_json(
             pose_prompt = ""
             camera_rotation = None
             if single_pose and "pose_library_ref" in single_pose and pose_library:
-                character_override, library_pose_prompt, camera_rotation = compose_pose_prompt_from_library(
+                pose_details, library_pose_prompt, camera_rotation = compose_pose_prompt_from_library(
                     char_data, single_pose, pose_library, json_data, equipment
                 )
-                # Combine library pose with character override (additive)
-                if character_override:
-                    pose_prompt = f"{library_pose_prompt}. {character_override}" if library_pose_prompt else character_override
+                # Combine library pose with pose-specific details (additive)
+                if pose_details:
+                    pose_prompt = f"{library_pose_prompt}. {pose_details}" if library_pose_prompt else pose_details
                 else:
                     pose_prompt = library_pose_prompt
             
-            # Use character_base (with fallback to description for backward compatibility)
-            final_prompt = character_base or char_data.get("description", "")
+            # Use character_base as the character prompt
+            final_prompt = character_base
             
             return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation, visual_notes
         
@@ -315,12 +315,12 @@ def resolve_prompt_from_json(
         pose_prompt = ""
         camera_rotation = None
         if "pose_library_ref" in first_item and pose_library:
-            character_override, library_pose_prompt, camera_rotation = compose_pose_prompt_from_library(
+            pose_details, library_pose_prompt, camera_rotation = compose_pose_prompt_from_library(
                 char_data, first_item, pose_library, json_data, equipment
             )
-            # Combine library pose with character override (additive)
-            if character_override:
-                pose_prompt = f"{library_pose_prompt}. {character_override}" if library_pose_prompt else character_override
+            # Combine library pose with pose-specific details (additive)
+            if pose_details:
+                pose_prompt = f"{library_pose_prompt}. {pose_details}" if library_pose_prompt else pose_details
             else:
                 pose_prompt = library_pose_prompt
         else:
@@ -330,8 +330,8 @@ def resolve_prompt_from_json(
                 # This is a pose-specific addition, add it to pose_prompt
                 pose_prompt = inline_prompt
         
-        # Use character_base (with fallback to description for backward compatibility)
-        final_prompt = character_base or char_data.get("description", "")
+        # Use character_base as the character prompt
+        final_prompt = character_base
 
         return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation, visual_notes
     
@@ -379,12 +379,12 @@ def resolve_prompt_from_json(
     pose_prompt = ""
     camera_rotation = None
     if "pose_library_ref" in item and pose_library:
-        character_override, library_pose_prompt, camera_rotation = compose_pose_prompt_from_library(
+        pose_details, library_pose_prompt, camera_rotation = compose_pose_prompt_from_library(
             char_data, item, pose_library, json_data, equipment
         )
-        # Combine library pose with character override (additive)
-        if character_override:
-            pose_prompt = f"{library_pose_prompt}. {character_override}" if library_pose_prompt else character_override
+        # Combine library pose with pose-specific details (additive)
+        if pose_details:
+            pose_prompt = f"{library_pose_prompt}. {pose_details}" if library_pose_prompt else pose_details
         else:
             pose_prompt = library_pose_prompt
     else:
@@ -394,8 +394,8 @@ def resolve_prompt_from_json(
             # This is a pose-specific addition, add it to pose_prompt
             pose_prompt = inline_prompt
     
-    # Use character_base (with fallback to description for backward compatibility)
-    final_prompt = character_base or char_data.get("description", "")
+    # Use character_base as the character prompt
+    final_prompt = character_base
 
     return final_prompt, thematic, gender, proportions, age, equipment, pose_prompt, camera_rotation, visual_notes
 

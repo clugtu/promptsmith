@@ -65,8 +65,8 @@ def compose_pose_prompt_from_library(
         equipment: Resolved equipment list to extract hand-held props
         
     Returns:
-        Tuple of (character_override, pose_prompt, camera_rotation):
-        - character_override: Character appearance/expression modifications (str)
+        Tuple of (pose_details, pose_prompt, camera_rotation):
+        - pose_details: Pose-specific character details (expression, posture, etc.) (str)
         - pose_prompt: The composed pose prompt with placeholders replaced (str)
         - camera_rotation: Optional camera rotation angle (Optional[int])
         
@@ -77,7 +77,7 @@ def compose_pose_prompt_from_library(
         >>> character_data = {"name": "Warrior"}
         >>> pose_def = {"pose_library_ref": "unarmed_002"}
         >>> equipment = ["sword : main_hand : gripped"]
-        >>> override, prompt, rotation = compose_pose_prompt_from_library(
+        >>> details, prompt, rotation = compose_pose_prompt_from_library(
         ...     character_data, pose_def, pose_library, json_data, equipment)
     """
     pose_ref = pose_def.get("pose_library_ref")
@@ -90,10 +90,10 @@ def compose_pose_prompt_from_library(
         # Fall back to embedded pose definition if available
         if "pose_prompt" in pose_def:
             print(f"⚠️  Warning: Pose '{pose_ref}' not found in library, using embedded pose definition", file=sys.stderr)
-            character_override = pose_def.get("character_override", "")
+            pose_details = pose_def.get("pose_details", "")
             pose_prompt = pose_def.get("pose_prompt", "")
             camera_rotation = pose_def.get("camera_rotation")
-            return character_override, pose_prompt, camera_rotation
+            return pose_details, pose_prompt, camera_rotation
         
         # If no embedded definition, raise error
         available_ids = [p.get("pose_id", "?") for p in pose_library.get("poses", [])[:15]]
@@ -169,13 +169,13 @@ def compose_pose_prompt_from_library(
         if not compatible:
             print(f"⚠️  Warning: Figure type mismatch - pose expects '{pose_figure_type}' but character has '{char_figure_type}'", file=sys.stderr)
     
-    # Get character_override (for appearance/expression modifications)
-    character_override = pose_def.get("character_override", "")
+    # Get pose_details (for appearance/expression modifications)
+    pose_details = pose_def.get("pose_details", "")
     
     # Extract camera_rotation if present
     camera_rotation = library_pose.get("camera_rotation")
     
-    return character_override, pose_prompt, camera_rotation
+    return pose_details, pose_prompt, camera_rotation
 
 
 def validate_pose_compatibility(

@@ -239,12 +239,12 @@ class TestComposePoseEdgeCases:
         
         assert pose_prompt == "Standing"
     
-    def test_compose_with_character_override_and_camera_rotation(self):
-        """Test compose extracting both override and camera rotation."""
+    def test_compose_with_pose_details_and_camera_rotation(self):
+        """Test compose extracting both pose details and camera rotation."""
         character_data = {}
         pose_def = {
             "pose_library_ref": "test_pose",
-            "character_override": "grinning menacingly"
+            "pose_details": "grinning menacingly"
         }
         pose_library_data = {
             "poses": [

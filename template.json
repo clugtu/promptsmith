@@ -48,7 +48,7 @@
           "name": "static_heroic",
           "description": "Calm, imposing guard stance",
           "pose_library_ref": "oh_melee_guarded_low_ready",
-          "character_override": "calm determined expression; armor plates clearly visible; strong grounded presence",
+          "pose_details": "calm determined expression; armor plates clearly visible; strong grounded presence",
           "camera_rotation": 45
         },
         {
@@ -56,7 +56,7 @@
           "name": "combat_ready",
           "description": "Shield forward defensive stance",
           "pose_library_ref": "dh_ranged_aim_and_cover",
-          "character_override": "alert defensive posture; shield raised; sword ready; battle-ready expression",
+          "pose_details": "alert defensive posture; shield raised; sword ready; battle-ready expression",
           "camera_rotation": 45
         },
         {
@@ -64,7 +64,7 @@
           "name": "action_pose",
           "description": "Dynamic charging attack",
           "pose_library_ref": "oh_melee_forward_lunge_action",
-          "character_override": "dynamic forward momentum; armor flowing; both legs clearly visible and separated",
+          "pose_details": "dynamic forward momentum; armor flowing; both legs clearly visible and separated",
           "camera_rotation": 45
         },
         {
@@ -72,7 +72,7 @@
           "name": "victory_stance",
           "description": "Triumphant victory pose",
           "pose_library_ref": "oh_triumph_raise",
-          "character_override": "triumphant expression; weight shifted back; sword raised in victory; strong negative space",
+          "pose_details": "triumphant expression; weight shifted back; sword raised in victory; strong negative space",
           "camera_rotation": 45
         },
         {
@@ -85,7 +85,7 @@
             "round shield (wood planks, steel rim, central boss) : holstered_back : slung on back",
             "dagger (simple blade, leather sheath) : holstered_belt : sheathed"
           ],
-          "character_override": "combat ready stance with hands empty; weapons visible but not held; prepared for unarmed combat",
+          "pose_details": "combat ready stance with hands empty; weapons visible but not held; prepared for unarmed combat",
           "camera_rotation": 45
         }
       ]
@@ -113,7 +113,7 @@
           "name": "static_heroic",
           "description": "Calm ready stance with bow",
           "pose_library_ref": "th_ranged_standing_aim_wide",
-          "character_override": "calm alert expression; bow held vertically; ranger stance",
+          "pose_details": "calm alert expression; bow held vertically; ranger stance",
           "camera_rotation": 45
         },
         {
@@ -121,7 +121,7 @@
           "name": "combat_ready",
           "description": "Bow drawn ready to shoot",
           "pose_library_ref": "th_ranged_dynamic_step_aim",
-          "character_override": "focused expression; bow at ready; quiver visible on back",
+          "pose_details": "focused expression; bow at ready; quiver visible on back",
           "camera_rotation": 45
         }
       ]
@@ -141,7 +141,7 @@
         "name": "idle_stand",
         "description": "Casual standing pose",
         "pose_library_ref": "cw_idle_arms_folded_foot_tap",
-        "character_override": "relaxed friendly expression; natural everyday posture",
+        "pose_details": "relaxed friendly expression; natural everyday posture",
         "camera_rotation": 45
       }
     }
