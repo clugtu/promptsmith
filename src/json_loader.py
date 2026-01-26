@@ -55,10 +55,11 @@ def load_json_data(json_path: Path) -> Dict[str, Any]:
         data = json.load(f)
     
     # Resolve imports if present.
-    # Intentionally resolve relative import paths against the current working directory
-    # (the directory create_image.py is run from) to make libraries portable across machines.
+    # Resolve relative import paths with fallback strategy:
+    # 1. Try relative to JSON file's directory (for co-located rules)
+    # 2. Fall back to project root (for centralized rules)
     if "imports" in data:
-        data = resolve_imports(data, Path.cwd())
+        data = resolve_imports(data, json_path.parent, json_path)
     
     # Validate character IDs are sequential
     if "characters" in data:
@@ -101,15 +102,55 @@ def validate_character_ids(characters: List[Dict[str, Any]]) -> None:
         raise ValueError(f"Character IDs must be sequential from 1 to {len(ids)}. {' '.join(errors)}")
 
 
-def resolve_imports(data: Dict[str, Any], base_path: Path) -> Dict[str, Any]:
+def find_project_root(json_path: Path = None) -> Path:
+    """Find the project root by looking for a rules/ directory.
+    
+    Searches upward from either the provided JSON file's location or from this module's
+    location to find a directory containing a rules/ subdirectory, which indicates the
+    project root.
+    
+    Args:
+        json_path: Optional path to start searching from. If None, searches from this module's location.
+        
+    Returns:
+        Path to project root if found, None otherwise
+    """
+    if json_path:
+        start = json_path.parent
+    else:
+        # Start from this module's location
+        start = Path(__file__).parent.parent  # Go up from src/ to project root
+    
+    current = start
+    max_levels = 10  # Prevent infinite loop
+    
+    for _ in range(max_levels):
+        rules_dir = current / "rules"
+        if rules_dir.exists() and rules_dir.is_dir():
+            return current
+        
+        parent = current.parent
+        if parent == current:  # Reached filesystem root
+            break
+        current = parent
+    
+    return None
+
+
+def resolve_imports(data: Dict[str, Any], base_path: Path, json_path: Path = None) -> Dict[str, Any]:
     """Resolve file references in the imports section and merge them into the data.
     
     This function loads referenced JSON files and merges their content into the main data structure.
     Files are cached to avoid loading the same file multiple times.
     
+    Uses a fallback strategy for resolving relative paths:
+    1. Try relative to base_path (typically the JSON file's directory)
+    2. If not found, try relative to project root (detected by finding rules/ directory)
+    
     Args:
         data: The JSON data with potential imports section
         base_path: Base path for resolving relative import paths
+        json_path: Optional path to the JSON file being loaded (for project root detection)
         
     Returns:
         Updated data with imports resolved and merged
@@ -121,9 +162,65 @@ def resolve_imports(data: Dict[str, Any], base_path: Path) -> Dict[str, Any]:
     # Cache for loaded files to avoid duplicate loads
     file_cache = {}
     
+    # Helper function to resolve with fallback
+    def resolve_with_fallback(import_path: str) -> Path:
+        """Try to resolve import path with fallback to project root and custom rules directory."""
+        # First try: relative to base_path (JSON file's directory)
+        resolved = resolve_path(import_path, base_path)
+        if resolved.exists():
+            return resolved
+        
+        # Second try: custom rules directory from environment variable
+        # If import contains "rules/", try using PROMPTSMITH_RULES_DIR
+        custom_rules_dir = os.environ.get("PROMPTSMITH_RULES_DIR")
+        if custom_rules_dir:
+            custom_rules_path = Path(custom_rules_dir)
+            if custom_rules_path.exists():
+                # Try the import path as-is from custom rules directory
+                resolved = resolve_path(import_path, custom_rules_path)
+                if resolved.exists():
+                    return resolved
+                
+                # If path contains "rules/", strip it and resolve from custom directory
+                import_path_normalized = import_path.lstrip("./").replace("../", "")
+                if "rules/" in import_path_normalized:
+                    # Remove the "rules/" part since we're already in the rules directory
+                    rules_relative = import_path_normalized.split("rules/", 1)[-1]
+                    resolved = custom_rules_path / rules_relative
+                    if resolved.exists():
+                        return resolved
+        
+        # Third try: relative to project root searched from JSON location
+        if json_path:
+            project_root = find_project_root(json_path)
+            if project_root and project_root != base_path:
+                resolved = resolve_path(import_path, project_root)
+                if resolved.exists():
+                    return resolved
+        
+        # Fourth try: relative to this module's project root
+        # For imports like "../rules/...", try treating as "rules/..." from project root
+        module_project_root = find_project_root()
+        if module_project_root and module_project_root != base_path:
+            # Try the path as-is from project root
+            resolved = resolve_path(import_path, module_project_root)
+            if resolved.exists():
+                return resolved
+            
+            # Also try stripping leading "../" and resolving from project root
+            # This handles imports like "../rules/..." that should be "rules/..." from project root
+            import_path_normalized = import_path.lstrip("./").replace("../", "")
+            if import_path_normalized != import_path:
+                resolved = resolve_path(import_path_normalized, module_project_root)
+                if resolved.exists():
+                    return resolved
+        
+        # If nothing worked, return first attempt (will fail with clear error message)
+        return resolve_path(import_path, base_path)
+    
     # Resolve generic_render_rules
     if "generic_render_rules" in imports:
-        rules_path = resolve_path(imports["generic_render_rules"], base_path)
+        rules_path = resolve_with_fallback(imports["generic_render_rules"])
         if rules_path not in file_cache:
             with open(rules_path, "r", encoding="utf-8") as f:
                 file_cache[rules_path] = json.load(f)
@@ -131,7 +228,7 @@ def resolve_imports(data: Dict[str, Any], base_path: Path) -> Dict[str, Any]:
     
     # Resolve miniature_scale_rules
     if "miniature_scale_rules" in imports:
-        rules_path = resolve_path(imports["miniature_scale_rules"], base_path)
+        rules_path = resolve_with_fallback(imports["miniature_scale_rules"])
         if rules_path not in file_cache:
             with open(rules_path, "r", encoding="utf-8") as f:
                 file_cache[rules_path] = json.load(f)
@@ -139,7 +236,7 @@ def resolve_imports(data: Dict[str, Any], base_path: Path) -> Dict[str, Any]:
     
     # Resolve common_thematic_forms
     if "common_thematic_forms" in imports:
-        forms_path = resolve_path(imports["common_thematic_forms"], base_path)
+        forms_path = resolve_with_fallback(imports["common_thematic_forms"])
         if forms_path not in file_cache:
             with open(forms_path, "r", encoding="utf-8") as f:
                 file_cache[forms_path] = json.load(f)
@@ -156,7 +253,7 @@ def resolve_imports(data: Dict[str, Any], base_path: Path) -> Dict[str, Any]:
     
     # Resolve style_rules
     if "style_rules" in imports:
-        style_path = resolve_path(imports["style_rules"], base_path)
+        style_path = resolve_with_fallback(imports["style_rules"])
         if style_path not in file_cache:
             with open(style_path, "r", encoding="utf-8") as f:
                 file_cache[style_path] = json.load(f)
@@ -165,7 +262,7 @@ def resolve_imports(data: Dict[str, Any], base_path: Path) -> Dict[str, Any]:
     
     # Resolve pose_library
     if "pose_library" in imports:
-        pose_path = resolve_path(imports["pose_library"], base_path)
+        pose_path = resolve_with_fallback(imports["pose_library"])
         if pose_path not in file_cache:
             with open(pose_path, "r", encoding="utf-8") as f:
                 file_cache[pose_path] = json.load(f)

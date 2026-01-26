@@ -31,15 +31,15 @@
     "sections": {
       "material_appearance": {
         "title": "MATERIAL & APPEARANCE",
-        "content": "Unpainted grey resin tabletop miniature sculpt—NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. Hard edges, CHUNKY stylized details for 28-32mm scale. All features thick and bold. Miniature sculpt aesthetic, NOT realistic human."
+        "content": "Unpainted grey resin tabletop miniature sculpt—NOT a photograph of a person. Uniform flat grey material. Depth from geometry only, NOT surface texture. FIGURE: realistic proportions, lean athletic builds appropriate to character type. GEAR & ADORNMENTS: chunky stylized details for 28-32mm scale; all equipment, armor, weapons, and accessories thick and bold for readability. Miniature sculpt aesthetic, NOT realistic human."
       },
       "geometry_constraints": {
         "title": "3D-SAFE GEOMETRY",
-        "content": "Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.\nWIELDED ITEMS: Angled 30-45° from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.\nSTOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.\nCLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles."
+        "content": "Overlap allowed for expressive poses with clear depth order and 2-4mm clearance.\nWIELDED ITEMS: Angled 30-45\u00b0 from camera. Contact with forearm/chest OK if needed. Distinct volumes. Grip points only.\nSTOWED ITEMS: Follow body contours. Attachment visible. Blades show grip only. Shields center-back, convex out.\nCLOTH: Flows behind/beside. No arm/weapon intersection. No thin straps or dangles."
       },
       "facial_geometry": {
         "title": "FACE (3D-SAFE)",
-        "content": "Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes—NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait."
+        "content": "Simplified miniature-scale face with clean geometric features. Eyes as gentle indents with minimal eyelid suggestion. Nose as low-profile wedge or subtle bridge. Mouth as simple horizontal line or shallow groove. Minimal cheekbone definition. Face reads as smooth stylized planes\u2014NOT realistic anatomy. Features bold enough to read at tabletop scale but abstracted from photorealism. Think miniature sculpt, not portrait."
       },
       "pose_constraints": {
         "title": "POSE CLARITY",
@@ -47,13 +47,52 @@
       },
       "framing": {
         "title": "FRAMING",
-        "content": "Full-body centered, head to feet, blank background. All limbs in frame—no cropping. Generous negative space. 3/4 view (~{camera_rotation}°), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.",
+        "content": "Full-body centered, head to feet, blank background. All limbs in frame\u2014no cropping. Generous negative space. 3/4 view (~{camera_rotation}\u00b0), orthographic. Camera pulled back for complete silhouette. No close-ups or cinematic framing.",
         "default_camera_rotation": 45
       },
       "rendering": {
         "title": "RENDERING",
-        "content": "Unpainted resin miniature sculpt under studio lighting—NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human."
+        "content": "Unpainted resin miniature sculpt under studio lighting\u2014NOT a realistic person. Flat matte grey surface. Soft diffuse lighting. Natural shadows from geometry. No photorealism, no skin texture, no pores, no fine detail, no realistic hair strands. STYLIZED miniature aesthetic with bold simplified forms. Product photo of a sculpt, NOT portrait of a human."
       }
+    }
+  },
+  "miniature_overrides": {
+    "prompt_enforcement_snippet": "BACKGROUND: solid flat pure white or neutral light grey; NO texture, NO grain, NO gradient, NO vignette, NO environment, NO ground plane. MATERIAL: uniform matte grey resin; NO surface noise; NO micro texture; all wear/damage must be large, simplified sculpted geometry only.",
+    "forbidden_background_elements": [
+      "paper texture",
+      "canvas texture",
+      "concrete texture",
+      "subtle noise grain",
+      "film grain",
+      "gradient backdrop",
+      "vignette",
+      "environment hint",
+      "dust particles",
+      "ground plane",
+      "plinth",
+      "pedestal"
+    ],
+    "surface_control": {
+      "material": "uniform_matte_resin",
+      "micro_texture": "forbidden",
+      "surface_noise": "forbidden",
+      "wear": "macro_geometry_only"
+    },
+    "background_control": {
+      "background": "solid",
+      "color": "neutral_light_grey_or_pure_white",
+      "texture": "forbidden",
+      "gradient": "forbidden",
+      "vignette": "forbidden",
+      "environment": "forbidden",
+      "ground_plane": "forbidden"
+    },
+    "lighting_rules": {
+      "type": "studio_diffuse",
+      "shadows": "soft",
+      "contact_shadow": "minimal_only_if_unavoidable",
+      "no_cinematic_rimlight": true,
+      "no_hdr_environment_reflections": true
     }
   }
 }

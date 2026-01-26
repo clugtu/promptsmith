@@ -1,9 +1,9 @@
 create image: create image
 
-ASSET_NAME: Wasteland Marauder_1
+ASSET_NAME: Wasteland Marauder (Male)_1
 
 VISUAL:
-Feral raider with wild bloodshot eyes, face smeared with rust-red war paint in jagged tribal patterns. Tattered cloth wraps and crude scrap metal armor plates lashed with wire. Hunched aggressive posture. Weapon is brutal and improvised: jagged scrap blade welded to pipe or glass-shard club. Manic energy, predatory stance. Clearly hostile--NOT a friendly NPC.
+Male build: wiry, underfed frame; sinewy rather than muscular. Angular jaw with unkempt beard or stubble. Weather-beaten face with scars. Tattered, layered clothing and scrap armor assembled over time; uneven repairs and ill-fitting straps. Improvised melee weapon (jagged pipe-blade) raised overhead in aggressive charging stance. Crude war paint in rust, ash, or bone tones. Patchwork armor, scrap metal, scavenged gear. Aggressive forward-leaning silhouette. Earth-toned, rusted palette. Clearly hostile--NOT a friendly NPC.
 
 CHARACTER:
 Wild-eyed survivors draped in tattered clothing and makeshift armor crafted from scrap metal and debris. Their faces are painted with crude war paint made from rust and ash, and they brandish weapons cobbled together from whatever they could find--jagged metal shards welded to pipes, broken glass embedded in wooden clubs. They move in aggressive, unpredictable patterns, letting out primal howls and shrieks as they charge into battle with reckless abandon.
@@ -14,7 +14,7 @@ PROPS:
 - makeshift scrap armor plates
 
 POSE:
-FRONT VIEW (subrefine 1:1): RENDER SCOPE (CRITICAL): Render ONLY the FRONT view for subrefinement :1. Do NOT include the back view. Do NOT include multiple views. Output a SINGLE character view only. Aggressive forward-lean stance; claws/weapon presented clearly; feet planted wide; arms away from torso for negative space; threat-first silhouette.
+FRONT VIEW (subrefine 1:1): RENDER SCOPE (CRITICAL): Render ONLY the FRONT view for subrefinement :1. Do NOT include the back view. Do NOT include multiple views. Output a SINGLE character view only. Aggressive charging stance; weapon raised overhead; forward momentum; feet planted wide in mid-stride; threatening advance.
 
 THEME:
 Shattered Citadel enemy standee for 28-35mm tabletop standees; bold graphic illustration, thick silhouette outline, simplified chunky shapes, flat colors with minimal cel shading, strong material color separation, 1-2 bright accent colors by faction; figure only; no base; transparent background; no background elements whatsoever.

@@ -1,16 +1,17 @@
 create image: create image
 
-ASSET_NAME: Crystal Drone_2
+ASSET_NAME: Wasteland Marauder (Female)_2
 
 VISUAL:
-Floating geometric crystal construct--angular faceted body like a carved gemstone with sharp edges and prismatic surfaces. Hovering 6-10 inches above ground surface, tethered by visible energy beam or crackling lightning effect connecting crystal base to ground point below (for standee stability--must show grounding effect). Glowing core visible through translucent crystal. Distinctly non-human, alien geometry. Compact but threatening silhouette with jutting crystal shards.
+Female build: wiry, underfed frame; lean and sinewy. Sharp cheekbones, matted hair tied back with wire or cloth scraps. Weather-beaten face with distinctive scars. Tattered, layered clothing and scrap armor; uneven repairs and makeshift straps. Improvised melee weapon (bent scrap-axe) held low in defensive crouch. Hunched, predatory posture; coiled energy suggesting ambush tactics. Crude war paint in rust, ash, or bone tones. Patchwork armor, scrap metal, scavenged gear. Alert, circling silhouette. Earth-toned, rusted palette. Clearly hostile--NOT a friendly NPC.
 
 CHARACTER:
-Geometric constructs of living crystal that hum with harmonic frequencies. Their multifaceted bodies refract light into dazzling rainbow patterns that shift and dance as they move. Each drone appears to be carved from a single massive gemstone, with sharp angular edges and surfaces so perfectly smooth they seem to defy physics. They emit a constant, almost musical tone that grows more discordant when they detect technology, which they seem compelled to 'harmonize' with their crystalline matrix.
+Wild-eyed survivors draped in tattered clothing and makeshift armor crafted from scrap metal and debris. Their faces are painted with crude war paint made from rust and ash, and they brandish weapons cobbled together from whatever they could find--jagged metal shards welded to pipes, broken glass embedded in wooden clubs. They move in aggressive, unpredictable patterns, letting out primal howls and shrieks as they charge into battle with reckless abandon.
 
 PROPS:
-- geometric crystal chassis with sharp facets
-- integrated harmonic beam emitter (no firearm cues)
+- scrap-axe or jagged pipe-blade (blocky silhouette)
+- crude molotov cocktail (bottle silhouette; cloth wick)
+- makeshift scrap armor plates
 
 POSE:
 BACK VIEW (subrefine 1:2): RENDER SCOPE (CRITICAL): Render ONLY the BACK view for subrefinement :2. Do NOT include the front view. Do NOT include multiple views. Output a SINGLE character view only. Use the provided FRONT image as a locked silhouette reference. BACK VIEW must match the flipped silhouette of the provided FRONT reference image exactly. Do not redraw or reinterpret the outline. Render the BACK view by reusing the exact same outer silhouette as the FRONT via a horizontal-flip silhouette mask. Do NOT change the outline at all. Only change interior details (straps, seams, back panels, damage) that fit entirely inside the silhouette.
@@ -19,7 +20,7 @@ THEME:
 Shattered Citadel enemy standee for 28-35mm tabletop standees; bold graphic illustration, thick silhouette outline, simplified chunky shapes, flat colors with minimal cel shading, strong material color separation, 1-2 bright accent colors by faction; figure only; no base; transparent background; no background elements whatsoever.
 
 PROPORTIONS:
-28-35mm standee scale: compact hovering form, human-head-sized, angular threatening geometry; clearly non-human enemy.
+28-35mm standee scale: human proportions but exaggerated aggressive lean; chunky weapons; clear enemy silhouette distinct from player characters.
 
 STYLE:
 Post-apocalyptic sci-fi survivor from the Shattered Citadel setting, bold graphic illustration for 28-35mm tabletop standees: thick silhouette outline, simplified chunky shapes, flat color blocks with minimal cel shading, strong material color separation, 1-2 bright accent colors, no micro-detail, no background, no base, transparent background.

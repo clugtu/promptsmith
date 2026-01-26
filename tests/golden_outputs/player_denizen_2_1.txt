@@ -3,7 +3,7 @@ create image: create image
 ASSET_NAME: Relic Hunter (female, scavenger)_1
 
 VISUAL:
-Feminine presentation; athletic/compact build; readable silhouette. Dark brown skin, West African features (broad nose, full lips, deep brown eyes, short natural hair texture). Short hair, goggles pushed up on forehead. Tactical vest with asymmetric straps, functional pouches. Weapons must appear ancient and ceremonial with carved runes and ritual markings--no modern firearm cues. Dark grays with purple accent stripes. Tech-savvy explorer aesthetic.
+FEMALE character; athletic/compact build. Dark brown skin, West African features (broad nose, full lips, deep brown eyes, short natural hair texture). Short hair, goggles pushed up on forehead. Tactical vest with asymmetric straps, functional pouches. Weapons must appear ancient and ceremonial with carved runes and ritual markings--no modern firearm cues. Dark grays with purple accent stripes. Tech-savvy explorer aesthetic.
 
 CHARACTER:
 Skilled explorer and marksman who ventures into dangerous ruins in search of pre-Fall technology and dimensional artifacts. Confident but wary survivor who knows the Citadel's depths hide both treasure and terrible danger., adult
@@ -13,7 +13,7 @@ PROPS:
 - cross chest shoulder harness with simplified pouches
 
 POSE:
-FRONT VIEW (subrefine 1:1): RENDER SCOPE (CRITICAL): Render ONLY the FRONT view for subrefinement :1. Do NOT include the back view. Do NOT include multiple views. Output a SINGLE character view only. Standing in a stable, ready stance; one hand holds an archaic arcane hand-cannon (flintlock-era silhouette with ornate brass and glowing runes) angled safely down and outward for readability; off-hand at side or near belt; shoulders squared; feet apart; gear kept away from torso to preserve negative space.
+FRONT VIEW only. Standing in stable, ready stance; one hand holds archaic arcane hand-cannon (flintlock-era silhouette with ornate brass and glowing runes) angled safely down and outward; off-hand at side or near belt; shoulders squared; feet apart.
 
 THEME:
 Shattered Citadel denizen character for 28-35mm tabletop standees; bold graphic illustration, thick silhouette outline, simplified chunky shapes, flat colors with minimal cel shading, strong material color separation, 1-2 bright accent colors; figure only; no base; transparent background; no background elements whatsoever.
