@@ -1,17 +1,16 @@
 create image: create image
 
-ASSET_NAME: Rogue Scavenger_2
+ASSET_NAME: Crystal Drone (Variant A)_2
 
 VISUAL:
-CORRUPTED hostile scavenger with visible mutations--crystalline growths erupting from flesh, blackened necrotic patches on exposed skin, crude respirator mask with tubes and filters. Hunched desperate posture, jerky movements. Filthy tattered clothing and mismatched armor plates. Scavenged weapon clutched in mutated hands (extra fingers, warped digits). Eyes glow with sickly radiation. Clearly DISEASED and DESPERATE threat, not heroic.
+Floating geometric crystal construct. Angular, faceted gemstone body with sharp edges and prismatic surfaces. Glowing internal core visible through translucent crystal. Hovers above ground, tethered by crackling energy or lightning grounding beam. Compact but threatening silhouette. Entirely non-human; clean, alien geometry. Must show grounding effect for standee stability.
 
 CHARACTER:
-Twisted figures consumed by radiation sickness and dimensional corruption. Their flesh shows patches of crystalline growths and blackened necrotic tissue. Crude respirators wheeze with every labored breath, barely filtering the toxic air. They wear filthy rags and scavenged armor plates held together with rusted wire. Their movements are jerky and desperate, driven by hunger and madness. Exposed skin reveals radiation burns and unnatural mutations--extra fingers, warped bone structures, eyes that glow faintly with sickly light.
+Geometric constructs of living crystal that hum with harmonic frequencies. Their multifaceted bodies refract light into dazzling rainbow patterns that shift and dance as they move. Each drone appears to be carved from a single massive gemstone, with sharp angular edges and surfaces so perfectly smooth they seem to defy physics. They emit a constant, almost musical tone that grows more discordant when they detect technology, which they seem compelled to 'harmonize' with their crystalline matrix.
 
 PROPS:
-- well-maintained scavenged rifle/carbine (simple silhouette)
-- dark weathered cloak
-- ammo bandoliers
+- geometric crystal chassis with sharp facets
+- integrated harmonic beam emitter (no firearm cues)
 
 POSE:
 BACK VIEW (subrefine 1:2): RENDER SCOPE (CRITICAL): Render ONLY the BACK view for subrefinement :2. Do NOT include the front view. Do NOT include multiple views. Output a SINGLE character view only. Use the provided FRONT image as a locked silhouette reference. BACK VIEW must match the flipped silhouette of the provided FRONT reference image exactly. Do not redraw or reinterpret the outline. Render the BACK view by reusing the exact same outer silhouette as the FRONT via a horizontal-flip silhouette mask. Do NOT change the outline at all. Only change interior details (straps, seams, back panels, damage) that fit entirely inside the silhouette.
@@ -20,7 +19,7 @@ THEME:
 Shattered Citadel enemy standee for 28-35mm tabletop standees; bold graphic illustration, thick silhouette outline, simplified chunky shapes, flat colors with minimal cel shading, strong material color separation, 1-2 bright accent colors by faction; figure only; no base; transparent background; no background elements whatsoever.
 
 PROPORTIONS:
-28-35mm standee scale: bulkier than human baseline--wider shoulders, heavier build; larger weapon emphasis; threatening silhouette clearly marked as ENEMY.
+28-35mm standee scale: compact hovering form, human-head-sized, angular threatening geometry; clearly non-human enemy.
 
 STYLE:
 Post-apocalyptic sci-fi survivor from the Shattered Citadel setting, bold graphic illustration for 28-35mm tabletop standees: thick silhouette outline, simplified chunky shapes, flat color blocks with minimal cel shading, strong material color separation, 1-2 bright accent colors, no micro-detail, no background, no base, transparent background.
